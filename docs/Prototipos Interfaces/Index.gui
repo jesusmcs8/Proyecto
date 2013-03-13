@@ -50,7 +50,7 @@
 			<RibbonBarItem
 				ItemID = "2"
 				Type = "Tab"
-				Text = "Analíticas"
+				Text = "Alumnos"
 				ContextActive = "1"
 				ContextColour = "0,0,0,0,0"/>
 		</Element>
@@ -1032,8 +1032,8 @@
 		<Element
 			CID = "309659763"
 			Type = "CheckListBox"
-			X = "316"
-			Y = "223"
+			X = "145"
+			Y = "408"
 			Width = "112"
 			Height = "49"
 			Flags = "0"
@@ -1239,6 +1239,16 @@
 			Filename = "Icons\Toolbars\HelpAbout.ico"
 			IconIndex = "0"
 			IsDisabled = "0"/>
+		<Element
+			CID = "113073628"
+			Type = "RibbonBarPanel"
+			X = "-545"
+			Y = "196"
+			Width = "398"
+			Height = "296"
+			Flags = "0"
+			UseDataTable = "0"
+			TableName = ""/>
 	</Elements>
 	<Connections
 		CID = "2">
@@ -1427,6 +1437,17 @@
 			SourceSubItemID = ""
 			SourceRefID = "309661627"
 			TargetRefID = "492843346"
+			ConLineWidth = "2"
+			ConLineColour = "0,0,0,0,0"/>
+		<Connection
+			CID = "113069598"
+			Layer = "DesignElements"
+			Trigger = "LeftClick"
+			Type = "Navigation"
+			SubType = "ModelessSwitch"
+			SourceSubItemID = "2"
+			SourceRefID = "464987127"
+			TargetRefID = "113073628"
 			ConLineWidth = "2"
 			ConLineColour = "0,0,0,0,0"/>
 	</Connections>
