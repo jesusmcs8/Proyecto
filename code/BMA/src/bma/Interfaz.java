@@ -116,7 +116,21 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    conexion = abreConexion("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/BaloncestoBD", "root", "baloncesto");
+    String aux=new String();
+
+    aux="select * from alumno";
+    conexion = abreConexion("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
+/*
+    try{
+        stmt = conexion.createStatement();  //con la clase de la conexion, creo el objeto de la clase statement
+        retset = stmt.executeQuery (aux);   //ejecuta una consulta (Select)
+        while(retset.next()){       //recorro las tupas de la tabla
+            System.out.print("\nnombre "+retset.getString(2));
+        }
+    }
+    catch(SQLException ex){
+        System.out.print(ex.getMessage());
+    }*/
 }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
