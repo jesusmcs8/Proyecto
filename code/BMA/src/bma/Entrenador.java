@@ -4,16 +4,10 @@
  */
 package bma;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Alex
  */
 public class Entrenador {
-    private ArrayList<Grupo> grupos;
-    private ArrayList<Equipo> equipos;
     
-    private int idEntrenador;
-    private Usuario usuario;
 }

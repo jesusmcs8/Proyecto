@@ -9,12 +9,11 @@ package bma;
  * @author Alex
  */
 public class Fundacion {
-    private int idFundacion;
     private String direccion;
     private String ciudad;
     private int telefono;
     private String nombre;
     private int codPostal;
-    private String ccc;
+    private String numeroCuenta;
     private String email;
 }

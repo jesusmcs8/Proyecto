@@ -4,31 +4,29 @@
  */
 package bma;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
  * @author Alex
  */
 public class Alumno {
-    private ArrayList<Temporada> temporadas;
-    private ArrayList<Equipo> equipos;
-    private ArrayList<Actividad> actividades;
-    private ArrayList<Grupo> grupos;
-    
     private int idAlumno;
     private String nombre;
-    private String apellidos;
-    private String ccc;
+    private String primerApellido;
+    private String segundoApellido;
+    private Calendar fechaNacimiento;
+    private String cuentaCorriente;
     private String domicilio;
     private String localidad;
     private int codPostal;
     private String provincia;
     private String colegio;
-    private String nombrePagre;
+    private String nombrePadre;
     private String nombreMadre;
     private int telFijo;
     private int telMovil;
     private String email;
     private String observaciones;
+    private TallaAlumno tallaAlumno;
 }

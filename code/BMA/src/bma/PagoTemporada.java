@@ -10,6 +10,4 @@ package bma;
  */
 public class PagoTemporada {
     private int idPagoTemporada;
-    private Alumno alumno;
-    private Temporada temporada;
 }

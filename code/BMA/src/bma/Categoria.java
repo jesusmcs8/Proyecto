@@ -4,17 +4,13 @@
  */
 package bma;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author Alex
  */
 public class Categoria {
-    private ArrayList<Equipo> equipos;
-    private ArrayList<Grupo> grupos;
-    
     private int idCategoria;
     private String tipo;
     private String descripcion;
+    private int edadMaxima;
 }

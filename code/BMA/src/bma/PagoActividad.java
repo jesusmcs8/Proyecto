@@ -11,6 +11,4 @@ package bma;
 public class PagoActividad {
     private int idPagoActividad;
     private String recibo;
-    private Alumno alumno;
-    private Actividad actividad;
 }

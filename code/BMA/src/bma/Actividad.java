@@ -4,18 +4,15 @@
  */
 package bma;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Calendar;
 
 /**
  *
  * @author Alex
  */
 public class Actividad {
-    private HashMap<Integer, Alumno> alumnos;
-    private Temporada temporada;
-    
     private int idActividad;
     private int descripcion;
-    private ArrayList<Integer> dias;
+    private Calendar fechaInicio;
+    private Calendar fechaFin;
 }

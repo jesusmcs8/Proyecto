@@ -8,6 +8,15 @@ package bma;
  *
  * @author Alex
  */
-public class Equipo {
-    private int idEquipo;
+public enum TallaAlumno {
+    SEIS,
+    OCHO,
+    DIEZ,
+    DOCE,
+    XS,
+    S,
+    M,
+    L,
+    XL,
+    XXL
 }

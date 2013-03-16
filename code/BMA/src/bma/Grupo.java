@@ -4,15 +4,13 @@
  */
 package bma;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
  * @author Alex
  */
 public class Grupo {
-    private ArrayList<Alumno> alumnos;
-    private Entrenador entrenador;
-    private Temporada temporada;
-    private Categoria categoria;
+    private int idGrupo;
+    private Calendar[] horarios;
 }

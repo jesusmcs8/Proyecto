@@ -8,6 +8,6 @@ package bma;
  *
  * @author Alex
  */
-public class Equipo {
-    private int idEquipo;
+public enum TipoEntrenador {
+    PRIMERO, SEGUNDO
 }

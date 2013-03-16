@@ -9,5 +9,6 @@ package bma;
  * @author Alex
  */
 public class Rango {
-    private int tipo;
+    private int idRango;
+    private TipoEntrenador tipo;
 }
