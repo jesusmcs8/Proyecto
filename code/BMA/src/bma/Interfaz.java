@@ -47,11 +47,12 @@ public class Interfaz extends javax.swing.JFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        jTextField1 = new javax.swing.JTextField();
+        user_textfield = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        pass_textfield = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        mensaje_error_conexion = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -79,6 +80,9 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
 
+        mensaje_error_conexion.setText("Usuario y contraseña incorrectos.");
+        mensaje_error_conexion.setVisible(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,9 +96,13 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jTextField2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
-                .addContainerGap(126, Short.MAX_VALUE))
+                        .addComponent(pass_textfield)
+                        .addComponent(user_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
+                .addContainerGap(132, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(130, Short.MAX_VALUE)
+                .addComponent(mensaje_error_conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,35 +110,47 @@ public class Interfaz extends javax.swing.JFrame {
                 .addGap(107, 107, 107)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(user_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pass_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(mensaje_error_conexion)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String aux=new String();
-
-    aux="select * from alumno";
+    String usuario=new String();
+    String pass=new String();
+    String consulta_acceso=new String();
+    
     conexion = abreConexion("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
-/*
     try{
-        stmt = conexion.createStatement();  //con la clase de la conexion, creo el objeto de la clase statement
-        retset = stmt.executeQuery (aux);   //ejecuta una consulta (Select)
-        while(retset.next()){       //recorro las tupas de la tabla
-            System.out.print("\nnombre "+retset.getString(2));
+        usuario=user_textfield.getText();
+        pass=pass_textfield.getText();
+        consulta_acceso="SELECT * FROM usuario WHERE nombre='"+usuario+"' AND clave='"+pass+"'";
+        
+        stmt = conexion.createStatement();  
+        retset = stmt.executeQuery(consulta_acceso);   //ejecuta la consulta para ver si existen ese user con ese pass
+        if(retset.next()==true){
+            Usuario user=new Usuario();
+            user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getBoolean(6));            
+            
+            this.setVisible(false);
+            new InterfazInicio(conexion, user).setVisible(true);
+        }else{          
+            mensaje_error_conexion.setVisible(true);
         }
     }
     catch(SQLException ex){
         System.out.print(ex.getMessage());
-    }*/
+    }
 }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -173,7 +193,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel mensaje_error_conexion;
+    private javax.swing.JTextField pass_textfield;
+    private javax.swing.JTextField user_textfield;
     // End of variables declaration//GEN-END:variables
 }

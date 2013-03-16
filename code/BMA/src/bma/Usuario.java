@@ -14,4 +14,18 @@ public class Usuario {
     private String clave;
     private String nombre;
     private String apellidos;
+    private boolean entrenador;
+    
+    public void crearUsuario(int idUsuarioArg, String nombreArg, String apellidosArg, String dniArg, String claveArg, boolean entrenaArg){
+        idUsuario=idUsuarioArg;
+        dni=new String();
+        dni=dniArg;
+        clave=new String();
+        clave=claveArg;
+        nombre=new String();
+        nombre=nombreArg;
+        apellidos=new String();
+        apellidos=apellidosArg;
+        entrenador=entrenaArg;
+    }
 }
