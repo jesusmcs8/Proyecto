@@ -1,16 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package bma;
 
 import java.util.Calendar;
 
 /**
+ * Clase que representa al alumno y sus datos personales, además de los nombres
+ * del padre y la madre.
  *
- * @author Alex
+ * @author Alex Moreno
+ * @version 1.0
  */
 public class Alumno {
+
     private int idAlumno;
     private String nombre;
     private String primerApellido;

@@ -1,16 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package bma;
 
 import java.util.Calendar;
 
 /**
+ * Clase que representa las actividades que se realizan en una temporada que no
+ * tienen relación con las temporadas en si, como Campus de Semana Santa.
  *
- * @author Alex
+ * @author Alex Moreno
+ * @version 1.0
  */
 public class Actividad {
+
     private int idActividad;
     private int descripcion;
     private Calendar fechaInicio;

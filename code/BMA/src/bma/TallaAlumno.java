@@ -1,14 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package bma;
 
 /**
+ * Enumerado que indica las tallas de los alumons.
  *
- * @author Alex
+ * @author Alex Moreno
+ * @version 1.0
  */
 public enum TallaAlumno {
+
     SEIS,
     OCHO,
     DIEZ,

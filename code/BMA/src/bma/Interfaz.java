@@ -126,20 +126,17 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    String usuario=new String();
-    String pass=new String();
-    String consulta_acceso=new String();
-    
     conexion = abreConexion("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
     try{
-        usuario=user_textfield.getText();
-        pass=pass_textfield.getText();
-        consulta_acceso="SELECT * FROM usuario WHERE nombre='"+usuario+"' AND clave='"+pass+"'";
+        String usuario = user_textfield.getText();
+        String pass = pass_textfield.getText();
+        String consulta_acceso = "SELECT * FROM usuario WHERE nombre='" + usuario + "' AND clave='" + pass + "'";
         
         stmt = conexion.createStatement();  
         retset = stmt.executeQuery(consulta_acceso);   //ejecuta la consulta para ver si existen ese user con ese pass
-        if(retset.next()==true){
-            Usuario user=new Usuario();
+        Usuario user;
+        if(retset.next()){
+            user = new Usuario();
             user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getBoolean(6));            
             
             this.setVisible(false);

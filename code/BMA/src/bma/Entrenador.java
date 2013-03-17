@@ -1,13 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package bma;
 
 /**
+ * Clase que nos indica los Usuarios que son Entrenadores.
  *
- * @author Alex
+ * @author Alex Moreno
+ * @version 1.0
  */
 public class Entrenador {
-    
 }

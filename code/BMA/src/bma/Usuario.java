@@ -1,31 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package bma;
 
 /**
+ * Clase que indica los usuarios del sistema como entrenadores y
+ * administradores.
  *
- * @author Alex
+ * @author Alex Moreno
+ * @version 1.0
  */
 public class Usuario {
+
     private int idUsuario;
     private String dni;
     private String clave;
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
-    
-    public void crearUsuario(int idUsuarioArg, String nombreArg, String apellidosArg, String dniArg, String claveArg, boolean entrenaArg){
-        idUsuario=idUsuarioArg;
-        dni=new String();
-        dni=dniArg;
-        clave=new String();
-        clave=claveArg;
-        nombre=new String();
-        nombre=nombreArg;
-        apellidos=new String();
-        apellidos=apellidosArg;
-        entrenador=entrenaArg;
+
+    public void crearUsuario(int idUsuario, String nombre, String primerApellido, String segundoApellido, String dni, String clave) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.dni = dni;
+        this.clave = clave;
     }
 }
