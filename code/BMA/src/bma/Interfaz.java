@@ -137,7 +137,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         Usuario user;
         if(retset.next()){
             user = new Usuario();
-            user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getBoolean(6));            
+            user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getString(6));            
             
             this.setVisible(false);
             new InterfazInicio(conexion, user).setVisible(true);

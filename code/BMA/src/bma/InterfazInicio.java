@@ -52,7 +52,7 @@ public class InterfazInicio extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         textfield_nombre = new javax.swing.JTextField();
-        text_field_edad = new javax.swing.JTextField();
+        textfield_edad = new javax.swing.JTextField();
         textfield_equipo = new javax.swing.JTextField();
         textfield_grupo = new javax.swing.JTextField();
         textfield_entrenador = new javax.swing.JTextField();
@@ -61,6 +61,10 @@ public class InterfazInicio extends javax.swing.JFrame {
         boton_mostrar_alumnos = new javax.swing.JButton();
         textfield_categoria = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        textfield_apellido2 = new javax.swing.JTextField();
+        textfield_apellido1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -80,7 +84,7 @@ public class InterfazInicio extends javax.swing.JFrame {
             .addGroup(panel_inicioLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(542, Short.MAX_VALUE))
+                .addContainerGap(662, Short.MAX_VALUE))
         );
         panel_inicioLayout.setVerticalGroup(
             panel_inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,6 +99,11 @@ public class InterfazInicio extends javax.swing.JFrame {
         jLabel2.setText("Resultados de los alumnos:");
 
         jButton1.setText("Nuevo Alumno");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Modificar alumno");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -121,15 +130,15 @@ public class InterfazInicio extends javax.swing.JFrame {
 
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellidos", "Categoria", "Edad", "Entrenador", "Equipo", "Grupo"
+                "Nombre", "ApellidoPrimero", "ApellidoSegundo", "Edad", "Entrenador", "Equipo", "Grupo", "Email", "Telefono Movil"
             }
         ));
         jScrollPane1.setViewportView(tabla_alumnos);
@@ -143,6 +152,10 @@ public class InterfazInicio extends javax.swing.JFrame {
 
         jLabel9.setText("Categoria");
 
+        jLabel10.setText("Apellido Primero");
+
+        jLabel11.setText("Apellido Segundo");
+
         javax.swing.GroupLayout panel_jugadoresLayout = new javax.swing.GroupLayout(panel_jugadores);
         panel_jugadores.setLayout(panel_jugadoresLayout);
         panel_jugadoresLayout.setHorizontalGroup(
@@ -155,72 +168,83 @@ public class InterfazInicio extends javax.swing.JFrame {
                         .addGap(94, 94, 94)
                         .addComponent(boton_mostrar_alumnos))
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_jugadoresLayout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addGap(76, 76, 76)
                         .addComponent(jButton3))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panel_jugadoresLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textfield_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textfield_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_jugadoresLayout.createSequentialGroup()
+                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(text_field_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(38, 38, 38)
-                                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textfield_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panel_jugadoresLayout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
                                     .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textfield_entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(436, Short.MAX_VALUE))
+                                    .addComponent(jLabel9))
+                                .addGap(21, 21, 21)
+                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textfield_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textfield_entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textfield_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textfield_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textfield_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_jugadoresLayout.createSequentialGroup()
+                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel11)
+                                        .addComponent(jLabel10))
+                                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addComponent(jLabel8)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textfield_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textfield_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         panel_jugadoresLayout.setVerticalGroup(
             panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_jugadoresLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
+                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel8))
+                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
+                        .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textfield_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textfield_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(text_field_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(textfield_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(textfield_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(textfield_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(textfield_entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(8, 8, 8)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textfield_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
-                .addGap(59, 59, 59)
+                .addGap(95, 95, 95)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_jugadoresLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -229,12 +253,12 @@ public class InterfazInicio extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addComponent(boton_mostrar_alumnos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(52, 52, 52))
+                .addGap(72, 72, 72))
         );
 
         jMenu1.setText("File");
@@ -289,7 +313,7 @@ public class InterfazInicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel_inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_jugadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE))
+                .addComponent(panel_jugadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE))
         );
 
         pack();
@@ -323,13 +347,68 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     
     try{
         stmt = conexion.createStatement(); 
-        consulta_alumnos="SELECT * FROM alumno WHERE nombre='"+textfield_nombre.getText()+"' AND grupo_idgrupo="+textfield_grupo.getText()+" AND Grupo_Categoria_idCategoria="+textfield_categoria.getText();
-        retset = stmt.executeQuery (consulta_alumnos);  
+        consulta_alumnos="SELECT * FROM alumno";
+        if(! textfield_nombre.getText().equals("") || ! textfield_apellido1.getText().equals("") || ! textfield_apellido2.getText().equals("")
+              || ! textfield_edad.getText().equals("") || ! textfield_equipo.getText().equals("") || ! textfield_grupo.getText().equals("")
+              || ! textfield_entrenador.getText().equals("") || ! textfield_categoria.getText().equals("")){
+            consulta_alumnos=consulta_alumnos+" WHERE ";
+            if(! textfield_nombre.getText().equals("")){
+                consulta_alumnos=consulta_alumnos+" nombre='"+textfield_nombre.getText()+"' AND ";
+            }
+            if(! textfield_apellido1.getText().equals("")){
+                consulta_alumnos=consulta_alumnos+" primerapellido='"+textfield_apellido1.getText()+"' AND ";
+            }
+            if(! textfield_apellido2.getText().equals("")){
+                consulta_alumnos=consulta_alumnos+" segundoapellido='"+textfield_apellido2.getText()+"' AND ";
+            }
+            if(! textfield_grupo.getText().equals("")){
+                consulta_alumnos=consulta_alumnos+" Grupo_idGrupo="+textfield_grupo.getText()+" AND ";
+            }   
+            if(! textfield_categoria.getText().equals("")){
+                consulta_alumnos=consulta_alumnos+" Grupo_Categoria_idCategoria='"+textfield_categoria.getText()+"' AND ";
+            } 
+            consulta_alumnos=consulta_alumnos.substring(0, consulta_alumnos.length()-4);
+        }
+               
+        System.out.print("\nLA consulta "+ consulta_alumnos);
+        retset = stmt.executeQuery (consulta_alumnos);
+
+        tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "ApellidoPrimero", "ApellidoSegundo", "Edad", "Entrenador", "Equipo", "Grupo", "Email", "Telefono Movil"
+            }
+        ));
+        javax.swing.table.TableModel modelo_tabla=new javax.swing.table.DefaultTableModel();
+        modelo_tabla=tabla_alumnos.getModel();
         int i=0;
         while(retset.next()){
-            tabla_alumnos.addRowSelectionInterval(0, 7);
-            for(int j=0;j<4;j++){
-                tabla_alumnos.setValueAt(retset.getString(j), i, j);                
+            if(i<6){
+                tabla_alumnos.setValueAt(retset.getString(2), i, 0);
+                tabla_alumnos.setValueAt(retset.getString(5), i, 1);
+                tabla_alumnos.setValueAt(retset.getString(6), i, 2);
+
+                tabla_alumnos.setValueAt(retset.getString(3), i, 6);
+                tabla_alumnos.setValueAt(retset.getString(9), i, 7);
+                tabla_alumnos.setValueAt(retset.getString(8), i, 8);
+            }else{
+                javax.swing.table.DefaultTableModel temp = (javax.swing.table.DefaultTableModel) tabla_alumnos.getModel();
+                Object nuevo[]= {"","",""};
+                temp.addRow(nuevo);
+                tabla_alumnos.setValueAt(retset.getString(2), i, 0);
+                tabla_alumnos.setValueAt(retset.getString(5), i, 1);
+                tabla_alumnos.setValueAt(retset.getString(6), i, 2);
+
+                tabla_alumnos.setValueAt(retset.getString(3), i, 6);
+                tabla_alumnos.setValueAt(retset.getString(9), i, 7);
+                tabla_alumnos.setValueAt(retset.getString(8), i, 8);                
             }
             i++;
         }
@@ -337,9 +416,14 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     catch(SQLException ex){
         System.out.print(ex.getMessage());
     }
-    
+    //tabla_alumnos.setValueAt("hola", 2, 3);
     
 }//GEN-LAST:event_boton_mostrar_alumnosActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    
+}//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -382,6 +466,8 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -401,8 +487,10 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JPanel panel_inicio;
     private javax.swing.JPanel panel_jugadores;
     private javax.swing.JTable tabla_alumnos;
-    private javax.swing.JTextField text_field_edad;
+    private javax.swing.JTextField textfield_apellido1;
+    private javax.swing.JTextField textfield_apellido2;
     private javax.swing.JTextField textfield_categoria;
+    private javax.swing.JTextField textfield_edad;
     private javax.swing.JTextField textfield_entrenador;
     private javax.swing.JTextField textfield_equipo;
     private javax.swing.JTextField textfield_grupo;
