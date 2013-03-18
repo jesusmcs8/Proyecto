@@ -103,25 +103,55 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`TallaAlumno`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`TallaAlumno` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`TallaAlumno` (
+  `idTallaAlumno` INT NOT NULL ,
+  `Nombre` VARCHAR(15) NOT NULL ,
+  PRIMARY KEY (`idTallaAlumno`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`Alumno`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`Alumno` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Alumno` (
   `idAlumno` INT NOT NULL AUTO_INCREMENT ,
-  `nombre` VARCHAR(45) NOT NULL ,
+  `TallaAlumno_idTallaAlumno` INT NOT NULL ,
   `Grupo_idGrupo` INT NOT NULL ,
   `Grupo_Categoria_idCategoria` INT NOT NULL ,
-  `primerApellido` VARCHAR(45) NULL ,
-  `segundoApellido` VARCHAR(45) NULL ,
+  `nombre` VARCHAR(45) NOT NULL ,
+  `primerApellido` VARCHAR(45) NOT NULL ,
+  `segundoApellido` VARCHAR(45) NOT NULL ,
   `telMovil` INT NULL ,
   `telFijo` INT NULL ,
+  `observaciones` VARCHAR(300) NULL ,
+  `numeroCuenta` VARCHAR(40) NULL ,
+  `nombreMadre` VARCHAR(45) NULL ,
+  `provincia` VARCHAR(70) NULL ,
+  `localidad` VARCHAR(45) NULL ,
+  `codigoPostal` INT NULL ,
+  `colegio` VARCHAR(45) NULL ,
+  `nombrePadre` VARCHAR(45) NULL ,
+  `domicilio` VARCHAR(100) NULL ,
+  `email` VARCHAR(75) NULL ,
+  `fechaNacimiento` DATE NOT NULL ,
   `Alumnocol` VARCHAR(45) NULL ,
-  PRIMARY KEY (`idAlumno`, `Grupo_idGrupo`, `Grupo_Categoria_idCategoria`) ,
+  PRIMARY KEY (`idAlumno`, `TallaAlumno_idTallaAlumno`, `Grupo_idGrupo`, `Grupo_Categoria_idCategoria`) ,
   INDEX `fk_Alumno_Grupo1_idx` (`Grupo_idGrupo` ASC, `Grupo_Categoria_idCategoria` ASC) ,
+  INDEX `fk_Alumno_TallaAlumno1_idx` (`TallaAlumno_idTallaAlumno` ASC) ,
   CONSTRAINT `fk_Alumno_Grupo1`
     FOREIGN KEY (`Grupo_idGrupo` , `Grupo_Categoria_idCategoria` )
     REFERENCES `mydb`.`Grupo` (`idGrupo` , `Categoria_idCategoria` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Alumno_TallaAlumno1`
+    FOREIGN KEY (`TallaAlumno_idTallaAlumno` )
+    REFERENCES `mydb`.`TallaAlumno` (`idTallaAlumno` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
