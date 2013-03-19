@@ -1028,18 +1028,28 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
     if(encontrado_error==false){
         mensajeConfirmacion.setVisible(true);
+        Alumno nuevoAlumno=new Alumno();
+        nuevoAlumno.crearAlumno(nombreAlumno.getText(), primerApellidoAlumno.getText(), segundoApellidoAlumno.getText(), dateFromDateChooser,
+                numeroCuentaAlumno.getText(),domicilioAlumno.getText(), localidadAlumno.getText(), 
+                Integer.parseInt(codigoPostalAlumno.getText()), provinciaAlumno.getText(), colegioAlumno.getText(), nombrePadreAlumno.getText(),
+                nombreMadreAlumno.getText(), Integer.parseInt(telefonoFijoAlumno.getText()), Integer.parseInt(telefonoMovilAlumno.getText()), emailAlumno.getText(), "",
+                (String) tallaAlumno.getSelectedItem());
+        
+        nuevoAlumno.insertarAlumnoBD(conexion);        
+        /*
         inserccion="INSERT INTO alumno (nombre, Grupo_idGrupo, Grupo_Categoria_idCategoria, primerapellido, segundoapellido, fechanacimiento, colegio, email, localidad, provincia, codigoPostal, domicilio, "
                 + "nombrePadre, nombreMadre, numeroCuenta, TallaAlumno_idTallaAlumno, telFijo, telMovil) VALUES ('";
         inserccion=inserccion+nombreAlumno.getText()+"', 1, 1, '"+primerApellidoAlumno.getText()+"', '"+segundoApellidoAlumno.getText()+"','"+
                 dateString+"', '"+colegioAlumno.getText()+"', '"+emailAlumno.getText()+"', '"+localidadAlumno.getText()+"', '"+provinciaAlumno.getText()+"', "+
                 codigoPostalAlumno.getText()+", '"+domicilioAlumno.getText()+"', '"+nombrePadreAlumno.getText()+"', '"+nombreMadreAlumno.getText()+
                 "', '"+numeroCuentaAlumno.getText()+"', '"+(String) tallaAlumno.getSelectedItem()+"', "+telefonoFijoAlumno.getText()+", "+telefonoMovilAlumno.getText()+")";
+        
         try{
             stmt = conexion.createStatement();
             stmt.executeUpdate(inserccion);
         }catch(SQLException ex){
             System.out.print(ex.getMessage());
-        }
+        }*/
         nombreAlumno.setText(null);
         primerApellidoAlumno.setText(null);
         segundoApellidoAlumno.setText(null);
