@@ -44,7 +44,7 @@ public class InterfazInicio extends javax.swing.JFrame {
         panel_jugadores = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         botonNuevoAlumno = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonModificarAlumno = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -159,10 +159,10 @@ public class InterfazInicio extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Modificar alumno");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonModificarAlumno.setText("Modificar alumno");
+        botonModificarAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonModificarAlumnoActionPerformed(evt);
             }
         });
 
@@ -223,7 +223,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                         .addComponent(boton_mostrar_alumnos))
                     .addComponent(jLabel2)
                     .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(botonModificarAlumno)
                         .addGap(76, 76, 76)
                         .addComponent(jButton3))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +310,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(botonModificarAlumno)
                     .addComponent(jButton3))
                 .addGap(103, 103, 103))
         );
@@ -734,7 +734,7 @@ public class InterfazInicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel_inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_jugadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
+                .addComponent(panel_jugadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 34, Short.MAX_VALUE)
@@ -745,9 +745,10 @@ public class InterfazInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_jButton2ActionPerformed
+private void botonModificarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarAlumnoActionPerformed
+
+    System.out.print("\n tenemos "+tabla_alumnos.getCellEditor());
+}//GEN-LAST:event_botonModificarAlumnoActionPerformed
 
 private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
@@ -1039,7 +1040,23 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }catch(SQLException ex){
             System.out.print(ex.getMessage());
         }
-        System.out.print("\ninsert "+inserccion);
+        nombreAlumno.setText(null);
+        primerApellidoAlumno.setText(null);
+        segundoApellidoAlumno.setText(null);
+        colegioAlumno.setText(null);
+        emailAlumno.setText(null);
+        localidadAlumno.setText(null);
+        provinciaAlumno.setText(null);
+        codigoPostalAlumno.setText(null);
+        domicilioAlumno.setText(null);
+        nombrePadreAlumno.setText(null);
+        nombreMadreAlumno.setText(null);
+        numeroCuentaAlumno.setText(null);
+        telefonoFijoAlumno.setText(null);
+        telefonoMovilAlumno.setText(null);
+        nombreAlumno.setText(null);
+        fechaNacAl.setDate(null);
+        tallaAlumno.setSelectedItem("SinMedir");
     }
 }//GEN-LAST:event_botonAnadirActionPerformed
 
@@ -1047,6 +1064,23 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 // TODO add your handling code here:
     panel_jugadores.setVisible(true);
     panel_anadiralumno.setVisible(false);
+    nombreAlumno.setText(null);
+    primerApellidoAlumno.setText(null);
+    segundoApellidoAlumno.setText(null);
+    colegioAlumno.setText(null);
+    emailAlumno.setText(null);
+    localidadAlumno.setText(null);
+    provinciaAlumno.setText(null);
+    codigoPostalAlumno.setText(null);
+    domicilioAlumno.setText(null);
+    nombrePadreAlumno.setText(null);
+    nombreMadreAlumno.setText(null);
+    numeroCuentaAlumno.setText(null);
+    telefonoFijoAlumno.setText(null);
+    telefonoMovilAlumno.setText(null);
+    nombreAlumno.setText(null);
+    fechaNacAl.setDate(null);
+    tallaAlumno.setSelectedItem("SinMedir");
 }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
@@ -1086,6 +1120,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAnadir;
+    private javax.swing.JButton botonModificarAlumno;
     private javax.swing.JButton botonNuevoAlumno;
     private javax.swing.JButton boton_mostrar_alumnos;
     private javax.swing.JTextField codigoPostalAlumno;
@@ -1109,7 +1144,6 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel errorTelefonoFijo;
     private javax.swing.JLabel errorTelefonoMovil;
     private com.toedter.calendar.JDateChooser fechaNacAl;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
