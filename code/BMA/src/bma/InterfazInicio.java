@@ -101,8 +101,24 @@ public class InterfazInicio extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         botonAnadir = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jLabel17 = new javax.swing.JLabel();
+        fechaNacAl = new com.toedter.calendar.JDateChooser();
+        errorCP = new javax.swing.JLabel();
+        errorTelefonoFijo = new javax.swing.JLabel();
+        errorTelefonoMovil = new javax.swing.JLabel();
+        mensajeConfirmacion = new javax.swing.JLabel();
+        errorInsertAl1 = new javax.swing.JLabel();
+        errorInsertAl2 = new javax.swing.JLabel();
+        errorInsertAl3 = new javax.swing.JLabel();
+        errorInsertAl4 = new javax.swing.JLabel();
+        errorInsertAl5 = new javax.swing.JLabel();
+        errorInsertAl6 = new javax.swing.JLabel();
+        errorInsertAl7 = new javax.swing.JLabel();
+        errorInsertAl8 = new javax.swing.JLabel();
+        errorInsertAl9 = new javax.swing.JLabel();
+        errorInsertAl10 = new javax.swing.JLabel();
+        errorInsertAl11 = new javax.swing.JLabel();
+        errorInsertAl12 = new javax.swing.JLabel();
+        errorInsertAl13 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -122,14 +138,14 @@ public class InterfazInicio extends javax.swing.JFrame {
             .addGroup(panel_inicioLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(662, Short.MAX_VALUE))
+                .addContainerGap(1020, Short.MAX_VALUE))
         );
         panel_inicioLayout.setVerticalGroup(
             panel_inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_inicioLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jLabel1)
-                .addContainerGap(632, Short.MAX_VALUE))
+                .addContainerGap(634, Short.MAX_VALUE))
         );
 
         panel_jugadores.setVisible(false);
@@ -242,7 +258,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                                     .addComponent(textfield_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textfield_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(494, Short.MAX_VALUE))
         );
         panel_jugadoresLayout.setVerticalGroup(
             panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -416,9 +432,80 @@ public class InterfazInicio extends javax.swing.JFrame {
         });
 
         jButton4.setText("Volver Atras");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-        jLabel17.setText("El codigo postal tiene que ser un numero");
-        jLabel17.setVisible(false);
+        errorCP.setForeground(new java.awt.Color(255, 0, 0));
+        errorCP.setText("El codigo postal tiene que ser un número");
+        errorCP.setVisible(false);
+
+        errorTelefonoFijo.setForeground(new java.awt.Color(255, 0, 0));
+        errorTelefonoFijo.setText("El telefono fijo tiene que ser un número");
+        errorTelefonoFijo.setVisible(false);
+
+        errorTelefonoMovil.setForeground(new java.awt.Color(255, 0, 0));
+        errorTelefonoMovil.setText("El telefono móvil tiene que ser un número");
+        errorTelefonoMovil.setVisible(false);
+
+        mensajeConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        mensajeConfirmacion.setForeground(new java.awt.Color(51, 204, 0));
+        mensajeConfirmacion.setText("El alumno se inserto correctamente");
+        mensajeConfirmacion.setVisible(false);
+
+        errorInsertAl1.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl1.setText("No ha introducido el nombre");
+        errorInsertAl1.setVisible(false);
+
+        errorInsertAl2.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl2.setText("No ha introducido el primer apellido");
+        errorInsertAl2.setVisible(false);
+
+        errorInsertAl3.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl3.setText("No ha introducido el segundo apellido");
+        errorInsertAl3.setVisible(false);
+
+        errorInsertAl4.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl4.setText("No ha introducido la fecha de nacimiento");
+        errorInsertAl4.setVisible(false);
+
+        errorInsertAl5.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl5.setText("No ha introducido el colegio");
+        errorInsertAl5.setVisible(false);
+
+        errorInsertAl6.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl6.setText("No ha introducido el email");
+        errorInsertAl6.setVisible(false);
+
+        errorInsertAl7.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl7.setText("No ha introducido la localidad");
+        errorInsertAl7.setVisible(false);
+
+        errorInsertAl8.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl8.setText("No ha introducido la provincia");
+        errorInsertAl8.setVisible(false);
+
+        errorInsertAl9.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl9.setText("No ha introducido el domicilio");
+        errorInsertAl9.setVisible(false);
+
+        errorInsertAl10.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl10.setText("No ha introducido el nombre del padre");
+        errorInsertAl10.setVisible(false);
+
+        errorInsertAl11.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl11.setText("No ha introducido el nombre de la madre");
+        errorInsertAl11.setVisible(false);
+
+        errorInsertAl12.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl12.setText("No ha introducido el número de cuenta");
+        errorInsertAl12.setVisible(false);
+
+        errorInsertAl13.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl13.setText("No ha introducido la talla");
+        errorInsertAl13.setVisible(false);
 
         javax.swing.GroupLayout panel_anadiralumnoLayout = new javax.swing.GroupLayout(panel_anadiralumno);
         panel_anadiralumno.setLayout(panel_anadiralumnoLayout);
@@ -433,7 +520,6 @@ public class InterfazInicio extends javax.swing.JFrame {
                         .addGap(49, 49, 49)
                         .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel26)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panel_anadiralumnoLayout.createSequentialGroup()
                                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -452,7 +538,8 @@ public class InterfazInicio extends javax.swing.JFrame {
                                         .addComponent(jLabel28, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel31))
+                                    .addComponent(jLabel31)
+                                    .addComponent(jLabel26))
                                 .addGap(27, 27, 27)
                                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(provinciaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
@@ -470,89 +557,120 @@ public class InterfazInicio extends javax.swing.JFrame {
                                     .addComponent(telefonoFijoAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                                     .addComponent(tallaAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
                                     .addComponent(telefonoMovilAlumno, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                    .addComponent(fechaNacAl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_anadiralumnoLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jButton4))
                     .addGroup(panel_anadiralumnoLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(474, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(errorInsertAl1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorCP, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorTelefonoFijo, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(errorTelefonoMovil, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl2, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl3, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl4, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl5, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl6, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl7, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl8, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl9, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl10, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl11, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl12, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(errorInsertAl13, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(mensajeConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(489, Short.MAX_VALUE))
         );
         panel_anadiralumnoLayout.setVerticalGroup(
             panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_anadiralumnoLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel12)
+                .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(mensajeConfirmacion))
                 .addGap(28, 28, 28)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(nombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorInsertAl1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(primerApellidoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(primerApellidoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorInsertAl2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(segundoApellidoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(segundoApellidoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorInsertAl3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel16)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(fechaNacAl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorInsertAl4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(colegioAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel24))
+                    .addComponent(jLabel24)
+                    .addComponent(errorInsertAl5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(emailAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22))
+                    .addComponent(jLabel22)
+                    .addComponent(errorInsertAl6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(localidadAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23))
+                    .addComponent(jLabel23)
+                    .addComponent(errorInsertAl7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(provinciaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21))
-                .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_anadiralumnoLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_anadiralumnoLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                        .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(codigoPostalAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel17))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(domicilioAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombrePadreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel27))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombreMadreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel25))))
+                    .addComponent(jLabel21)
+                    .addComponent(errorInsertAl8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codigoPostalAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel28)
+                    .addComponent(errorCP))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(domicilioAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorInsertAl9)
+                    .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombrePadreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel27)
+                    .addComponent(errorInsertAl10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombreMadreAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel25)
+                    .addComponent(errorInsertAl11))
                 .addGap(18, 18, 18)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(numeroCuentaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(numeroCuentaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(errorInsertAl12))
                 .addGap(18, 18, 18)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tallaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31))
+                    .addComponent(jLabel31)
+                    .addComponent(errorInsertAl13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefonoFijoAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32))
+                    .addComponent(jLabel32)
+                    .addComponent(errorTelefonoFijo))
                 .addGap(18, 18, 18)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telefonoMovilAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30))
+                    .addComponent(jLabel30)
+                    .addComponent(errorTelefonoMovil))
                 .addGap(27, 27, 27)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
@@ -733,6 +851,23 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
 }//GEN-LAST:event_boton_mostrar_alumnosActionPerformed
 
 private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
+    errorInsertAl1.setVisible(false);
+    errorInsertAl2.setVisible(false);
+    errorInsertAl3.setVisible(false);
+    errorInsertAl4.setVisible(false);
+    errorInsertAl5.setVisible(false);
+    errorInsertAl6.setVisible(false);
+    errorInsertAl7.setVisible(false);
+    errorInsertAl8.setVisible(false);
+    errorInsertAl9.setVisible(false);
+    errorInsertAl10.setVisible(false);
+    errorInsertAl11.setVisible(false);
+    errorInsertAl12.setVisible(false);
+    errorInsertAl13.setVisible(false);
+    errorCP.setVisible(false);
+    errorTelefonoMovil.setVisible(false);
+    errorTelefonoFijo.setVisible(false);
+    mensajeConfirmacion.setVisible(false);
     panel_jugadores.setVisible(false);
     panel_anadiralumno.setVisible(true);
 }//GEN-LAST:event_botonNuevoAlumnoActionPerformed
@@ -805,14 +940,111 @@ private boolean isLong(String cadena){
 }
 private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
 // TODO add your handling code here:
-    String codigoPostal=new String();
-    codigoPostal=codigoPostalAlumno.getText();
-    if(isInteger(codigoPostal)==false){
-        jLabel17.setVisible(true);
+    boolean encontrado_error=false;
+    String dateString=new String();
+    String inserccion=new String();
+    
+    errorInsertAl1.setVisible(false);
+    errorInsertAl2.setVisible(false);
+    errorInsertAl3.setVisible(false);
+    errorInsertAl4.setVisible(false);
+    errorInsertAl5.setVisible(false);
+    errorInsertAl6.setVisible(false);
+    errorInsertAl7.setVisible(false);
+    errorInsertAl8.setVisible(false);
+    errorInsertAl9.setVisible(false);
+    errorInsertAl10.setVisible(false);
+    errorInsertAl11.setVisible(false);
+    errorInsertAl12.setVisible(false);
+    errorInsertAl13.setVisible(false);
+    errorCP.setVisible(false);
+    errorTelefonoMovil.setVisible(false);
+    errorTelefonoFijo.setVisible(false);
+    mensajeConfirmacion.setVisible(false);
+    if(nombreAlumno.getText().equals("")){
+        errorInsertAl1.setVisible(true);
+        encontrado_error=true;
     }
+    if(primerApellidoAlumno.getText().equals("")){
+        errorInsertAl2.setVisible(true);
+        encontrado_error=true;
+    }
+    if(segundoApellidoAlumno.getText().equals("")){
+        errorInsertAl3.setVisible(true);
+        encontrado_error=true;
+    }
+    java.util.Date dateFromDateChooser = fechaNacAl.getDate();
+    dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
+    if(dateString.equals("null-null-null")){//COMPROBEMOSLOOO!!!!
+        errorInsertAl4.setVisible(true);
+        encontrado_error=true;
+    }    
+    if(colegioAlumno.getText().equals("")){
+        errorInsertAl5.setVisible(true);
+        encontrado_error=true;
+    }
+    if(emailAlumno.getText().equals("")){
+        errorInsertAl6.setVisible(true);
+        encontrado_error=true;
+    }
+    if(localidadAlumno.getText().equals("")){
+        errorInsertAl7.setVisible(true);
+        encontrado_error=true;
+    }
+    if(provinciaAlumno.getText().equals("")){
+        errorInsertAl8.setVisible(true);
+        encontrado_error=true;
+    }
+    if(domicilioAlumno.getText().equals("")){
+        errorInsertAl9.setVisible(true);
+        encontrado_error=true;
+    }
+    if(nombrePadreAlumno.getText().equals("")){
+        errorInsertAl10.setVisible(true);
+        encontrado_error=true;
+    }
+    if(nombreMadreAlumno.getText().equals("")){
+        errorInsertAl11.setVisible(true);
+        encontrado_error=true;
+    }
+    if(numeroCuentaAlumno.getText().equals("")){
+        errorInsertAl12.setVisible(true);
+        encontrado_error=true;
+    }
+    if(tallaAlumno.getText().equals("")){
+        errorInsertAl13.setVisible(true);
+        encontrado_error=true;
+    }
+    if(isInteger(codigoPostalAlumno.getText())==false){
+        errorCP.setVisible(true);
+        encontrado_error=true;
+    }
+    if(isInteger(telefonoMovilAlumno.getText())==false){
+        errorTelefonoMovil.setVisible(true);
+        encontrado_error=true;
+    }
+    if(isInteger(telefonoFijoAlumno.getText())==false){
+        errorTelefonoFijo.setVisible(true);
+        encontrado_error=true;
+    }
+    //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
+    if(encontrado_error==false){
+        mensajeConfirmacion.setVisible(true);
+        inserccion="INSERT INTO alumno (nombre, Grupo_idGrupo, Grupo_Categoria_idCategoria, primerapellido, segundoapellido, fechanacimiento, colegio, email, localidad, provincia, codigoPostal, domicilio, "
+                + "nombrePadre, nombreMadre, numeroCuenta, TallaAlumno_idTallaAlumno, telFijo, telMovil) VALUES ('";
+        inserccion=inserccion+nombreAlumno.getText()+"', 1, 1, '"+primerApellidoAlumno.getText()+"', '"+segundoApellidoAlumno.getText()+"','"+
+                dateString+"', '"+colegioAlumno.getText()+"', '"+emailAlumno.getText()+"', '"+localidadAlumno.getText()+"', '"+provinciaAlumno.getText()+"', "+
+                codigoPostalAlumno.getText()+", '"+domicilioAlumno.getText()+"', '"+nombrePadreAlumno.getText()+"', '"+nombreMadreAlumno.getText()+
+                "', '"+numeroCuentaAlumno.getText()+"', '"+tallaAlumno.getText()+"', "+telefonoFijoAlumno.getText()+", "+telefonoMovilAlumno.getText()+")";
+        System.out.print("\nInserccion \n"+inserccion);
+    }
+}//GEN-LAST:event_botonAnadirActionPerformed
+
+private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+// TODO add your handling code here:
     panel_jugadores.setVisible(true);
     panel_anadiralumno.setVisible(false);
-}//GEN-LAST:event_botonAnadirActionPerformed
+}//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -857,10 +1089,26 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JTextField colegioAlumno;
     private javax.swing.JTextField domicilioAlumno;
     private javax.swing.JTextField emailAlumno;
+    private javax.swing.JLabel errorCP;
+    private javax.swing.JLabel errorInsertAl1;
+    private javax.swing.JLabel errorInsertAl10;
+    private javax.swing.JLabel errorInsertAl11;
+    private javax.swing.JLabel errorInsertAl12;
+    private javax.swing.JLabel errorInsertAl13;
+    private javax.swing.JLabel errorInsertAl2;
+    private javax.swing.JLabel errorInsertAl3;
+    private javax.swing.JLabel errorInsertAl4;
+    private javax.swing.JLabel errorInsertAl5;
+    private javax.swing.JLabel errorInsertAl6;
+    private javax.swing.JLabel errorInsertAl7;
+    private javax.swing.JLabel errorInsertAl8;
+    private javax.swing.JLabel errorInsertAl9;
+    private javax.swing.JLabel errorTelefonoFijo;
+    private javax.swing.JLabel errorTelefonoMovil;
+    private com.toedter.calendar.JDateChooser fechaNacAl;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -869,7 +1117,6 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -899,6 +1146,7 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField localidadAlumno;
+    private javax.swing.JLabel mensajeConfirmacion;
     private javax.swing.JTextField nombreAlumno;
     private javax.swing.JTextField nombreMadreAlumno;
     private javax.swing.JTextField nombrePadreAlumno;
