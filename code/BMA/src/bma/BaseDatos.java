@@ -48,7 +48,7 @@ public class BaseDatos {
     }
 
     public ResultSet ejecutaConsulta(String consulta) {
-        try {
+        try{
             stmt = conexion.createStatement();
             retset = stmt.executeQuery(consulta);
         } catch (SQLException ex) {
@@ -58,10 +58,10 @@ public class BaseDatos {
     }
 
     public void ejecutaActualizacion(String actualizacion) {
-        try {
+        try{
             stmt = conexion.createStatement();
             stmt.executeUpdate(actualizacion);
-        } catch (SQLException ex) {
+        }catch (SQLException ex) {
             System.out.print(ex.getMessage());
         }
     }

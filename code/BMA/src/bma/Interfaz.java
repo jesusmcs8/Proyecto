@@ -114,7 +114,7 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    BaseDatos accesoBD=new BaseDatos();
+    BaseDatos accesoBD=new BaseDatos("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
     Usuario user;
     accesoBD.conectaBD();
     
