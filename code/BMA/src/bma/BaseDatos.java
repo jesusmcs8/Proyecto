@@ -54,12 +54,21 @@ public class BaseDatos {
     }
 
     public ResultSet ejecutaConsulta(String consulta) {
+        ArrayList<ArrayList<String>> consul = new ArrayList();
         try {
             stmt = conexion.createStatement();
             retset = stmt.executeQuery(consulta);
+            int i = 0;
+            while (retset.next()) {
+                retset.getString(i);
+                
+            }
+
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
         }
+
+
         return retset;
     }
 
