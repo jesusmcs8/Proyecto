@@ -5,6 +5,7 @@
 package bma;
 
 import java.sql.*;
+import java.util.*;
 
 /**
  *
@@ -14,21 +15,25 @@ import java.sql.*;
 public class BaseDatos {
 
     Connection conexion;
+    ArrayList<Connection> Cooconexion = new ArrayList();
     Statement stmt;
     ResultSet retset;
 
-   /* public BaseDatos(String driver, String servidor, String usuario, String clave) {
+    public BaseDatos(String driver, String servidor, String usuario, String clave) {
         try {
             Class.forName(driver);
             //Busca el controlador y abre conexion
+            for (int i = 0; i < 10; i++) {
+                //("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
+                this.Cooconexion.add(DriverManager.getConnection(servidor, usuario, clave));
+            }
         } catch (ClassNotFoundException e) {
-            System.err.print("No se han podido cargar los controladores"); 
-        }// catch (SQLException e) {
-           // System.err.print("No se ha podido acceder a la base de datos");
-            
-        //}
+            System.err.print("No se han podido cargar los controladores");
+        } catch (SQLException e) {
+            System.err.print("No se ha podido acceder a la base de datos");
+        }
 
-    }*/
+    }
 
     public Connection abreConexion(String driver, String servidor, String usuario, String clave) {
         try {
