@@ -9,6 +9,7 @@ import java.sql.*;
 /**
  *
  * @author Francisco
+ * @author Carlos
  */
 public class BaseDatos {
 
@@ -16,18 +17,18 @@ public class BaseDatos {
     Statement stmt;
     ResultSet retset;
 
-    public BaseDatos(String driver, String servidor, String usuario, String clave) {
+   /* public BaseDatos(String driver, String servidor, String usuario, String clave) {
         try {
             Class.forName(driver);
             //Busca el controlador y abre conexion
         } catch (ClassNotFoundException e) {
             System.err.print("No se han podido cargar los controladores"); 
-        }/* catch (SQLException e) {
-            System.err.print("No se ha podido acceder a la base de datos");
+        }// catch (SQLException e) {
+           // System.err.print("No se ha podido acceder a la base de datos");
             
-        }*/
+        //}
 
-    }
+    }*/
 
     public Connection abreConexion(String driver, String servidor, String usuario, String clave) {
         try {
