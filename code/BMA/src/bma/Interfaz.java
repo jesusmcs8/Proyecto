@@ -24,19 +24,7 @@ public class Interfaz extends javax.swing.JFrame {
     public Interfaz() {
         initComponents();
     }
-    public Connection abreConexion(String driver,String servidor, String usuario, String clave) {
-        try{
-            Class.forName(driver);
-            //Busca el controlador y abre conexion
-            return DriverManager.getConnection(servidor,usuario,clave);
-        }catch(ClassNotFoundException e){
-            System.out.print("No se han podido cargar los controladores");
-            return null;
-        }catch(SQLException e){
-            System.out.print("No se ha podido acceder a la base de datos");
-            return null;
-        }
-    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -126,21 +114,22 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    conexion = abreConexion("com.mysql.jdbc.Driver","jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
+    BaseDatos accesoBD=new BaseDatos();
+    Usuario user;
+    accesoBD.conectaBD();
+    
+    String usuario = user_textfield.getText();
+    String pass = pass_textfield.getText();
+    String consulta_acceso = "SELECT * FROM usuario WHERE nombre='" + usuario + "' AND clave='" + pass + "'";
+            
+    retset=accesoBD.ejecutaConsulta(consulta_acceso);
     try{
-        String usuario = user_textfield.getText();
-        String pass = pass_textfield.getText();
-        String consulta_acceso = "SELECT * FROM usuario WHERE nombre='" + usuario + "' AND clave='" + pass + "'";
-        
-        stmt = conexion.createStatement();  
-        retset = stmt.executeQuery(consulta_acceso);   //ejecuta la consulta para ver si existen ese user con ese pass
-        Usuario user;
         if(retset.next()){
             user = new Usuario();
             user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getString(6));            
             
             this.setVisible(false);
-            new InterfazInicio(conexion, user).setVisible(true);
+            new InterfazInicio(accesoBD, user).setVisible(true);
         }else{          
             mensaje_error_conexion.setVisible(true);
         }

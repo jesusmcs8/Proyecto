@@ -52,7 +52,7 @@ public class Alumno {
         this.tallaAlumno=tallaAlumno;
     }
     
-    public void insertarAlumnoBD(Connection conexion){
+    public void insertarAlumnoBD(BaseDatos accesoBD){
         String inserccion=new String();
         String dateString=new String();
         dateString = String.format("%1$tY-%1$tm-%1$td", fechaNacimiento);
@@ -63,11 +63,7 @@ public class Alumno {
                 dateString+"', '"+colegio+"', '"+email+"', '"+localidad+"', '"+provincia+"', "+
                 codPostal+", '"+domicilio+"', '"+nombrePadre+"', '"+nombreMadre+
                 "', '"+cuentaCorriente+"', '"+tallaAlumno+"', "+telFijo+", "+telMovil+")";
-        try{
-            stmt = conexion.createStatement();
-            stmt.executeUpdate(inserccion);
-        }catch(SQLException ex){
-            System.out.print(ex.getMessage());
-        }
+
+        accesoBD.ejecutaActualizacion(inserccion);
     }
 }

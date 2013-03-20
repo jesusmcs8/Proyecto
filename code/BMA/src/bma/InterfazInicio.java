@@ -16,7 +16,7 @@ import java.sql.*;
  * @author Francisco
  */
 public class InterfazInicio extends javax.swing.JFrame {
-    Connection conexion;   
+    BaseDatos accesoBD=new BaseDatos();  
     Statement stmt;      
     ResultSet retset;
     Usuario user=new Usuario();
@@ -25,8 +25,8 @@ public class InterfazInicio extends javax.swing.JFrame {
     public InterfazInicio() {
         initComponents();
     }
-    public InterfazInicio(Connection conexionArg, Usuario userArg) {
-        conexion=conexionArg;
+    public InterfazInicio(BaseDatos acceso, Usuario userArg) {
+        accesoBD=acceso;
         initComponents();
         user=userArg;
     }
@@ -138,7 +138,7 @@ public class InterfazInicio extends javax.swing.JFrame {
             .addGroup(panel_inicioLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1020, Short.MAX_VALUE))
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         panel_inicioLayout.setVerticalGroup(
             panel_inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,7 +258,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                                     .addComponent(textfield_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textfield_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panel_jugadoresLayout.setVerticalGroup(
             panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -581,7 +581,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                             .addComponent(errorInsertAl12, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                             .addComponent(errorInsertAl13, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                             .addComponent(mensajeConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(489, Short.MAX_VALUE))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         panel_anadiralumnoLayout.setVerticalGroup(
             panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -630,7 +630,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                     .addComponent(provinciaAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21)
                     .addComponent(errorInsertAl8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(panel_anadiralumnoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(codigoPostalAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel28)
@@ -734,7 +734,7 @@ public class InterfazInicio extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel_inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_jugadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(panel_jugadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 34, Short.MAX_VALUE)
@@ -773,7 +773,6 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     String consulta_alumnos=new String();
     
     try{
-        stmt = conexion.createStatement(); 
         consulta_alumnos="SELECT * FROM alumno";
         if(! textfield_nombre.getText().equals("") || ! textfield_apellido1.getText().equals("") || ! textfield_apellido2.getText().equals("")
               || ! textfield_edad.getText().equals("") || ! textfield_equipo.getText().equals("") || ! textfield_grupo.getText().equals("")
@@ -801,7 +800,7 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
         }
                
         System.out.print("\nLA consulta "+ consulta_alumnos);
-        retset = stmt.executeQuery (consulta_alumnos);
+        retset = accesoBD.ejecutaConsulta(consulta_alumnos);
 
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1035,21 +1034,7 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 nombreMadreAlumno.getText(), Integer.parseInt(telefonoFijoAlumno.getText()), Integer.parseInt(telefonoMovilAlumno.getText()), emailAlumno.getText(), "",
                 (String) tallaAlumno.getSelectedItem());
         
-        nuevoAlumno.insertarAlumnoBD(conexion);        
-        /*
-        inserccion="INSERT INTO alumno (nombre, Grupo_idGrupo, Grupo_Categoria_idCategoria, primerapellido, segundoapellido, fechanacimiento, colegio, email, localidad, provincia, codigoPostal, domicilio, "
-                + "nombrePadre, nombreMadre, numeroCuenta, TallaAlumno_idTallaAlumno, telFijo, telMovil) VALUES ('";
-        inserccion=inserccion+nombreAlumno.getText()+"', 1, 1, '"+primerApellidoAlumno.getText()+"', '"+segundoApellidoAlumno.getText()+"','"+
-                dateString+"', '"+colegioAlumno.getText()+"', '"+emailAlumno.getText()+"', '"+localidadAlumno.getText()+"', '"+provinciaAlumno.getText()+"', "+
-                codigoPostalAlumno.getText()+", '"+domicilioAlumno.getText()+"', '"+nombrePadreAlumno.getText()+"', '"+nombreMadreAlumno.getText()+
-                "', '"+numeroCuentaAlumno.getText()+"', '"+(String) tallaAlumno.getSelectedItem()+"', "+telefonoFijoAlumno.getText()+", "+telefonoMovilAlumno.getText()+")";
-        
-        try{
-            stmt = conexion.createStatement();
-            stmt.executeUpdate(inserccion);
-        }catch(SQLException ex){
-            System.out.print(ex.getMessage());
-        }*/
+        nuevoAlumno.insertarAlumnoBD(accesoBD);        
         nombreAlumno.setText(null);
         primerApellidoAlumno.setText(null);
         segundoApellidoAlumno.setText(null);
