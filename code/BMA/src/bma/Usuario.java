@@ -15,13 +15,15 @@ public class Usuario {
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
+    private boolean entrenador;
 
-    public void crearUsuario(int idUsuario, String nombre, String primerApellido, String segundoApellido, String dni, String clave) {
+    public void crearUsuario(int idUsuario, String nombre, String primerApellido, String segundoApellido, String dni, String clave, boolean entrenador) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.primerApellido = primerApellido;
         this.segundoApellido = segundoApellido;
         this.dni = dni;
         this.clave = clave;
+        this.entrenador=entrenador;
     }
 }

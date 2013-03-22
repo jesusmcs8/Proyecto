@@ -67,6 +67,8 @@ public class InterfazInicio extends javax.swing.JFrame {
         textfield_apellido1 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        textfield_categoria1 = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         panel_anadiralumno = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -161,8 +163,10 @@ public class InterfazInicio extends javax.swing.JFrame {
         getContentPane().add(panel_inicio, gridBagConstraints);
 
         panel_jugadores.setVisible(false);
+        panel_jugadores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Resultados de los alumnos:");
+        panel_jugadores.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 20));
 
         botonNuevoAlumno.setText("Nuevo Alumno");
         botonNuevoAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -170,44 +174,79 @@ public class InterfazInicio extends javax.swing.JFrame {
                 botonNuevoAlumnoActionPerformed(evt);
             }
         });
+        panel_jugadores.add(botonNuevoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
 
-        botonModificarAlumno.setText("Modificar alumno");
+        botonModificarAlumno.setText("Guardar Cambios");
         botonModificarAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonModificarAlumnoActionPerformed(evt);
             }
         });
+        panel_jugadores.add(botonModificarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
 
-        jButton3.setText("Eliminar alumno");
+        jButton3.setText("Deshacer Cambios");
+        panel_jugadores.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 690, -1, -1));
 
         jLabel3.setText("Buscar alumnos por:");
+        panel_jugadores.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, -1, -1));
 
         jLabel4.setText("Equipo");
+        panel_jugadores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
 
         jLabel5.setText("Grupo");
+        panel_jugadores.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
         jLabel6.setText("Edad");
+        panel_jugadores.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, -1, -1));
 
         jLabel7.setText("Entrenador");
+        panel_jugadores.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, -1));
 
         jLabel8.setText("Nombre");
+        panel_jugadores.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 36, -1, -1));
+        panel_jugadores.add(textfield_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 201, -1));
+        panel_jugadores.add(textfield_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 80, -1));
+        panel_jugadores.add(textfield_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 140, -1));
+        panel_jugadores.add(textfield_grupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 110, -1));
+        panel_jugadores.add(textfield_entrenador, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 110, -1));
 
         jScrollPane1.setAutoscrolls(true);
 
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "ApellidoPrimero", "ApellidoSegundo", "Edad", "Entrenador", "Equipo", "Grupo", "Email", "Telefono Movil"
+                "Nombre Apellidos", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Email", "Temporada"
             }
         ));
         jScrollPane1.setViewportView(tabla_alumnos);
+
+        panel_jugadores.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1130, 430));
 
         boton_mostrar_alumnos.setText("Mostrar Alumnos");
         boton_mostrar_alumnos.addActionListener(new java.awt.event.ActionListener() {
@@ -215,117 +254,23 @@ public class InterfazInicio extends javax.swing.JFrame {
                 boton_mostrar_alumnosActionPerformed(evt);
             }
         });
+        panel_jugadores.add(boton_mostrar_alumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        panel_jugadores.add(textfield_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 120, -1));
 
         jLabel9.setText("Categoria");
+        panel_jugadores.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
+        panel_jugadores.add(textfield_apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 201, -1));
+        panel_jugadores.add(textfield_apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 201, -1));
 
         jLabel10.setText("Apellido Primero");
+        panel_jugadores.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
 
         jLabel11.setText("Apellido Segundo");
+        panel_jugadores.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
+        panel_jugadores.add(textfield_categoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 140, -1));
 
-        javax.swing.GroupLayout panel_jugadoresLayout = new javax.swing.GroupLayout(panel_jugadores);
-        panel_jugadores.setLayout(panel_jugadoresLayout);
-        panel_jugadoresLayout.setHorizontalGroup(
-            panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(botonNuevoAlumno)
-                        .addGap(94, 94, 94)
-                        .addComponent(boton_mostrar_alumnos))
-                    .addComponent(jLabel2)
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(botonModificarAlumno)
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton3))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 734, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_jugadoresLayout.createSequentialGroup()
-                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel9))
-                                .addGap(21, 21, 21)
-                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textfield_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textfield_entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textfield_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textfield_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textfield_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_jugadoresLayout.createSequentialGroup()
-                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel11)
-                                        .addComponent(jLabel10))
-                                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                                        .addGap(17, 17, 17)
-                                        .addComponent(jLabel8)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(textfield_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textfield_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(174, Short.MAX_VALUE))
-        );
-        panel_jugadoresLayout.setVerticalGroup(
-            panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel8))
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textfield_apellido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textfield_apellido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(textfield_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(textfield_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textfield_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(textfield_entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textfield_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(95, 95, 95)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(botonNuevoAlumno)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addComponent(boton_mostrar_alumnos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonModificarAlumno)
-                    .addComponent(jButton3))
-                .addGap(103, 103, 103))
-        );
+        jLabel17.setText("Temporada");
+        panel_jugadores.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -339,359 +284,138 @@ public class InterfazInicio extends javax.swing.JFrame {
 
         panel_anadiralumno.setVisible(false);
         panel_anadiralumno.setAutoscrolls(true);
-        panel_anadiralumno.setLayout(new java.awt.GridBagLayout());
+        panel_anadiralumno.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setText("Introduzca los datos del nuevo alumno:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 13;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(30, 49, 0, 0);
-        panel_anadiralumno.add(jLabel12, gridBagConstraints);
+        panel_anadiralumno.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 40, 239, -1));
 
         jLabel13.setText("Nombre:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 5;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(31, 49, 0, 0);
-        panel_anadiralumno.add(jLabel13, gridBagConstraints);
+        panel_anadiralumno.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 85, -1, -1));
 
         jLabel14.setText("Primer apellido:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel14, gridBagConstraints);
+        panel_anadiralumno.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 116, -1, -1));
 
         jLabel15.setText("Segundo apellido:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel15, gridBagConstraints);
+        panel_anadiralumno.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 147, 91, -1));
 
         nombreAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(28, 27, 0, 0);
-        panel_anadiralumno.add(nombreAlumno, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(primerApellidoAlumno, gridBagConstraints);
+        panel_anadiralumno.add(nombreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 82, 145, -1));
+        panel_anadiralumno.add(primerApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 113, 145, -1));
 
         segundoApellidoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 segundoApellidoAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(segundoApellidoAlumno, gridBagConstraints);
+        panel_anadiralumno.add(segundoApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 144, 145, -1));
 
         jLabel16.setText("Fecha Nacimiento: ");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 49, 0, 0);
-        panel_anadiralumno.add(jLabel16, gridBagConstraints);
+        panel_anadiralumno.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 176, -1, -1));
 
         provinciaAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 provinciaAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(provinciaAlumno, gridBagConstraints);
+        panel_anadiralumno.add(provinciaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 294, 145, -1));
 
         jLabel21.setText("Provincia:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 44;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel21, gridBagConstraints);
+        panel_anadiralumno.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 297, 91, -1));
 
         localidadAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 localidadAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(localidadAlumno, gridBagConstraints);
+        panel_anadiralumno.add(localidadAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 263, 145, -1));
 
         jLabel22.setText("Email:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel22, gridBagConstraints);
+        panel_anadiralumno.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 235, -1, -1));
 
         jLabel23.setText("Localidad:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 6;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel23, gridBagConstraints);
+        panel_anadiralumno.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 266, -1, -1));
 
         colegioAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colegioAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(colegioAlumno, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(emailAlumno, gridBagConstraints);
+        panel_anadiralumno.add(colegioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 201, 145, -1));
+        panel_anadiralumno.add(emailAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 232, 145, -1));
 
         jLabel24.setText("Colegio:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel24, gridBagConstraints);
+        panel_anadiralumno.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 204, -1, -1));
 
         jLabel25.setText("Nombre Madre");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 22;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 21;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel25, gridBagConstraints);
+        panel_anadiralumno.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 436, 91, -1));
 
         nombreMadreAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreMadreAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 22;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(nombreMadreAlumno, gridBagConstraints);
+        panel_anadiralumno.add(nombreMadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 433, 145, -1));
 
         jLabel26.setText("Domicilio");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel26, gridBagConstraints);
+        panel_anadiralumno.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 374, -1, -1));
 
         nombrePadreAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombrePadreAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(nombrePadreAlumno, gridBagConstraints);
+        panel_anadiralumno.add(nombrePadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 402, 145, -1));
 
         jLabel27.setText("Nombre Padre");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel27, gridBagConstraints);
+        panel_anadiralumno.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 405, -1, -1));
 
         codigoPostalAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigoPostalAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(26, 27, 0, 0);
-        panel_anadiralumno.add(codigoPostalAlumno, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(domicilioAlumno, gridBagConstraints);
+        panel_anadiralumno.add(codigoPostalAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 340, 145, -1));
+        panel_anadiralumno.add(domicilioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 371, 145, -1));
 
         jLabel28.setText("Codigo Postal:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 22;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(29, 49, 0, 0);
-        panel_anadiralumno.add(jLabel28, gridBagConstraints);
+        panel_anadiralumno.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 343, 91, -1));
 
         numeroCuentaAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numeroCuentaAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 24;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 27, 0, 0);
-        panel_anadiralumno.add(numeroCuentaAlumno, gridBagConstraints);
+        panel_anadiralumno.add(numeroCuentaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 471, 145, -1));
 
         jLabel29.setText("Numero Cuenta");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 24;
-        gridBagConstraints.gridwidth = 9;
-        gridBagConstraints.ipadx = 12;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 49, 0, 0);
-        panel_anadiralumno.add(jLabel29, gridBagConstraints);
+        panel_anadiralumno.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 474, 87, -1));
 
         jLabel30.setText("Telefono Móvil");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 30;
-        gridBagConstraints.gridwidth = 10;
-        gridBagConstraints.ipadx = 22;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 49, 0, 0);
-        panel_anadiralumno.add(jLabel30, gridBagConstraints);
+        panel_anadiralumno.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 581, 91, -1));
 
         telefonoMovilAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonoMovilAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 30;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 27, 0, 0);
-        panel_anadiralumno.add(telefonoMovilAlumno, gridBagConstraints);
+        panel_anadiralumno.add(telefonoMovilAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 578, 145, -1));
 
         jLabel31.setText("Talla:");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 26;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 49, 0, 0);
-        panel_anadiralumno.add(jLabel31, gridBagConstraints);
+        panel_anadiralumno.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 512, -1, -1));
 
         telefonoFijoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonoFijoAlumnoActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 28;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.ipadx = 139;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(11, 27, 0, 0);
-        panel_anadiralumno.add(telefonoFijoAlumno, gridBagConstraints);
+        panel_anadiralumno.add(telefonoFijoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 540, 145, -1));
 
         jLabel32.setText("Telefono Fijo");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 28;
-        gridBagConstraints.gridwidth = 8;
-        gridBagConstraints.ipadx = 11;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 49, 0, 0);
-        panel_anadiralumno.add(jLabel32, gridBagConstraints);
+        panel_anadiralumno.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 543, 73, -1));
 
         botonAnadir.setText("Añadir");
         botonAnadir.addActionListener(new java.awt.event.ActionListener() {
@@ -699,12 +423,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                 botonAnadirActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 32;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 35, 27, 0);
-        panel_anadiralumno.add(botonAnadir, gridBagConstraints);
+        panel_anadiralumno.add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 625, -1, -1));
 
         jButton4.setText("Volver Atras");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -712,235 +431,97 @@ public class InterfazInicio extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 32;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 35, 27, 0);
-        panel_anadiralumno.add(jButton4, gridBagConstraints);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 14;
-        gridBagConstraints.ipadx = 118;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(6, 27, 0, 0);
-        panel_anadiralumno.add(fechaNacAl, gridBagConstraints);
+        panel_anadiralumno.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 625, -1, -1));
+        panel_anadiralumno.add(fechaNacAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 170, 145, -1));
 
         errorCP.setForeground(new java.awt.Color(255, 0, 0));
         errorCP.setText("El codigo postal tiene que ser un número");
         errorCP.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 16;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 49;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(29, 27, 0, 174);
-        panel_anadiralumno.add(errorCP, gridBagConstraints);
+        panel_anadiralumno.add(errorCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 343, 243, -1));
 
         errorTelefonoFijo.setForeground(new java.awt.Color(255, 0, 0));
         errorTelefonoFijo.setText("El telefono fijo tiene que ser un número");
         errorTelefonoFijo.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 28;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.ipadx = 31;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 0);
-        panel_anadiralumno.add(errorTelefonoFijo, gridBagConstraints);
+        panel_anadiralumno.add(errorTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 543, 220, -1));
 
         errorTelefonoMovil.setForeground(new java.awt.Color(255, 0, 0));
         errorTelefonoMovil.setText("El telefono móvil tiene que ser un número");
         errorTelefonoMovil.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 30;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 45;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 27, 0, 174);
-        panel_anadiralumno.add(errorTelefonoMovil, gridBagConstraints);
+        panel_anadiralumno.add(errorTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 581, 243, -1));
 
         mensajeConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 14));
         mensajeConfirmacion.setForeground(new java.awt.Color(51, 204, 0));
         mensajeConfirmacion.setText("El alumno se inserto correctamente");
         mensajeConfirmacion.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.ipadx = 16;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(27, 27, 0, 0);
-        panel_anadiralumno.add(mensajeConfirmacion, gridBagConstraints);
+        panel_anadiralumno.add(mensajeConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 37, 231, -1));
 
         errorInsertAl1.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl1.setText("No ha introducido el nombre");
         errorInsertAl1.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 109;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(31, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl1, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 85, 243, -1));
 
         errorInsertAl2.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl2.setText("No ha introducido el primer apellido");
         errorInsertAl2.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 3;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 76;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl2, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 116, 243, -1));
 
         errorInsertAl3.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl3.setText("No ha introducido el segundo apellido");
         errorInsertAl3.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 5;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 65;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl3, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 147, 243, -1));
 
         errorInsertAl4.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl4.setText("No ha introducido la fecha de nacimiento");
         errorInsertAl4.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 49;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(12, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl4, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 176, 243, -1));
 
         errorInsertAl5.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl5.setText("No ha introducido el colegio");
         errorInsertAl5.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 112;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl5, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 204, 243, -1));
 
         errorInsertAl6.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl6.setText("No ha introducido el email");
         errorInsertAl6.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 10;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 121;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl6, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 235, 243, -1));
 
         errorInsertAl7.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl7.setText("No ha introducido la localidad");
         errorInsertAl7.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 12;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 104;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl7, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 266, 243, -1));
 
         errorInsertAl8.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl8.setText("No ha introducido la provincia");
         errorInsertAl8.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 14;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 102;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl8, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 297, 243, -1));
 
         errorInsertAl9.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl9.setText("No ha introducido el domicilio");
         errorInsertAl9.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 18;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 106;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl9, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl9, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 374, 243, -1));
 
         errorInsertAl10.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl10.setText("No ha introducido el nombre del padre");
         errorInsertAl10.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 20;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 61;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl10, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl10, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 405, 243, -1));
 
         errorInsertAl11.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl11.setText("No ha introducido el nombre de la madre");
         errorInsertAl11.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 22;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 50;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(14, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl11, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl11, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 436, 243, -1));
 
         errorInsertAl12.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl12.setText("No ha introducido el número de cuenta");
         errorInsertAl12.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 24;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 58;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl12, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 474, 243, -1));
 
         errorInsertAl13.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl13.setText("No ha introducido la talla");
         errorInsertAl13.setVisible(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 24;
-        gridBagConstraints.gridy = 26;
-        gridBagConstraints.gridwidth = 4;
-        gridBagConstraints.ipadx = 125;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(21, 27, 0, 174);
-        panel_anadiralumno.add(errorInsertAl13, gridBagConstraints);
+        panel_anadiralumno.add(errorInsertAl13, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 512, 243, -1));
 
         tallaAlumno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SinMedir", "6", "8", "10", "12", "XS", "S", "M", "L", "XL", "XXL" }));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 10;
-        gridBagConstraints.gridy = 26;
-        gridBagConstraints.gridwidth = 2;
-        gridBagConstraints.gridheight = 2;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(18, 61, 0, 0);
-        panel_anadiralumno.add(tallaAlumno, gridBagConstraints);
+        panel_anadiralumno.add(tallaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 509, -1, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1058,24 +639,49 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "ApellidoPrimero", "ApellidoSegundo", "Edad", "Entrenador", "Equipo", "Grupo", "Email", "Telefono Movil"
+                "Nombre Apellidos", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Email", "Temporada"
             }
         ));
         javax.swing.table.TableModel modelo_tabla=new javax.swing.table.DefaultTableModel();
         modelo_tabla=tabla_alumnos.getModel();
         int i=0;
         while(retset.next()){
-            if(i<6){
-                tabla_alumnos.setValueAt(retset.getString(2), i, 0);
+            System.out.print("\ntabla fila "+i);
+            1         2      3       4               5                6              7           8
+            idAlumno, talla, nombre, primerApellido, segundoApellido, nombrePadre, nombreMadre, numeroCuenta, 
+            9           10         11         12          13         14           15       16         17       18              19
+            telMovil, telFijo, observaciones, provincia, localidad, codigoPostal, colegio, domicilio, email, fechaNacimiento, Alumnocol
+            if(i<25){
+                tabla_alumnos.setValueAt(retset.getString(3)+" "+retset.getString(4)+" "+retset.getString(5), i, 0);
                 tabla_alumnos.setValueAt(retset.getString(5), i, 1);
                 tabla_alumnos.setValueAt(retset.getString(6), i, 2);
 
-                tabla_alumnos.setValueAt(retset.getString(3), i, 6);
-                tabla_alumnos.setValueAt(retset.getString(9), i, 7);
-                tabla_alumnos.setValueAt(retset.getString(8), i, 8);
+                tabla_alumnos.setValueAt(retset.getString(3), i, 3);
+                tabla_alumnos.setValueAt(retset.getString(9), i, 4);
+                tabla_alumnos.setValueAt(retset.getString(8), i, 5);
+                tabla_alumnos.setValueAt(retset.getString(8), i, 6);
             }else{
                 javax.swing.table.DefaultTableModel temp = (javax.swing.table.DefaultTableModel) tabla_alumnos.getModel();
                 Object nuevo[]= {"","",""};
@@ -1094,7 +700,6 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     catch(SQLException ex){
         System.out.print(ex.getMessage());
     }
-    //tabla_alumnos.setValueAt("hola", 2, 3);
     
 }//GEN-LAST:event_boton_mostrar_alumnosActionPerformed
 
@@ -1398,6 +1003,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
@@ -1445,6 +1051,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JTextField textfield_apellido1;
     private javax.swing.JTextField textfield_apellido2;
     private javax.swing.JTextField textfield_categoria;
+    private javax.swing.JTextField textfield_categoria1;
     private javax.swing.JTextField textfield_edad;
     private javax.swing.JTextField textfield_entrenador;
     private javax.swing.JTextField textfield_equipo;

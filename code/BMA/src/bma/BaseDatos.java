@@ -19,20 +19,21 @@ public class BaseDatos {
     Statement stmt;
     ResultSet retset;
 
+    public BaseDatos(){        
+    }
+    
     public BaseDatos(String driver, String servidor, String usuario, String clave) {
         try {
             Class.forName(driver);
             //Busca el controlador y abre conexion
-            for (int i = 0; i < 10; i++) {
                 //("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
-                this.Cooconexion.add(DriverManager.getConnection(servidor, usuario, clave));
-            }
+            DriverManager.getConnection(servidor, usuario, clave);
+
         } catch (ClassNotFoundException e) {
             System.err.print("No se han podido cargar los controladores");
         } catch (SQLException e) {
             System.err.print("No se ha podido acceder a la base de datos");
         }
-
     }
 
     public Connection abreConexion(String driver, String servidor, String usuario, String clave) {
@@ -54,12 +55,15 @@ public class BaseDatos {
     }
 
     public ResultSet ejecutaConsulta(String consulta) {
-        try{
+
+        try {
             stmt = conexion.createStatement();
             retset = stmt.executeQuery(consulta);
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
         }
+
+
         return retset;
     }
 

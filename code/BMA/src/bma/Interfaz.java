@@ -114,20 +114,19 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    BaseDatos accesoBD=new BaseDatos("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");
+    BaseDatos accesoBD=new BaseDatos();
     Usuario user;
     accesoBD.conectaBD();
     
     String usuario = user_textfield.getText();
     String pass = pass_textfield.getText();
     String consulta_acceso = "SELECT * FROM usuario WHERE nombre='" + usuario + "' AND clave='" + pass + "'";
-            
     retset=accesoBD.ejecutaConsulta(consulta_acceso);
     try{
         if(retset.next()){
             user = new Usuario();
-            user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getString(6));            
-            
+            user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getString(6), retset.getBoolean(7));            
+
             this.setVisible(false);
             new InterfazInicio(accesoBD, user).setVisible(true);
         }else{          
