@@ -10,6 +10,7 @@
  */
 package bma;
 import java.sql.*;
+import java.util.Calendar;
 
 /**
  *
@@ -55,20 +56,20 @@ public class InterfazInicio extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         textfield_nombre = new javax.swing.JTextField();
         textfield_edad = new javax.swing.JTextField();
-        textfield_equipo = new javax.swing.JTextField();
-        textfield_grupo = new javax.swing.JTextField();
-        textfield_entrenador = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_alumnos = new javax.swing.JTable();
         boton_mostrar_alumnos = new javax.swing.JButton();
-        textfield_categoria = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         textfield_apellido2 = new javax.swing.JTextField();
         textfield_apellido1 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        textfield_categoria1 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        consultaEntrenador = new javax.swing.JComboBox();
+        consultaEquipo = new javax.swing.JComboBox();
+        consultaGrupo = new javax.swing.JComboBox();
+        consultaCategoria = new javax.swing.JComboBox();
+        consultaTemporada = new javax.swing.JComboBox();
         panel_anadiralumno = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -124,7 +125,7 @@ public class InterfazInicio extends javax.swing.JFrame {
         tallaAlumno = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuJugadores = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
@@ -142,7 +143,7 @@ public class InterfazInicio extends javax.swing.JFrame {
             .addGroup(panel_inicioLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(633, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         panel_inicioLayout.setVerticalGroup(
             panel_inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,47 +207,55 @@ public class InterfazInicio extends javax.swing.JFrame {
         panel_jugadores.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 36, -1, -1));
         panel_jugadores.add(textfield_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 201, -1));
         panel_jugadores.add(textfield_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 80, -1));
-        panel_jugadores.add(textfield_equipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 140, -1));
-        panel_jugadores.add(textfield_grupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 110, -1));
-        panel_jugadores.add(textfield_entrenador, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 110, -1));
 
         jScrollPane1.setAutoscrolls(true);
 
+        tabla_alumnos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre Apellidos", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Email", "Temporada"
+                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Temporada", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
             }
-        ));
-        jScrollPane1.setViewportView(tabla_alumnos);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, true, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true
+            };
 
-        panel_jugadores.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1130, 430));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabla_alumnos.setColumnSelectionAllowed(true);
+        jScrollPane1.setViewportView(tabla_alumnos);
+        tabla_alumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        panel_jugadores.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, -1));
 
         boton_mostrar_alumnos.setText("Mostrar Alumnos");
         boton_mostrar_alumnos.addActionListener(new java.awt.event.ActionListener() {
@@ -255,7 +264,6 @@ public class InterfazInicio extends javax.swing.JFrame {
             }
         });
         panel_jugadores.add(boton_mostrar_alumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
-        panel_jugadores.add(textfield_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 120, -1));
 
         jLabel9.setText("Categoria");
         panel_jugadores.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
@@ -267,10 +275,24 @@ public class InterfazInicio extends javax.swing.JFrame {
 
         jLabel11.setText("Apellido Segundo");
         panel_jugadores.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
-        panel_jugadores.add(textfield_categoria1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 140, -1));
 
         jLabel17.setText("Temporada");
         panel_jugadores.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
+
+        consultaEntrenador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaEntrenador, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 200, -1));
+
+        consultaEquipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 100, -1));
+
+        consultaGrupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 100, -1));
+
+        consultaCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 100, -1));
+
+        consultaTemporada.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaTemporada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 100, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -545,18 +567,18 @@ public class InterfazInicio extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Jugadores");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuJugadores.setText("Jugadores");
+        menuJugadores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+                menuJugadoresMouseClicked(evt);
             }
         });
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        menuJugadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                menuJugadoresActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuJugadores);
 
         jMenu3.setText("Equipos");
         jMenuBar1.add(jMenu3);
@@ -584,95 +606,163 @@ private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
 
 }//GEN-LAST:event_jMenu1ActionPerformed
 
-private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+private void menuJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuJugadoresActionPerformed
 
-}//GEN-LAST:event_jMenu2ActionPerformed
+}//GEN-LAST:event_menuJugadoresActionPerformed
 
-private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+private void menuJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuJugadoresMouseClicked
 // TODO add your handling code here:
     panel_inicio.setVisible(false);
     panel_jugadores.setVisible(true);
-}//GEN-LAST:event_jMenu2MouseClicked
+    ResultSet consulta;
+    
+    try{
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM grupo");
+        while(consulta.next()){
+            consultaGrupo.addItem(consulta.getInt(1));
+        }
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM equipo");
+        while(consulta.next()){
+            consultaEquipo.addItem(consulta.getInt(1));
+        } 
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM categoria");
+        while(consulta.next()){
+            consultaCategoria.addItem(consulta.getString("tipo"));
+        } 
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM temporada");
+        while(consulta.next()){
+            consultaTemporada.addItem(consulta.getString("curso"));
+        }
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM usuario where usuario.entrenador=true");
+        while(consulta.next()){
+            consultaEntrenador.addItem(consulta.getString("nombre")+" "+consulta.getString("primerApellido"));
+        }
+    }catch(SQLException ex){
+        System.out.print(ex.getMessage());
+    }
+}//GEN-LAST:event_menuJugadoresMouseClicked
 
 private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
     panel_inicio.setVisible(true);
     panel_jugadores.setVisible(false);
 }//GEN-LAST:event_jMenu1MouseClicked
 
+private int calculaEdad(java.util.Date fechaNac){
+    Calendar cal1 = Calendar.getInstance();
+
+    String dateString = String.format("%1$tY-%1$tm-%1$td", fechaNac.toString());
+    int diaAct, mesAct, anoAct;
+    int edad=0;
+    
+    diaAct=cal1.get(Calendar.DATE);
+    mesAct=cal1.get(Calendar.MONTH)+1;
+    anoAct=cal1.get(Calendar.YEAR);
+ 
+    System.out.println(" "+diaAct+" "+mesAct+" "+anoAct+" al "+dateString);
+   
+    return edad;
+}
 private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
     String consulta_alumnos=new String();
+    String condicionesConsulta=new String();
+    String tablasImplicadas=new String();
     
     try{
-        consulta_alumnos="SELECT * FROM alumno";
+        consulta_alumnos="SELECT a.idAlumno, a.talla, a.nombre, a.primerApellido, a.segundoApellido, a.nombrePadre, a.nombreMadre, a.numeroCuenta,"+ 
+            "a.telMovil, a.telFijo, a.observaciones, a.provincia, a.localidad, a.codigoPostal, a.colegio, a.domicilio, a.email, a.fechaNacimiento, a.Alumnocol FROM ";
+        tablasImplicadas=" alumno a ";
+        condicionesConsulta=" WHERE ";
+
         if(! textfield_nombre.getText().equals("") || ! textfield_apellido1.getText().equals("") || ! textfield_apellido2.getText().equals("")
-              || ! textfield_edad.getText().equals("") || ! textfield_equipo.getText().equals("") || ! textfield_grupo.getText().equals("")
-              || ! textfield_entrenador.getText().equals("") || ! textfield_categoria.getText().equals("")){
-            consulta_alumnos=consulta_alumnos+" WHERE ";
+              || ! textfield_edad.getText().equals("") || ! consultaEquipo.getSelectedItem().equals("") || ! consultaGrupo.getSelectedItem().equals("")
+              || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
             if(! textfield_nombre.getText().equals("")){
-                consulta_alumnos=consulta_alumnos+" nombre='"+textfield_nombre.getText()+"' AND ";
+                condicionesConsulta=condicionesConsulta+" nombre='"+textfield_nombre.getText()+"' AND ";
             }
             if(! textfield_apellido1.getText().equals("")){
-                consulta_alumnos=consulta_alumnos+" primerapellido='"+textfield_apellido1.getText()+"' AND ";
+                condicionesConsulta=condicionesConsulta+" primerapellido='"+textfield_apellido1.getText()+"' AND ";
             }
             if(! textfield_apellido2.getText().equals("")){
-                consulta_alumnos=consulta_alumnos+" segundoapellido='"+textfield_apellido2.getText()+"' AND ";
+                condicionesConsulta=condicionesConsulta+" segundoapellido='"+textfield_apellido2.getText()+"' AND ";
             }
-            if(! textfield_grupo.getText().equals("")){
-                consulta_alumnos=consulta_alumnos+" Grupo_idGrupo="+textfield_grupo.getText()+" AND ";
-            }   
-            if(! textfield_categoria.getText().equals("")){
-                consulta_alumnos=consulta_alumnos+" Grupo_Categoria_idCategoria='"+textfield_categoria.getText()+"' AND ";
+            if(! textfield_edad.getText().equals("")){
+                condicionesConsulta=condicionesConsulta+" a.edad='"+textfield_edad.getText()+"' AND ";
+            }            
+            if(! consultaGrupo.getSelectedItem().equals("") || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , alumno_has_grupo ";
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Alumno_idAlumno=a.idalumno AND ";
+                if(! consultaGrupo.getSelectedItem().equals("") ){
+                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_idGrupo="+consultaGrupo.getSelectedItem()+" AND ";
+                }   
+                if(! consultaCategoria.getSelectedItem().equals("")){
+                    tablasImplicadas=tablasImplicadas+" , categoria ";
+                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Categoria_idCategoria=categoria.idCategoria AND categoria.tipo='"+consultaCategoria.getSelectedItem()+"' AND ";
+                }
+                if(! consultaTemporada.getSelectedItem().equals("")){
+                    tablasImplicadas=tablasImplicadas+" , temporada ";
+                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Temporada_idTemporada=temporada.idTemporada and temporada.curso='"+consultaTemporada.getSelectedItem()+"' AND ";
+                }            
+                if(! consultaEntrenador.getSelectedItem().equals("")){
+                    tablasImplicadas=tablasImplicadas+" , usuario ";
+                    String nombre, apellido;
+                    int espacios;
+                    espacios=consultaEntrenador.getSelectedItem().toString().indexOf(" ");
+                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Usuario_idUsuario=usuario.idUsuario and concat(usuario.nombre, ' ', usuario.primerApellido)='"+consultaEntrenador.getSelectedItem()+"' AND ";
+                }     
             }
-            if(! textfield_equipo.getText().equals("")){
-                
+            if(! consultaEquipo.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , alumnoequipo ";
+                condicionesConsulta=condicionesConsulta+" alumnoequipo.Alumno_idAlumno=a.idalumno AND alumnoequipo.Equipo_idEquipo="+consultaEquipo.getSelectedItem()+" AND ";
             }
-            consulta_alumnos=consulta_alumnos.substring(0, consulta_alumnos.length()-4);
+            
+            condicionesConsulta=condicionesConsulta.substring(0, condicionesConsulta.length()-4);
+            tablasImplicadas=tablasImplicadas+condicionesConsulta;
         }
+        consulta_alumnos=consulta_alumnos+tablasImplicadas;
                
         System.out.print("\nLA consulta "+ consulta_alumnos);
         retset = accesoBD.ejecutaConsulta(consulta_alumnos);
 
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre Apellidos", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Email", "Temporada"
+                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Temporada", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
             }
         ));
         javax.swing.table.TableModel modelo_tabla=new javax.swing.table.DefaultTableModel();
         modelo_tabla=tabla_alumnos.getModel();
         int i=0;
         while(retset.next()){
-            System.out.print("\ntabla fila "+i);
-            1         2      3       4               5                6              7           8
+ /*           1         2      3       4               5                6              7           8
             idAlumno, talla, nombre, primerApellido, segundoApellido, nombrePadre, nombreMadre, numeroCuenta, 
             9           10         11         12          13         14           15       16         17       18              19
-            telMovil, telFijo, observaciones, provincia, localidad, codigoPostal, colegio, domicilio, email, fechaNacimiento, Alumnocol
+            telMovil, telFijo, observaciones, provincia, localidad, codigoPostal, colegio, domicilio, email, fechaNacimiento, Alumnocol*/
             if(i<25){
                 tabla_alumnos.setValueAt(retset.getString(3)+" "+retset.getString(4)+" "+retset.getString(5), i, 0);
                 tabla_alumnos.setValueAt(retset.getString(5), i, 1);
@@ -974,6 +1064,11 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JButton boton_mostrar_alumnos;
     private javax.swing.JTextField codigoPostalAlumno;
     private javax.swing.JTextField colegioAlumno;
+    private javax.swing.JComboBox consultaCategoria;
+    private javax.swing.JComboBox consultaEntrenador;
+    private javax.swing.JComboBox consultaEquipo;
+    private javax.swing.JComboBox consultaGrupo;
+    private javax.swing.JComboBox consultaTemporada;
     private javax.swing.JTextField domicilioAlumno;
     private javax.swing.JTextField emailAlumno;
     private javax.swing.JLabel errorCP;
@@ -1025,7 +1120,6 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
@@ -1034,6 +1128,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField localidadAlumno;
     private javax.swing.JLabel mensajeConfirmacion;
+    private javax.swing.JMenu menuJugadores;
     private javax.swing.JTextField nombreAlumno;
     private javax.swing.JTextField nombreMadreAlumno;
     private javax.swing.JTextField nombrePadreAlumno;
@@ -1050,12 +1145,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JTextField telefonoMovilAlumno;
     private javax.swing.JTextField textfield_apellido1;
     private javax.swing.JTextField textfield_apellido2;
-    private javax.swing.JTextField textfield_categoria;
-    private javax.swing.JTextField textfield_categoria1;
     private javax.swing.JTextField textfield_edad;
-    private javax.swing.JTextField textfield_entrenador;
-    private javax.swing.JTextField textfield_equipo;
-    private javax.swing.JTextField textfield_grupo;
     private javax.swing.JTextField textfield_nombre;
     // End of variables declaration//GEN-END:variables
 }
