@@ -50,6 +50,7 @@ public class Alumno {
         this.telFijo=telFijo;
         this.telMovil=telMovil;
         this.tallaAlumno=tallaAlumno;
+        
     }
     
     public void insertarAlumnoBD(BaseDatos accesoBD){
@@ -57,13 +58,14 @@ public class Alumno {
         String dateString=new String();
         dateString = String.format("%1$tY-%1$tm-%1$td", fechaNacimiento);
         
-        inserccion="INSERT INTO alumno (nombre, Grupo_idGrupo, Grupo_Categoria_idCategoria, primerapellido, segundoapellido, fechanacimiento, colegio, email, localidad, provincia, codigoPostal, domicilio, "
-                + "nombrePadre, nombreMadre, numeroCuenta, TallaAlumno_idTallaAlumno, telFijo, telMovil) VALUES ('";
-        inserccion=inserccion+nombre+"', 1, 1, '"+primerApellido+"', '"+segundoApellido+"','"+
+        inserccion="INSERT INTO alumno (nombre, primerapellido, segundoapellido, fechanacimiento, colegio, email, localidad, provincia, codigoPostal, domicilio, "
+                + "nombrePadre, nombreMadre, numeroCuenta, talla, telFijo, telMovil) VALUES ('";
+        inserccion=inserccion+nombre+"', '"+primerApellido+"', '"+segundoApellido+"','"+
                 dateString+"', '"+colegio+"', '"+email+"', '"+localidad+"', '"+provincia+"', "+
                 codPostal+", '"+domicilio+"', '"+nombrePadre+"', '"+nombreMadre+
                 "', '"+cuentaCorriente+"', '"+tallaAlumno+"', "+telFijo+", "+telMovil+")";
 
+        System.out.print("\n inser "+inserccion);
         accesoBD.ejecutaActualizacion(inserccion);
     }
 }

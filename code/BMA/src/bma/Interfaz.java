@@ -18,7 +18,6 @@ public class Interfaz extends javax.swing.JFrame {
     Connection conexion;   
     Statement stmt;      
     ResultSet retset;
-     
     
     /** Creates new form Interfaz */
     public Interfaz() {

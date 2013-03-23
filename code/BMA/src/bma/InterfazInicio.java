@@ -20,8 +20,10 @@ public class InterfazInicio extends javax.swing.JFrame {
     BaseDatos accesoBD=new BaseDatos("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");  
     Statement stmt;      
     ResultSet retset;
+    ResultSet retsetMostrados;
+    ResultSet retsetMostradosAnt;
+
     Usuario user=new Usuario();
-    
     /** Creates new form InterfazInicio */
     public InterfazInicio() {
         initComponents();
@@ -46,8 +48,8 @@ public class InterfazInicio extends javax.swing.JFrame {
         panel_jugadores = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         botonNuevoAlumno = new javax.swing.JButton();
-        botonModificarAlumno = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonGuardarCambios = new javax.swing.JButton();
+        deshacerCambios = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -70,6 +72,9 @@ public class InterfazInicio extends javax.swing.JFrame {
         consultaGrupo = new javax.swing.JComboBox();
         consultaCategoria = new javax.swing.JComboBox();
         consultaTemporada = new javax.swing.JComboBox();
+        errorModifMovil = new javax.swing.JLabel();
+        errorModifFijo = new javax.swing.JLabel();
+        errorModifCP = new javax.swing.JLabel();
         panel_anadiralumno = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -177,16 +182,21 @@ public class InterfazInicio extends javax.swing.JFrame {
         });
         panel_jugadores.add(botonNuevoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
 
-        botonModificarAlumno.setText("Guardar Cambios");
-        botonModificarAlumno.addActionListener(new java.awt.event.ActionListener() {
+        botonGuardarCambios.setText("Guardar Cambios");
+        botonGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonModificarAlumnoActionPerformed(evt);
+                botonGuardarCambiosActionPerformed(evt);
             }
         });
-        panel_jugadores.add(botonModificarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
+        panel_jugadores.add(botonGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
 
-        jButton3.setText("Deshacer Cambios");
-        panel_jugadores.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 690, -1, -1));
+        deshacerCambios.setText("Deshacer Cambios");
+        deshacerCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deshacerCambiosActionPerformed(evt);
+            }
+        });
+        panel_jugadores.add(deshacerCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 690, -1, -1));
 
         jLabel3.setText("Buscar alumnos por:");
         panel_jugadores.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, -1, -1));
@@ -213,42 +223,42 @@ public class InterfazInicio extends javax.swing.JFrame {
         tabla_alumnos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Temporada", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
+                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, false, false, false, true, true, true, true, true, true, true, true, true, true, true, true
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
         tabla_alumnos.setColumnSelectionAllowed(true);
@@ -291,8 +301,22 @@ public class InterfazInicio extends javax.swing.JFrame {
         consultaCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         panel_jugadores.add(consultaCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 100, -1));
 
-        consultaTemporada.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         panel_jugadores.add(consultaTemporada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 100, -1));
+
+        errorModifMovil.setForeground(new java.awt.Color(255, 0, 51));
+        errorModifMovil.setText("Error Tel.Movil");
+        errorModifMovil.setVisible(false);
+        panel_jugadores.add(errorModifMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, -1, -1));
+
+        errorModifFijo.setForeground(new java.awt.Color(255, 0, 51));
+        errorModifFijo.setText("Error Tel.Fijo");
+        errorModifFijo.setVisible(false);
+        panel_jugadores.add(errorModifFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, -1, -1));
+
+        errorModifCP.setForeground(new java.awt.Color(255, 0, 51));
+        errorModifCP.setText("Error CP");
+        errorModifCP.setVisible(false);
+        panel_jugadores.add(errorModifCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 210, -1, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -309,135 +333,135 @@ public class InterfazInicio extends javax.swing.JFrame {
         panel_anadiralumno.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setText("Introduzca los datos del nuevo alumno:");
-        panel_anadiralumno.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 40, 239, -1));
+        panel_anadiralumno.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 239, -1));
 
         jLabel13.setText("Nombre:");
-        panel_anadiralumno.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 85, -1, -1));
+        panel_anadiralumno.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel14.setText("Primer apellido:");
-        panel_anadiralumno.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 116, -1, -1));
+        panel_anadiralumno.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, -1));
 
         jLabel15.setText("Segundo apellido:");
-        panel_anadiralumno.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 147, 91, -1));
+        panel_anadiralumno.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 91, -1));
 
         nombreAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(nombreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 82, 145, -1));
-        panel_anadiralumno.add(primerApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 113, 145, -1));
+        panel_anadiralumno.add(nombreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 145, -1));
+        panel_anadiralumno.add(primerApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 145, -1));
 
         segundoApellidoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 segundoApellidoAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(segundoApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 144, 145, -1));
+        panel_anadiralumno.add(segundoApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 145, -1));
 
         jLabel16.setText("Fecha Nacimiento: ");
-        panel_anadiralumno.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 176, -1, -1));
+        panel_anadiralumno.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         provinciaAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 provinciaAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(provinciaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 294, 145, -1));
+        panel_anadiralumno.add(provinciaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 145, -1));
 
         jLabel21.setText("Provincia:");
-        panel_anadiralumno.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 297, 91, -1));
+        panel_anadiralumno.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 91, -1));
 
         localidadAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 localidadAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(localidadAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 263, 145, -1));
+        panel_anadiralumno.add(localidadAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 145, -1));
 
         jLabel22.setText("Email:");
-        panel_anadiralumno.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 235, -1, -1));
+        panel_anadiralumno.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
 
         jLabel23.setText("Localidad:");
-        panel_anadiralumno.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 266, -1, -1));
+        panel_anadiralumno.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
 
         colegioAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 colegioAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(colegioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 201, 145, -1));
-        panel_anadiralumno.add(emailAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 232, 145, -1));
+        panel_anadiralumno.add(colegioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 145, -1));
+        panel_anadiralumno.add(emailAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 145, -1));
 
         jLabel24.setText("Colegio:");
-        panel_anadiralumno.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 204, -1, -1));
+        panel_anadiralumno.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
 
         jLabel25.setText("Nombre Madre");
-        panel_anadiralumno.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 436, 91, -1));
+        panel_anadiralumno.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 91, -1));
 
         nombreMadreAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreMadreAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(nombreMadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 433, 145, -1));
+        panel_anadiralumno.add(nombreMadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 145, -1));
 
         jLabel26.setText("Domicilio");
-        panel_anadiralumno.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 374, -1, -1));
+        panel_anadiralumno.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, -1));
 
         nombrePadreAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombrePadreAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(nombrePadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 402, 145, -1));
+        panel_anadiralumno.add(nombrePadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 145, -1));
 
         jLabel27.setText("Nombre Padre");
-        panel_anadiralumno.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 405, -1, -1));
+        panel_anadiralumno.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, -1));
 
         codigoPostalAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codigoPostalAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(codigoPostalAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 340, 145, -1));
-        panel_anadiralumno.add(domicilioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 371, 145, -1));
+        panel_anadiralumno.add(codigoPostalAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, 145, -1));
+        panel_anadiralumno.add(domicilioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 145, -1));
 
         jLabel28.setText("Codigo Postal:");
-        panel_anadiralumno.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 343, 91, -1));
+        panel_anadiralumno.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, 91, -1));
 
         numeroCuentaAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 numeroCuentaAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(numeroCuentaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 471, 145, -1));
+        panel_anadiralumno.add(numeroCuentaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 145, -1));
 
         jLabel29.setText("Numero Cuenta");
-        panel_anadiralumno.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 474, 87, -1));
+        panel_anadiralumno.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 87, -1));
 
         jLabel30.setText("Telefono Móvil");
-        panel_anadiralumno.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 581, 91, -1));
+        panel_anadiralumno.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 91, -1));
 
         telefonoMovilAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonoMovilAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(telefonoMovilAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 578, 145, -1));
+        panel_anadiralumno.add(telefonoMovilAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 145, -1));
 
         jLabel31.setText("Talla:");
-        panel_anadiralumno.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 512, -1, -1));
+        panel_anadiralumno.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
 
         telefonoFijoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 telefonoFijoAlumnoActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(telefonoFijoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 540, 145, -1));
+        panel_anadiralumno.add(telefonoFijoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 145, -1));
 
         jLabel32.setText("Telefono Fijo");
-        panel_anadiralumno.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(97, 543, 73, -1));
+        panel_anadiralumno.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 73, -1));
 
         botonAnadir.setText("Añadir");
         botonAnadir.addActionListener(new java.awt.event.ActionListener() {
@@ -445,7 +469,7 @@ public class InterfazInicio extends javax.swing.JFrame {
                 botonAnadirActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 625, -1, -1));
+        panel_anadiralumno.add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, -1, -1));
 
         jButton4.setText("Volver Atras");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -453,97 +477,97 @@ public class InterfazInicio extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        panel_anadiralumno.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(463, 625, -1, -1));
-        panel_anadiralumno.add(fechaNacAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(215, 170, 145, -1));
+        panel_anadiralumno.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
+        panel_anadiralumno.add(fechaNacAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 145, -1));
 
         errorCP.setForeground(new java.awt.Color(255, 0, 0));
         errorCP.setText("El codigo postal tiene que ser un número");
         errorCP.setVisible(false);
-        panel_anadiralumno.add(errorCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 343, 243, -1));
+        panel_anadiralumno.add(errorCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 350, 243, -1));
 
         errorTelefonoFijo.setForeground(new java.awt.Color(255, 0, 0));
         errorTelefonoFijo.setText("El telefono fijo tiene que ser un número");
         errorTelefonoFijo.setVisible(false);
-        panel_anadiralumno.add(errorTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 543, 220, -1));
+        panel_anadiralumno.add(errorTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 220, -1));
 
         errorTelefonoMovil.setForeground(new java.awt.Color(255, 0, 0));
         errorTelefonoMovil.setText("El telefono móvil tiene que ser un número");
         errorTelefonoMovil.setVisible(false);
-        panel_anadiralumno.add(errorTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 581, 243, -1));
+        panel_anadiralumno.add(errorTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 243, -1));
 
         mensajeConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 14));
         mensajeConfirmacion.setForeground(new java.awt.Color(51, 204, 0));
         mensajeConfirmacion.setText("El alumno se inserto correctamente");
         mensajeConfirmacion.setVisible(false);
-        panel_anadiralumno.add(mensajeConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 37, 231, -1));
+        panel_anadiralumno.add(mensajeConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 231, -1));
 
         errorInsertAl1.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl1.setText("No ha introducido el nombre");
         errorInsertAl1.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 85, 243, -1));
+        panel_anadiralumno.add(errorInsertAl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 243, -1));
 
         errorInsertAl2.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl2.setText("No ha introducido el primer apellido");
         errorInsertAl2.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 116, 243, -1));
+        panel_anadiralumno.add(errorInsertAl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 243, -1));
 
         errorInsertAl3.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl3.setText("No ha introducido el segundo apellido");
         errorInsertAl3.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 147, 243, -1));
+        panel_anadiralumno.add(errorInsertAl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 243, -1));
 
         errorInsertAl4.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl4.setText("No ha introducido la fecha de nacimiento");
         errorInsertAl4.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 176, 243, -1));
+        panel_anadiralumno.add(errorInsertAl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 243, -1));
 
         errorInsertAl5.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl5.setText("No ha introducido el colegio");
         errorInsertAl5.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 204, 243, -1));
+        panel_anadiralumno.add(errorInsertAl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 243, -1));
 
         errorInsertAl6.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl6.setText("No ha introducido el email");
         errorInsertAl6.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 235, 243, -1));
+        panel_anadiralumno.add(errorInsertAl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 243, -1));
 
         errorInsertAl7.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl7.setText("No ha introducido la localidad");
         errorInsertAl7.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 266, 243, -1));
+        panel_anadiralumno.add(errorInsertAl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 243, -1));
 
         errorInsertAl8.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl8.setText("No ha introducido la provincia");
         errorInsertAl8.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 297, 243, -1));
+        panel_anadiralumno.add(errorInsertAl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 243, -1));
 
         errorInsertAl9.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl9.setText("No ha introducido el domicilio");
         errorInsertAl9.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl9, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 374, 243, -1));
+        panel_anadiralumno.add(errorInsertAl9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 243, -1));
 
         errorInsertAl10.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl10.setText("No ha introducido el nombre del padre");
         errorInsertAl10.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl10, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 405, 243, -1));
+        panel_anadiralumno.add(errorInsertAl10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 243, -1));
 
         errorInsertAl11.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl11.setText("No ha introducido el nombre de la madre");
         errorInsertAl11.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl11, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 436, 243, -1));
+        panel_anadiralumno.add(errorInsertAl11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 243, -1));
 
         errorInsertAl12.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl12.setText("No ha introducido el número de cuenta");
         errorInsertAl12.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 474, 243, -1));
+        panel_anadiralumno.add(errorInsertAl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 243, -1));
 
         errorInsertAl13.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertAl13.setText("No ha introducido la talla");
         errorInsertAl13.setVisible(false);
-        panel_anadiralumno.add(errorInsertAl13, new org.netbeans.lib.awtextra.AbsoluteConstraints(455, 512, 243, -1));
+        panel_anadiralumno.add(errorInsertAl13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 243, -1));
 
         tallaAlumno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SinMedir", "6", "8", "10", "12", "XS", "S", "M", "L", "XL", "XXL" }));
-        panel_anadiralumno.add(tallaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(249, 509, -1, -1));
+        panel_anadiralumno.add(tallaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -597,10 +621,216 @@ public class InterfazInicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void botonModificarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModificarAlumnoActionPerformed
-
-    System.out.print("\n tenemos "+tabla_alumnos.getCellEditor());
-}//GEN-LAST:event_botonModificarAlumnoActionPerformed
+private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
+    String consulta_alumnos=new String();
+    
+    errorModifCP.setVisible(false);
+    errorModifMovil.setVisible(false);
+    errorModifFijo.setVisible(false);
+    try{
+        consulta_alumnos=leeConsultaInterfaz();
+        retsetMostrados= accesoBD.ejecutaConsulta(consulta_alumnos);
+        int i=0;
+        while(retsetMostrados.next()){
+            String updateFila=new String();
+            updateFila="UPDATE alumno SET ";
+            boolean fila_editada=false;
+            if(! retsetMostrados.getString("a.nombre").equals(tabla_alumnos.getValueAt(i, 0))){
+                fila_editada=true;
+                updateFila=updateFila+" nombre='"+tabla_alumnos.getValueAt(i, 0)+"', ";
+            }
+            if(! retsetMostrados.getString("a.primerApellido").equals(tabla_alumnos.getValueAt(i, 1))){
+                fila_editada=true;
+                updateFila=updateFila+" primerApellido='"+tabla_alumnos.getValueAt(i, 1)+"', ";
+            }
+            if(! retsetMostrados.getString("a.segundoApellido").equals(tabla_alumnos.getValueAt(i, 2))){
+                fila_editada=true;
+                updateFila=updateFila+" segundoApellido='"+tabla_alumnos.getValueAt(i, 2)+"', ";
+            }
+            if(! retsetMostrados.getString("a.fechaNacimiento").equals(tabla_alumnos.getValueAt(i, 3))){
+                fila_editada=true;
+                updateFila=updateFila+" fechaNacimiento='"+tabla_alumnos.getValueAt(i, 3)+"', ";
+            }
+            if(! retsetMostrados.getString("a.talla").equals(tabla_alumnos.getValueAt(i, 5))){
+                fila_editada=true;
+                updateFila=updateFila+" talla='"+tabla_alumnos.getValueAt(i, 5)+"', ";
+            }            
+            if(! retsetMostrados.getString("a.nombrepadre").equals(tabla_alumnos.getValueAt(i, 13))){
+                fila_editada=true;
+                updateFila=updateFila+" nombrepadre='"+tabla_alumnos.getValueAt(i, 13)+"', ";
+            }            
+            if(! retsetMostrados.getString("a.nombremadre").equals(tabla_alumnos.getValueAt(i, 14))){
+                fila_editada=true;
+                updateFila=updateFila+" nombremadre='"+tabla_alumnos.getValueAt(i, 14)+"', ";
+            }              
+            if( tabla_alumnos.getValueAt(i, 4)!=null){
+                if( retsetMostrados.getString("a.email")!=null){
+                    if(! retsetMostrados.getString("a.email").equals(tabla_alumnos.getValueAt(i, 4))){
+                        fila_editada=true;
+                        updateFila=updateFila+" email='"+tabla_alumnos.getValueAt(i, 4)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" email='"+tabla_alumnos.getValueAt(i, 4)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.email")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" email=null, ";
+                } 
+            }                     
+            if( tabla_alumnos.getValueAt(i, 6)!=null){
+                if( retsetMostrados.getString("a.numeroCuenta")!=null){
+                    if(! retsetMostrados.getString("a.numeroCuenta").equals(tabla_alumnos.getValueAt(i, 6))){
+                        fila_editada=true;
+                        updateFila=updateFila+" numerocuenta='"+tabla_alumnos.getValueAt(i, 6)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" numerocuenta='"+tabla_alumnos.getValueAt(i, 6)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.numeroCuenta")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" numerocuenta=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 7)!=null){
+                if(isInteger((String) tabla_alumnos.getValueAt(i, 7))){
+                    if( retsetMostrados.getString("a.telmovil")!=null){
+                        if(! retsetMostrados.getString("a.telmovil").equals(tabla_alumnos.getValueAt(i, 7))){
+                            fila_editada=true;
+                            updateFila=updateFila+" telmovil="+tabla_alumnos.getValueAt(i, 7)+", ";
+                        }
+                    }else{
+                        fila_editada=true;
+                        updateFila=updateFila+" telmovil="+tabla_alumnos.getValueAt(i, 7)+", ";                    
+                    }
+                }else{
+                    errorModifMovil.setVisible(true);
+                }
+            }else{
+                if( retsetMostrados.getString("a.telmovil")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" telmovil=null, ";
+                } 
+            }  
+            if( tabla_alumnos.getValueAt(i, 8)!=null){
+                if(isInteger((String) tabla_alumnos.getValueAt(i, 8))){
+                    if( retsetMostrados.getString("a.telfijo")!=null){
+                        if(! retsetMostrados.getString("a.telfijo").equals(tabla_alumnos.getValueAt(i, 8))){
+                            fila_editada=true;
+                            updateFila=updateFila+" telfijo="+tabla_alumnos.getValueAt(i, 8)+", ";
+                        }
+                    }else{
+                        fila_editada=true;
+                        updateFila=updateFila+" telfijo="+tabla_alumnos.getValueAt(i, 8)+", ";                    
+                    }
+                }else{
+                    errorModifFijo.setVisible(true);
+                }
+            }else{
+                if( retsetMostrados.getString("a.telfijo")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" telfijo=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 9)!=null){
+                if( retsetMostrados.getString("a.provincia")!=null){
+                    if(! retsetMostrados.getString("a.provincia").equals(tabla_alumnos.getValueAt(i, 9))){
+                        fila_editada=true;
+                        updateFila=updateFila+" provincia='"+tabla_alumnos.getValueAt(i, 9)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" provincia='"+tabla_alumnos.getValueAt(i, 9)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.provincia")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" provincia=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 10)!=null){
+                if( retsetMostrados.getString("a.localidad")!=null){
+                    if(! retsetMostrados.getString("a.localidad").equals(tabla_alumnos.getValueAt(i, 10))){
+                        fila_editada=true;
+                        updateFila=updateFila+" localidad='"+tabla_alumnos.getValueAt(i, 10)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" localidad='"+tabla_alumnos.getValueAt(i, 10)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.localidad")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" localidad=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 11)!=null){
+                if( retsetMostrados.getString("a.domicilio")!=null){
+                    if(! retsetMostrados.getString("a.domicilio").equals(tabla_alumnos.getValueAt(i, 11))){
+                        fila_editada=true;
+                        updateFila=updateFila+" domicilio='"+tabla_alumnos.getValueAt(i, 11)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" domicilio='"+tabla_alumnos.getValueAt(i, 11)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.domicilio")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" domicilio=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 12)!=null){
+                if(isInteger((String) tabla_alumnos.getValueAt(i, 12))){
+                    if( retsetMostrados.getString("a.codigopostal")!=null){
+                        if(! retsetMostrados.getString("a.codigopostal").equals(tabla_alumnos.getValueAt(i, 12))){
+                            fila_editada=true;
+                            updateFila=updateFila+" codigopostal="+tabla_alumnos.getValueAt(i, 12)+", ";
+                        }
+                    }else{
+                        fila_editada=true;
+                        updateFila=updateFila+" codigopostal="+tabla_alumnos.getValueAt(i, 12)+", ";                    
+                    }
+                }else{
+                    errorModifCP.setVisible(true);
+                }
+            }else{
+                if( retsetMostrados.getString("a.codigopostal")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" codigopostal=null, ";
+                } 
+            }           
+            if( tabla_alumnos.getValueAt(i, 15)!=null){
+                if( retsetMostrados.getString("a.colegio")!=null){
+                    if(! retsetMostrados.getString("a.colegio").equals(tabla_alumnos.getValueAt(i, 15))){
+                        fila_editada=true;
+                        updateFila=updateFila+" colegio='"+tabla_alumnos.getValueAt(i, 15)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" colegio='"+tabla_alumnos.getValueAt(i, 15)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.colegio")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" colegio=null, ";
+                } 
+            }     
+            updateFila=updateFila.substring(0, updateFila.length()-2);
+            updateFila=updateFila+" WHERE alumno.idalumno="+retsetMostrados.getString("a.idalumno");
+            if(fila_editada==true){
+                accesoBD.ejecutaActualizacion(updateFila);
+                System.out.print("\nModificado "+i+" act\n "+updateFila);
+            }
+            i++;
+        }
+    }catch(SQLException ex){
+        System.out.print(ex.getMessage());
+    }
+}//GEN-LAST:event_botonGuardarCambiosActionPerformed
 
 private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
@@ -647,142 +877,163 @@ private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:even
     panel_jugadores.setVisible(false);
 }//GEN-LAST:event_jMenu1MouseClicked
 
-private int calculaEdad(java.util.Date fechaNac){
-    Calendar cal1 = Calendar.getInstance();
-
-    String dateString = String.format("%1$tY-%1$tm-%1$td", fechaNac.toString());
-    int diaAct, mesAct, anoAct;
-    int edad=0;
-    
-    diaAct=cal1.get(Calendar.DATE);
-    mesAct=cal1.get(Calendar.MONTH)+1;
-    anoAct=cal1.get(Calendar.YEAR);
- 
-    System.out.println(" "+diaAct+" "+mesAct+" "+anoAct+" al "+dateString);
-   
-    return edad;
-}
-private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
+private String leeConsultaInterfaz(){
     String consulta_alumnos=new String();
     String condicionesConsulta=new String();
     String tablasImplicadas=new String();
     
-    try{
-        consulta_alumnos="SELECT a.idAlumno, a.talla, a.nombre, a.primerApellido, a.segundoApellido, a.nombrePadre, a.nombreMadre, a.numeroCuenta,"+ 
-            "a.telMovil, a.telFijo, a.observaciones, a.provincia, a.localidad, a.codigoPostal, a.colegio, a.domicilio, a.email, a.fechaNacimiento, a.Alumnocol FROM ";
-        tablasImplicadas=" alumno a ";
-        condicionesConsulta=" WHERE ";
+    consulta_alumnos="SELECT a.idAlumno, a.talla, a.nombre, a.primerApellido, a.segundoApellido, a.nombrePadre, a.nombreMadre, a.numeroCuenta,"+ 
+        "a.telMovil, a.telFijo, a.observaciones, a.provincia, a.localidad, a.codigoPostal, a.colegio, a.domicilio, a.email, a.fechaNacimiento, "
+        + "a.Alumnocol FROM ";
+    tablasImplicadas=" alumno a ";
+    condicionesConsulta=" WHERE ";
 
-        if(! textfield_nombre.getText().equals("") || ! textfield_apellido1.getText().equals("") || ! textfield_apellido2.getText().equals("")
-              || ! textfield_edad.getText().equals("") || ! consultaEquipo.getSelectedItem().equals("") || ! consultaGrupo.getSelectedItem().equals("")
-              || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
-            if(! textfield_nombre.getText().equals("")){
-                condicionesConsulta=condicionesConsulta+" nombre='"+textfield_nombre.getText()+"' AND ";
-            }
-            if(! textfield_apellido1.getText().equals("")){
-                condicionesConsulta=condicionesConsulta+" primerapellido='"+textfield_apellido1.getText()+"' AND ";
-            }
-            if(! textfield_apellido2.getText().equals("")){
-                condicionesConsulta=condicionesConsulta+" segundoapellido='"+textfield_apellido2.getText()+"' AND ";
-            }
-            if(! textfield_edad.getText().equals("")){
-                condicionesConsulta=condicionesConsulta+" a.edad='"+textfield_edad.getText()+"' AND ";
-            }            
-            if(! consultaGrupo.getSelectedItem().equals("") || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
-                tablasImplicadas=tablasImplicadas+" , alumno_has_grupo ";
-                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Alumno_idAlumno=a.idalumno AND ";
-                if(! consultaGrupo.getSelectedItem().equals("") ){
-                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_idGrupo="+consultaGrupo.getSelectedItem()+" AND ";
-                }   
-                if(! consultaCategoria.getSelectedItem().equals("")){
-                    tablasImplicadas=tablasImplicadas+" , categoria ";
-                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Categoria_idCategoria=categoria.idCategoria AND categoria.tipo='"+consultaCategoria.getSelectedItem()+"' AND ";
-                }
-                if(! consultaTemporada.getSelectedItem().equals("")){
-                    tablasImplicadas=tablasImplicadas+" , temporada ";
-                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Temporada_idTemporada=temporada.idTemporada and temporada.curso='"+consultaTemporada.getSelectedItem()+"' AND ";
-                }            
-                if(! consultaEntrenador.getSelectedItem().equals("")){
-                    tablasImplicadas=tablasImplicadas+" , usuario ";
-                    String nombre, apellido;
-                    int espacios;
-                    espacios=consultaEntrenador.getSelectedItem().toString().indexOf(" ");
-                    condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Usuario_idUsuario=usuario.idUsuario and concat(usuario.nombre, ' ', usuario.primerApellido)='"+consultaEntrenador.getSelectedItem()+"' AND ";
-                }     
-            }
-            if(! consultaEquipo.getSelectedItem().equals("")){
-                tablasImplicadas=tablasImplicadas+" , alumnoequipo ";
-                condicionesConsulta=condicionesConsulta+" alumnoequipo.Alumno_idAlumno=a.idalumno AND alumnoequipo.Equipo_idEquipo="+consultaEquipo.getSelectedItem()+" AND ";
-            }
-            
-            condicionesConsulta=condicionesConsulta.substring(0, condicionesConsulta.length()-4);
-            tablasImplicadas=tablasImplicadas+condicionesConsulta;
+    if(! textfield_nombre.getText().equals("") || ! textfield_apellido1.getText().equals("") || ! textfield_apellido2.getText().equals("")
+          || ! textfield_edad.getText().equals("") || ! consultaEquipo.getSelectedItem().equals("") || ! consultaGrupo.getSelectedItem().equals("")
+          || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
+        if(! textfield_nombre.getText().equals("")){
+            condicionesConsulta=condicionesConsulta+" a.nombre='"+textfield_nombre.getText()+"' AND ";
         }
-        consulta_alumnos=consulta_alumnos+tablasImplicadas;
-               
+        if(! textfield_apellido1.getText().equals("")){
+            condicionesConsulta=condicionesConsulta+" a.primerapellido='"+textfield_apellido1.getText()+"' AND ";
+        }
+        if(! textfield_apellido2.getText().equals("")){
+            condicionesConsulta=condicionesConsulta+" a.segundoapellido='"+textfield_apellido2.getText()+"' AND ";
+        }
+        if(! textfield_edad.getText().equals("") && isInteger(textfield_edad.getText())){ 
+            Calendar cal1 = Calendar.getInstance();  //con la hora actual del sistema calculamos la edad del alumno
+            int diaAct, mesAct, anoAct;
+            String fechaAnt, fechaPost;
+            diaAct=cal1.get(Calendar.DATE);
+            mesAct=cal1.get(Calendar.MONTH)+1;
+            anoAct=cal1.get(Calendar.YEAR)- Integer.parseInt(textfield_edad.getText());
+            fechaAnt=anoAct+"-"+mesAct+"-"+diaAct;
+            fechaPost=(anoAct-1)+"-"+mesAct+"-"+diaAct;
+            condicionesConsulta=condicionesConsulta+" a.fechaNacimiento <= '"+fechaAnt+"' AND "+" a.fechaNacimiento > '"+fechaPost+"' AND ";
+        }            
+        if(! consultaGrupo.getSelectedItem().equals("") || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
+            tablasImplicadas=tablasImplicadas+" , alumno_has_grupo ";
+            condicionesConsulta=condicionesConsulta+" alumno_has_grupo.alumno_idalumno=a.idalumno AND ";
+            if(! consultaGrupo.getSelectedItem().equals("") ){
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_idGrupo="+consultaGrupo.getSelectedItem()+" AND ";
+            }   
+            if(! consultaCategoria.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , categoria ";
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Categoria_idCategoria=categoria.idCategoria AND categoria.tipo='"+consultaCategoria.getSelectedItem()+"' AND ";
+            }
+            if(! consultaTemporada.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , temporada ";
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Temporada_idTemporada=temporada.idTemporada and temporada.curso='"+consultaTemporada.getSelectedItem()+"' AND ";
+            }            
+            if(! consultaEntrenador.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , usuario ";
+                String nombre, apellido;
+                int espacios;
+                espacios=consultaEntrenador.getSelectedItem().toString().indexOf(" ");
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Usuario_idUsuario=usuario.idUsuario and concat(usuario.nombre, ' ', usuario.primerApellido)='"+consultaEntrenador.getSelectedItem()+"' AND ";
+            }     
+        }
+        if(! consultaEquipo.getSelectedItem().equals("")){
+            tablasImplicadas=tablasImplicadas+" , alumnoequipo ";
+            condicionesConsulta=condicionesConsulta+" alumnoequipo.Alumno_idAlumno=a.idalumno AND alumnoequipo.Equipo_idEquipo="+consultaEquipo.getSelectedItem()+" AND ";
+        }
+
+        condicionesConsulta=condicionesConsulta.substring(0, condicionesConsulta.length()-4);
+        tablasImplicadas=tablasImplicadas+condicionesConsulta;
+    }
+    consulta_alumnos=consulta_alumnos+tablasImplicadas;    
+    
+    return consulta_alumnos;
+}
+private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
+    String consulta_alumnos=new String();
+
+    errorModifCP.setVisible(false);
+    errorModifMovil.setVisible(false);
+    errorModifFijo.setVisible(false);
+    try{
+        consulta_alumnos=leeConsultaInterfaz();
         System.out.print("\nLA consulta "+ consulta_alumnos);
         retset = accesoBD.ejecutaConsulta(consulta_alumnos);
-
+        retsetMostradosAnt=accesoBD.ejecutaConsulta(consulta_alumnos);
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Entrenador", "Equipo", "Grupo", "Temporada", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
+                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
             }
         ));
         javax.swing.table.TableModel modelo_tabla=new javax.swing.table.DefaultTableModel();
         modelo_tabla=tabla_alumnos.getModel();
         int i=0;
         while(retset.next()){
- /*           1         2      3       4               5                6              7           8
-            idAlumno, talla, nombre, primerApellido, segundoApellido, nombrePadre, nombreMadre, numeroCuenta, 
-            9           10         11         12          13         14           15       16         17       18              19
-            telMovil, telFijo, observaciones, provincia, localidad, codigoPostal, colegio, domicilio, email, fechaNacimiento, Alumnocol*/
-            if(i<25){
-                tabla_alumnos.setValueAt(retset.getString(3)+" "+retset.getString(4)+" "+retset.getString(5), i, 0);
-                tabla_alumnos.setValueAt(retset.getString(5), i, 1);
-                tabla_alumnos.setValueAt(retset.getString(6), i, 2);
 
-                tabla_alumnos.setValueAt(retset.getString(3), i, 3);
-                tabla_alumnos.setValueAt(retset.getString(9), i, 4);
-                tabla_alumnos.setValueAt(retset.getString(8), i, 5);
-                tabla_alumnos.setValueAt(retset.getString(8), i, 6);
+            
+
+            if(i<25){                
+                tabla_alumnos.setValueAt(retset.getString("a.nombre"), i, 0);
+                tabla_alumnos.setValueAt(retset.getString("a.primerApellido"), i, 1);
+                tabla_alumnos.setValueAt(retset.getString("a.segundoApellido"), i, 2);
+                tabla_alumnos.setValueAt(retset.getString("fechaNacimiento"), i, 3);
+
+                tabla_alumnos.setValueAt(retset.getString("a.email"), i, 4);
+                tabla_alumnos.setValueAt(retset.getString("a.talla"), i, 5);
+                tabla_alumnos.setValueAt(retset.getString("a.numerocuenta"), i, 6);
+                tabla_alumnos.setValueAt(retset.getString("a.telmovil"), i, 7);
+                tabla_alumnos.setValueAt(retset.getString("a.telfijo"), i, 8);
+                tabla_alumnos.setValueAt(retset.getString("a.provincia"), i, 9);
+                tabla_alumnos.setValueAt(retset.getString("a.localidad"), i, 10);
+                tabla_alumnos.setValueAt(retset.getString("a.domicilio"), i, 11);
+                tabla_alumnos.setValueAt(retset.getString("a.codigopostal"), i, 12);
+                tabla_alumnos.setValueAt(retset.getString("a.nombrepadre"), i, 13);
+                tabla_alumnos.setValueAt(retset.getString("a.nombremadre"), i, 14);
+                tabla_alumnos.setValueAt(retset.getString("a.colegio"), i, 15);
             }else{
                 javax.swing.table.DefaultTableModel temp = (javax.swing.table.DefaultTableModel) tabla_alumnos.getModel();
                 Object nuevo[]= {"","",""};
                 temp.addRow(nuevo);
-                tabla_alumnos.setValueAt(retset.getString(2), i, 0);
-                tabla_alumnos.setValueAt(retset.getString(5), i, 1);
-                tabla_alumnos.setValueAt(retset.getString(6), i, 2);
+                tabla_alumnos.setValueAt(retset.getString("a.nombre"), i, 0);
+                tabla_alumnos.setValueAt(retset.getString("a.primerApellido"), i, 1);
+                tabla_alumnos.setValueAt(retset.getString("a.segundoApellido"), i, 2);
+                tabla_alumnos.setValueAt(retset.getString("fechaNacimiento"), i, 3);
 
-                tabla_alumnos.setValueAt(retset.getString(3), i, 6);
-                tabla_alumnos.setValueAt(retset.getString(9), i, 7);
-                tabla_alumnos.setValueAt(retset.getString(8), i, 8);                
+                tabla_alumnos.setValueAt(retset.getString("a.email"), i, 4);
+                tabla_alumnos.setValueAt(retset.getString("a.talla"), i, 5);
+                tabla_alumnos.setValueAt(retset.getString("a.numerocuenta"), i, 6);
+                tabla_alumnos.setValueAt(retset.getString("a.telmovil"), i, 7);
+                tabla_alumnos.setValueAt(retset.getString("a.telfijo"), i, 8);
+                tabla_alumnos.setValueAt(retset.getString("a.provincia"), i, 9);
+                tabla_alumnos.setValueAt(retset.getString("a.localidad"), i, 10);
+                tabla_alumnos.setValueAt(retset.getString("a.domicilio"), i, 11);
+                tabla_alumnos.setValueAt(retset.getString("a.codigopostal"), i, 12);
+                tabla_alumnos.setValueAt(retset.getString("a.nombrepadre"), i, 13);
+                tabla_alumnos.setValueAt(retset.getString("a.nombremadre"), i, 14);
+                tabla_alumnos.setValueAt(retset.getString("a.colegio"), i, 15);               
             }
             i++;
         }
@@ -1022,6 +1273,12 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     tallaAlumno.setSelectedItem("SinMedir");
 }//GEN-LAST:event_jButton4ActionPerformed
 
+private void deshacerCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosActionPerformed
+ 
+    
+    
+}//GEN-LAST:event_deshacerCambiosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1059,7 +1316,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAnadir;
-    private javax.swing.JButton botonModificarAlumno;
+    private javax.swing.JButton botonGuardarCambios;
     private javax.swing.JButton botonNuevoAlumno;
     private javax.swing.JButton boton_mostrar_alumnos;
     private javax.swing.JTextField codigoPostalAlumno;
@@ -1069,6 +1326,7 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JComboBox consultaEquipo;
     private javax.swing.JComboBox consultaGrupo;
     private javax.swing.JComboBox consultaTemporada;
+    private javax.swing.JButton deshacerCambios;
     private javax.swing.JTextField domicilioAlumno;
     private javax.swing.JTextField emailAlumno;
     private javax.swing.JLabel errorCP;
@@ -1085,10 +1343,12 @@ private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel errorInsertAl7;
     private javax.swing.JLabel errorInsertAl8;
     private javax.swing.JLabel errorInsertAl9;
+    private javax.swing.JLabel errorModifCP;
+    private javax.swing.JLabel errorModifFijo;
+    private javax.swing.JLabel errorModifMovil;
     private javax.swing.JLabel errorTelefonoFijo;
     private javax.swing.JLabel errorTelefonoMovil;
     private com.toedter.calendar.JDateChooser fechaNacAl;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
