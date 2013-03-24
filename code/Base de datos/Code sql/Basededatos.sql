@@ -131,9 +131,7 @@ DROP TABLE IF EXISTS `mydb`.`Alumno` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`Alumno` (
   `idAlumno` INT NOT NULL AUTO_INCREMENT ,
-  `TallaAlumno_idTallaAlumno` INT NOT NULL ,
-  `Grupo_idGrupo` INT NOT NULL ,
-  `Grupo_Categoria_idCategoria` INT NOT NULL ,
+  `talla` VARCHAR(12) NOT NULL ,
   `nombre` VARCHAR(45) NOT NULL ,
   `primerApellido` VARCHAR(45) NOT NULL ,
   `segundoApellido` VARCHAR(45) NOT NULL ,
@@ -150,8 +148,8 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Alumno` (
   `domicilio` VARCHAR(100) NULL ,
   `email` VARCHAR(75) NULL ,
   `fechaNacimiento` DATE NOT NULL ,
-  `talla` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`idAlumno`, `TallaAlumno_idTallaAlumno`, `Grupo_idGrupo`, `Grupo_Categoria_idCategoria`) )
+  `Alumnocol` VARCHAR(45) NULL ,
+  PRIMARY KEY (`idAlumno`) )
 ENGINE = InnoDB;
 
 
@@ -210,11 +208,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Temporada_has_Equipo`
+-- Table `mydb`.`TemporadaEquipo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Temporada_has_Equipo` ;
+DROP TABLE IF EXISTS `mydb`.`TemporadaEquipo` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`Temporada_has_Equipo` (
+CREATE  TABLE IF NOT EXISTS `mydb`.`TemporadaEquipo` (
   `Temporada_idTemporada` INT NOT NULL ,
   `Equipo_idEquipo` INT NOT NULL ,
   `Equipo_Fundacion_idFundacion` INT NOT NULL ,
@@ -237,19 +235,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Cuota`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`Cuota` ;
-
-CREATE  TABLE IF NOT EXISTS `mydb`.`Cuota` (
-  `idcuota` INT NOT NULL AUTO_INCREMENT ,
-  `importe` FLOAT NULL ,
-  `pagado` TINYINT(1) NULL ,
-  PRIMARY KEY (`idcuota`) )
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `mydb`.`Actividades`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`Actividades` ;
@@ -261,15 +246,7 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`Actividades` (
   `precioSocio` FLOAT NULL ,
   `precioNoSocio` FLOAT NULL ,
   `Temporada_idTemporada` INT NOT NULL ,
-  `precioSocio` FLOAT NULL ,
-  `precioNoSocio` FLOAT NULL ,
-  PRIMARY KEY (`idActividades`, `Temporada_idTemporada`) ,
-  INDEX `fk_Actividades_Temporada1_idx` (`Temporada_idTemporada` ASC) ,
-  CONSTRAINT `fk_Actividades_Temporada1`
-    FOREIGN KEY (`Temporada_idTemporada` )
-    REFERENCES `mydb`.`Temporada` (`idTemporada` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`idActividades`, `Temporada_idTemporada`) )
 ENGINE = InnoDB;
 
 
@@ -297,45 +274,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`ActAlumno`
+-- Table `mydb`.`AlumnoTemporada`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`ActAlumno` ;
+DROP TABLE IF EXISTS `mydb`.`AlumnoTemporada` ;
 
-CREATE  TABLE IF NOT EXISTS `mydb`.`ActAlumno` (
-  `Actividades_idActividades` INT NOT NULL ,
-  `Actividades_Temporada_idTemporada` INT NOT NULL ,
-  `Alumno_idAlumno` INT NOT NULL ,
-  `Alumno_Grupo_idGrupo` INT NOT NULL ,
-  `Alumno_Grupo_Categoria_idCategoria` INT NOT NULL ,
-  `Cuota_idcuota` INT NOT NULL ,
-  PRIMARY KEY (`Actividades_idActividades`, `Actividades_Temporada_idTemporada`, `Alumno_idAlumno`, `Alumno_Grupo_idGrupo`, `Alumno_Grupo_Categoria_idCategoria`, `Cuota_idcuota`) ,
-  INDEX `fk_Actividades_has_Alumno_Alumno1_idx` (`Alumno_idAlumno` ASC, `Alumno_Grupo_idGrupo` ASC, `Alumno_Grupo_Categoria_idCategoria` ASC) ,
-  INDEX `fk_Actividades_has_Alumno_Actividades1_idx` (`Actividades_idActividades` ASC, `Actividades_Temporada_idTemporada` ASC) ,
-  INDEX `fk_Actividades_has_Alumno_Cuota1_idx` (`Cuota_idcuota` ASC) ,
-  CONSTRAINT `fk_Actividades_has_Alumno_Actividades1`
-    FOREIGN KEY (`Actividades_idActividades` , `Actividades_Temporada_idTemporada` )
-    REFERENCES `mydb`.`Actividades` (`idActividades` , `Temporada_idTemporada` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Actividades_has_Alumno_Alumno1`
-    FOREIGN KEY (`Alumno_idAlumno` , `Alumno_Grupo_idGrupo` , `Alumno_Grupo_Categoria_idCategoria` )
-    REFERENCES `mydb`.`Alumno` (`idAlumno` , `Grupo_idGrupo` , `Grupo_Categoria_idCategoria` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Actividades_has_Alumno_Cuota1`
-    FOREIGN KEY (`Cuota_idcuota` )
-    REFERENCES `mydb`.`Cuota` (`idcuota` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`PagoTemporada`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`PagoTemporada` ;
-
-CREATE  TABLE IF NOT EXISTS `mydb`.`PagoTemporada` (
+CREATE  TABLE IF NOT EXISTS `mydb`.`AlumnoTemporada` (
   `Alumno_idAlumno` INT NOT NULL ,
   `Alumno_Grupo_idGrupo` INT NOT NULL ,
   `Alumno_Grupo_Categoria_idCategoria` INT NOT NULL ,
@@ -344,8 +287,8 @@ CREATE  TABLE IF NOT EXISTS `mydb`.`PagoTemporada` (
   INDEX `fk_Alumno_has_Temporada_Temporada1_idx` (`Temporada_idTemporada` ASC) ,
   INDEX `fk_Alumno_has_Temporada_Alumno1_idx` (`Alumno_idAlumno` ASC, `Alumno_Grupo_idGrupo` ASC, `Alumno_Grupo_Categoria_idCategoria` ASC) ,
   CONSTRAINT `fk_Alumno_has_Temporada_Alumno1`
-    FOREIGN KEY (`Alumno_idAlumno` , `Alumno_Grupo_idGrupo` , `Alumno_Grupo_Categoria_idCategoria` )
-    REFERENCES `mydb`.`Alumno` (`idAlumno` , `Grupo_idGrupo` , `Grupo_Categoria_idCategoria` )
+    FOREIGN KEY (`Alumno_idAlumno` )
+    REFERENCES `mydb`.`Alumno` (`idAlumno` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Alumno_has_Temporada_Temporada1`
@@ -363,24 +306,95 @@ DROP TABLE IF EXISTS `mydb`.`AlumnoGrupo` ;
 
 CREATE  TABLE IF NOT EXISTS `mydb`.`AlumnoGrupo` (
   `Alumno_idAlumno` INT NOT NULL ,
-  `Alumno_TallaAlumno_idTallaAlumno` INT NOT NULL ,
-  `Alumno_Grupo_idGrupo` INT NOT NULL ,
-  `Alumno_Grupo_Categoria_idCategoria` INT NOT NULL ,
   `Grupo_idGrupo` INT NOT NULL ,
   `Grupo_Categoria_idCategoria` INT NOT NULL ,
   `Grupo_Usuario_idUsuario` INT NOT NULL ,
   `Grupo_Temporada_idTemporada` INT NOT NULL ,
-  PRIMARY KEY (`Alumno_idAlumno`, `Alumno_TallaAlumno_idTallaAlumno`, `Alumno_Grupo_idGrupo`, `Alumno_Grupo_Categoria_idCategoria`, `Grupo_idGrupo`, `Grupo_Categoria_idCategoria`, `Grupo_Usuario_idUsuario`, `Grupo_Temporada_idTemporada`) ,
+  PRIMARY KEY (`Alumno_idAlumno`, `Grupo_idGrupo`, `Grupo_Categoria_idCategoria`, `Grupo_Usuario_idUsuario`, `Grupo_Temporada_idTemporada`) ,
   INDEX `fk_Alumno_has_Grupo_Grupo1_idx` (`Grupo_idGrupo` ASC, `Grupo_Categoria_idCategoria` ASC, `Grupo_Usuario_idUsuario` ASC, `Grupo_Temporada_idTemporada` ASC) ,
-  INDEX `fk_Alumno_has_Grupo_Alumno1_idx` (`Alumno_idAlumno` ASC, `Alumno_TallaAlumno_idTallaAlumno` ASC, `Alumno_Grupo_idGrupo` ASC, `Alumno_Grupo_Categoria_idCategoria` ASC) ,
+  INDEX `fk_Alumno_has_Grupo_Alumno1_idx` (`Alumno_idAlumno` ASC) ,
   CONSTRAINT `fk_Alumno_has_Grupo_Alumno1`
-    FOREIGN KEY (`Alumno_idAlumno` , `Alumno_TallaAlumno_idTallaAlumno` , `Alumno_Grupo_idGrupo` , `Alumno_Grupo_Categoria_idCategoria` )
-    REFERENCES `mydb`.`Alumno` (`idAlumno` , `TallaAlumno_idTallaAlumno` , `Grupo_idGrupo` , `Grupo_Categoria_idCategoria` )
+    FOREIGN KEY (`Alumno_idAlumno` )
+    REFERENCES `mydb`.`Alumno` (`idAlumno` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Alumno_has_Grupo_Grupo1`
     FOREIGN KEY (`Grupo_idGrupo` , `Grupo_Categoria_idCategoria` , `Grupo_Usuario_idUsuario` , `Grupo_Temporada_idTemporada` )
     REFERENCES `mydb`.`Grupo` (`idGrupo` , `Categoria_idCategoria` , `Usuario_idUsuario` , `Temporada_idTemporada` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Cuota`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Cuota` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`Cuota` (
+  `idCuota` INT NOT NULL AUTO_INCREMENT ,
+  `importe` FLOAT NOT NULL ,
+  `fecha` DATE NOT NULL ,
+  `pagado` TINYINT(1) NULL ,
+  PRIMARY KEY (`idCuota`) )
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`PagoActividades`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`PagoActividades` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`PagoActividades` (
+  `Alumno_idAlumno` INT NOT NULL ,
+  `Actividades_idActividades` INT NOT NULL ,
+  `Actividades_Temporada_idTemporada` INT NOT NULL ,
+  `Cuota_idCuota` INT NOT NULL ,
+  PRIMARY KEY (`Alumno_idAlumno`, `Actividades_idActividades`, `Actividades_Temporada_idTemporada`, `Cuota_idCuota`) ,
+  INDEX `fk_Alumno_has_Actividades_Actividades1_idx` (`Actividades_idActividades` ASC, `Actividades_Temporada_idTemporada` ASC) ,
+  INDEX `fk_Alumno_has_Actividades_Alumno1_idx` (`Alumno_idAlumno` ASC) ,
+  INDEX `fk_PagoActividades_Cuota1_idx` (`Cuota_idCuota` ASC) ,
+  CONSTRAINT `fk_Alumno_has_Actividades_Alumno1`
+    FOREIGN KEY (`Alumno_idAlumno` )
+    REFERENCES `mydb`.`Alumno` (`idAlumno` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Alumno_has_Actividades_Actividades1`
+    FOREIGN KEY (`Actividades_idActividades` , `Actividades_Temporada_idTemporada` )
+    REFERENCES `mydb`.`Actividades` (`idActividades` , `Temporada_idTemporada` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PagoActividades_Cuota1`
+    FOREIGN KEY (`Cuota_idCuota` )
+    REFERENCES `mydb`.`Cuota` (`idCuota` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`PagoTemporada`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`PagoTemporada` ;
+
+CREATE  TABLE IF NOT EXISTS `mydb`.`PagoTemporada` (
+  `idPagoTemporada` INT NOT NULL AUTO_INCREMENT ,
+  `Cuota_idCuota` INT NOT NULL ,
+  `AlumnoTemporada_Alumno_idAlumno` INT NOT NULL ,
+  `AlumnoTemporada_Alumno_Grupo_idGrupo` INT NOT NULL ,
+  `AlumnoTemporada_Alumno_Grupo_Categoria_idCategoria` INT NOT NULL ,
+  `AlumnoTemporada_Temporada_idTemporada` INT NOT NULL ,
+  PRIMARY KEY (`idPagoTemporada`, `Cuota_idCuota`, `AlumnoTemporada_Alumno_idAlumno`, `AlumnoTemporada_Alumno_Grupo_idGrupo`, `AlumnoTemporada_Alumno_Grupo_Categoria_idCategoria`, `AlumnoTemporada_Temporada_idTemporada`) ,
+  INDEX `fk_PagoTemporada_Cuota1_idx` (`Cuota_idCuota` ASC) ,
+  INDEX `fk_PagoTemporada_AlumnoTemporada1_idx` (`AlumnoTemporada_Alumno_idAlumno` ASC, `AlumnoTemporada_Alumno_Grupo_idGrupo` ASC, `AlumnoTemporada_Alumno_Grupo_Categoria_idCategoria` ASC, `AlumnoTemporada_Temporada_idTemporada` ASC) ,
+  CONSTRAINT `fk_PagoTemporada_Cuota1`
+    FOREIGN KEY (`Cuota_idCuota` )
+    REFERENCES `mydb`.`Cuota` (`idCuota` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_PagoTemporada_AlumnoTemporada1`
+    FOREIGN KEY (`AlumnoTemporada_Alumno_idAlumno` , `AlumnoTemporada_Alumno_Grupo_idGrupo` , `AlumnoTemporada_Alumno_Grupo_Categoria_idCategoria` , `AlumnoTemporada_Temporada_idTemporada` )
+    REFERENCES `mydb`.`AlumnoTemporada` (`Alumno_idAlumno` , `Alumno_Grupo_idGrupo` , `Alumno_Grupo_Categoria_idCategoria` , `Temporada_idTemporada` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
