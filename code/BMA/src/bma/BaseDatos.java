@@ -20,9 +20,9 @@ public class BaseDatos {
 
     public BaseDatos() {
         try {
-            Class.forName("jdbc:mysql://localhost:3306/mydb");
+            Class.forName("com.mysql.jdbc.Driver");
             for (int i = 0; i < 10; i++) {
-                this.conexion.add(DriverManager.getConnection("com.mysql.jdbc.Driver",  "root", "baloncesto"));
+                this.conexion.add(DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb",  "root", "baloncesto"));
                 //this.conexion.add(DriverManager.getConnection(servidor, usuario, clave));
             }
 
