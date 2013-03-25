@@ -10,22 +10,26 @@
  */
 package bma;
 import java.sql.*;
+import java.util.Calendar;
+
 /**
  *
  * @author Francisco
  */
 public class InterfazInicio extends javax.swing.JFrame {
-    Connection conexion;   
+    BaseDatos accesoBD=new BaseDatos("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/mydb", "root", "baloncesto");  
     Statement stmt;      
     ResultSet retset;
+    ResultSet retsetMostrados;
+    ResultSet retsetMostradosAnt;
+
     Usuario user=new Usuario();
-    
     /** Creates new form InterfazInicio */
     public InterfazInicio() {
         initComponents();
     }
-    public InterfazInicio(Connection conexionArg, Usuario userArg) {
-        conexion=conexionArg;
+    public InterfazInicio(BaseDatos acceso, Usuario userArg) {
+        accesoBD=acceso;
         initComponents();
         user=userArg;
     }
@@ -37,14 +41,15 @@ public class InterfazInicio extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         panel_inicio = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         panel_jugadores = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        botonNuevoAlumno = new javax.swing.JButton();
+        botonGuardarCambios = new javax.swing.JButton();
+        deshacerCambios = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -52,24 +57,87 @@ public class InterfazInicio extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         textfield_nombre = new javax.swing.JTextField();
-        text_field_edad = new javax.swing.JTextField();
-        textfield_equipo = new javax.swing.JTextField();
-        textfield_grupo = new javax.swing.JTextField();
-        textfield_entrenador = new javax.swing.JTextField();
+        textfield_edad = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_alumnos = new javax.swing.JTable();
         boton_mostrar_alumnos = new javax.swing.JButton();
-        textfield_categoria = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        textfield_apellido2 = new javax.swing.JTextField();
+        textfield_apellido1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        consultaEntrenador = new javax.swing.JComboBox();
+        consultaEquipo = new javax.swing.JComboBox();
+        consultaGrupo = new javax.swing.JComboBox();
+        consultaCategoria = new javax.swing.JComboBox();
+        consultaTemporada = new javax.swing.JComboBox();
+        errorModifMovil = new javax.swing.JLabel();
+        errorModifFijo = new javax.swing.JLabel();
+        errorModifCP = new javax.swing.JLabel();
+        panel_anadiralumno = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        nombreAlumno = new javax.swing.JTextField();
+        primerApellidoAlumno = new javax.swing.JTextField();
+        segundoApellidoAlumno = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        provinciaAlumno = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        localidadAlumno = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        colegioAlumno = new javax.swing.JTextField();
+        emailAlumno = new javax.swing.JTextField();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        nombreMadreAlumno = new javax.swing.JTextField();
+        jLabel26 = new javax.swing.JLabel();
+        nombrePadreAlumno = new javax.swing.JTextField();
+        jLabel27 = new javax.swing.JLabel();
+        codigoPostalAlumno = new javax.swing.JTextField();
+        domicilioAlumno = new javax.swing.JTextField();
+        jLabel28 = new javax.swing.JLabel();
+        numeroCuentaAlumno = new javax.swing.JTextField();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        telefonoMovilAlumno = new javax.swing.JTextField();
+        jLabel31 = new javax.swing.JLabel();
+        telefonoFijoAlumno = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        botonAnadir = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        fechaNacAl = new com.toedter.calendar.JDateChooser();
+        errorCP = new javax.swing.JLabel();
+        errorTelefonoFijo = new javax.swing.JLabel();
+        errorTelefonoMovil = new javax.swing.JLabel();
+        mensajeConfirmacion = new javax.swing.JLabel();
+        errorInsertAl1 = new javax.swing.JLabel();
+        errorInsertAl2 = new javax.swing.JLabel();
+        errorInsertAl3 = new javax.swing.JLabel();
+        errorInsertAl4 = new javax.swing.JLabel();
+        errorInsertAl5 = new javax.swing.JLabel();
+        errorInsertAl6 = new javax.swing.JLabel();
+        errorInsertAl7 = new javax.swing.JLabel();
+        errorInsertAl8 = new javax.swing.JLabel();
+        errorInsertAl9 = new javax.swing.JLabel();
+        errorInsertAl10 = new javax.swing.JLabel();
+        errorInsertAl11 = new javax.swing.JLabel();
+        errorInsertAl12 = new javax.swing.JLabel();
+        errorInsertAl13 = new javax.swing.JLabel();
+        tallaAlumno = new javax.swing.JComboBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        menuJugadores = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu6 = new javax.swing.JMenu();
         jMenu7 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Bienvenido a la aplicacion");
 
@@ -80,59 +148,124 @@ public class InterfazInicio extends javax.swing.JFrame {
             .addGroup(panel_inicioLayout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(542, Short.MAX_VALUE))
+                .addContainerGap(428, Short.MAX_VALUE))
         );
         panel_inicioLayout.setVerticalGroup(
             panel_inicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_inicioLayout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(jLabel1)
-                .addContainerGap(601, Short.MAX_VALUE))
+                .addContainerGap(673, Short.MAX_VALUE))
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 623;
+        gridBagConstraints.ipady = 662;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(panel_inicio, gridBagConstraints);
+
         panel_jugadores.setVisible(false);
+        panel_jugadores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Resultados de los alumnos:");
+        panel_jugadores.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 20));
 
-        jButton1.setText("Nuevo Alumno");
-
-        jButton2.setText("Modificar alumno");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonNuevoAlumno.setText("Nuevo Alumno");
+        botonNuevoAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonNuevoAlumnoActionPerformed(evt);
             }
         });
+        panel_jugadores.add(botonNuevoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 60, -1, -1));
 
-        jButton3.setText("Eliminar alumno");
+        botonGuardarCambios.setText("Guardar Cambios");
+        botonGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGuardarCambiosActionPerformed(evt);
+            }
+        });
+        panel_jugadores.add(botonGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
+
+        deshacerCambios.setText("Deshacer Cambios");
+        deshacerCambios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deshacerCambiosActionPerformed(evt);
+            }
+        });
+        panel_jugadores.add(deshacerCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 690, -1, -1));
 
         jLabel3.setText("Buscar alumnos por:");
+        panel_jugadores.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, -1, -1));
 
         jLabel4.setText("Equipo");
+        panel_jugadores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
 
         jLabel5.setText("Grupo");
+        panel_jugadores.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
         jLabel6.setText("Edad");
+        panel_jugadores.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, -1, -1));
 
         jLabel7.setText("Entrenador");
+        panel_jugadores.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, -1));
 
         jLabel8.setText("Nombre");
+        panel_jugadores.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 36, -1, -1));
+        panel_jugadores.add(textfield_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 201, -1));
+        panel_jugadores.add(textfield_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 80, -1));
 
         jScrollPane1.setAutoscrolls(true);
 
+        tabla_alumnos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Nombre", "Apellidos", "Categoria", "Edad", "Entrenador", "Equipo", "Grupo"
+                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tabla_alumnos.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tabla_alumnos);
+        tabla_alumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+
+        panel_jugadores.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, -1));
 
         boton_mostrar_alumnos.setText("Mostrar Alumnos");
         boton_mostrar_alumnos.addActionListener(new java.awt.event.ActionListener() {
@@ -140,102 +273,310 @@ public class InterfazInicio extends javax.swing.JFrame {
                 boton_mostrar_alumnosActionPerformed(evt);
             }
         });
+        panel_jugadores.add(boton_mostrar_alumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
         jLabel9.setText("Categoria");
+        panel_jugadores.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
+        panel_jugadores.add(textfield_apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 201, -1));
+        panel_jugadores.add(textfield_apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 201, -1));
 
-        javax.swing.GroupLayout panel_jugadoresLayout = new javax.swing.GroupLayout(panel_jugadores);
-        panel_jugadores.setLayout(panel_jugadoresLayout);
-        panel_jugadoresLayout.setHorizontalGroup(
-            panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(94, 94, 94)
-                        .addComponent(boton_mostrar_alumnos))
-                    .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(76, 76, 76)
-                        .addComponent(jButton3))
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textfield_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textfield_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(text_field_edad, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addGap(38, 38, 38)
-                                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(textfield_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textfield_entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(436, Short.MAX_VALUE))
-        );
-        panel_jugadoresLayout.setVerticalGroup(
-            panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(textfield_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(text_field_edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(textfield_equipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(textfield_grupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(textfield_entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textfield_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addGap(59, 59, 59)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_jugadoresLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2))
-                    .addComponent(boton_mostrar_alumnos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(panel_jugadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addGap(52, 52, 52))
-        );
+        jLabel10.setText("Apellido Primero");
+        panel_jugadores.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
+
+        jLabel11.setText("Apellido Segundo");
+        panel_jugadores.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
+
+        jLabel17.setText("Temporada");
+        panel_jugadores.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
+
+        consultaEntrenador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaEntrenador, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 200, -1));
+
+        consultaEquipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 100, -1));
+
+        consultaGrupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaGrupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 100, -1));
+
+        consultaCategoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
+        panel_jugadores.add(consultaCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 100, -1));
+
+        panel_jugadores.add(consultaTemporada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 100, -1));
+
+        errorModifMovil.setForeground(new java.awt.Color(255, 0, 51));
+        errorModifMovil.setText("Error Tel.Movil");
+        errorModifMovil.setVisible(false);
+        panel_jugadores.add(errorModifMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, -1, -1));
+
+        errorModifFijo.setForeground(new java.awt.Color(255, 0, 51));
+        errorModifFijo.setText("Error Tel.Fijo");
+        errorModifFijo.setVisible(false);
+        panel_jugadores.add(errorModifFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, -1, -1));
+
+        errorModifCP.setForeground(new java.awt.Color(255, 0, 51));
+        errorModifCP.setText("Error CP");
+        errorModifCP.setVisible(false);
+        panel_jugadores.add(errorModifCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 210, -1, -1));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 164;
+        gridBagConstraints.ipady = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        getContentPane().add(panel_jugadores, gridBagConstraints);
+
+        panel_anadiralumno.setVisible(false);
+        panel_anadiralumno.setAutoscrolls(true);
+        panel_anadiralumno.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setText("Introduzca los datos del nuevo alumno:");
+        panel_anadiralumno.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 239, -1));
+
+        jLabel13.setText("Nombre:");
+        panel_anadiralumno.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+
+        jLabel14.setText("Primer apellido:");
+        panel_anadiralumno.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, -1, -1));
+
+        jLabel15.setText("Segundo apellido:");
+        panel_anadiralumno.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 91, -1));
+
+        nombreAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(nombreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 145, -1));
+        panel_anadiralumno.add(primerApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 145, -1));
+
+        segundoApellidoAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                segundoApellidoAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(segundoApellidoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 145, -1));
+
+        jLabel16.setText("Fecha Nacimiento: ");
+        panel_anadiralumno.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        provinciaAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                provinciaAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(provinciaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 145, -1));
+
+        jLabel21.setText("Provincia:");
+        panel_anadiralumno.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 91, -1));
+
+        localidadAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                localidadAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(localidadAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, 145, -1));
+
+        jLabel22.setText("Email:");
+        panel_anadiralumno.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+
+        jLabel23.setText("Localidad:");
+        panel_anadiralumno.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 300, -1, -1));
+
+        colegioAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                colegioAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(colegioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 145, -1));
+        panel_anadiralumno.add(emailAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 145, -1));
+
+        jLabel24.setText("Colegio:");
+        panel_anadiralumno.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
+
+        jLabel25.setText("Nombre Madre");
+        panel_anadiralumno.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 220, 91, -1));
+
+        nombreMadreAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreMadreAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(nombreMadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 145, -1));
+
+        jLabel26.setText("Domicilio");
+        panel_anadiralumno.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, -1));
+
+        nombrePadreAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombrePadreAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(nombrePadreAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 145, -1));
+
+        jLabel27.setText("Nombre Padre");
+        panel_anadiralumno.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 220, -1, -1));
+
+        codigoPostalAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codigoPostalAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(codigoPostalAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 320, 145, -1));
+        panel_anadiralumno.add(domicilioAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, 145, -1));
+
+        jLabel28.setText("Codigo Postal:");
+        panel_anadiralumno.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 300, 91, -1));
+
+        numeroCuentaAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numeroCuentaAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(numeroCuentaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 145, -1));
+
+        jLabel29.setText("Numero Cuenta");
+        panel_anadiralumno.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 87, -1));
+
+        jLabel30.setText("Telefono Móvil");
+        panel_anadiralumno.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 91, -1));
+
+        telefonoMovilAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefonoMovilAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(telefonoMovilAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 145, -1));
+
+        jLabel31.setText("Talla:");
+        panel_anadiralumno.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
+
+        telefonoFijoAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefonoFijoAlumnoActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(telefonoFijoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 145, -1));
+
+        jLabel32.setText("Telefono Fijo");
+        panel_anadiralumno.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 380, 73, -1));
+
+        botonAnadir.setText("Añadir");
+        botonAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAnadirActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 490, -1, -1));
+
+        jButton4.setText("Volver Atras");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        panel_anadiralumno.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 490, -1, -1));
+        panel_anadiralumno.add(fechaNacAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 145, -1));
+
+        errorCP.setForeground(new java.awt.Color(255, 0, 0));
+        errorCP.setText("El codigo postal tiene que ser un número");
+        errorCP.setVisible(false);
+        panel_anadiralumno.add(errorCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 350, 243, -1));
+
+        errorTelefonoFijo.setForeground(new java.awt.Color(255, 0, 0));
+        errorTelefonoFijo.setText("El telefono fijo tiene que ser un número");
+        errorTelefonoFijo.setVisible(false);
+        panel_anadiralumno.add(errorTelefonoFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 430, 220, -1));
+
+        errorTelefonoMovil.setForeground(new java.awt.Color(255, 0, 0));
+        errorTelefonoMovil.setText("El telefono móvil tiene que ser un número");
+        errorTelefonoMovil.setVisible(false);
+        panel_anadiralumno.add(errorTelefonoMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 430, 243, -1));
+
+        mensajeConfirmacion.setFont(new java.awt.Font("Tahoma", 0, 14));
+        mensajeConfirmacion.setForeground(new java.awt.Color(51, 204, 0));
+        mensajeConfirmacion.setText("El alumno se inserto correctamente");
+        mensajeConfirmacion.setVisible(false);
+        panel_anadiralumno.add(mensajeConfirmacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 231, -1));
+
+        errorInsertAl1.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl1.setText("No ha introducido el nombre");
+        errorInsertAl1.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 243, -1));
+
+        errorInsertAl2.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl2.setText("No ha introducido el primer apellido");
+        errorInsertAl2.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 243, -1));
+
+        errorInsertAl3.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl3.setText("No ha introducido el segundo apellido");
+        errorInsertAl3.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 243, -1));
+
+        errorInsertAl4.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl4.setText("No ha introducido la fecha de nacimiento");
+        errorInsertAl4.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 243, -1));
+
+        errorInsertAl5.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl5.setText("No ha introducido el colegio");
+        errorInsertAl5.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 243, -1));
+
+        errorInsertAl6.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl6.setText("No ha introducido el email");
+        errorInsertAl6.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 243, -1));
+
+        errorInsertAl7.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl7.setText("No ha introducido la localidad");
+        errorInsertAl7.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl7, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, 243, -1));
+
+        errorInsertAl8.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl8.setText("No ha introducido la provincia");
+        errorInsertAl8.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 243, -1));
+
+        errorInsertAl9.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl9.setText("No ha introducido el domicilio");
+        errorInsertAl9.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl9, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 243, -1));
+
+        errorInsertAl10.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl10.setText("No ha introducido el nombre del padre");
+        errorInsertAl10.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl10, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 243, -1));
+
+        errorInsertAl11.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl11.setText("No ha introducido el nombre de la madre");
+        errorInsertAl11.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl11, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, 243, -1));
+
+        errorInsertAl12.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl12.setText("No ha introducido el número de cuenta");
+        errorInsertAl12.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 243, -1));
+
+        errorInsertAl13.setForeground(new java.awt.Color(255, 0, 0));
+        errorInsertAl13.setText("No ha introducido la talla");
+        errorInsertAl13.setVisible(false);
+        panel_anadiralumno.add(errorInsertAl13, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 243, -1));
+
+        tallaAlumno.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SinMedir", "6", "8", "10", "12", "XS", "S", "M", "L", "XL", "XXL" }));
+        panel_anadiralumno.add(tallaAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 164;
+        gridBagConstraints.ipady = 20;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(34, 133, 0, 0);
+        getContentPane().add(panel_anadiralumno, gridBagConstraints);
 
         jMenu1.setText("File");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -250,18 +591,18 @@ public class InterfazInicio extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Jugadores");
-        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuJugadores.setText("Jugadores");
+        menuJugadores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu2MouseClicked(evt);
+                menuJugadoresMouseClicked(evt);
             }
         });
-        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+        menuJugadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu2ActionPerformed(evt);
+                menuJugadoresActionPerformed(evt);
             }
         });
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(menuJugadores);
 
         jMenu3.setText("Equipos");
         jMenuBar1.add(jMenu3);
@@ -277,59 +618,422 @@ public class InterfazInicio extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_inicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_jugadores, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_inicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(panel_jugadores, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-// TODO add your handling code here:
-}//GEN-LAST:event_jButton2ActionPerformed
+private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
+    String consulta_alumnos=new String();
+    
+    errorModifCP.setVisible(false);
+    errorModifMovil.setVisible(false);
+    errorModifFijo.setVisible(false);
+    try{
+        consulta_alumnos=leeConsultaInterfaz();
+        retsetMostrados= accesoBD.ejecutaConsulta(consulta_alumnos);
+        int i=0;
+        while(retsetMostrados.next()){
+            String updateFila=new String();
+            updateFila="UPDATE alumno SET ";
+            boolean fila_editada=false;
+            if(! retsetMostrados.getString("a.nombre").equals(tabla_alumnos.getValueAt(i, 0))){
+                fila_editada=true;
+                updateFila=updateFila+" nombre='"+tabla_alumnos.getValueAt(i, 0)+"', ";
+            }
+            if(! retsetMostrados.getString("a.primerApellido").equals(tabla_alumnos.getValueAt(i, 1))){
+                fila_editada=true;
+                updateFila=updateFila+" primerApellido='"+tabla_alumnos.getValueAt(i, 1)+"', ";
+            }
+            if(! retsetMostrados.getString("a.segundoApellido").equals(tabla_alumnos.getValueAt(i, 2))){
+                fila_editada=true;
+                updateFila=updateFila+" segundoApellido='"+tabla_alumnos.getValueAt(i, 2)+"', ";
+            }
+            if(! retsetMostrados.getString("a.fechaNacimiento").equals(tabla_alumnos.getValueAt(i, 3))){
+                fila_editada=true;
+                updateFila=updateFila+" fechaNacimiento='"+tabla_alumnos.getValueAt(i, 3)+"', ";
+            }
+            if(! retsetMostrados.getString("a.talla").equals(tabla_alumnos.getValueAt(i, 5))){
+                fila_editada=true;
+                updateFila=updateFila+" talla='"+tabla_alumnos.getValueAt(i, 5)+"', ";
+            }            
+            if(! retsetMostrados.getString("a.nombrepadre").equals(tabla_alumnos.getValueAt(i, 13))){
+                fila_editada=true;
+                updateFila=updateFila+" nombrepadre='"+tabla_alumnos.getValueAt(i, 13)+"', ";
+            }            
+            if(! retsetMostrados.getString("a.nombremadre").equals(tabla_alumnos.getValueAt(i, 14))){
+                fila_editada=true;
+                updateFila=updateFila+" nombremadre='"+tabla_alumnos.getValueAt(i, 14)+"', ";
+            }              
+            if( tabla_alumnos.getValueAt(i, 4)!=null){
+                if( retsetMostrados.getString("a.email")!=null){
+                    if(! retsetMostrados.getString("a.email").equals(tabla_alumnos.getValueAt(i, 4))){
+                        fila_editada=true;
+                        updateFila=updateFila+" email='"+tabla_alumnos.getValueAt(i, 4)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" email='"+tabla_alumnos.getValueAt(i, 4)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.email")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" email=null, ";
+                } 
+            }                     
+            if( tabla_alumnos.getValueAt(i, 6)!=null){
+                if( retsetMostrados.getString("a.numeroCuenta")!=null){
+                    if(! retsetMostrados.getString("a.numeroCuenta").equals(tabla_alumnos.getValueAt(i, 6))){
+                        fila_editada=true;
+                        updateFila=updateFila+" numerocuenta='"+tabla_alumnos.getValueAt(i, 6)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" numerocuenta='"+tabla_alumnos.getValueAt(i, 6)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.numeroCuenta")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" numerocuenta=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 7)!=null){
+                if(isInteger((String) tabla_alumnos.getValueAt(i, 7))){
+                    if( retsetMostrados.getString("a.telmovil")!=null){
+                        if(! retsetMostrados.getString("a.telmovil").equals(tabla_alumnos.getValueAt(i, 7))){
+                            fila_editada=true;
+                            updateFila=updateFila+" telmovil="+tabla_alumnos.getValueAt(i, 7)+", ";
+                        }
+                    }else{
+                        fila_editada=true;
+                        updateFila=updateFila+" telmovil="+tabla_alumnos.getValueAt(i, 7)+", ";                    
+                    }
+                }else{
+                    errorModifMovil.setVisible(true);
+                }
+            }else{
+                if( retsetMostrados.getString("a.telmovil")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" telmovil=null, ";
+                } 
+            }  
+            if( tabla_alumnos.getValueAt(i, 8)!=null){
+                if(isInteger((String) tabla_alumnos.getValueAt(i, 8))){
+                    if( retsetMostrados.getString("a.telfijo")!=null){
+                        if(! retsetMostrados.getString("a.telfijo").equals(tabla_alumnos.getValueAt(i, 8))){
+                            fila_editada=true;
+                            updateFila=updateFila+" telfijo="+tabla_alumnos.getValueAt(i, 8)+", ";
+                        }
+                    }else{
+                        fila_editada=true;
+                        updateFila=updateFila+" telfijo="+tabla_alumnos.getValueAt(i, 8)+", ";                    
+                    }
+                }else{
+                    errorModifFijo.setVisible(true);
+                }
+            }else{
+                if( retsetMostrados.getString("a.telfijo")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" telfijo=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 9)!=null){
+                if( retsetMostrados.getString("a.provincia")!=null){
+                    if(! retsetMostrados.getString("a.provincia").equals(tabla_alumnos.getValueAt(i, 9))){
+                        fila_editada=true;
+                        updateFila=updateFila+" provincia='"+tabla_alumnos.getValueAt(i, 9)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" provincia='"+tabla_alumnos.getValueAt(i, 9)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.provincia")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" provincia=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 10)!=null){
+                if( retsetMostrados.getString("a.localidad")!=null){
+                    if(! retsetMostrados.getString("a.localidad").equals(tabla_alumnos.getValueAt(i, 10))){
+                        fila_editada=true;
+                        updateFila=updateFila+" localidad='"+tabla_alumnos.getValueAt(i, 10)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" localidad='"+tabla_alumnos.getValueAt(i, 10)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.localidad")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" localidad=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 11)!=null){
+                if( retsetMostrados.getString("a.domicilio")!=null){
+                    if(! retsetMostrados.getString("a.domicilio").equals(tabla_alumnos.getValueAt(i, 11))){
+                        fila_editada=true;
+                        updateFila=updateFila+" domicilio='"+tabla_alumnos.getValueAt(i, 11)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" domicilio='"+tabla_alumnos.getValueAt(i, 11)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.domicilio")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" domicilio=null, ";
+                } 
+            }
+            if( tabla_alumnos.getValueAt(i, 12)!=null){
+                if(isInteger((String) tabla_alumnos.getValueAt(i, 12))){
+                    if( retsetMostrados.getString("a.codigopostal")!=null){
+                        if(! retsetMostrados.getString("a.codigopostal").equals(tabla_alumnos.getValueAt(i, 12))){
+                            fila_editada=true;
+                            updateFila=updateFila+" codigopostal="+tabla_alumnos.getValueAt(i, 12)+", ";
+                        }
+                    }else{
+                        fila_editada=true;
+                        updateFila=updateFila+" codigopostal="+tabla_alumnos.getValueAt(i, 12)+", ";                    
+                    }
+                }else{
+                    errorModifCP.setVisible(true);
+                }
+            }else{
+                if( retsetMostrados.getString("a.codigopostal")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" codigopostal=null, ";
+                } 
+            }           
+            if( tabla_alumnos.getValueAt(i, 15)!=null){
+                if( retsetMostrados.getString("a.colegio")!=null){
+                    if(! retsetMostrados.getString("a.colegio").equals(tabla_alumnos.getValueAt(i, 15))){
+                        fila_editada=true;
+                        updateFila=updateFila+" colegio='"+tabla_alumnos.getValueAt(i, 15)+"', ";
+                    }
+                }else{
+                    fila_editada=true;
+                    updateFila=updateFila+" colegio='"+tabla_alumnos.getValueAt(i, 15)+"', ";                    
+                }
+            }else{
+                if( retsetMostrados.getString("a.colegio")!=null){
+                    fila_editada=true;
+                    updateFila=updateFila+" colegio=null, ";
+                } 
+            }     
+            updateFila=updateFila.substring(0, updateFila.length()-2);
+            updateFila=updateFila+" WHERE alumno.idalumno="+retsetMostrados.getString("a.idalumno");
+            if(fila_editada==true){
+                accesoBD.ejecutaActualizacion(updateFila);
+                System.out.print("\nModificado "+i+" act\n "+updateFila);
+            }
+            i++;
+        }
+    }catch(SQLException ex){
+        System.out.print(ex.getMessage());
+    }
+}//GEN-LAST:event_botonGuardarCambiosActionPerformed
 
 private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
 
 }//GEN-LAST:event_jMenu1ActionPerformed
 
-private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+private void menuJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuJugadoresActionPerformed
 
-}//GEN-LAST:event_jMenu2ActionPerformed
+}//GEN-LAST:event_menuJugadoresActionPerformed
 
-private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+private void menuJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuJugadoresMouseClicked
 // TODO add your handling code here:
     panel_inicio.setVisible(false);
     panel_jugadores.setVisible(true);
-}//GEN-LAST:event_jMenu2MouseClicked
+    ResultSet consulta;
+    
+    try{
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM grupo");
+        while(consulta.next()){
+            consultaGrupo.addItem(consulta.getInt(1));
+        }
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM equipo");
+        while(consulta.next()){
+            consultaEquipo.addItem(consulta.getInt(1));
+        } 
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM categoria");
+        while(consulta.next()){
+            consultaCategoria.addItem(consulta.getString("tipo"));
+        } 
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM temporada");
+        while(consulta.next()){
+            consultaTemporada.addItem(consulta.getString("curso"));
+        }
+        consulta=accesoBD.ejecutaConsulta("SELECT * FROM usuario where usuario.entrenador=true");
+        while(consulta.next()){
+            consultaEntrenador.addItem(consulta.getString("nombre")+" "+consulta.getString("primerApellido"));
+        }
+    }catch(SQLException ex){
+        System.out.print(ex.getMessage());
+    }
+}//GEN-LAST:event_menuJugadoresMouseClicked
 
 private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
     panel_inicio.setVisible(true);
     panel_jugadores.setVisible(false);
 }//GEN-LAST:event_jMenu1MouseClicked
 
+private String leeConsultaInterfaz(){
+    String consulta_alumnos=new String();
+    String condicionesConsulta=new String();
+    String tablasImplicadas=new String();
+    
+    consulta_alumnos="SELECT a.idAlumno, a.talla, a.nombre, a.primerApellido, a.segundoApellido, a.nombrePadre, a.nombreMadre, a.numeroCuenta,"+ 
+        "a.telMovil, a.telFijo, a.observaciones, a.provincia, a.localidad, a.codigoPostal, a.colegio, a.domicilio, a.email, a.fechaNacimiento, "
+        + "a.Alumnocol FROM ";
+    tablasImplicadas=" alumno a ";
+    condicionesConsulta=" WHERE ";
+
+    if(! textfield_nombre.getText().equals("") || ! textfield_apellido1.getText().equals("") || ! textfield_apellido2.getText().equals("")
+          || ! textfield_edad.getText().equals("") || ! consultaEquipo.getSelectedItem().equals("") || ! consultaGrupo.getSelectedItem().equals("")
+          || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
+        if(! textfield_nombre.getText().equals("")){
+            condicionesConsulta=condicionesConsulta+" a.nombre='"+textfield_nombre.getText()+"' AND ";
+        }
+        if(! textfield_apellido1.getText().equals("")){
+            condicionesConsulta=condicionesConsulta+" a.primerapellido='"+textfield_apellido1.getText()+"' AND ";
+        }
+        if(! textfield_apellido2.getText().equals("")){
+            condicionesConsulta=condicionesConsulta+" a.segundoapellido='"+textfield_apellido2.getText()+"' AND ";
+        }
+        if(! textfield_edad.getText().equals("") && isInteger(textfield_edad.getText())){ 
+            Calendar cal1 = Calendar.getInstance();  //con la hora actual del sistema calculamos la edad del alumno
+            int diaAct, mesAct, anoAct;
+            String fechaAnt, fechaPost;
+            diaAct=cal1.get(Calendar.DATE);
+            mesAct=cal1.get(Calendar.MONTH)+1;
+            anoAct=cal1.get(Calendar.YEAR)- Integer.parseInt(textfield_edad.getText());
+            fechaAnt=anoAct+"-"+mesAct+"-"+diaAct;
+            fechaPost=(anoAct-1)+"-"+mesAct+"-"+diaAct;
+            condicionesConsulta=condicionesConsulta+" a.fechaNacimiento <= '"+fechaAnt+"' AND "+" a.fechaNacimiento > '"+fechaPost+"' AND ";
+        }            
+        if(! consultaGrupo.getSelectedItem().equals("") || ! consultaCategoria.getSelectedItem().equals("") || ! consultaTemporada.getSelectedItem().equals("") || ! consultaEntrenador.getSelectedItem().equals("")){
+            tablasImplicadas=tablasImplicadas+" , alumno_has_grupo ";
+            condicionesConsulta=condicionesConsulta+" alumno_has_grupo.alumno_idalumno=a.idalumno AND ";
+            if(! consultaGrupo.getSelectedItem().equals("") ){
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_idGrupo="+consultaGrupo.getSelectedItem()+" AND ";
+            }   
+            if(! consultaCategoria.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , categoria ";
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Categoria_idCategoria=categoria.idCategoria AND categoria.tipo='"+consultaCategoria.getSelectedItem()+"' AND ";
+            }
+            if(! consultaTemporada.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , temporada ";
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Temporada_idTemporada=temporada.idTemporada and temporada.curso='"+consultaTemporada.getSelectedItem()+"' AND ";
+            }            
+            if(! consultaEntrenador.getSelectedItem().equals("")){
+                tablasImplicadas=tablasImplicadas+" , usuario ";
+                String nombre, apellido;
+                int espacios;
+                espacios=consultaEntrenador.getSelectedItem().toString().indexOf(" ");
+                condicionesConsulta=condicionesConsulta+" alumno_has_grupo.Grupo_Usuario_idUsuario=usuario.idUsuario and concat(usuario.nombre, ' ', usuario.primerApellido)='"+consultaEntrenador.getSelectedItem()+"' AND ";
+            }     
+        }
+        if(! consultaEquipo.getSelectedItem().equals("")){
+            tablasImplicadas=tablasImplicadas+" , alumnoequipo ";
+            condicionesConsulta=condicionesConsulta+" alumnoequipo.Alumno_idAlumno=a.idalumno AND alumnoequipo.Equipo_idEquipo="+consultaEquipo.getSelectedItem()+" AND ";
+        }
+
+        condicionesConsulta=condicionesConsulta.substring(0, condicionesConsulta.length()-4);
+        tablasImplicadas=tablasImplicadas+condicionesConsulta;
+    }
+    consulta_alumnos=consulta_alumnos+tablasImplicadas;    
+    
+    return consulta_alumnos;
+}
 private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
     String consulta_alumnos=new String();
-    
+
+    errorModifCP.setVisible(false);
+    errorModifMovil.setVisible(false);
+    errorModifFijo.setVisible(false);
     try{
-        stmt = conexion.createStatement(); 
-        consulta_alumnos="SELECT * FROM alumno WHERE nombre='"+textfield_nombre.getText()+"' AND grupo_idgrupo="+textfield_grupo.getText()+" AND Grupo_Categoria_idCategoria="+textfield_categoria.getText();
-        retset = stmt.executeQuery (consulta_alumnos);  
+        consulta_alumnos=leeConsultaInterfaz();
+        System.out.print("\nLA consulta "+ consulta_alumnos);
+        retset = accesoBD.ejecutaConsulta(consulta_alumnos);
+        retsetMostradosAnt=accesoBD.ejecutaConsulta(consulta_alumnos);
+        tabla_alumnos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Primer Apellido", "Segundo Apellido", "Fecha Nacimiento", "Email", "Talla", "Numero Cuenta", "Tel. Movil", "Tel. Fijo", "Provincia", "Localidad", "Domicilio", "CP", "Nombre Padre", "Nombre Madre", "Colegio"
+            }
+        ));
+        javax.swing.table.TableModel modelo_tabla=new javax.swing.table.DefaultTableModel();
+        modelo_tabla=tabla_alumnos.getModel();
         int i=0;
         while(retset.next()){
-            tabla_alumnos.addRowSelectionInterval(0, 7);
-            for(int j=0;j<4;j++){
-                tabla_alumnos.setValueAt(retset.getString(j), i, j);                
+
+            
+
+            if(i<25){                
+                tabla_alumnos.setValueAt(retset.getString("a.nombre"), i, 0);
+                tabla_alumnos.setValueAt(retset.getString("a.primerApellido"), i, 1);
+                tabla_alumnos.setValueAt(retset.getString("a.segundoApellido"), i, 2);
+                tabla_alumnos.setValueAt(retset.getString("fechaNacimiento"), i, 3);
+
+                tabla_alumnos.setValueAt(retset.getString("a.email"), i, 4);
+                tabla_alumnos.setValueAt(retset.getString("a.talla"), i, 5);
+                tabla_alumnos.setValueAt(retset.getString("a.numerocuenta"), i, 6);
+                tabla_alumnos.setValueAt(retset.getString("a.telmovil"), i, 7);
+                tabla_alumnos.setValueAt(retset.getString("a.telfijo"), i, 8);
+                tabla_alumnos.setValueAt(retset.getString("a.provincia"), i, 9);
+                tabla_alumnos.setValueAt(retset.getString("a.localidad"), i, 10);
+                tabla_alumnos.setValueAt(retset.getString("a.domicilio"), i, 11);
+                tabla_alumnos.setValueAt(retset.getString("a.codigopostal"), i, 12);
+                tabla_alumnos.setValueAt(retset.getString("a.nombrepadre"), i, 13);
+                tabla_alumnos.setValueAt(retset.getString("a.nombremadre"), i, 14);
+                tabla_alumnos.setValueAt(retset.getString("a.colegio"), i, 15);
+            }else{
+                javax.swing.table.DefaultTableModel temp = (javax.swing.table.DefaultTableModel) tabla_alumnos.getModel();
+                Object nuevo[]= {"","",""};
+                temp.addRow(nuevo);
+                tabla_alumnos.setValueAt(retset.getString("a.nombre"), i, 0);
+                tabla_alumnos.setValueAt(retset.getString("a.primerApellido"), i, 1);
+                tabla_alumnos.setValueAt(retset.getString("a.segundoApellido"), i, 2);
+                tabla_alumnos.setValueAt(retset.getString("fechaNacimiento"), i, 3);
+
+                tabla_alumnos.setValueAt(retset.getString("a.email"), i, 4);
+                tabla_alumnos.setValueAt(retset.getString("a.talla"), i, 5);
+                tabla_alumnos.setValueAt(retset.getString("a.numerocuenta"), i, 6);
+                tabla_alumnos.setValueAt(retset.getString("a.telmovil"), i, 7);
+                tabla_alumnos.setValueAt(retset.getString("a.telfijo"), i, 8);
+                tabla_alumnos.setValueAt(retset.getString("a.provincia"), i, 9);
+                tabla_alumnos.setValueAt(retset.getString("a.localidad"), i, 10);
+                tabla_alumnos.setValueAt(retset.getString("a.domicilio"), i, 11);
+                tabla_alumnos.setValueAt(retset.getString("a.codigopostal"), i, 12);
+                tabla_alumnos.setValueAt(retset.getString("a.nombrepadre"), i, 13);
+                tabla_alumnos.setValueAt(retset.getString("a.nombremadre"), i, 14);
+                tabla_alumnos.setValueAt(retset.getString("a.colegio"), i, 15);               
             }
             i++;
         }
@@ -338,8 +1042,242 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
         System.out.print(ex.getMessage());
     }
     
-    
 }//GEN-LAST:event_boton_mostrar_alumnosActionPerformed
+
+private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
+    errorInsertAl1.setVisible(false);
+    errorInsertAl2.setVisible(false);
+    errorInsertAl3.setVisible(false);
+    errorInsertAl4.setVisible(false);
+    errorInsertAl5.setVisible(false);
+    errorInsertAl6.setVisible(false);
+    errorInsertAl7.setVisible(false);
+    errorInsertAl8.setVisible(false);
+    errorInsertAl9.setVisible(false);
+    errorInsertAl10.setVisible(false);
+    errorInsertAl11.setVisible(false);
+    errorInsertAl12.setVisible(false);
+    errorInsertAl13.setVisible(false);
+    errorCP.setVisible(false);
+    errorTelefonoMovil.setVisible(false);
+    errorTelefonoFijo.setVisible(false);
+    mensajeConfirmacion.setVisible(false);
+    panel_jugadores.setVisible(false);
+    panel_anadiralumno.setVisible(true);
+}//GEN-LAST:event_botonNuevoAlumnoActionPerformed
+
+private void segundoApellidoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_segundoApellidoAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_segundoApellidoAlumnoActionPerformed
+
+private void nombreAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_nombreAlumnoActionPerformed
+
+private void provinciaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_provinciaAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_provinciaAlumnoActionPerformed
+
+private void localidadAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localidadAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_localidadAlumnoActionPerformed
+
+private void colegioAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colegioAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_colegioAlumnoActionPerformed
+
+private void nombreMadreAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreMadreAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_nombreMadreAlumnoActionPerformed
+
+private void nombrePadreAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombrePadreAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_nombrePadreAlumnoActionPerformed
+
+private void codigoPostalAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codigoPostalAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_codigoPostalAlumnoActionPerformed
+
+private void numeroCuentaAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numeroCuentaAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_numeroCuentaAlumnoActionPerformed
+
+private void telefonoMovilAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoMovilAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_telefonoMovilAlumnoActionPerformed
+
+private void telefonoFijoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefonoFijoAlumnoActionPerformed
+// TODO add your handling code here:
+}//GEN-LAST:event_telefonoFijoAlumnoActionPerformed
+
+private boolean isInteger(String cadena){
+    try{
+        int num;
+        num=Integer.parseInt(cadena);
+        return true;
+    }catch(Exception e){
+        return false;
+    } 
+}
+private boolean isLong(String cadena){
+    try{
+        Long num;
+        num=Long.parseLong(cadena);
+        return true;
+    }catch(Exception e){
+        return false;
+    } 
+}
+
+/*Observación importante: al crear a un alumno tenemos que asignarle un grupo y una categoria.
+ * El grupo y la categoría los introducirá el entrenador y no la secretaria,
+ * por lo que usaremos el grupo 1 como un grupo ficticio en el que se incluiran los alumnos que se añadan,
+ * y una vez añadido el alumno ya se le podra asignar su grupo y su categoria.
+ */
+private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
+// TODO add your handling code here:
+    boolean encontrado_error=false;
+    String dateString=new String();
+    String inserccion=new String();
+    
+    errorInsertAl1.setVisible(false);
+    errorInsertAl2.setVisible(false);
+    errorInsertAl3.setVisible(false);
+    errorInsertAl4.setVisible(false);
+    errorInsertAl5.setVisible(false);
+    errorInsertAl6.setVisible(false);
+    errorInsertAl7.setVisible(false);
+    errorInsertAl8.setVisible(false);
+    errorInsertAl9.setVisible(false);
+    errorInsertAl10.setVisible(false);
+    errorInsertAl11.setVisible(false);
+    errorInsertAl12.setVisible(false);
+    errorInsertAl13.setVisible(false);
+    errorCP.setVisible(false);
+    errorTelefonoMovil.setVisible(false);
+    errorTelefonoFijo.setVisible(false);
+    mensajeConfirmacion.setVisible(false);
+    if(nombreAlumno.getText().equals("")){
+        errorInsertAl1.setVisible(true);
+        encontrado_error=true;
+    }
+    if(primerApellidoAlumno.getText().equals("")){
+        errorInsertAl2.setVisible(true);
+        encontrado_error=true;
+    }
+    if(segundoApellidoAlumno.getText().equals("")){
+        errorInsertAl3.setVisible(true);
+        encontrado_error=true;
+    }
+    java.util.Date dateFromDateChooser = fechaNacAl.getDate();
+    dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
+    if(dateString.equals("null-null-null")){
+        errorInsertAl4.setVisible(true);
+        encontrado_error=true;
+    }    
+    if(colegioAlumno.getText().equals("")){
+        errorInsertAl5.setVisible(true);
+        encontrado_error=true;
+    }
+    if(emailAlumno.getText().equals("")){
+        errorInsertAl6.setVisible(true);
+        encontrado_error=true;
+    }
+    if(localidadAlumno.getText().equals("")){
+        errorInsertAl7.setVisible(true);
+        encontrado_error=true;
+    }
+    if(provinciaAlumno.getText().equals("")){
+        errorInsertAl8.setVisible(true);
+        encontrado_error=true;
+    }
+    if(domicilioAlumno.getText().equals("")){
+        errorInsertAl9.setVisible(true);
+        encontrado_error=true;
+    }
+    if(nombrePadreAlumno.getText().equals("")){
+        errorInsertAl10.setVisible(true);
+        encontrado_error=true;
+    }
+    if(nombreMadreAlumno.getText().equals("")){
+        errorInsertAl11.setVisible(true);
+        encontrado_error=true;
+    }
+    if(numeroCuentaAlumno.getText().equals("")){
+        errorInsertAl12.setVisible(true);
+        encontrado_error=true;
+    }
+    if(isInteger(codigoPostalAlumno.getText())==false){
+        errorCP.setVisible(true);
+        encontrado_error=true;
+    }
+    if(isInteger(telefonoMovilAlumno.getText())==false){
+        errorTelefonoMovil.setVisible(true);
+        encontrado_error=true;
+    }
+    if(isInteger(telefonoFijoAlumno.getText())==false){
+        errorTelefonoFijo.setVisible(true);
+        encontrado_error=true;
+    }
+    //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
+    if(encontrado_error==false){
+        mensajeConfirmacion.setVisible(true);
+        Alumno nuevoAlumno=new Alumno();
+        nuevoAlumno.crearAlumno(nombreAlumno.getText(), primerApellidoAlumno.getText(), segundoApellidoAlumno.getText(), dateFromDateChooser,
+                numeroCuentaAlumno.getText(),domicilioAlumno.getText(), localidadAlumno.getText(), 
+                Integer.parseInt(codigoPostalAlumno.getText()), provinciaAlumno.getText(), colegioAlumno.getText(), nombrePadreAlumno.getText(),
+                nombreMadreAlumno.getText(), Integer.parseInt(telefonoFijoAlumno.getText()), Integer.parseInt(telefonoMovilAlumno.getText()), emailAlumno.getText(), "",
+                (String) tallaAlumno.getSelectedItem());
+        
+        nuevoAlumno.insertarAlumnoBD(accesoBD);        
+        nombreAlumno.setText(null);
+        primerApellidoAlumno.setText(null);
+        segundoApellidoAlumno.setText(null);
+        colegioAlumno.setText(null);
+        emailAlumno.setText(null);
+        localidadAlumno.setText(null);
+        provinciaAlumno.setText(null);
+        codigoPostalAlumno.setText(null);
+        domicilioAlumno.setText(null);
+        nombrePadreAlumno.setText(null);
+        nombreMadreAlumno.setText(null);
+        numeroCuentaAlumno.setText(null);
+        telefonoFijoAlumno.setText(null);
+        telefonoMovilAlumno.setText(null);
+        nombreAlumno.setText(null);
+        fechaNacAl.setDate(null);
+        tallaAlumno.setSelectedItem("SinMedir");
+    }
+}//GEN-LAST:event_botonAnadirActionPerformed
+
+private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+// TODO add your handling code here:
+    panel_jugadores.setVisible(true);
+    panel_anadiralumno.setVisible(false);
+    nombreAlumno.setText(null);
+    primerApellidoAlumno.setText(null);
+    segundoApellidoAlumno.setText(null);
+    colegioAlumno.setText(null);
+    emailAlumno.setText(null);
+    localidadAlumno.setText(null);
+    provinciaAlumno.setText(null);
+    codigoPostalAlumno.setText(null);
+    domicilioAlumno.setText(null);
+    nombrePadreAlumno.setText(null);
+    nombreMadreAlumno.setText(null);
+    numeroCuentaAlumno.setText(null);
+    telefonoFijoAlumno.setText(null);
+    telefonoMovilAlumno.setText(null);
+    nombreAlumno.setText(null);
+    fechaNacAl.setDate(null);
+    tallaAlumno.setSelectedItem("SinMedir");
+}//GEN-LAST:event_jButton4ActionPerformed
+
+private void deshacerCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosActionPerformed
+ 
+    
+    
+}//GEN-LAST:event_deshacerCambiosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,13 +1315,64 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAnadir;
+    private javax.swing.JButton botonGuardarCambios;
+    private javax.swing.JButton botonNuevoAlumno;
     private javax.swing.JButton boton_mostrar_alumnos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JTextField codigoPostalAlumno;
+    private javax.swing.JTextField colegioAlumno;
+    private javax.swing.JComboBox consultaCategoria;
+    private javax.swing.JComboBox consultaEntrenador;
+    private javax.swing.JComboBox consultaEquipo;
+    private javax.swing.JComboBox consultaGrupo;
+    private javax.swing.JComboBox consultaTemporada;
+    private javax.swing.JButton deshacerCambios;
+    private javax.swing.JTextField domicilioAlumno;
+    private javax.swing.JTextField emailAlumno;
+    private javax.swing.JLabel errorCP;
+    private javax.swing.JLabel errorInsertAl1;
+    private javax.swing.JLabel errorInsertAl10;
+    private javax.swing.JLabel errorInsertAl11;
+    private javax.swing.JLabel errorInsertAl12;
+    private javax.swing.JLabel errorInsertAl13;
+    private javax.swing.JLabel errorInsertAl2;
+    private javax.swing.JLabel errorInsertAl3;
+    private javax.swing.JLabel errorInsertAl4;
+    private javax.swing.JLabel errorInsertAl5;
+    private javax.swing.JLabel errorInsertAl6;
+    private javax.swing.JLabel errorInsertAl7;
+    private javax.swing.JLabel errorInsertAl8;
+    private javax.swing.JLabel errorInsertAl9;
+    private javax.swing.JLabel errorModifCP;
+    private javax.swing.JLabel errorModifFijo;
+    private javax.swing.JLabel errorModifMovil;
+    private javax.swing.JLabel errorTelefonoFijo;
+    private javax.swing.JLabel errorTelefonoMovil;
+    private com.toedter.calendar.JDateChooser fechaNacAl;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -391,21 +1380,32 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField localidadAlumno;
+    private javax.swing.JLabel mensajeConfirmacion;
+    private javax.swing.JMenu menuJugadores;
+    private javax.swing.JTextField nombreAlumno;
+    private javax.swing.JTextField nombreMadreAlumno;
+    private javax.swing.JTextField nombrePadreAlumno;
+    private javax.swing.JTextField numeroCuentaAlumno;
+    private javax.swing.JPanel panel_anadiralumno;
     private javax.swing.JPanel panel_inicio;
     private javax.swing.JPanel panel_jugadores;
+    private javax.swing.JTextField primerApellidoAlumno;
+    private javax.swing.JTextField provinciaAlumno;
+    private javax.swing.JTextField segundoApellidoAlumno;
     private javax.swing.JTable tabla_alumnos;
-    private javax.swing.JTextField text_field_edad;
-    private javax.swing.JTextField textfield_categoria;
-    private javax.swing.JTextField textfield_entrenador;
-    private javax.swing.JTextField textfield_equipo;
-    private javax.swing.JTextField textfield_grupo;
+    private javax.swing.JComboBox tallaAlumno;
+    private javax.swing.JTextField telefonoFijoAlumno;
+    private javax.swing.JTextField telefonoMovilAlumno;
+    private javax.swing.JTextField textfield_apellido1;
+    private javax.swing.JTextField textfield_apellido2;
+    private javax.swing.JTextField textfield_edad;
     private javax.swing.JTextField textfield_nombre;
     // End of variables declaration//GEN-END:variables
 }
