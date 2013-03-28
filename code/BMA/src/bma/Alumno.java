@@ -68,4 +68,13 @@ public class Alumno {
         System.out.print("\n inser "+inserccion);
         accesoBD.ejecutaActualizacion(inserccion);
     }
+    public ResultSet consultaAlumno(BaseDatos accesoBD, String consulta){
+        ResultSet retset;
+        retset=accesoBD.ejecutaConsulta(consulta);
+        
+        return retset;
+    }
+    public void actualizaAlumno(BaseDatos accesoBD, String actualizacion){
+        accesoBD.ejecutaActualizacion(actualizacion);
+    }
 }

@@ -37,9 +37,9 @@ public class InterfazAcceso extends javax.swing.JFrame {
         user_textfield = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        pass_textfield = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         mensaje_error_conexion = new javax.swing.JLabel();
+        pass_textfield = new javax.swing.JPasswordField();
 
         jInternalFrame1.setVisible(true);
 
@@ -74,21 +74,23 @@ public class InterfazAcceso extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(pass_textfield)
-                        .addComponent(user_textfield, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
-                .addContainerGap(132, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(130, Short.MAX_VALUE)
-                .addComponent(mensaje_error_conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(pass_textfield, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(user_textfield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(130, Short.MAX_VALUE)
+                        .addComponent(mensaje_error_conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39))
         );
         layout.setVerticalGroup(
@@ -100,8 +102,8 @@ public class InterfazAcceso extends javax.swing.JFrame {
                     .addComponent(user_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pass_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(pass_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addGap(34, 34, 34)
@@ -114,18 +116,22 @@ public class InterfazAcceso extends javax.swing.JFrame {
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     BaseDatos accesoBD=new BaseDatos();
-    Usuario user;
+    Usuario user=new Usuario();
     accesoBD.conectaBD();
+   
     
     String usuario = user_textfield.getText();
-    String pass = pass_textfield.getText();
-    String consulta_acceso = "SELECT * FROM usuario WHERE nombre='" + usuario + "' AND clave='" + pass + "'";
-    retset=accesoBD.ejecutaConsulta(consulta_acceso);
+    char [] pass=new char [100];
+    pass = pass_textfield.getPassword();
+    String consulta_acceso = "SELECT * FROM usuario WHERE nombre='" + usuario + "' AND clave='";
+    for(int i=0;i<pass.length;i++)
+        consulta_acceso=consulta_acceso+pass[i];
+    consulta_acceso=consulta_acceso+ "'";
+    System.out.print("\npass "+consulta_acceso);
+    retset=user.consultaUsuario(accesoBD, consulta_acceso);
     try{
         if(retset.next()){
-            user = new Usuario();
-            user.crearUsuario(retset.getInt(1), retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getString(6), retset.getBoolean(7));            
-
+            user.crearUsuario(retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getString(6), retset.getBoolean(7), retset.getInt("telMovil"), retset.getInt("telFijo"), retset.getString("email"), retset.getString("numeroCuenta"));
             this.setVisible(false);
             new InterfazPrincipal(accesoBD, user).setVisible(true);
         }else{          
@@ -178,7 +184,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel mensaje_error_conexion;
-    private javax.swing.JTextField pass_textfield;
+    private javax.swing.JPasswordField pass_textfield;
     private javax.swing.JTextField user_textfield;
     // End of variables declaration//GEN-END:variables
 }

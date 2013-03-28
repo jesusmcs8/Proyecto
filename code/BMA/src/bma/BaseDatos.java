@@ -63,7 +63,6 @@ public class BaseDatos {
             System.out.print(ex.getMessage());
         }
 
-
         return retset;
     }
 
