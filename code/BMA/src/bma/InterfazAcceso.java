@@ -116,13 +116,7 @@ public class InterfazAcceso extends javax.swing.JFrame {
 
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
     BaseDatos accesoBD=new BaseDatos();
-<<<<<<< HEAD
-    Usuario user=new Usuario();
-    accesoBD.conectaBD();
-   
-=======
-    Usuario user;
->>>>>>> 80f274db9de86423cac1b5db8ee67013e8978e25
+    Usuario user=new Usuario();  
     
     String usuario = user_textfield.getText();
     char [] pass=new char [100];
