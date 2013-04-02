@@ -2198,17 +2198,10 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
                     }
                 }else{
                     fila_editada=true;
-<<<<<<< HEAD
                     if(tablaUsuarios.getValueAt(i, 9).toString().length()<45){
                         updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9)+"', ";
                     }else{
                         updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9).toString().substring(0, 44) +"', ";
-=======
-                    if(tablaUsuarios.getValueAt(i, 0).toString().length()<45){
-                        updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9)+"', ";
-                    }else{
-                        updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9).toString().substring(0, 45) +"', ";
->>>>>>> 56094f1d20b9582f9733173b2e86134ea035bc9c
                     }
                 }
             }else{
