@@ -350,18 +350,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         tablaAlumnos.setColumnSelectionAllowed(true);
         jScrollPane1.setViewportView(tablaAlumnos);
         tablaAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaAlumnos.getColumnModel().getColumn(4).setHeaderValue("Email");
-        tablaAlumnos.getColumnModel().getColumn(5).setHeaderValue("Talla");
-        tablaAlumnos.getColumnModel().getColumn(6).setHeaderValue("Numero Cuenta");
-        tablaAlumnos.getColumnModel().getColumn(7).setHeaderValue("Tel. Movil");
-        tablaAlumnos.getColumnModel().getColumn(8).setHeaderValue("Tel. Fijo");
-        tablaAlumnos.getColumnModel().getColumn(9).setHeaderValue("Provincia");
-        tablaAlumnos.getColumnModel().getColumn(10).setHeaderValue("Localidad");
-        tablaAlumnos.getColumnModel().getColumn(11).setHeaderValue("Domicilio");
-        tablaAlumnos.getColumnModel().getColumn(12).setHeaderValue("CP");
-        tablaAlumnos.getColumnModel().getColumn(13).setHeaderValue("Nombre Padre");
-        tablaAlumnos.getColumnModel().getColumn(14).setHeaderValue("Nombre Madre");
-        tablaAlumnos.getColumnModel().getColumn(15).setHeaderValue("Colegio");
+        tablaAlumnos.getColumnModel().getColumn(0).setMaxWidth(45);
 
         panel_jugadores.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, -1));
 
@@ -958,7 +947,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         errorInsertUsuario1.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertUsuario1.setText("No ha introducido el nombre");
         errorInsertAl1.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 243, -1));
+        panelAnadirUsuario.add(errorInsertUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 170, -1));
 
         errorInsertUsuario2.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertUsuario2.setText("No ha introducido el primer apellido");
@@ -978,17 +967,17 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         errorInsertUsuario5.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertUsuario5.setText("No ha introducido el dni");
         errorInsertAl10.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 243, -1));
+        panelAnadirUsuario.add(errorInsertUsuario5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 150, -1));
 
         errorInsertUsuario7.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertUsuario7.setText("No ha introducido la clave");
         errorInsertAl11.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 130, -1));
+        panelAnadirUsuario.add(errorInsertUsuario7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 160, -1));
 
         errorInsertUsuario4.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertUsuario4.setText("No ha introducido el número de cuenta");
         errorInsertAl12.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 243, -1));
+        panelAnadirUsuario.add(errorInsertUsuario4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, -1));
 
         errorInsertUsuario6.setForeground(new java.awt.Color(255, 0, 0));
         errorInsertUsuario6.setText("No ha introducido el tipo de usuario");
@@ -1072,6 +1061,11 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
     errorModifCP.setVisible(false);
     errorModifMovil.setVisible(false);
     errorModifFijo.setVisible(false);
+
+    //compruebo si se ha mostrado algún resultado antes de guardar los cambios, ya que si no se han mostrado no se ha podido modificar nada
+    if(tablaAlumnos.getValueAt(0, 0)==null){
+        return;
+    }
     try{
         consulta_alumnos=leeConsultaAlumnosInterfaz();
         retsetMostrados=alumno.consultaAlumno(accesoBD, consulta_alumnos);
@@ -1084,15 +1078,27 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
             boolean fila_editada=false;
             if(! retsetMostrados.getString("a.nombre").equals(tablaAlumnos.getValueAt(i, 0))){
                 fila_editada=true;
-                updateFila=updateFila+" nombre='"+tablaAlumnos.getValueAt(i, 0)+"', ";
+                if(tablaAlumnos.getValueAt(i, 0).toString().length()<45){
+                    updateFila=updateFila+" nombre='"+tablaAlumnos.getValueAt(i, 0)+"', ";
+                }else{
+                    updateFila=updateFila+" nombre='"+tablaAlumnos.getValueAt(i, 0).toString().substring(0, 45) +"', ";
+                }
             }
             if(! retsetMostrados.getString("a.primerApellido").equals(tablaAlumnos.getValueAt(i, 1))){
                 fila_editada=true;
-                updateFila=updateFila+" primerApellido='"+tablaAlumnos.getValueAt(i, 1)+"', ";
+                if(tablaAlumnos.getValueAt(i, 1).toString().length()<45){
+                    updateFila=updateFila+" primerApellido='"+tablaAlumnos.getValueAt(i, 1)+"', ";
+                }else{
+                    updateFila=updateFila+" primerApellido='"+tablaAlumnos.getValueAt(i, 1).toString().substring(0, 45) +"', ";
+                }
             }
             if(! retsetMostrados.getString("a.segundoApellido").equals(tablaAlumnos.getValueAt(i, 2))){
                 fila_editada=true;
-                updateFila=updateFila+" segundoApellido='"+tablaAlumnos.getValueAt(i, 2)+"', ";
+                if(tablaAlumnos.getValueAt(i, 2).toString().length()<45){
+                    updateFila=updateFila+" segundoApellido='"+tablaAlumnos.getValueAt(i, 2)+"', ";
+                }else{
+                    updateFila=updateFila+" segundoApellido='"+tablaAlumnos.getValueAt(i, 2).toString().substring(0, 45) +"', ";
+                }
             }
             if(! retsetMostrados.getString("a.fechaNacimiento").equals(tablaAlumnos.getValueAt(i, 3))){
                 fila_editada=true;
@@ -1100,25 +1106,45 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
             }
             if(! retsetMostrados.getString("a.talla").equals(tablaAlumnos.getValueAt(i, 5))){
                 fila_editada=true;
-                updateFila=updateFila+" talla='"+tablaAlumnos.getValueAt(i, 5)+"', ";
+                if(tablaAlumnos.getValueAt(i, 5).toString().length()<12){
+                    updateFila=updateFila+" talla='"+tablaAlumnos.getValueAt(i, 5)+"', ";
+                }else{
+                    updateFila=updateFila+" talla='"+tablaAlumnos.getValueAt(i, 5).toString().substring(0, 12) +"', ";
+                }
             }            
             if(! retsetMostrados.getString("a.nombrepadre").equals(tablaAlumnos.getValueAt(i, 13))){
                 fila_editada=true;
-                updateFila=updateFila+" nombrepadre='"+tablaAlumnos.getValueAt(i, 13)+"', ";
+                if(tablaAlumnos.getValueAt(i, 13).toString().length()<100){
+                    updateFila=updateFila+" nombrepadre='"+tablaAlumnos.getValueAt(i, 13)+"', ";
+                }else{
+                    updateFila=updateFila+" nombrepadre='"+tablaAlumnos.getValueAt(i, 13).toString().substring(0, 100) +"', ";
+                }
             }            
             if(! retsetMostrados.getString("a.nombremadre").equals(tablaAlumnos.getValueAt(i, 14))){
                 fila_editada=true;
-                updateFila=updateFila+" nombremadre='"+tablaAlumnos.getValueAt(i, 14)+"', ";
+                if(tablaAlumnos.getValueAt(i, 14).toString().length()<100){
+                    updateFila=updateFila+" nombremadre='"+tablaAlumnos.getValueAt(i, 14)+"', ";
+                }else{
+                    updateFila=updateFila+" nombremadre='"+tablaAlumnos.getValueAt(i, 14).toString().substring(0, 100) +"', ";
+                }
             }              
             if( tablaAlumnos.getValueAt(i, 4)!=null){
                 if( retsetMostrados.getString("a.email")!=null){
                     if(! retsetMostrados.getString("a.email").equals(tablaAlumnos.getValueAt(i, 4))){
                         fila_editada=true;
-                        updateFila=updateFila+" email='"+tablaAlumnos.getValueAt(i, 4)+"', ";
+                        if(tablaAlumnos.getValueAt(i, 4).toString().length()<75){
+                            updateFila=updateFila+" email='"+tablaAlumnos.getValueAt(i, 4)+"', ";
+                        }else{
+                            updateFila=updateFila+" email='"+tablaAlumnos.getValueAt(i, 4).toString().substring(0, 75) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" email='"+tablaAlumnos.getValueAt(i, 4)+"', ";                    
+                    if(tablaAlumnos.getValueAt(i, 4).toString().length()<75){
+                        updateFila=updateFila+" email='"+tablaAlumnos.getValueAt(i, 4)+"', ";
+                    }else{
+                        updateFila=updateFila+" email='"+tablaAlumnos.getValueAt(i, 4).toString().substring(0, 75) +"', ";
+                    }                   
                 }
             }else{
                 if( retsetMostrados.getString("a.email")!=null){
@@ -1130,11 +1156,19 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                 if( retsetMostrados.getString("a.numeroCuenta")!=null){
                     if(! retsetMostrados.getString("a.numeroCuenta").equals(tablaAlumnos.getValueAt(i, 6))){
                         fila_editada=true;
-                        updateFila=updateFila+" numerocuenta='"+tablaAlumnos.getValueAt(i, 6)+"', ";
+                        if(tablaAlumnos.getValueAt(i, 6).toString().length()<40){
+                            updateFila=updateFila+" numerocuenta='"+tablaAlumnos.getValueAt(i, 6)+"', ";
+                        }else{
+                            updateFila=updateFila+" numerocuenta='"+tablaAlumnos.getValueAt(i, 6).toString().substring(0, 40) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" numerocuenta='"+tablaAlumnos.getValueAt(i, 6)+"', ";                    
+                    if(tablaAlumnos.getValueAt(i, 6).toString().length()<40){
+                        updateFila=updateFila+" numerocuenta='"+tablaAlumnos.getValueAt(i, 6)+"', ";
+                    }else{
+                        updateFila=updateFila+" numerocuenta='"+tablaAlumnos.getValueAt(i, 6).toString().substring(0, 40) +"', ";
+                    }                
                 }
             }else{
                 if( retsetMostrados.getString("a.numeroCuenta")!=null){
@@ -1147,11 +1181,19 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if( retsetMostrados.getString("a.telmovil")!=null){
                         if(! retsetMostrados.getString("a.telmovil").equals(tablaAlumnos.getValueAt(i, 7))){
                             fila_editada=true;
-                            updateFila=updateFila+" telmovil="+tablaAlumnos.getValueAt(i, 7)+", ";
+                            if(tablaAlumnos.getValueAt(i, 7).toString().length()<45){
+                                updateFila=updateFila+" telmovil='"+tablaAlumnos.getValueAt(i, 7)+"', ";
+                            }else{
+                                updateFila=updateFila+" telmovil='"+tablaAlumnos.getValueAt(i, 7).toString().substring(0, 45) +"', ";
+                            }
                         }
                     }else{
                         fila_editada=true;
-                        updateFila=updateFila+" telmovil="+tablaAlumnos.getValueAt(i, 7)+", ";                    
+                        if(tablaAlumnos.getValueAt(i, 7).toString().length()<45){
+                            updateFila=updateFila+" telmovil='"+tablaAlumnos.getValueAt(i, 7)+"', ";
+                        }else{
+                            updateFila=updateFila+" telmovil='"+tablaAlumnos.getValueAt(i, 7).toString().substring(0, 45) +"', ";
+                        }                 
                     }
                 }else{
                     errorModifMovil.setVisible(true);
@@ -1167,7 +1209,11 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if( retsetMostrados.getString("a.telfijo")!=null){
                         if(! retsetMostrados.getString("a.telfijo").equals(tablaAlumnos.getValueAt(i, 8))){
                             fila_editada=true;
-                            updateFila=updateFila+" telfijo="+tablaAlumnos.getValueAt(i, 8)+", ";
+                            if(tablaAlumnos.getValueAt(i, 8).toString().length()<45){
+                                updateFila=updateFila+" telfijo='"+tablaAlumnos.getValueAt(i, 8)+"', ";
+                            }else{
+                                updateFila=updateFila+" telfijo='"+tablaAlumnos.getValueAt(i, 8).toString().substring(0, 45) +"', ";
+                            }
                         }
                     }else{
                         fila_editada=true;
@@ -1186,11 +1232,19 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                 if( retsetMostrados.getString("a.provincia")!=null){
                     if(! retsetMostrados.getString("a.provincia").equals(tablaAlumnos.getValueAt(i, 9))){
                         fila_editada=true;
-                        updateFila=updateFila+" provincia='"+tablaAlumnos.getValueAt(i, 9)+"', ";
+                        if(tablaAlumnos.getValueAt(i, 9).toString().length()<70){
+                            updateFila=updateFila+" provincia='"+tablaAlumnos.getValueAt(i, 9)+"', ";
+                        }else{
+                            updateFila=updateFila+" provincia='"+tablaAlumnos.getValueAt(i, 9).toString().substring(0, 70) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" provincia='"+tablaAlumnos.getValueAt(i, 9)+"', ";                    
+                    if(tablaAlumnos.getValueAt(i, 9).toString().length()<70){
+                        updateFila=updateFila+" provincia='"+tablaAlumnos.getValueAt(i, 9)+"', ";
+                    }else{
+                        updateFila=updateFila+" provincia='"+tablaAlumnos.getValueAt(i, 9).toString().substring(0, 70) +"', ";
+                    }                  
                 }
             }else{
                 if( retsetMostrados.getString("a.provincia")!=null){
@@ -1202,11 +1256,19 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                 if( retsetMostrados.getString("a.localidad")!=null){
                     if(! retsetMostrados.getString("a.localidad").equals(tablaAlumnos.getValueAt(i, 10))){
                         fila_editada=true;
-                        updateFila=updateFila+" localidad='"+tablaAlumnos.getValueAt(i, 10)+"', ";
+                        if(tablaAlumnos.getValueAt(i, 10).toString().length()<45){
+                            updateFila=updateFila+" localidad='"+tablaAlumnos.getValueAt(i, 10)+"', ";
+                        }else{
+                            updateFila=updateFila+" localidad='"+tablaAlumnos.getValueAt(i, 10).toString().substring(0, 45) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" localidad='"+tablaAlumnos.getValueAt(i, 10)+"', ";                    
+                    if(tablaAlumnos.getValueAt(i, 10).toString().length()<45){
+                        updateFila=updateFila+" localidad='"+tablaAlumnos.getValueAt(i, 10)+"', ";
+                    }else{
+                        updateFila=updateFila+" localidad='"+tablaAlumnos.getValueAt(i, 10).toString().substring(0, 45) +"', ";
+                    }                   
                 }
             }else{
                 if( retsetMostrados.getString("a.localidad")!=null){
@@ -1218,11 +1280,19 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                 if( retsetMostrados.getString("a.domicilio")!=null){
                     if(! retsetMostrados.getString("a.domicilio").equals(tablaAlumnos.getValueAt(i, 11))){
                         fila_editada=true;
-                        updateFila=updateFila+" domicilio='"+tablaAlumnos.getValueAt(i, 11)+"', ";
+                        if(tablaAlumnos.getValueAt(i, 11).toString().length()<100){
+                            updateFila=updateFila+" domicilio='"+tablaAlumnos.getValueAt(i, 11)+"', ";
+                        }else{
+                            updateFila=updateFila+" domicilio='"+tablaAlumnos.getValueAt(i, 11).toString().substring(0, 100) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" domicilio='"+tablaAlumnos.getValueAt(i, 11)+"', ";                    
+                    if(tablaAlumnos.getValueAt(i, 11).toString().length()<100){
+                        updateFila=updateFila+" domicilio='"+tablaAlumnos.getValueAt(i, 11)+"', ";
+                    }else{
+                        updateFila=updateFila+" domicilio='"+tablaAlumnos.getValueAt(i, 11).toString().substring(0, 100) +"', ";
+                    }                
                 }
             }else{
                 if( retsetMostrados.getString("a.domicilio")!=null){
@@ -1254,11 +1324,19 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                 if( retsetMostrados.getString("a.colegio")!=null){
                     if(! retsetMostrados.getString("a.colegio").equals(tablaAlumnos.getValueAt(i, 15))){
                         fila_editada=true;
-                        updateFila=updateFila+" colegio='"+tablaAlumnos.getValueAt(i, 15)+"', ";
+                        if(tablaAlumnos.getValueAt(i, 15).toString().length()<45){
+                            updateFila=updateFila+" colegio='"+tablaAlumnos.getValueAt(i, 15)+"', ";
+                        }else{
+                            updateFila=updateFila+" colegio='"+tablaAlumnos.getValueAt(i, 15).toString().substring(0, 45) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" colegio='"+tablaAlumnos.getValueAt(i, 15)+"', ";                    
+                    if(tablaAlumnos.getValueAt(i, 15).toString().length()<45){
+                        updateFila=updateFila+" colegio='"+tablaAlumnos.getValueAt(i, 15)+"', ";
+                    }else{
+                        updateFila=updateFila+" colegio='"+tablaAlumnos.getValueAt(i, 15).toString().substring(0, 45) +"', ";
+                    }                   
                 }
             }else{
                 if( retsetMostrados.getString("a.colegio")!=null){
@@ -1408,7 +1486,7 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
     errorModifFijo.setVisible(false);
     try{
         consulta_alumnos=leeConsultaAlumnosInterfaz();
-        System.out.print("\nLA consulta "+ consulta_alumnos);
+        System.out.print("\nLA consulta a "+ consulta_alumnos+"  y qui termina");
         retset=alumno.consultaAlumno(accesoBD, consulta_alumnos);
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1583,11 +1661,6 @@ private boolean isLong(String cadena){
     } 
 }
 
-/*Observación importante: al crear a un alumno tenemos que asignarle un grupo y una categoria.
- * El grupo y la categoría los introducirá el entrenador y no la secretaria,
- * por lo que usaremos el grupo 1 como un grupo ficticio en el que se incluiran los alumnos que se añadan,
- * y una vez añadido el alumno ya se le podra asignar su grupo y su categoria.
- */
 private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
 // TODO add your handling code here:
     boolean encontrado_error=false;
@@ -1612,16 +1685,34 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     errorTelefonoFijo.setVisible(false);
     mensajeConfirmacion.setVisible(false);
     if(nombreAlumno.getText().equals("")){
+        errorInsertAl1.setText("No ha introducido el nombre");
         errorInsertAl1.setVisible(true);
         encontrado_error=true;
     }
+    if(nombreAlumno.getText().length()>45){
+        errorInsertAl1.setText("Nombre demasiado largo");
+        errorInsertAl1.setVisible(true);
+        encontrado_error=true;        
+    }
     if(primerApellidoAlumno.getText().equals("")){
+        errorInsertAl2.setText("No ha introducido el primer apellido");
         errorInsertAl2.setVisible(true);
         encontrado_error=true;
     }
+    if(primerApellidoAlumno.getText().length()>45){
+        errorInsertAl2.setText("Primer apellido demasiado largo");
+        errorInsertAl2.setVisible(true);
+        encontrado_error=true;        
+    }
     if(segundoApellidoAlumno.getText().equals("")){
+        errorInsertAl3.setText("No ha introducido el segundo apellido");
         errorInsertAl3.setVisible(true);
         encontrado_error=true;
+    }
+    if(segundoApellidoAlumno.getText().length()>45){
+        errorInsertAl3.setText("Segundo apellido demasiado largo");
+        errorInsertAl3.setVisible(true);
+        encontrado_error=true;        
     }
     java.util.Date dateFromDateChooser = fechaNacAl.getDate();
     dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
@@ -1630,46 +1721,97 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         encontrado_error=true;
     }    
     if(colegioAlumno.getText().equals("")){
+        errorInsertAl5.setText("No ha introducido el colegio");
         errorInsertAl5.setVisible(true);
         encontrado_error=true;
     }
+    if(colegioAlumno.getText().length()>45){
+        errorInsertAl5.setText("Colegio demasiado largo");
+        errorInsertAl5.setVisible(true);
+        encontrado_error=true;        
+    }
     if(emailAlumno.getText().equals("")){
+        errorInsertAl6.setText("No ha introducido el email");
         errorInsertAl6.setVisible(true);
         encontrado_error=true;
     }
+    if(emailAlumno.getText().length()>75){
+        errorInsertAl6.setText("Email demasiado largo");
+        errorInsertAl6.setVisible(true);
+        encontrado_error=true;        
+    }
     if(localidadAlumno.getText().equals("")){
+        errorInsertAl7.setText("No ha introducido la localidad");
         errorInsertAl7.setVisible(true);
         encontrado_error=true;
     }
+    if(localidadAlumno.getText().length()>45){
+        errorInsertAl7.setText("Localidad demasiado larga");
+        errorInsertAl7.setVisible(true);
+        encontrado_error=true;        
+    }
     if(provinciaAlumno.getText().equals("")){
+        errorInsertAl8.setText("No ha introducido la provincia");
         errorInsertAl8.setVisible(true);
         encontrado_error=true;
     }
+    if(provinciaAlumno.getText().length()>70){
+        errorInsertAl8.setText("Provincia demasiado larga");
+        errorInsertAl8.setVisible(true);
+        encontrado_error=true;        
+    }
     if(domicilioAlumno.getText().equals("")){
+        errorInsertAl9.setText("No ha introducido el domicilio");
         errorInsertAl9.setVisible(true);
         encontrado_error=true;
     }
+    if(domicilioAlumno.getText().length()>100){
+        errorInsertAl9.setText("Domicilio demasiado largo");
+        errorInsertAl9.setVisible(true);
+        encontrado_error=true;        
+    }
     if(nombrePadreAlumno.getText().equals("")){
+        errorInsertAl10.setText("No ha introducido el nombre del padre");
         errorInsertAl10.setVisible(true);
         encontrado_error=true;
     }
+    if(nombrePadreAlumno.getText().length()>100){
+        errorInsertAl10.setText("Nombre del padre demasiado largo");
+        errorInsertAl10.setVisible(true);
+        encontrado_error=true;        
+    }
     if(nombreMadreAlumno.getText().equals("")){
+        errorInsertAl11.setText("No ha introducido el nombre de la madre");
         errorInsertAl11.setVisible(true);
         encontrado_error=true;
     }
+    if(nombreMadreAlumno.getText().length()>100){
+        errorInsertAl11.setText("Nombre de la madre demasiado largo");
+        errorInsertAl11.setVisible(true);
+        encontrado_error=true;        
+    }
     if(numeroCuentaAlumno.getText().equals("")){
+        errorInsertAl12.setText("No ha introducido el numero de cuenta");
         errorInsertAl12.setVisible(true);
         encontrado_error=true;
     }
+    if(numeroCuentaAlumno.getText().length()>40){
+        errorInsertAl12.setText("Numero de cuenta demasiado largo");
+        errorInsertAl12.setVisible(true);
+        encontrado_error=true;        
+    }
     if(isInteger(codigoPostalAlumno.getText())==false){
+        errorCP.setText("El codigo postal tiene que ser un numero");
         errorCP.setVisible(true);
         encontrado_error=true;
     }
     if(isInteger(telefonoMovilAlumno.getText())==false){
+        errorTelefonoMovil.setText("El telefono movil tiene que ser un numero");
         errorTelefonoMovil.setVisible(true);
         encontrado_error=true;
     }
     if(isInteger(telefonoFijoAlumno.getText())==false){
+        errorTelefonoFijo.setText("El telefono fijo tiene que ser un numero");
         errorTelefonoFijo.setVisible(true);
         encontrado_error=true;
     }
@@ -1997,6 +2139,11 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
     
     errorModifFijoUsuario.setVisible(false);
     errorModifMovilUsuario.setVisible(false);
+    
+    //compruebo si se ha mostrado algún resultado antes de guardar los cambios, ya que si no se han mostrado no se ha podido modificar nada
+    if(tablaUsuarios.getValueAt(0, 0)==null){
+        return;
+    }
     try{
         consultaUsuario=leeConsultaUsuariosInterfaz();
         retsetMostrados=usuario.consultaUsuario(accesoBD, consultaUsuario);
@@ -2009,29 +2156,53 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
             boolean fila_editada=false;
             if(! retsetMostrados.getString("u.nombre").equals(tablaUsuarios.getValueAt(i, 0))){
                 fila_editada=true;
-                updateFila=updateFila+" nombre='"+tablaUsuarios.getValueAt(i, 0)+"', ";
+                if(tablaUsuarios.getValueAt(i, 0).toString().length()<45){
+                    updateFila=updateFila+" nombre='"+tablaUsuarios.getValueAt(i, 0)+"', ";
+                }else{
+                    updateFila=updateFila+" nombre='"+tablaUsuarios.getValueAt(i, 0).toString().substring(0, 45) +"', ";
+                }
             }
             if(! retsetMostrados.getString("u.primerApellido").equals(tablaUsuarios.getValueAt(i, 1))){
                 fila_editada=true;
-                updateFila=updateFila+" primerApellido='"+tablaUsuarios.getValueAt(i, 1)+"', ";
+                if(tablaUsuarios.getValueAt(i, 1).toString().length()<75){
+                    updateFila=updateFila+" primerApellido='"+tablaUsuarios.getValueAt(i, 1)+"', ";
+                }else{
+                    updateFila=updateFila+" primerApellido='"+tablaUsuarios.getValueAt(i, 1).toString().substring(0, 75) +"', ";
+                }
             }
             if(! retsetMostrados.getString("u.segundoApellido").equals(tablaUsuarios.getValueAt(i, 2))){
                 fila_editada=true;
-                updateFila=updateFila+" segundoApellido='"+tablaUsuarios.getValueAt(i, 2)+"', ";
+                if(tablaUsuarios.getValueAt(i, 2).toString().length()<45){
+                    updateFila=updateFila+" segundoApellido='"+tablaUsuarios.getValueAt(i, 2)+"', ";
+                }else{
+                    updateFila=updateFila+" segundoApellido='"+tablaUsuarios.getValueAt(i, 2).toString().substring(0, 45) +"', ";
+                }
             }
             if(! retsetMostrados.getString("u.dni").equals(tablaUsuarios.getValueAt(i, 3))){
                 fila_editada=true;
-                updateFila=updateFila+" dni='"+tablaUsuarios.getValueAt(i, 3)+"', ";
+                if(tablaUsuarios.getValueAt(i, 3).toString().length()<12){
+                    updateFila=updateFila+" dni='"+tablaUsuarios.getValueAt(i, 3)+"', ";
+                }else{
+                    updateFila=updateFila+" dni='"+tablaUsuarios.getValueAt(i, 3).toString().substring(0, 12) +"', ";
+                }
             }                  
             if( tablaUsuarios.getValueAt(i, 9)!=null){
                 if( retsetMostrados.getString("u.email")!=null){
                     if(! retsetMostrados.getString("u.email").equals(tablaUsuarios.getValueAt(i, 9))){
                         fila_editada=true;
-                        updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9)+"', ";
+                        if(tablaUsuarios.getValueAt(i, 9).toString().length()<45){
+                            updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9)+"', ";
+                        }else{
+                            updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9).toString().substring(0, 45) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9)+"', ";                    
+                    if(tablaUsuarios.getValueAt(i, 0).toString().length()<45){
+                        updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9)+"', ";
+                    }else{
+                        updateFila=updateFila+" email='"+tablaUsuarios.getValueAt(i, 9).toString().substring(0, 45) +"', ";
+                    }
                 }
             }else{
                 if( retsetMostrados.getString("u.email")!=null){
@@ -2044,11 +2215,19 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
                 if( retsetMostrados.getString("u.clave")!=null){
                     if(! retsetMostrados.getString("u.clave").equals(tablaUsuarios.getValueAt(i, 4))){
                         fila_editada=true;
-                        updateFila=updateFila+" clave='"+tablaUsuarios.getValueAt(i, 4)+"', ";
+                        if(tablaUsuarios.getValueAt(i, 4).toString().length()<30){
+                            updateFila=updateFila+" clave='"+tablaUsuarios.getValueAt(i, 4)+"', ";
+                        }else{
+                            updateFila=updateFila+" clave='"+tablaUsuarios.getValueAt(i, 4).toString().substring(0, 30) +"', ";
+                        }
                     }
                 }else{
-                    fila_editada=true;
-                    updateFila=updateFila+" clave='"+tablaUsuarios.getValueAt(i, 4)+"', ";                    
+                    fila_editada=true; 
+                    if(tablaUsuarios.getValueAt(i, 4).toString().length()<30){
+                        updateFila=updateFila+" clave='"+tablaUsuarios.getValueAt(i, 4)+"', ";
+                    }else{
+                        updateFila=updateFila+" clave='"+tablaUsuarios.getValueAt(i, 4).toString().substring(0, 30) +"', ";
+                    }
                 }
             }else{
                 if( retsetMostrados.getString("u.clave")!=null){
@@ -2060,11 +2239,19 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
                 if( retsetMostrados.getString("u.numeroCuenta")!=null){
                     if(! retsetMostrados.getString("u.numeroCuenta").equals(tablaUsuarios.getValueAt(i, 6))){
                         fila_editada=true;
-                        updateFila=updateFila+" numeroCuenta='"+tablaUsuarios.getValueAt(i, 6)+"', ";
+                        if(tablaUsuarios.getValueAt(i, 6).toString().length()<45){
+                            updateFila=updateFila+" numeroCuenta='"+tablaUsuarios.getValueAt(i, 6)+"', ";
+                        }else{
+                            updateFila=updateFila+" numeroCuenta='"+tablaUsuarios.getValueAt(i, 6).toString().substring(0, 45) +"', ";
+                        }
                     }
                 }else{
                     fila_editada=true;
-                    updateFila=updateFila+" numeroCuenta='"+tablaUsuarios.getValueAt(i, 6)+"', ";                    
+                    if(tablaUsuarios.getValueAt(i, 6).toString().length()<45){
+                        updateFila=updateFila+" numeroCuenta='"+tablaUsuarios.getValueAt(i, 6)+"', ";
+                    }else{
+                        updateFila=updateFila+" numeroCuenta='"+tablaUsuarios.getValueAt(i, 6).toString().substring(0, 45) +"', ";
+                    }
                 }
             }else{
                 if( retsetMostrados.getString("u.numeroCuenta")!=null){
@@ -2081,7 +2268,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
                         }
                     }else{
                         fila_editada=true;
-                        updateFila=updateFila+" telmovil="+tablaUsuarios.getValueAt(i, 7)+", ";                    
+                        updateFila=updateFila+" telmovil="+tablaUsuarios.getValueAt(i, 7)+", ";
                     }
                 }else{
                     errorModifMovilUsuario.setVisible(true);
@@ -2443,42 +2630,87 @@ private void botonAnadirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
 
     mensajeConfirmacionUsuario.setVisible(false);
     if(nombreUsuario.getText().equals("")){
+        errorInsertUsuario1.setText("No ha introducido el nombre");
         errorInsertUsuario1.setVisible(true);
         encontrado_error=true;
     }
+    if(nombreUsuario.getText().length()>45){
+        errorInsertUsuario1.setText("Nombre demasiado largo");
+        errorInsertUsuario1.setVisible(true);
+        encontrado_error=true;        
+    }
     if(primerApellidoUsuario.getText().equals("")){
+        errorInsertUsuario2.setText("No ha introducido el primer apellido");
         errorInsertUsuario2.setVisible(true);
         encontrado_error=true;
     }
+    if(primerApellidoUsuario.getText().length()>75){
+        errorInsertUsuario2.setText("Primer apellido demasiado largo");
+        errorInsertUsuario2.setVisible(true);
+        encontrado_error=true;        
+    }
     if(segundoApellidoUsuario.getText().equals("")){
+        errorInsertUsuario3.setText("No ha introducido el segundo apellido");
         errorInsertUsuario3.setVisible(true);
         encontrado_error=true;
     }
+    if(segundoApellidoUsuario.getText().length()>45){
+        errorInsertUsuario3.setText("Segundo apellido demasiado largo");
+        errorInsertUsuario3.setVisible(true);
+        encontrado_error=true;        
+    }
     if(dniUsuario.getText().equals("")){
+        errorInsertUsuario5.setText("No ha introducido el dni");
         errorInsertUsuario5.setVisible(true);
         encontrado_error=true;
     }
+    if(dniUsuario.getText().length()>12){
+        errorInsertUsuario5.setText("DNI demasiado largo");
+        errorInsertUsuario5.setVisible(true);
+        encontrado_error=true;        
+    }
     if(claveUsuario.getText().equals("")){
+        errorInsertUsuario7.setText("No ha introducido la clave");
         errorInsertUsuario7.setVisible(true);
         encontrado_error=true;
     }
+    if(claveUsuario.getText().length()>30){
+        errorInsertUsuario7.setText("Clave demasiado larga");
+        errorInsertUsuario7.setVisible(true);
+        encontrado_error=true;        
+    }
     if( tipoUsuario.getSelectedItem().equals("") ){
+        errorInsertUsuario6.setText("No ha introducido el tipo de usuario");
         errorInsertUsuario6.setVisible(true);
         encontrado_error=true;
     }
     if(emailUsuario.getText().equals("")){
+        errorInsertUsuario8.setText("No ha introducido el email");
         errorInsertUsuario8.setVisible(true);
         encontrado_error=true;
     }
+    if(emailUsuario.getText().length()>45){
+        errorInsertUsuario8.setText("Email demasiado largo");
+        errorInsertUsuario8.setVisible(true);
+        encontrado_error=true;        
+    }
     if(numeroCuentaUsuario.getText().equals("")){
+        errorInsertUsuario4.setText("No ha introducido el numero de cuenta");
         errorInsertUsuario4.setVisible(true);
         encontrado_error=true;
     }
+    if(numeroCuentaUsuario.getText().length()>45){
+        errorInsertUsuario4.setText("Numero de cuenta demasiado largo");
+        errorInsertUsuario4.setVisible(true);
+        encontrado_error=true;        
+    }
     if(isInteger(telefonoMovilUsuario.getText())==false){
+        errorInsertUsuario10.setText("No ha introducido el movil");
         errorInsertUsuario10.setVisible(true);
         encontrado_error=true;
     }
     if(isInteger(telefonoFijoUsuario.getText())==false){
+        errorInsertUsuario9.setText("No ha introducido el fijo");
         errorInsertUsuario9.setVisible(true);
         encontrado_error=true;
     }
