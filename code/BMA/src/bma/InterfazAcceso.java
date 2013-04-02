@@ -12,8 +12,7 @@ package bma;
 import java.sql.*;
 /**
  *
- * @author Francisco
- */
+ * @author Francisco */
 public class InterfazAcceso extends javax.swing.JFrame {
     Connection conexion;   
     Statement stmt;      
