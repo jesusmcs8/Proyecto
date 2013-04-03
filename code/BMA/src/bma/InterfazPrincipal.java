@@ -9,7 +9,7 @@
  * Created on 16-mar-2013, 16:58:04
  */
 package bma;
-import GestionDeAlumnos.GestorDeAlumnos;
+import GestionDeAlumnos.*;
 import java.sql.*;
 import java.util.Calendar;
 
@@ -1819,14 +1819,15 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
     if(encontrado_error==false){
         mensajeConfirmacion.setVisible(true);
-        GestorDeAlumnos nuevoAlumno=new GestorDeAlumnos();
-        nuevoAlumno.crearAlumno(nombreAlumno.getText(), primerApellidoAlumno.getText(), segundoApellidoAlumno.getText(), dateFromDateChooser,
+        Alumno nuevoAlumno;
+        
+        nuevoAlumno=GestorDeAlumnos.crearAlumno(nombreAlumno.getText(), primerApellidoAlumno.getText(), segundoApellidoAlumno.getText(), dateFromDateChooser,
                 numeroCuentaAlumno.getText(),domicilioAlumno.getText(), localidadAlumno.getText(), 
                 Integer.parseInt(codigoPostalAlumno.getText()), provinciaAlumno.getText(), colegioAlumno.getText(), nombrePadreAlumno.getText(),
                 nombreMadreAlumno.getText(), Integer.parseInt(telefonoFijoAlumno.getText()), Integer.parseInt(telefonoMovilAlumno.getText()), emailAlumno.getText(), "",
                 (String) tallaAlumno.getSelectedItem());
         
-        nuevoAlumno.insertarAlumnoBD(accesoBD);        
+        GestorDeAlumnos.insertarAlumno(accesoBD, nuevoAlumno);    
         nombreAlumno.setText(null);
         primerApellidoAlumno.setText(null);
         segundoApellidoAlumno.setText(null);

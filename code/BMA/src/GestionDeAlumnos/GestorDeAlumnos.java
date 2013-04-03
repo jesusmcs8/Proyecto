@@ -21,11 +21,15 @@ public class GestorDeAlumnos {
         return alumnoNuevo;
     }
 
-    public static void insertartarAlumno(BaseDatos accesoBD, Alumno alumnoNuevo){
+    public static void insertarAlumno(BaseDatos accesoBD, Alumno alumnoNuevo){
         AlumnoBD alumno=new AlumnoBD();
         
-        alumno.insertarAlumnoBD(accesoBD, alumnoNuevo.getNombre(), alumnoNuevo.getPrimerApellido(), alumnoNuevo.getSegundoApellido, alumnoNuevo.getFechaNacimiento(), alumnoNuevo.getColegio(), 
-            alumnoNuevo.getEmail(), alumnoNuevo.getLocalidad, provincia, codPostal, domicilio, nombrePadre, nombreMadre, 
-            cuentaCorriente, tallaAlumno, telFijo, telMovil);
+        alumno.insertarAlumnoBD(accesoBD, alumnoNuevo.getNombre(), alumnoNuevo.getPrimerApellido(), alumnoNuevo.getSegundoApellido(), alumnoNuevo.getFechaNacimiento(), alumnoNuevo.getColegio(), 
+            alumnoNuevo.getEmail(), alumnoNuevo.getLocalidad(), alumnoNuevo.getProvincia(), alumnoNuevo.getCodPostal(), alumnoNuevo.getDomicilio(), 
+            alumnoNuevo.getNombrePadre(), alumnoNuevo.getNombreMadre(), alumnoNuevo.getCuentaCorriente(), alumnoNuevo.getTallaAlumno(), 
+            alumnoNuevo.getTelFijo(), alumnoNuevo.getTelMovil());
+    }
+    public static retset consultarAlumno(){
+        
     }
 }

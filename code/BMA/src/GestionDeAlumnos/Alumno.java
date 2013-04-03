@@ -29,7 +29,7 @@ public class Alumno {
     private String observaciones;
     private String tallaAlumno;
 
-    Alumno(String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
+    public Alumno(String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
             String cuentaCorriente, String domicilio, String localidad, int codPostal, String provincia, String colegio,
             String nombrePadre, String nombreMadre, int telFijo, int telMovil, String email, String observaciones, String tallaAlumno) {
         this.nombre = nombre;
@@ -118,7 +118,7 @@ public class Alumno {
         return observaciones;
     }
 
-    public String gettallaAlumno() {
+    public String getTallaAlumno() {
         return tallaAlumno;
     }
 }

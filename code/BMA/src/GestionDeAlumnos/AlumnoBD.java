@@ -31,14 +31,14 @@ public class AlumnoBD {
     public void insertarAlumnoBD(BaseDatos accesoBD, Alumno alumnoNuevo){
         String inserccion=new String();
         String dateString=new String();
-        dateString = String.format("%1$tY-%1$tm-%1$td", alumnoNuevo.fechaNacimiento);
+        dateString = String.format("%1$tY-%1$tm-%1$td", alumnoNuevo.getFechaNacimiento());
         
         inserccion="INSERT INTO alumno (nombre, primerapellido, segundoapellido, fechanacimiento, colegio, email, localidad, provincia, codigoPostal, domicilio, "
                 + "nombrePadre, nombreMadre, numeroCuenta, talla, telFijo, telMovil) VALUES ('";
-        inserccion=inserccion+alumnoNuevo.nombre+"', '"+alumnoNuevo.primerApellido+"', '"+alumnoNuevo.segundoApellido+"','"+
-                dateString+"', '"+alumnoNuevo.colegio+"', '"+alumnoNuevo.email+"', '"+alumnoNuevo.localidad+"', '"+alumnoNuevo.provincia+"', "+
-                alumnoNuevo.codPostal+", '"+alumnoNuevo.domicilio+"', '"+alumnoNuevo.nombrePadre+"', '"+alumnoNuevo.nombreMadre+
-                "', '"+alumnoNuevo.cuentaCorriente+"', '"+alumnoNuevo.tallaAlumno+"', "+alumnoNuevo.telFijo+", "+alumnoNuevo.telMovil+")";
+        inserccion=inserccion+alumnoNuevo.getNombre()+"', '"+alumnoNuevo.getPrimerApellido()+"', '"+alumnoNuevo.getSegundoApellido()+"','"+
+                dateString+"', '"+alumnoNuevo.getColegio()+"', '"+alumnoNuevo.getEmail()+"', '"+alumnoNuevo.getLocalidad()+"', '"+alumnoNuevo.getProvincia()+"', "+
+                alumnoNuevo.getCodPostal()+", '"+alumnoNuevo.getDomicilio()+"', '"+alumnoNuevo.getNombrePadre()+"', '"+alumnoNuevo.getNombreMadre()+
+                "', '"+alumnoNuevo.getCuentaCorriente()+"', '"+alumnoNuevo.getTallaAlumno()+"', "+alumnoNuevo.getTelFijo()+", "+alumnoNuevo.getTelMovil()+")";
 
         System.out.print("\n inser "+inserccion);
         accesoBD.ejecutaActualizacion(inserccion);
