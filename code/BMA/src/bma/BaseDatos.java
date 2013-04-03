@@ -117,13 +117,19 @@ public class BaseDatos {
         return retset;
     }
 
-    public void ejecutaActualizacion(String actualizacion) {
+    public boolean ejecutaActualizacion(String actualizacion) {
         try {
             int i = comprobar();
             stmt = conexion.get(i).createStatement();
-            stmt.executeUpdate(actualizacion);
+            int act=stmt.executeUpdate(actualizacion);
+            if (act == 1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
+            return false;
         }
     }
 
