@@ -9,6 +9,7 @@
  * Created on 16-mar-2013, 16:58:04
  */
 package bma;
+import GestionDeAlumnos.GestorDeAlumnos;
 import java.sql.*;
 import java.util.Calendar;
 
@@ -1056,7 +1057,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
     String consulta_alumnos=new String();
     ResultSet retsetMostrados;
-    Alumno alumno=new Alumno();
+    GestorDeAlumnos alumno=new GestorDeAlumnos();
     
     errorModifCP.setVisible(false);
     errorModifMovil.setVisible(false);
@@ -1480,7 +1481,7 @@ private String leeConsultaAlumnosInterfaz(){
 }
 private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
     String consulta_alumnos=new String();
-    Alumno alumno=new Alumno();
+    GestorDeAlumnos alumno=new GestorDeAlumnos();
     errorModifCP.setVisible(false);
     errorModifMovil.setVisible(false);
     errorModifFijo.setVisible(false);
@@ -1818,7 +1819,7 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
     if(encontrado_error==false){
         mensajeConfirmacion.setVisible(true);
-        Alumno nuevoAlumno=new Alumno();
+        GestorDeAlumnos nuevoAlumno=new GestorDeAlumnos();
         nuevoAlumno.crearAlumno(nombreAlumno.getText(), primerApellidoAlumno.getText(), segundoApellidoAlumno.getText(), dateFromDateChooser,
                 numeroCuentaAlumno.getText(),domicilioAlumno.getText(), localidadAlumno.getText(), 
                 Integer.parseInt(codigoPostalAlumno.getText()), provinciaAlumno.getText(), colegioAlumno.getText(), nombrePadreAlumno.getText(),
@@ -1871,7 +1872,7 @@ private void botonVolverAtrasAlumnoActionPerformed(java.awt.event.ActionEvent ev
 
 private void deshacerCambiosAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosAlumnoActionPerformed
     ResultSet estadoActual;
-    Alumno alumno=new Alumno();
+    GestorDeAlumnos alumno=new GestorDeAlumnos();
     estadoActual=alumno.consultaAlumno(accesoBD, ultimaConsultaAlumno); 
     try{
         while(estadoActual.next()){
