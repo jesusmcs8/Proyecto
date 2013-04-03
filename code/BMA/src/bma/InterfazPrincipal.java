@@ -88,9 +88,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         consultaGrupo = new javax.swing.JComboBox();
         consultaCategoria = new javax.swing.JComboBox();
         consultaTemporada = new javax.swing.JComboBox();
-        errorModifMovil = new javax.swing.JLabel();
-        errorModifFijo = new javax.swing.JLabel();
-        errorModifCP = new javax.swing.JLabel();
         panelAnadirAlumno = new javax.swing.JPanel();
         participante = new javax.swing.JLabel();
         nombreLabel = new javax.swing.JLabel();
@@ -154,8 +151,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         consultaGrupoUsuario = new javax.swing.JComboBox();
         consultaCategoriaUsuario = new javax.swing.JComboBox();
         consultaTemporadaUsuario = new javax.swing.JComboBox();
-        errorModifMovilUsuario = new javax.swing.JLabel();
-        errorModifFijoUsuario = new javax.swing.JLabel();
         consultaEntrenadorUsuario = new javax.swing.JComboBox();
         panelAnadirUsuario = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
@@ -180,17 +175,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel56 = new javax.swing.JLabel();
         botonAnadirUsuario = new javax.swing.JButton();
         botonVolverAtrasUsuario = new javax.swing.JButton();
-        errorInsertUsuario9 = new javax.swing.JLabel();
-        errorInsertUsuario10 = new javax.swing.JLabel();
         mensajeConfirmacionUsuario = new javax.swing.JLabel();
-        errorInsertUsuario1 = new javax.swing.JLabel();
-        errorInsertUsuario2 = new javax.swing.JLabel();
-        errorInsertUsuario3 = new javax.swing.JLabel();
-        errorInsertUsuario8 = new javax.swing.JLabel();
-        errorInsertUsuario5 = new javax.swing.JLabel();
-        errorInsertUsuario7 = new javax.swing.JLabel();
-        errorInsertUsuario4 = new javax.swing.JLabel();
-        errorInsertUsuario6 = new javax.swing.JLabel();
         tipoUsuario = new javax.swing.JComboBox();
         barraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
@@ -382,21 +367,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         panelJugadores.add(consultaTemporada, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 100, -1));
 
-        errorModifMovil.setForeground(new java.awt.Color(255, 0, 51));
-        errorModifMovil.setText("Error Tel.Movil");
-        errorModifMovil.setVisible(false);
-        panelJugadores.add(errorModifMovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, -1, -1));
-
-        errorModifFijo.setForeground(new java.awt.Color(255, 0, 51));
-        errorModifFijo.setText("Error Tel.Fijo");
-        errorModifFijo.setVisible(false);
-        panelJugadores.add(errorModifFijo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 210, -1, -1));
-
-        errorModifCP.setForeground(new java.awt.Color(255, 0, 51));
-        errorModifCP.setText("Error CP");
-        errorModifCP.setVisible(false);
-        panelJugadores.add(errorModifCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 210, -1, -1));
-
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -474,7 +444,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         fechaNacLabel.setText("Fecha Nacimiento: ");
         panelAnadirAlumno.add(fechaNacLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 100, 20));
-        panelAnadirAlumno.add(fechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 150, -1));
+        panelAnadirAlumno.add(fechaNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 150, -1));
 
         tallaLabel.setText("Talla:");
         panelAnadirAlumno.add(tallaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, 30, 20));
@@ -525,7 +495,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
         panelAnadirAlumno.add(colegio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 410, -1));
-        panelAnadirAlumno.add(separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 770, 10));
+        panelAnadirAlumno.add(separador, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 910, 10));
 
         datosFamiliares.setBackground(new java.awt.Color(134, 190, 134));
         datosFamiliares.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -595,7 +565,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 botonAnadirActionPerformed(evt);
             }
         });
-        panelAnadirAlumno.add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 300, 110, 30));
+        panelAnadirAlumno.add(botonAnadir, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 310, 110, 30));
 
         botonVolverAtras.setText("Volver Atras");
         botonVolverAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -603,7 +573,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
                 botonVolverAtrasActionPerformed(evt);
             }
         });
-        panelAnadirAlumno.add(botonVolverAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, 110, 30));
+        panelAnadirAlumno.add(botonVolverAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 310, 110, 30));
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -748,16 +718,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 
         panelUsuarios.add(consultaTemporadaUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 120, 100, -1));
 
-        errorModifMovilUsuario.setForeground(new java.awt.Color(255, 0, 51));
-        errorModifMovilUsuario.setText("Error Tel.Movil");
-        errorModifMovilUsuario.setVisible(false);
-        panelUsuarios.add(errorModifMovilUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 210, -1, -1));
-
-        errorModifFijoUsuario.setForeground(new java.awt.Color(255, 0, 51));
-        errorModifFijoUsuario.setText("Error Tel.Fijo");
-        errorModifFijoUsuario.setVisible(false);
-        panelUsuarios.add(errorModifFijoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 210, -1, -1));
-
         consultaEntrenadorUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Entrenador", "Administrador" }));
         panelUsuarios.add(consultaEntrenadorUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
 
@@ -876,61 +836,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         panelAnadirUsuario.add(botonVolverAtrasUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
 
-        errorInsertUsuario9.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario9.setText("El telefono fijo tiene que ser un número");
-        errorTelefonoFijo.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, 220, -1));
-
-        errorInsertUsuario10.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario10.setText("El telefono móvil tiene que ser un número");
-        errorTelefonoMovil.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 243, -1));
-
         mensajeConfirmacionUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         mensajeConfirmacionUsuario.setForeground(new java.awt.Color(51, 204, 0));
         mensajeConfirmacionUsuario.setText("El usuario se inserto correctamente");
-        mensajeConfirmacion.setVisible(false);
         panelAnadirUsuario.add(mensajeConfirmacionUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, 231, -1));
-
-        errorInsertUsuario1.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario1.setText("No ha introducido el nombre");
-        errorInsertAl1.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 170, -1));
-
-        errorInsertUsuario2.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario2.setText("No ha introducido el primer apellido");
-        errorInsertAl2.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, 243, -1));
-
-        errorInsertUsuario3.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario3.setText("No ha introducido el segundo apellido");
-        errorInsertAl3.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, 243, -1));
-
-        errorInsertUsuario8.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario8.setText("No ha introducido el email");
-        errorInsertAl6.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 243, -1));
-
-        errorInsertUsuario5.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario5.setText("No ha introducido el dni");
-        errorInsertAl10.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario5, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, 150, -1));
-
-        errorInsertUsuario7.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario7.setText("No ha introducido la clave");
-        errorInsertAl11.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario7, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 190, 160, -1));
-
-        errorInsertUsuario4.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario4.setText("No ha introducido el número de cuenta");
-        errorInsertAl12.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, -1));
-
-        errorInsertUsuario6.setForeground(new java.awt.Color(255, 0, 0));
-        errorInsertUsuario6.setText("No ha introducido el tipo de usuario");
-        errorInsertAl13.setVisible(false);
-        panelAnadirUsuario.add(errorInsertUsuario6, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 190, 180, -1));
 
         tipoUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Entrenador", "Administrador" }));
         panelAnadirUsuario.add(tipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 160, -1, -1));
@@ -1004,10 +913,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
     String consulta_alumnos=new String();
     ResultSet retsetMostrados;
-    
-    errorModifCP.setVisible(false);
-    errorModifMovil.setVisible(false);
-    errorModifFijo.setVisible(false);
 
     //compruebo si se ha mostrado algún resultado antes de guardar los cambios, ya que si no se han mostrado no se ha podido modificar nada
     if(tablaAlumnos.getValueAt(0, 0)==null){
@@ -1123,7 +1028,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     updateFila=updateFila+" numerocuenta=null, ";
                 } 
             }
-            if( tablaAlumnos.getValueAt(i, 7)!=null){
+            if(tablaAlumnos.getValueAt(i, 7)!=null){
                 if(isInteger((String) tablaAlumnos.getValueAt(i, 7))){
                     if( retsetMostrados.getString("a.telmovil")!=null){
                         if(! retsetMostrados.getString("a.telmovil").equals(tablaAlumnos.getValueAt(i, 7))){
@@ -1143,7 +1048,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                         }                 
                     }
                 }else{
-                    errorModifMovil.setVisible(true);
+                    //errorModifMovil.setVisible(true);
                 }
             }else{
                 if( retsetMostrados.getString("a.telmovil")!=null){
@@ -1167,7 +1072,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                         updateFila=updateFila+" telfijo="+tablaAlumnos.getValueAt(i, 8)+", ";                    
                     }
                 }else{
-                    errorModifFijo.setVisible(true);
+                    //errorModifFijo.setVisible(true);
                 }
             }else{
                 if( retsetMostrados.getString("a.telfijo")!=null){
@@ -1259,7 +1164,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                         updateFila=updateFila+" codigopostal="+tablaAlumnos.getValueAt(i, 12)+", ";                    
                     }
                 }else{
-                    errorModifCP.setVisible(true);
+                    //errorModifCP.setVisible(true);
                 }
             }else{
                 if( retsetMostrados.getString("a.codigopostal")!=null){
@@ -1427,9 +1332,6 @@ private String leeConsultaAlumnosInterfaz(){
 }
 private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
     String consulta_alumnos=new String();
-    errorModifCP.setVisible(false);
-    errorModifMovil.setVisible(false);
-    errorModifFijo.setVisible(false);
     try{
         consulta_alumnos=leeConsultaAlumnosInterfaz();
         System.out.print("\nLA consulta a "+ consulta_alumnos+"  y qui termina");
@@ -1523,23 +1425,6 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
 }//GEN-LAST:event_boton_mostrar_alumnosActionPerformed
 
 private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
-    errorInsertAl1.setVisible(false);
-    errorInsertAl2.setVisible(false);
-    errorInsertAl3.setVisible(false);
-    errorInsertAl4.setVisible(false);
-    errorInsertAl5.setVisible(false);
-    errorInsertAl6.setVisible(false);
-    errorInsertAl7.setVisible(false);
-    errorInsertAl8.setVisible(false);
-    errorInsertAl9.setVisible(false);
-    errorInsertAl10.setVisible(false);
-    errorInsertAl11.setVisible(false);
-    errorInsertAl12.setVisible(false);
-    errorInsertAl13.setVisible(false);
-    errorCP.setVisible(false);
-    errorTelefonoMovil.setVisible(false);
-    errorTelefonoFijo.setVisible(false);
-    mensajeConfirmacion.setVisible(false);
     panelJugadores.setVisible(false);
     panelAnadirAlumno.setVisible(true);
 }//GEN-LAST:event_botonNuevoAlumnoActionPerformed
@@ -1613,157 +1498,88 @@ private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     String dateString=new String();
     String inserccion=new String();
     
-    errorInsertAl1.setVisible(false);
-    errorInsertAl2.setVisible(false);
-    errorInsertAl3.setVisible(false);
-    errorInsertAl4.setVisible(false);
-    errorInsertAl5.setVisible(false);
-    errorInsertAl6.setVisible(false);
-    errorInsertAl7.setVisible(false);
-    errorInsertAl8.setVisible(false);
-    errorInsertAl9.setVisible(false);
-    errorInsertAl10.setVisible(false);
-    errorInsertAl11.setVisible(false);
-    errorInsertAl12.setVisible(false);
-    errorInsertAl13.setVisible(false);
-    errorCP.setVisible(false);
-    errorTelefonoMovil.setVisible(false);
-    errorTelefonoFijo.setVisible(false);
-    mensajeConfirmacion.setVisible(false);
     if(nombre.getText().equals("")){
-        errorInsertAl1.setText("No ha introducido el nombre");
-        errorInsertAl1.setVisible(true);
         encontrado_error=true;
     }
     if(nombre.getText().length()>45){
-        errorInsertAl1.setText("Nombre demasiado largo");
-        errorInsertAl1.setVisible(true);
         encontrado_error=true;        
     }
     if(primerApellido.getText().equals("")){
-        errorInsertAl2.setText("No ha introducido el primer apellido");
-        errorInsertAl2.setVisible(true);
         encontrado_error=true;
     }
     if(primerApellido.getText().length()>45){
-        errorInsertAl2.setText("Primer apellido demasiado largo");
-        errorInsertAl2.setVisible(true);
         encontrado_error=true;        
     }
     if(segundoApellido.getText().equals("")){
-        errorInsertAl3.setText("No ha introducido el segundo apellido");
-        errorInsertAl3.setVisible(true);
         encontrado_error=true;
     }
     if(segundoApellido.getText().length()>45){
-        errorInsertAl3.setText("Segundo apellido demasiado largo");
-        errorInsertAl3.setVisible(true);
         encontrado_error=true;        
     }
     java.util.Date dateFromDateChooser = fechaNac.getDate();
     dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
     if(dateString.equals("null-null-null")){
-        errorInsertAl4.setVisible(true);
         encontrado_error=true;
     }    
     if(colegio.getText().equals("")){
-        errorInsertAl5.setText("No ha introducido el colegio");
-        errorInsertAl5.setVisible(true);
         encontrado_error=true;
     }
     if(colegio.getText().length()>45){
-        errorInsertAl5.setText("Colegio demasiado largo");
-        errorInsertAl5.setVisible(true);
         encontrado_error=true;        
     }
     if(email.getText().equals("")){
-        errorInsertAl6.setText("No ha introducido el email");
-        errorInsertAl6.setVisible(true);
         encontrado_error=true;
     }
     if(email.getText().length()>75){
-        errorInsertAl6.setText("Email demasiado largo");
-        errorInsertAl6.setVisible(true);
         encontrado_error=true;        
     }
     if(localidad.getText().equals("")){
-        errorInsertAl7.setText("No ha introducido la localidad");
-        errorInsertAl7.setVisible(true);
         encontrado_error=true;
     }
     if(localidad.getText().length()>45){
-        errorInsertAl7.setText("Localidad demasiado larga");
-        errorInsertAl7.setVisible(true);
         encontrado_error=true;        
     }
     if(provincia.getText().equals("")){
-        errorInsertAl8.setText("No ha introducido la provincia");
-        errorInsertAl8.setVisible(true);
         encontrado_error=true;
     }
     if(provincia.getText().length()>70){
-        errorInsertAl8.setText("Provincia demasiado larga");
-        errorInsertAl8.setVisible(true);
         encontrado_error=true;        
     }
     if(domicilio.getText().equals("")){
-        errorInsertAl9.setText("No ha introducido el domicilio");
-        errorInsertAl9.setVisible(true);
         encontrado_error=true;
     }
     if(domicilio.getText().length()>100){
-        errorInsertAl9.setText("Domicilio demasiado largo");
-        errorInsertAl9.setVisible(true);
         encontrado_error=true;        
     }
     if(nombrePadre.getText().equals("")){
-        errorInsertAl10.setText("No ha introducido el nombre del padre");
-        errorInsertAl10.setVisible(true);
         encontrado_error=true;
     }
     if(nombrePadre.getText().length()>100){
-        errorInsertAl10.setText("Nombre del padre demasiado largo");
-        errorInsertAl10.setVisible(true);
         encontrado_error=true;        
     }
     if(nombreMadre.getText().equals("")){
-        errorInsertAl11.setText("No ha introducido el nombre de la madre");
-        errorInsertAl11.setVisible(true);
         encontrado_error=true;
     }
     if(nombreMadre.getText().length()>100){
-        errorInsertAl11.setText("Nombre de la madre demasiado largo");
-        errorInsertAl11.setVisible(true);
         encontrado_error=true;        
     }
     if(numCuenta.getText().equals("")){
-        errorInsertAl12.setText("No ha introducido el numero de cuenta");
-        errorInsertAl12.setVisible(true);
         encontrado_error=true;
     }
     if(numCuenta.getText().length()>40){
-        errorInsertAl12.setText("Numero de cuenta demasiado largo");
-        errorInsertAl12.setVisible(true);
         encontrado_error=true;        
     }
     if(isInteger(codPostal.getText())==false){
-        errorCP.setText("El codigo postal tiene que ser un numero");
-        errorCP.setVisible(true);
         encontrado_error=true;
     }
     if(isInteger(telMovil.getText())==false){
-        errorTelefonoMovil.setText("El telefono movil tiene que ser un numero");
-        errorTelefonoMovil.setVisible(true);
         encontrado_error=true;
     }
     if(isInteger(telFijo.getText())==false){
-        errorTelefonoFijo.setText("El telefono fijo tiene que ser un numero");
-        errorTelefonoFijo.setVisible(true);
         encontrado_error=true;
     }
     //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
     if(encontrado_error==false){
-        mensajeConfirmacion.setVisible(true);
         Alumno nuevoAlumno;
         
         nuevoAlumno=GestorDeAlumnos.crearAlumno(nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dateFromDateChooser,
@@ -2062,17 +1878,6 @@ private void menuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_menuUsuariosMouseClicked
 
 private void botonNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoUsuarioActionPerformed
-    errorInsertUsuario1.setVisible(false);
-    errorInsertUsuario2.setVisible(false);
-    errorInsertUsuario3.setVisible(false);
-    errorInsertUsuario4.setVisible(false);
-    errorInsertUsuario5.setVisible(false);
-    errorInsertUsuario6.setVisible(false);
-    errorInsertUsuario7.setVisible(false);
-    errorInsertUsuario8.setVisible(false);
-    errorInsertUsuario9.setVisible(false);
-    errorInsertUsuario10.setVisible(false);
-
     mensajeConfirmacionUsuario.setVisible(false);
     panelUsuarios.setVisible(false);
     panelAnadirUsuario.setVisible(true);
@@ -2081,9 +1886,6 @@ private void botonNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {/
 private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosUsuarioActionPerformed
     String consultaUsuario=new String();
     ResultSet retsetMostrados;
-    
-    errorModifFijoUsuario.setVisible(false);
-    errorModifMovilUsuario.setVisible(false);
     
     //compruebo si se ha mostrado algún resultado antes de guardar los cambios, ya que si no se han mostrado no se ha podido modificar nada
     if(tablaUsuarios.getValueAt(0, 0)==null){
@@ -2216,7 +2018,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
                         updateFila=updateFila+" telmovil="+tablaUsuarios.getValueAt(i, 7)+", ";
                     }
                 }else{
-                    errorModifMovilUsuario.setVisible(true);
+                    //errorModifMovilUsuario.setVisible(true);
                 }
             }else{
                 if( retsetMostrados.getString("u.telmovil")!=null){
@@ -2236,7 +2038,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
                         updateFila=updateFila+" telFijo="+tablaUsuarios.getValueAt(i, 8)+", ";                    
                     }
                 }else{
-                    errorModifFijoUsuario.setVisible(true);
+                    //errorModifFijoUsuario.setVisible(true);
                 }
             }else{
                 if( retsetMostrados.getString("u.telFijo")!=null){
@@ -2433,8 +2235,6 @@ private String leeConsultaUsuariosInterfaz(){
 }
 private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_UsuariosActionPerformed
     String consulta_usuarios=new String();
-    errorModifMovilUsuario.setVisible(false);
-    errorModifFijoUsuario.setVisible(false);
     try{
         consulta_usuarios=leeConsultaUsuariosInterfaz();
         System.out.print("\nLA consulta "+ consulta_usuarios);
@@ -2559,102 +2359,57 @@ private void botonAnadirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
 // TODO add your handling code here:
     boolean encontrado_error=false;
     String inserccion=new String();
-    
-    errorInsertUsuario1.setVisible(false);
-    errorInsertUsuario2.setVisible(false);
-    errorInsertUsuario3.setVisible(false);
-    errorInsertUsuario4.setVisible(false);
-    errorInsertUsuario5.setVisible(false);
-    errorInsertUsuario6.setVisible(false);
-    errorInsertUsuario7.setVisible(false);
-    errorInsertUsuario8.setVisible(false);
-    errorInsertUsuario9.setVisible(false);
-    errorInsertUsuario10.setVisible(false);
 
     mensajeConfirmacionUsuario.setVisible(false);
     if(nombreUsuario.getText().equals("")){
-        errorInsertUsuario1.setText("No ha introducido el nombre");
-        errorInsertUsuario1.setVisible(true);
         encontrado_error=true;
     }
     if(nombreUsuario.getText().length()>45){
-        errorInsertUsuario1.setText("Nombre demasiado largo");
-        errorInsertUsuario1.setVisible(true);
         encontrado_error=true;        
     }
     if(primerApellidoUsuario.getText().equals("")){
-        errorInsertUsuario2.setText("No ha introducido el primer apellido");
-        errorInsertUsuario2.setVisible(true);
         encontrado_error=true;
     }
     if(primerApellidoUsuario.getText().length()>75){
-        errorInsertUsuario2.setText("Primer apellido demasiado largo");
-        errorInsertUsuario2.setVisible(true);
         encontrado_error=true;        
     }
     if(segundoApellidoUsuario.getText().equals("")){
-        errorInsertUsuario3.setText("No ha introducido el segundo apellido");
-        errorInsertUsuario3.setVisible(true);
         encontrado_error=true;
     }
     if(segundoApellidoUsuario.getText().length()>45){
-        errorInsertUsuario3.setText("Segundo apellido demasiado largo");
-        errorInsertUsuario3.setVisible(true);
         encontrado_error=true;        
     }
     if(dniUsuario.getText().equals("")){
-        errorInsertUsuario5.setText("No ha introducido el dni");
-        errorInsertUsuario5.setVisible(true);
         encontrado_error=true;
     }
     if(dniUsuario.getText().length()>12){
-        errorInsertUsuario5.setText("DNI demasiado largo");
-        errorInsertUsuario5.setVisible(true);
         encontrado_error=true;        
     }
     if(claveUsuario.getText().equals("")){
-        errorInsertUsuario7.setText("No ha introducido la clave");
-        errorInsertUsuario7.setVisible(true);
         encontrado_error=true;
     }
     if(claveUsuario.getText().length()>30){
-        errorInsertUsuario7.setText("Clave demasiado larga");
-        errorInsertUsuario7.setVisible(true);
         encontrado_error=true;        
     }
     if( tipoUsuario.getSelectedItem().equals("") ){
-        errorInsertUsuario6.setText("No ha introducido el tipo de usuario");
-        errorInsertUsuario6.setVisible(true);
         encontrado_error=true;
     }
     if(emailUsuario.getText().equals("")){
-        errorInsertUsuario8.setText("No ha introducido el email");
-        errorInsertUsuario8.setVisible(true);
         encontrado_error=true;
     }
     if(emailUsuario.getText().length()>45){
-        errorInsertUsuario8.setText("Email demasiado largo");
-        errorInsertUsuario8.setVisible(true);
         encontrado_error=true;        
     }
     if(numeroCuentaUsuario.getText().equals("")){
-        errorInsertUsuario4.setText("No ha introducido el numero de cuenta");
-        errorInsertUsuario4.setVisible(true);
         encontrado_error=true;
     }
     if(numeroCuentaUsuario.getText().length()>45){
-        errorInsertUsuario4.setText("Numero de cuenta demasiado largo");
-        errorInsertUsuario4.setVisible(true);
         encontrado_error=true;        
     }
     if(isInteger(telefonoMovilUsuario.getText())==false){
-        errorInsertUsuario10.setText("No ha introducido el movil");
-        errorInsertUsuario10.setVisible(true);
         encontrado_error=true;
     }
     if(isInteger(telefonoFijoUsuario.getText())==false){
-        errorInsertUsuario9.setText("No ha introducido el fijo");
-        errorInsertUsuario9.setVisible(true);
         encontrado_error=true;
     }
     //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
@@ -2791,21 +2546,6 @@ private void claveUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     private javax.swing.JTextField email;
     private javax.swing.JLabel emailLabel;
     private javax.swing.JTextField emailUsuario;
-    private javax.swing.JLabel errorInsertUsuario1;
-    private javax.swing.JLabel errorInsertUsuario10;
-    private javax.swing.JLabel errorInsertUsuario2;
-    private javax.swing.JLabel errorInsertUsuario3;
-    private javax.swing.JLabel errorInsertUsuario4;
-    private javax.swing.JLabel errorInsertUsuario5;
-    private javax.swing.JLabel errorInsertUsuario6;
-    private javax.swing.JLabel errorInsertUsuario7;
-    private javax.swing.JLabel errorInsertUsuario8;
-    private javax.swing.JLabel errorInsertUsuario9;
-    private javax.swing.JLabel errorModifCP;
-    private javax.swing.JLabel errorModifFijo;
-    private javax.swing.JLabel errorModifFijoUsuario;
-    private javax.swing.JLabel errorModifMovil;
-    private javax.swing.JLabel errorModifMovilUsuario;
     private com.toedter.calendar.JDateChooser fechaNac;
     private javax.swing.JLabel fechaNacLabel;
     private javax.swing.JLabel jLabel1;
