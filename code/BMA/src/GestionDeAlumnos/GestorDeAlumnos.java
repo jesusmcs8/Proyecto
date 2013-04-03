@@ -29,7 +29,14 @@ public class GestorDeAlumnos {
             alumnoNuevo.getNombrePadre(), alumnoNuevo.getNombreMadre(), alumnoNuevo.getCuentaCorriente(), alumnoNuevo.getTallaAlumno(), 
             alumnoNuevo.getTelFijo(), alumnoNuevo.getTelMovil());
     }
-    public static retset consultarAlumno(){
+    public static ResultSet consultarAlumno(BaseDatos accesoBD, String consulta){
+        AlumnoBD alumno=new AlumnoBD();
         
+        return alumno.consultaAlumnoBD(accesoBD, consulta);
+    }
+    public static void actualizaAlumno(BaseDatos accesoBD, String actualizacion){
+        AlumnoBD alumno=new AlumnoBD();
+        
+        alumno.actualizaAlumnoBD(accesoBD, actualizacion);
     }
 }

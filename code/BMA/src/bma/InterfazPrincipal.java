@@ -1057,7 +1057,6 @@ public class InterfazPrincipal extends javax.swing.JFrame {
 private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
     String consulta_alumnos=new String();
     ResultSet retsetMostrados;
-    GestorDeAlumnos alumno=new GestorDeAlumnos();
     
     errorModifCP.setVisible(false);
     errorModifMovil.setVisible(false);
@@ -1069,8 +1068,8 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
     }
     try{
         consulta_alumnos=leeConsultaAlumnosInterfaz();
-        retsetMostrados=alumno.consultaAlumno(accesoBD, consulta_alumnos);
-        ultimaActualizacionAlumno=alumno.consultaAlumno(accesoBD, consulta_alumnos);
+        retsetMostrados=GestorDeAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
+        ultimaActualizacionAlumno=GestorDeAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
         ultimaConsultaAlumno=consulta_alumnos;
         int i=0;
         while(retsetMostrados.next()){
@@ -1348,7 +1347,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
             updateFila=updateFila.substring(0, updateFila.length()-2);
             updateFila=updateFila+" WHERE alumno.idalumno="+retsetMostrados.getString("a.idalumno");
             if(fila_editada==true){
-                alumno.actualizaAlumno(accesoBD, updateFila);
+                GestorDeAlumnos.actualizaAlumno(accesoBD, updateFila);
                 //accesoBD.ejecutaActualizacion(updateFila);
                 System.out.print("\nModificado "+i+" act\n "+updateFila);
             }
@@ -1481,14 +1480,13 @@ private String leeConsultaAlumnosInterfaz(){
 }
 private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
     String consulta_alumnos=new String();
-    GestorDeAlumnos alumno=new GestorDeAlumnos();
     errorModifCP.setVisible(false);
     errorModifMovil.setVisible(false);
     errorModifFijo.setVisible(false);
     try{
         consulta_alumnos=leeConsultaAlumnosInterfaz();
         System.out.print("\nLA consulta a "+ consulta_alumnos+"  y qui termina");
-        retset=alumno.consultaAlumno(accesoBD, consulta_alumnos);
+        retset=GestorDeAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -1873,8 +1871,7 @@ private void botonVolverAtrasAlumnoActionPerformed(java.awt.event.ActionEvent ev
 
 private void deshacerCambiosAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosAlumnoActionPerformed
     ResultSet estadoActual;
-    GestorDeAlumnos alumno=new GestorDeAlumnos();
-    estadoActual=alumno.consultaAlumno(accesoBD, ultimaConsultaAlumno); 
+    estadoActual=GestorDeAlumnos.consultarAlumno(accesoBD, ultimaConsultaAlumno); 
     try{
         while(estadoActual.next()){
             ultimaActualizacionAlumno.next();
@@ -2068,7 +2065,7 @@ private void deshacerCambiosAlumnoActionPerformed(java.awt.event.ActionEvent evt
             updateFila=updateFila.substring(0, updateFila.length()-2);
             updateFila=updateFila+" WHERE alumno.idalumno="+ultimaActualizacionAlumno.getString("a.idalumno");
             if(fila_editada==true){
-                alumno.actualizaAlumno(accesoBD, updateFila);
+                GestorDeAlumnos.actualizaAlumno(accesoBD, updateFila);
                 System.out.print("\nModificado  act\n "+updateFila);
             }
         }
