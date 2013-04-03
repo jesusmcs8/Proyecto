@@ -130,7 +130,7 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
     String usuario = userTextfield.getText();
     char[] pass = passTextfield.getPassword();
     String consulta_acceso = "SELECT * FROM usuario WHERE nombre='"
-            + usuario + "' AND clave='" + pass.toString() + "'";
+            + usuario + "' AND clave='" + new String (pass) + "'";
     
     System.out.print("\npass "+consulta_acceso);
     retset = user.consultaUsuario(accesoBD, consulta_acceso);
