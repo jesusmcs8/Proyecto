@@ -83,7 +83,6 @@ public class BaseDatos {
         }
     }
 
-  
     private int comprobar() {
         int i = 0;
         try {
@@ -127,16 +126,21 @@ public class BaseDatos {
             System.out.print(ex.getMessage());
         }
     }
-    
-    public boolean eliminar(String delete){
-        try {         
+
+    public boolean eliminar(String delete) {
+        try {
             int i = comprobar();
             stmt = conexion.get(i).createStatement();
-            stmt.executeUpdate(delete);
+            int del = stmt.executeUpdate(delete);
+            if (del == 1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
             return false;
         }
-        return true;
+
     }
 }
