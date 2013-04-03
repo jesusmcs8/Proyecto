@@ -66,8 +66,11 @@ public class AlumnoBD {
 
         if (alumnoNuevo.getIdAlumno() == -1) {
 
-            String selId = "SELECT a.idAlumno FROM alumno a WHERE" + "a.nombre=" + alumnoNuevo.getNombre() + ", a.primerApellido=" + alumnoNuevo.getPrimerApellido() + ", a.segundoApellido=" + alumnoNuevo.getSegundoApellido() + ", a.nombrePadre=" + alumnoNuevo.getNombrePadre() + ", a.nombreMadre=" + alumnoNuevo.getNombreMadre() + ", a.numeroCuenta=" + alumnoNuevo.getCuentaCorriente() + ","
-                    + "a.telMovil" + alumnoNuevo.getTelMovil() + ", a.telFijo" + alumnoNuevo.getTelFijo() + ", a.email" + alumnoNuevo.getEmail() + ";";
+            String selId = "SELECT a.idAlumno FROM alumno a WHERE" + "a.nombre=" + alumnoNuevo.getNombre() + ", a.primerApellido=" 
+                    + alumnoNuevo.getPrimerApellido() + ", a.segundoApellido=" + alumnoNuevo.getSegundoApellido() + ", a.nombrePadre=" 
+                    + alumnoNuevo.getNombrePadre() + ", a.nombreMadre=" + alumnoNuevo.getNombreMadre() + ", a.numeroCuenta=" 
+                    + alumnoNuevo.getCuentaCorriente() + ","+ "a.telMovil" + alumnoNuevo.getTelMovil() 
+                    + ", a.telFijo" + alumnoNuevo.getTelFijo() + ", a.email" + alumnoNuevo.getEmail();
 
 
             ResultSet retset;
@@ -77,10 +80,10 @@ public class AlumnoBD {
             } catch (SQLException ex) {
                 System.out.print(ex.getMessage());
             }
-            String delete = "DELETE FROM alumno WHERE idAlumno = '" + alumnoNuevo.getIdAlumno() + "'";
+            String delete = "DELETE FROM alumno WHERE idAlumno = " + alumnoNuevo.getIdAlumno() ;
             accesoBD.ejecutaActualizacion(delete);
         } else {
-            String delete = "DELETE FROM alumno WHERE idAlumno = '" + alumnoNuevo.getIdAlumno() + "'";
+            String delete = "DELETE FROM alumno WHERE idAlumno = " + alumnoNuevo.getIdAlumno() ;
             accesoBD.ejecutaActualizacion(delete);
         }
     }
