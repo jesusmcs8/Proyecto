@@ -23,7 +23,7 @@ public class Usuario {
     private String email;
     private boolean entrenador;
 
-    public void crearUsuario(int idUsuario, String nombre,
+    public void crearUsuario( String nombre,
             String primerApellido, String segundoApellido, String dni,
             String clave, boolean entrenador, int telMovil, int telFijo,
             String email, String numeroCuenta) {
