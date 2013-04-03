@@ -23,7 +23,7 @@ public class Usuario {
     private String email;
     private boolean entrenador;
 
-    public void crearUsuario( String nombre,
+    public void crearUsuario(String nombre,
             String primerApellido, String segundoApellido, String dni,
             String clave, boolean entrenador, int telMovil, int telFijo,
             String email, String numeroCuenta) {
@@ -37,6 +37,50 @@ public class Usuario {
         this.telMovil = telMovil;
         this.telFijo = telFijo;
         this.email = email;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getClave() {
+        return clave;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
+
+    public String getSegundoApellido() {
+        return segundoApellido;
+    }
+
+    public String getNumeroCuenta() {
+        return numeroCuenta;
+    }
+
+    public int getTelMovil() {
+        return telMovil;
+    }
+
+    public int getTelFijo() {
+        return telFijo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean getEntrenador() {
+        return entrenador;
     }
 
     public void insertarUsuarioBD(BaseDatos accesoBD) {
