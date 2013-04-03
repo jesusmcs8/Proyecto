@@ -11,7 +11,6 @@ import java.sql.*;
  * @version 1.0
  */
 public class GestorDeAlumnos {
-    
 
     public static Alumno crearAlumno(String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
                     String cuentaCorriente, String domicilio, String localidad, int codPostal, String provincia, String colegio,
@@ -24,8 +23,9 @@ public class GestorDeAlumnos {
 
     public static void insertartarAlumno(BaseDatos accesoBD, Alumno alumnoNuevo){
         AlumnoBD alumno=new AlumnoBD();
-        alumno.insertarAlumnoBD(accesoBD, alumnoNuevo.nombre, alumnoNuevo.primerApellido, segundoApellido, fechaNacimiento, colegio, 
-            email, localidad, provincia, codPostal, domicilio, nombrePadre, nombreMadre, 
+        
+        alumno.insertarAlumnoBD(accesoBD, alumnoNuevo.getNombre(), alumnoNuevo.getPrimerApellido(), alumnoNuevo.getSegundoApellido, alumnoNuevo.getFechaNacimiento(), alumnoNuevo.getColegio(), 
+            alumnoNuevo.getEmail(), alumnoNuevo.getLocalidad, provincia, codPostal, domicilio, nombrePadre, nombreMadre, 
             cuentaCorriente, tallaAlumno, telFijo, telMovil);
     }
 }
