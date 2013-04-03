@@ -4,6 +4,7 @@
  * Created on 15-mar-2013, 16:22:20
  */
 package bma;
+import GestionDeUsuarios.*;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -125,7 +126,6 @@ public class InterfazAcceso extends javax.swing.JFrame {
 
 private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authenticateButtonActionPerformed
     BaseDatos accesoBD = new BaseDatos();
-    Usuario user = new Usuario();  
     
     String usuario = userTextfield.getText();
     char[] pass = passTextfield.getPassword();
@@ -133,16 +133,17 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
             + usuario + "' AND clave='" + new String (pass) + "'";
     
     System.out.print("\npass "+consulta_acceso);
-    retset = user.consultaUsuario(accesoBD, consulta_acceso);
+    retset = GestorDeUsuarios.consultarUsuario(accesoBD, consulta_acceso);
     try{
         if (retset.next()) {
-            user.crearUsuario(retset.getString(2), retset.getString(3),
+            Usuario unUsuario;
+            unUsuario=GestorDeUsuarios.crearUsuario(retset.getString(2), retset.getString(3),
                     retset.getString(4), retset.getString(5),
                     retset.getString(6), retset.getBoolean(7),
                     retset.getInt(8), retset.getInt(9), retset.getString(10), 
                     retset.getString(11));
             this.setVisible(false);
-            new InterfazPrincipal(accesoBD, user).setVisible(true);
+            new InterfazPrincipal(accesoBD, unUsuario).setVisible(true);
         }else{          
             JOptionPane.showMessageDialog(null,
                     "Usuario o contraseña incorrectos", "Error",

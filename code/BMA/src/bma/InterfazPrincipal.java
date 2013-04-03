@@ -9,6 +9,7 @@
  * Created on 16-mar-2013, 16:58:04
  */
 package bma;
+import GestionDeUsuarios.*;
 import GestionDeAlumnos.*;
 import java.sql.*;
 import java.util.Calendar;
@@ -25,7 +26,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     String ultimaConsultaAlumno=new String();
     ResultSet ultimaActualizacionUsuario;
     String ultimaConsultaUsuario=new String();
-    Usuario userConectado=new Usuario();
+    Usuario userConectado;
     /** Creates new form InterfazPrincipal */
     public InterfazPrincipal() {
         initComponents();
@@ -2134,7 +2135,6 @@ private void botonNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {/
 private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosUsuarioActionPerformed
     String consultaUsuario=new String();
     ResultSet retsetMostrados;
-    Usuario usuario=new Usuario();
     
     errorModifFijoUsuario.setVisible(false);
     errorModifMovilUsuario.setVisible(false);
@@ -2145,8 +2145,8 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
     }
     try{
         consultaUsuario=leeConsultaUsuariosInterfaz();
-        retsetMostrados=usuario.consultaUsuario(accesoBD, consultaUsuario);
-        ultimaActualizacionUsuario=usuario.consultaUsuario(accesoBD, consultaUsuario);
+        retsetMostrados=GestorDeUsuarios.consultarUsuario(accesoBD, consultaUsuario);
+        ultimaActualizacionUsuario=GestorDeUsuarios.consultarUsuario(accesoBD, consultaUsuario);
         ultimaConsultaUsuario=consultaUsuario;
         int i=0;
         while(retsetMostrados.next()){
@@ -2301,7 +2301,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
             updateFila=updateFila.substring(0, updateFila.length()-2);
             updateFila=updateFila+" WHERE usuario.idusuario="+retsetMostrados.getString("u.idUsuario");
             if(fila_editada==true){
-                usuario.actualizaUsuario(accesoBD, updateFila);
+                GestorDeUsuarios.actualizaUsuario(accesoBD, updateFila);
                 System.out.print("\nModificado "+i+" act\n "+updateFila);
             }
             i++;
@@ -2313,8 +2313,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
 
 private void deshacerCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosUsuarioActionPerformed
     ResultSet estadoActual;
-    Usuario usuario=new Usuario();
-    estadoActual=usuario.consultaUsuario(accesoBD, ultimaConsultaUsuario); 
+    estadoActual=GestorDeUsuarios.consultarUsuario(accesoBD, ultimaConsultaUsuario); 
     try{
         while(estadoActual.next()){
             ultimaActualizacionUsuario.next();
@@ -2421,7 +2420,7 @@ private void deshacerCambiosUsuarioActionPerformed(java.awt.event.ActionEvent ev
             updateFila=updateFila+" WHERE usuario.idusuario="+ultimaActualizacionUsuario.getString("u.idusuario");
             if(fila_editada==true){
                 System.out.print("\nVuelta atras  act\n "+updateFila);
-                usuario.actualizaUsuario(accesoBD, updateFila);
+                GestorDeUsuarios.actualizaUsuario(accesoBD, updateFila);
             }
         }
         
@@ -2488,13 +2487,12 @@ private String leeConsultaUsuariosInterfaz(){
 }
 private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_UsuariosActionPerformed
     String consulta_usuarios=new String();
-    Usuario usuario=new Usuario();
     errorModifMovilUsuario.setVisible(false);
     errorModifFijoUsuario.setVisible(false);
     try{
         consulta_usuarios=leeConsultaUsuariosInterfaz();
         System.out.print("\nLA consulta "+ consulta_usuarios);
-        retset=usuario.consultaUsuario(accesoBD, consulta_usuarios);
+        retset=GestorDeUsuarios.consultarUsuario(accesoBD, consulta_usuarios);
         //retset = accesoBD.ejecutaConsulta(consulta_alumnos);
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
            new Object [][] {
@@ -2717,17 +2715,17 @@ private void botonAnadirUsuarioActionPerformed(java.awt.event.ActionEvent evt) {
     if(encontrado_error==false){
         boolean entrenador;
         mensajeConfirmacionUsuario.setVisible(true);
-        Usuario nuevoUsuario=new Usuario();
 
         if(((String) tipoUsuario.getSelectedItem()).equals("Entrenador")){
             entrenador=true;
         }else
             entrenador=false;
-        nuevoUsuario.crearUsuario(nombreUsuario.getText(), primerApellidoUsuario.getText(), segundoApellidoUsuario.getText(), dniUsuario.getText(),
+        Usuario unUsuario;
+        unUsuario=GestorDeUsuarios.crearUsuario(nombreUsuario.getText(), primerApellidoUsuario.getText(), segundoApellidoUsuario.getText(), dniUsuario.getText(),
                 claveUsuario.getText(), entrenador, Integer.parseInt(telefonoMovilUsuario.getText()), 
                 Integer.parseInt(telefonoFijoUsuario.getText()), emailUsuario.getText(), numeroCuentaUsuario.getText());
         
-        nuevoUsuario.insertarUsuarioBD(accesoBD);        
+        GestorDeUsuarios.insertarUsuario(accesoBD, unUsuario);        
         nombreUsuario.setText(null);
         primerApellidoUsuario.setText(null);
         segundoApellidoUsuario.setText(null);

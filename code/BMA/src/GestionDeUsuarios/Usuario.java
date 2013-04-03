@@ -24,6 +24,22 @@ public class Usuario {
     private String email;
     private boolean entrenador;
 
+    Usuario(String nombre, String primerApellido, String segundoApellido, String dni,
+            String clave, boolean entrenador, int telMovil, int telFijo,
+            String email, String numeroCuenta){
+        this.nombre = nombre;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.dni = dni;
+        this.clave = clave;
+        this.entrenador = entrenador;
+        this.numeroCuenta = numeroCuenta;
+        this.telMovil = telMovil;
+        this.telFijo = telFijo;
+        this.email = email;
+    }
+
+    
     public void crearUsuario(String nombre,
             String primerApellido, String segundoApellido, String dni,
             String clave, boolean entrenador, int telMovil, int telFijo,
@@ -83,28 +99,6 @@ public class Usuario {
     public boolean getEntrenador() {
         return entrenador;
     }
-
-    public void insertarUsuarioBD(BaseDatos accesoBD) {
-        String insercion = "INSERT INTO usuario (nombre, primerApellido,"
-                + "segundoApellido, DNI, clave, entrenador, numeroCuenta,"
-                + "telMovil, telFijo, email) values ('"
-                + nombre + "', '" + primerApellido + "', '" + segundoApellido
-                + "','" + dni + "', '" + clave + "', " + entrenador + ", '"
-                + numeroCuenta + "', " + telMovil + ", " + telFijo + ", '"
-                + email + "')";
-
-        System.out.print("\n insert usuario--> " + insercion);
-        accesoBD.ejecutaActualizacion(insercion);
-    }
-
-    public ResultSet consultaUsuario(BaseDatos accesoBD, String consulta) {
-        return accesoBD.ejecutaConsulta(consulta);
-    }
-
-    public void actualizaUsuario(BaseDatos accesoBD, String actualizacion) {
-        accesoBD.ejecutaActualizacion(actualizacion);
-    }
-
     public boolean tengoPermisosAdministrador() {
         if (this.entrenador) {
             return false;
