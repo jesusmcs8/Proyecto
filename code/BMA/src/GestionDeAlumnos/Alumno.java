@@ -53,9 +53,11 @@ public class Alumno {
     public int getIdAlumno() {
         return idAlumno;
     }
-    public void setIdAlumno(int id){
-        this.idAlumno=id;
+
+    public void setIdAlumno(int id) {
+        this.idAlumno = id;
     }
+
     public String getNombre() {
         return nombre;
     }
