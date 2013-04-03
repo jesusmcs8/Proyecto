@@ -5,6 +5,7 @@
  */
 package bma;
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  * Interfaz de acceso
@@ -138,14 +139,14 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
             user.crearUsuario(retset.getString(2), retset.getString(3),
                     retset.getString(4), retset.getString(5),
                     retset.getString(6), retset.getBoolean(7),
-                    retset.getInt("telMovil"),
-                    retset.getInt("telFijo"),
-                    retset.getString("email"), 
-                    retset.getString("numeroCuenta"));
+                    retset.getInt(8), retset.getInt(9), retset.getString(10), 
+                    retset.getString(11));
             this.setVisible(false);
             new InterfazPrincipal(accesoBD, user).setVisible(true);
         }else{          
-            mensaje_error_conexion.setVisible(true);
+            JOptionPane.showMessageDialog(null,
+                    "Usuario o contraseña incorrectos", "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
     catch(SQLException ex){
