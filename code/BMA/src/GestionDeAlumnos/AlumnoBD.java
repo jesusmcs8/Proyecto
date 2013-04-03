@@ -77,6 +77,8 @@ public class AlumnoBD {
             } catch (SQLException ex) {
                 System.out.print(ex.getMessage());
             }
+            String delete = "DELETE FROM alumno WHERE idAlumno = '" + alumnoNuevo.getIdAlumno() + "'";
+            accesoBD.ejecutaActualizacion(delete);
         } else {
             String delete = "DELETE FROM alumno WHERE idAlumno = '" + alumnoNuevo.getIdAlumno() + "'";
             accesoBD.ejecutaActualizacion(delete);
