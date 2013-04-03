@@ -14,13 +14,13 @@ import java.util.*;
  */
 public class BaseDatos {
 
-    ArrayList<Connection> conexion = new ArrayList();
-    Statement stmt;
-    ResultSet retset;
-    String driver;
-    String servidor;
-    String usuario;
-    String clave;
+    private ArrayList<Connection> conexion = new ArrayList();
+    private Statement stmt;
+    private ResultSet retset;
+    private String driver;
+    private String servidor;
+    private String usuario;
+    private String clave;
 
     public BaseDatos() {
         try {
@@ -41,7 +41,7 @@ public class BaseDatos {
         }
     }
 
-    public boolean reconec() {
+    private boolean reconec() {
         try {
             Class.forName(driver);
             for (int i = 0; i < 10; i++) {
@@ -84,7 +84,7 @@ public class BaseDatos {
     }
 
   
-    public int comprobar() {
+    private int comprobar() {
         int i = 0;
         try {
             while (conexion.get(i).isClosed()) {
@@ -108,7 +108,7 @@ public class BaseDatos {
 
         try {
             int i = comprobar();
-            System.out.println(i);
+            //System.out.println(i);
             stmt = conexion.get(i).createStatement();
             retset = stmt.executeQuery(consulta);
         } catch (SQLException ex) {
@@ -120,14 +120,23 @@ public class BaseDatos {
 
     public void ejecutaActualizacion(String actualizacion) {
         try {
-            int i = 0;
-            while (!conexion.get(i).isValid(i)) {
-                i++;
-            }
+            int i = comprobar();
             stmt = conexion.get(i).createStatement();
             stmt.executeUpdate(actualizacion);
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
         }
+    }
+    
+    public boolean eliminar(String delete){
+        try {         
+            int i = comprobar();
+            stmt = conexion.get(i).createStatement();
+            stmt.executeUpdate(delete);
+        } catch (SQLException ex) {
+            System.out.print(ex.getMessage());
+            return false;
+        }
+        return true;
     }
 }
