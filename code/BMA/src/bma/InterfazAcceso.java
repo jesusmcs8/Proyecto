@@ -1,18 +1,15 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * InterfazAcceso.java
  *
  * Created on 15-mar-2013, 16:22:20
  */
 package bma;
 import java.sql.*;
+
 /**
- *
- * @author Francisco */
+ * Interfaz de acceso
+ * @author Francisco
+ */
 public class InterfazAcceso extends javax.swing.JFrame {
     Connection conexion;   
     Statement stmt;      
@@ -33,12 +30,13 @@ public class InterfazAcceso extends javax.swing.JFrame {
     private void initComponents() {
 
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        user_textfield = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        mensaje_error_conexion = new javax.swing.JLabel();
-        pass_textfield = new javax.swing.JPasswordField();
+        userTextfield = new javax.swing.JTextField();
+        userLabel = new javax.swing.JLabel();
+        passLabel = new javax.swing.JLabel();
+        authenticateButton = new javax.swing.JButton();
+        passTextfield = new javax.swing.JPasswordField();
+        titleLabel2 = new javax.swing.JLabel();
+        titleLabel1 = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -55,80 +53,95 @@ public class InterfazAcceso extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Usuario:");
+        userLabel.setText("Usuario:");
 
-        jLabel2.setText("Contraseña:");
+        passLabel.setText("Contraseña:");
 
-        jButton1.setText("Entrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        authenticateButton.setText("Entrar");
+        authenticateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                authenticateButtonActionPerformed(evt);
             }
         });
 
-        mensaje_error_conexion.setText("Usuario y contraseña incorrectos.");
-        mensaje_error_conexion.setVisible(false);
+        titleLabel2.setFont(new java.awt.Font("Tahoma", 2, 28)); // NOI18N
+        titleLabel2.setText("Application");
+
+        titleLabel1.setFont(new java.awt.Font("Tahoma", 2, 28)); // NOI18N
+        titleLabel1.setText("Basketball Management");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(pass_textfield, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(user_textfield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(130, Short.MAX_VALUE)
-                        .addComponent(mensaje_error_conexion, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(39, 39, 39))
+                    .addComponent(userLabel)
+                    .addComponent(passLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(authenticateButton)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(passTextfield, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(userTextfield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(103, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(titleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 127, 127))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(63, Short.MAX_VALUE)
+                    .addComponent(titleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(37, 37, 37)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(107, 107, 107)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(70, Short.MAX_VALUE)
+                .addComponent(titleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(user_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userLabel)
+                    .addComponent(userTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(pass_textfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passLabel)
+                    .addComponent(passTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(34, 34, 34)
-                .addComponent(mensaje_error_conexion)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addComponent(authenticateButton)
+                .addGap(59, 59, 59))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(30, 30, 30)
+                    .addComponent(titleLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(236, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    BaseDatos accesoBD=new BaseDatos();
-    Usuario user=new Usuario();  
+private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_authenticateButtonActionPerformed
+    BaseDatos accesoBD = new BaseDatos();
+    Usuario user = new Usuario();  
     
-    String usuario = user_textfield.getText();
-    char [] pass=new char [100];
-    pass = pass_textfield.getPassword();
-    String consulta_acceso = "SELECT * FROM usuario WHERE nombre='" + usuario + "' AND clave='";
-    for(int i=0;i<pass.length;i++)
-        consulta_acceso=consulta_acceso+pass[i];
-    consulta_acceso=consulta_acceso+ "'";
+    String usuario = userTextfield.getText();
+    char[] pass = passTextfield.getPassword();
+    String consulta_acceso = "SELECT * FROM usuario WHERE nombre='"
+            + usuario + "' AND clave='" + pass.toString() + "'";
+    
     System.out.print("\npass "+consulta_acceso);
-    retset=user.consultaUsuario(accesoBD, consulta_acceso);
+    retset = user.consultaUsuario(accesoBD, consulta_acceso);
     try{
-        if(retset.next()){
-            user.crearUsuario(retset.getString(2), retset.getString(3), retset.getString(4), retset.getString(5), retset.getString(6), retset.getBoolean(7), retset.getInt("telMovil"), retset.getInt("telFijo"), retset.getString("email"), retset.getString("numeroCuenta"));
+        if (retset.next()) {
+            user.crearUsuario(retset.getString(2), retset.getString(3),
+                    retset.getString(4), retset.getString(5),
+                    retset.getString(6), retset.getBoolean(7),
+                    retset.getInt("telMovil"),
+                    retset.getInt("telFijo"),
+                    retset.getString("email"), 
+                    retset.getString("numeroCuenta"));
             this.setVisible(false);
             new InterfazPrincipal(accesoBD, user).setVisible(true);
         }else{          
@@ -138,7 +151,7 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     catch(SQLException ex){
         System.out.print(ex.getMessage());
     }
-}//GEN-LAST:event_jButton1ActionPerformed
+}//GEN-LAST:event_authenticateButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,12 +189,13 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton authenticateButton;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel mensaje_error_conexion;
-    private javax.swing.JPasswordField pass_textfield;
-    private javax.swing.JTextField user_textfield;
+    private javax.swing.JLabel passLabel;
+    private javax.swing.JPasswordField passTextfield;
+    private javax.swing.JLabel titleLabel1;
+    private javax.swing.JLabel titleLabel2;
+    private javax.swing.JLabel userLabel;
+    private javax.swing.JTextField userTextfield;
     // End of variables declaration//GEN-END:variables
 }
