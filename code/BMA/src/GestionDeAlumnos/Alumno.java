@@ -4,11 +4,13 @@
  */
 package GestionDeAlumnos;
 
+import java.util.Date;
+
 /**
  *
  * @author Francisco
  */
-public class Alumno {
+class Alumno {
 
     private int idAlumno;
     private String nombre;
@@ -29,7 +31,7 @@ public class Alumno {
     private String observaciones;
     private String tallaAlumno;
 
-    public Alumno(String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
+    Alumno(String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
             String cuentaCorriente, String domicilio, String localidad, int codPostal, String provincia, String colegio,
             String nombrePadre, String nombreMadre, int telFijo, int telMovil, String email, String observaciones, String tallaAlumno) {
         this.nombre = nombre;
@@ -48,6 +50,14 @@ public class Alumno {
         this.telFijo = telFijo;
         this.telMovil = telMovil;
         this.tallaAlumno = tallaAlumno;
+    }
+
+    public static Alumno crearAlumno(String nombre, String primerApellido, String segundoApellido, Date fechaNac,
+            String cuentaCorriente, String domicilio, String localidad, int codPostal, String provincia, String colegio,
+            String nombrePadre, String nombreMadre, int telFijo, int telMovil, String email, String observaciones, String tallaAlumno) {
+        return new Alumno(nombre, primerApellido, segundoApellido, fechaNac,
+                cuentaCorriente, domicilio, localidad, codPostal, provincia, colegio,
+                nombrePadre, nombreMadre, telFijo, telMovil, email, observaciones, tallaAlumno);
     }
 
     public int getIdAlumno() {

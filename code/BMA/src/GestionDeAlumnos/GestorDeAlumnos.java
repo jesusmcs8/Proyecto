@@ -1,7 +1,6 @@
 package GestionDeAlumnos;
 
-import bma.BaseDatos;
-import java.util.Calendar;
+import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.*;
 /**
  * Clase que representa al alumno y sus datos personales, además de los nombres
@@ -12,22 +11,19 @@ import java.sql.*;
  */
 public class GestorDeAlumnos {
 
-    public static Alumno crearAlumno(String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
+    public static boolean darAltaAlumno(BaseDatos accesoBD, String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
                     String cuentaCorriente, String domicilio, String localidad, int codPostal, String provincia, String colegio,
                     String nombrePadre, String nombreMadre, int telFijo, int telMovil, String email, String observaciones, String tallaAlumno){
-        
-        Alumno alumnoNuevo=new Alumno(nombre, primerApellido, segundoApellido, fechaNac, cuentaCorriente,  domicilio, localidad, codPostal, provincia,
-                 colegio, nombrePadre, nombreMadre, telFijo, telMovil, email, observaciones, tallaAlumno);
-        return alumnoNuevo;
-    }
-
-    public static void insertarAlumno(BaseDatos accesoBD, Alumno alumnoNuevo){
-        AlumnoBD alumno=new AlumnoBD();
-        
-        alumno.insertarAlumnoBD(accesoBD, alumnoNuevo.getNombre(), alumnoNuevo.getPrimerApellido(), alumnoNuevo.getSegundoApellido(), alumnoNuevo.getFechaNacimiento(), alumnoNuevo.getColegio(), 
-            alumnoNuevo.getEmail(), alumnoNuevo.getLocalidad(), alumnoNuevo.getProvincia(), alumnoNuevo.getCodPostal(), alumnoNuevo.getDomicilio(), 
-            alumnoNuevo.getNombrePadre(), alumnoNuevo.getNombreMadre(), alumnoNuevo.getCuentaCorriente(), alumnoNuevo.getTallaAlumno(), 
-            alumnoNuevo.getTelFijo(), alumnoNuevo.getTelMovil());
+        Alumno alumno = Alumno.crearAlumno(nombre, primerApellido, segundoApellido, fechaNac,
+                cuentaCorriente, domicilio, localidad, codPostal, provincia, colegio,
+                nombrePadre, nombreMadre, telFijo, telMovil, email, observaciones, tallaAlumno);
+        boolean exito = true;
+        try {
+            AlumnoBD.insertarAlumnoBD(accesoBD, alumno);
+        } catch (SQLException ex) {
+            exito = false;
+        }
+        return exito;
     }
     public static ResultSet consultarAlumno(BaseDatos accesoBD, String consulta){
         AlumnoBD alumno=new AlumnoBD();

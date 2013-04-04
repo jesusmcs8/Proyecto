@@ -1,8 +1,5 @@
 package GestionDeUsuarios;
 
-import bma.BaseDatos;
-import java.sql.*;
-
 /**
  * Clase que indica los usuarios del sistema como entrenadores y
  * administradores.
@@ -10,7 +7,7 @@ import java.sql.*;
  * @author Alex Moreno
  * @version 1.0
  */
-public class Usuario {
+class Usuario {
 
     private int idUsuario;
     private String dni;
@@ -40,20 +37,14 @@ public class Usuario {
     }
 
     
-    public void crearUsuario(String nombre,
+    public static Usuario crearUsuario(String nombre,
             String primerApellido, String segundoApellido, String dni,
             String clave, boolean entrenador, int telMovil, int telFijo,
             String email, String numeroCuenta) {
-        this.nombre = nombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
-        this.dni = dni;
-        this.clave = clave;
-        this.entrenador = entrenador;
-        this.numeroCuenta = numeroCuenta;
-        this.telMovil = telMovil;
-        this.telFijo = telFijo;
-        this.email = email;
+        return new Usuario(nombre,
+            primerApellido, segundoApellido, dni,
+            clave, entrenador, telMovil, telFijo,
+            email, numeroCuenta);
     }
 
     public int getIdUsuario() {
@@ -98,12 +89,5 @@ public class Usuario {
 
     public boolean getEntrenador() {
         return entrenador;
-    }
-    public boolean tengoPermisosAdministrador() {
-        if (this.entrenador) {
-            return false;
-        } else {
-            return true;
-        }
     }
 }

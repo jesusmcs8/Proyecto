@@ -8,11 +8,15 @@
  *
  * Created on 16-mar-2013, 16:58:04
  */
-package bma;
+package InterfazUsuario;
 
-import GestionDeAlumnos.*;
-import GestionDeUsuarios.*;
-import java.sql.*;
+
+import GestionDeAlumnos.GestorDeAlumnos;
+import GestionDeUsuarios.GestorDeUsuarios;
+import ServiciosAlmacenamiento.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Calendar;
 
 /**
@@ -22,13 +26,13 @@ import java.util.Calendar;
 public class InterfazPrincipal extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
+    String usuario;
     Statement stmt;
     ResultSet retset;
     ResultSet ultimaActualizacionAlumno;
     String ultimaConsultaAlumno;
     ResultSet ultimaActualizacionUsuario;
     String ultimaConsultaUsuario;
-    Usuario userConectado;
 
     /**
      * Creates new form InterfazPrincipal
@@ -37,15 +41,15 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         initComponents();
     }
 
-    public InterfazPrincipal(BaseDatos acceso, Usuario userArg) {
+    public InterfazPrincipal(BaseDatos acceso, String usuario) {
         accesoBD = acceso;
-        userConectado = userArg;
+        this.usuario = usuario;
         initComponents();
         initComponentsSegunUsuario();
     }
 
     private void initComponentsSegunUsuario() {
-        if (!userConectado.tengoPermisosAdministrador()) {
+        if (!GestorDeUsuarios.tengoPermisosAdministrador(accesoBD, usuario)) {
             System.out.print("\ninitcomponent segun user");
             barraMenu.remove(menuUsuarios);
             panelJugadores.remove(botonNuevoAlumno);
@@ -1059,7 +1063,7 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
 }//GEN-LAST:event_boton_mostrar_alumnosActionPerformed
 
 private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
-    new AnadirAlumno(accesoBD, userConectado).setVisible(true);
+    new AnadirAlumno(accesoBD).setVisible(true);
 }//GEN-LAST:event_botonNuevoAlumnoActionPerformed
 
     private boolean isInteger(String cadena) {
@@ -1317,7 +1321,7 @@ private void menuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_menuUsuariosMouseClicked
 
 private void botonNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoUsuarioActionPerformed
-    new AnadirUsuario(accesoBD, userConectado).setVisible(true);
+    new AnadirUsuario(accesoBD).setVisible(true);
 }//GEN-LAST:event_botonNuevoUsuarioActionPerformed
 
 private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosUsuarioActionPerformed

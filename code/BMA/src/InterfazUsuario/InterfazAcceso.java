@@ -3,8 +3,9 @@
  *
  * Created on 15-mar-2013, 16:22:20
  */
-package bma;
+package InterfazUsuario;
 import GestionDeUsuarios.*;
+import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
@@ -89,7 +90,7 @@ public class InterfazAcceso extends javax.swing.JFrame {
                         .addComponent(userTextfield, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(103, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(136, Short.MAX_VALUE)
                 .addComponent(titleLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(127, 127, 127))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,22 +130,16 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
     
     String usuario = userTextfield.getText();
     char[] pass = passTextfield.getPassword();
-    String consulta_acceso = "SELECT * FROM usuario WHERE nombre='"
+    String consulta_acceso = "SELECT * FROM usuario WHERE user='"
             + usuario + "' AND clave='" + new String (pass) + "'";
     
     System.out.print("\npass "+consulta_acceso);
     retset = GestorDeUsuarios.consultarUsuario(accesoBD, consulta_acceso);
     try{
         if (retset.next()) {
-            Usuario unUsuario;
-            unUsuario=GestorDeUsuarios.crearUsuario(retset.getString(2), retset.getString(3),
-                    retset.getString(4), retset.getString(5),
-                    retset.getString(6), retset.getBoolean(7),
-                    retset.getInt(8), retset.getInt(9), retset.getString(10), 
-                    retset.getString(11));
-            this.setVisible(false);
-            new InterfazPrincipal(accesoBD, unUsuario).setVisible(true);
-        }else{          
+           (new InterfazPrincipal(accesoBD, usuario)).setVisible(true);
+            this.dispose();
+        } else {          
             JOptionPane.showMessageDialog(null,
                     "Usuario o contraseña incorrectos", "Error",
                     JOptionPane.ERROR_MESSAGE);
@@ -180,6 +175,7 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
 
+            @Override
             public void run() {
                 new InterfazAcceso().setVisible(true);
             }

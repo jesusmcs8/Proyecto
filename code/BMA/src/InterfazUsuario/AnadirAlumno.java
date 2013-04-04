@@ -2,11 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package bma;
+package InterfazUsuario;
 
-import GestionDeAlumnos.Alumno;
 import GestionDeAlumnos.GestorDeAlumnos;
-import GestionDeUsuarios.Usuario;
+import ServiciosAlmacenamiento.BaseDatos;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.BorderFactory;
@@ -20,7 +19,6 @@ import javax.swing.border.Border;
 public class AnadirAlumno extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
-    Usuario userConectado;
     Border bordeOriginal, bordeDatePicker, bordeError;
 
     /**
@@ -33,9 +31,8 @@ public class AnadirAlumno extends javax.swing.JFrame {
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
     }
 
-    public AnadirAlumno(BaseDatos acceso, Usuario userArg) {
+    public AnadirAlumno(BaseDatos acceso) {
         accesoBD = acceso;
-        userConectado = userArg;
         initComponents();
         bordeOriginal = nombre.getBorder();
         bordeDatePicker = fechaNac.getBorder();
@@ -668,21 +665,22 @@ public class AnadirAlumno extends javax.swing.JFrame {
         }
         //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
         if (errores.isEmpty()) {
-            Alumno nuevoAlumno;
-
-            nuevoAlumno = GestorDeAlumnos.crearAlumno(nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dateFromDateChooser,
+            boolean error = GestorDeAlumnos.darAltaAlumno(accesoBD, nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dateFromDateChooser,
                     numCuenta.getText(), domicilio.getText(), localidad.getText(),
                     Integer.parseInt(codPostal.getText()), provincia.getText(), colegio.getText(), nombrePadre.getText(),
                     nombreMadre.getText(), Integer.parseInt(telFijo.getText()), Integer.parseInt(telMovil.getText()), email.getText(), "",
                     (String) talla.getSelectedItem());
-
-            GestorDeAlumnos.insertarAlumno(accesoBD, nuevoAlumno);
-            JOptionPane.showMessageDialog(null, "Alumno creado con exito",
-                    "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            if (error) {
+                JOptionPane.showMessageDialog(null, "Ha habido un error en la base de datos",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Alumno creado con exito",
+                        "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            }
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null,
-                    errores.substring(0, errores.length()-1),
+                    errores.substring(0, errores.length() - 1),
                     "Errores en el formulario", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botonAnadirActionPerformed
@@ -815,8 +813,11 @@ public class AnadirAlumno extends javax.swing.JFrame {
 
     private boolean isInteger(String cadena) {
         boolean esEntero = true;
-        try { Integer.parseInt(cadena); }
-        catch (Exception e) { esEntero = false; }
+        try {
+            Integer.parseInt(cadena);
+        } catch (Exception e) {
+            esEntero = false;
+        }
         return esEntero;
     }
 
@@ -849,6 +850,7 @@ public class AnadirAlumno extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new AnadirAlumno().setVisible(true);
             }

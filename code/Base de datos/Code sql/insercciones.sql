@@ -1,9 +1,9 @@
-INSERT INTO usuario (nombre, primerapellido, segundoapellido, dni, clave)
-VALUES ("paco", "fernandez" , "fernandez2", "77777777q","clave");
-INSERT INTO usuario (nombre, primerapellido, segundoapellido, dni, clave, entrenador)
-VALUES ("trainerman", "fernandez" , "fernandez2", "77777777q","clave", true);
-INSERT INTO usuario (nombre, primerapellido, segundoapellido, dni, clave, entrenador)
-VALUES ("mourino", "fernandez" , "fernandez2", "77777777q","clave", true);
+INSERT INTO usuario (nombre, primerapellido, segundoapellido, dni, user, clave)
+VALUES ("paco", "fernandez" , "fernandez2", "77777777q", "paco","clave");
+INSERT INTO usuario (nombre, primerapellido, segundoapellido, dni, user, clave, entrenador)
+VALUES ("reinaldo", "fernandez" , "fernandez2", "77777777q", "trainerman", "clave", true);
+INSERT INTO usuario (nombre, primerapellido, segundoapellido, dni, user, clave, entrenador)
+VALUES ("mourinho", "fernandez" , "fernandez2", "77777777q","mourino","clave", true);
 
 INSERT INTO temporada ( curso, inicio, fin) values ('2012-2013', '2012-02-02', '2013-03-03');
 INSERT INTO temporada ( curso, inicio, fin) values ('2013-2014', '2012-02-02', '2013-03-03');
@@ -100,49 +100,49 @@ INSERT INTO alumno (nombre,  primerapellido, segundoapellido,
 fechanacimiento, telmovil, email, talla, nombrepadre, nombremadre)
 VALUES ("alumno28",  "apellido1", "apellido2", 12/07/90, 677677677, "sucorreo", 'XL', 'eladio', 'juana');
 
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (1, 1, 1, 2, 1);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (2, 1, 1, 2, 1);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (3, 1, 1, 2, 1);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (4, 1, 1, 2, 1);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (5, 1, 1, 2, 1);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (6, 1, 1, 2, 1);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (7, 1, 1, 2, 1);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (8, 1, 1, 2, 1);
 
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (9, 2, 1, 2, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (10, 2, 1, 2, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (11, 2, 1, 2, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (12, 2, 1, 2, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (13, 2, 1, 2, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (14, 2, 1, 2, 2);
 
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (15, 3, 2, 3, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (16, 3, 2, 3, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (17, 3, 2, 3, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (18, 3, 2, 3, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (19, 3, 2, 3, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (20, 3, 2, 3, 2);
-INSERT INTO alumno_has_grupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
+INSERT INTO alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, Grupo_Categoria_idCategoria, 
 Grupo_Usuario_idUsuario, Grupo_Temporada_idTemporada) VALUES (21, 3, 2, 3, 2);
 
 insert into fundacion (nombre,cp,ccc,email) values ('lafundacion' , 12, 'no se que es ccc pero hay lo llevas', 'correo@fundacion');

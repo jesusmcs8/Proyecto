@@ -3,15 +3,18 @@
  * and open the template in the editor.
  */
 package GestionDeUsuarios;
-import java.sql.*;
-import bma.BaseDatos;
+import ServiciosAlmacenamiento.BaseDatos;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Francisco
  */
-public class UsuarioBD {
+class UsuarioBD {
     
-    public void insertarUsuarioBD(BaseDatos accesoBD, Usuario nuevoUsuario) {
+    public static void insertarUsuarioBD(BaseDatos accesoBD, Usuario nuevoUsuario) {
         String insercion = "INSERT INTO usuario (nombre, primerApellido,"
                 + "segundoApellido, DNI, clave, entrenador, numeroCuenta,"
                 + "telMovil, telFijo, email) values ('"
@@ -21,13 +24,27 @@ public class UsuarioBD {
                 + nuevoUsuario.getEmail() + "')";
 
         System.out.print("\n insert usuario--> " + insercion);
-        accesoBD.ejecutaActualizacion(insercion);
+        try {
+            accesoBD.ejecutaActualizacion(insercion);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
-    public ResultSet consultaUsuarioBD(BaseDatos accesoBD, String consulta) {
+    
+    public static boolean consultaUsuarioDNI(BaseDatos accesoBD, String dni) throws SQLException {
+        boolean existe = true;
+        ResultSet rs = accesoBD.ejecutaConsulta("SELECT dni FROM usuario WHERE dni='" + dni + "'");
+        if (!rs.next()) {
+            existe = false;
+        }
+        return existe;
+    }
+    
+    public static ResultSet consultaUsuarioBD(BaseDatos accesoBD, String consulta) {
         return accesoBD.ejecutaConsulta(consulta);
     }
-    public void actualizaUsuarioBD(BaseDatos accesoBD, String actualizacion) {
+
+    public void actualizaUsuarioBD(BaseDatos accesoBD, String actualizacion) throws SQLException {
         accesoBD.ejecutaActualizacion(actualizacion);
     }
 

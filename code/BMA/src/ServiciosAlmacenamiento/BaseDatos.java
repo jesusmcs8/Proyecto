@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package bma;
+package ServiciosAlmacenamiento;
 
 import java.sql.*;
 import java.util.*;
@@ -117,20 +117,10 @@ public class BaseDatos {
         return retset;
     }
 
-    public boolean ejecutaActualizacion(String actualizacion) {
-        try {
-            int i = comprobar();
-            stmt = conexion.get(i).createStatement();
-            int act=stmt.executeUpdate(actualizacion);
-            if (act == 1) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (SQLException ex) {
-            System.out.print(ex.getMessage());
-            return false;
-        }
+    public void ejecutaActualizacion(String actualizacion) throws SQLException {
+        int i = comprobar();
+        stmt = conexion.get(i).createStatement();
+        stmt.executeUpdate(actualizacion);
     }
 
     public boolean eliminar(String delete) {

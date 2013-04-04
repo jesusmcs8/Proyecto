@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package bma;
+package InterfazUsuario;
 
 import GestionDeUsuarios.GestorDeUsuarios;
-import GestionDeUsuarios.Usuario;
+import ServiciosAlmacenamiento.BaseDatos;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -18,7 +18,6 @@ import javax.swing.border.Border;
 public class AnadirUsuario extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
-    Usuario userConectado;
     Border bordeOriginal, bordeError;
     
     /**
@@ -30,9 +29,8 @@ public class AnadirUsuario extends javax.swing.JFrame {
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
     }
     
-    public AnadirUsuario(BaseDatos acceso, Usuario userArg) {
+    public AnadirUsuario(BaseDatos acceso) {
         accesoBD = acceso;
-        userConectado = userArg;
         initComponents();
         bordeOriginal = nombre.getBorder();
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
@@ -74,7 +72,6 @@ public class AnadirUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo usuario");
-        setMaximumSize(new java.awt.Dimension(800, 275));
         setMinimumSize(new java.awt.Dimension(800, 275));
         setResizable(false);
 
@@ -451,12 +448,9 @@ public class AnadirUsuario extends javax.swing.JFrame {
             
             entrenador = ((String) tipo.getSelectedItem()).equals("Entrenador");
             
-            Usuario unUsuario;
-            unUsuario = GestorDeUsuarios.crearUsuario(nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dni.getText(),
+            GestorDeUsuarios.darAltaUsuario(accesoBD, nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dni.getText(),
                 clave.getText(), entrenador, Integer.parseInt(telMovil.getText()),
                 Integer.parseInt(telFijo.getText()), email.getText(), numeroCuenta.getText());
-
-            GestorDeUsuarios.insertarUsuario(accesoBD, unUsuario);
             JOptionPane.showMessageDialog(null, "Usuario creado con exito",
                     "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
