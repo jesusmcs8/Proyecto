@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  *
  * @author Francisco
  */
-class UsuarioBD {
+class AccesoBDUsuario {
     
     public static void insertarUsuarioBD(BaseDatos accesoBD, Usuario nuevoUsuario) {
         String insercion = "INSERT INTO usuario (nombre, primerApellido,"
@@ -27,7 +27,7 @@ class UsuarioBD {
         try {
             accesoBD.ejecutaActualizacion(insercion);
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioBD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AccesoBDUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

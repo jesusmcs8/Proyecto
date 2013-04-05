@@ -4,7 +4,7 @@
  */
 package InterfazUsuario;
 
-import GestionDeAlumnos.GestorDeAlumnos;
+import GestionDeAlumnos.GestorAlumnos;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.awt.Color;
 import java.util.Date;
@@ -16,7 +16,7 @@ import javax.swing.border.Border;
  *
  * @author Alex
  */
-public class AnadirAlumno extends javax.swing.JFrame {
+public class AltaAlumno extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
     Border bordeOriginal, bordeDatePicker, bordeError;
@@ -24,14 +24,14 @@ public class AnadirAlumno extends javax.swing.JFrame {
     /**
      * Creates new form AnadorAlumno
      */
-    public AnadirAlumno() {
+    public AltaAlumno() {
         initComponents();
         bordeOriginal = nombre.getBorder();
         bordeDatePicker = fechaNac.getBorder();
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
     }
 
-    public AnadirAlumno(BaseDatos acceso) {
+    public AltaAlumno(BaseDatos acceso) {
         accesoBD = acceso;
         initComponents();
         bordeOriginal = nombre.getBorder();
@@ -665,7 +665,7 @@ public class AnadirAlumno extends javax.swing.JFrame {
         }
         //Si no ha habido ningún error al introducir los campos, entonces hacemos el insert
         if (errores.isEmpty()) {
-            boolean error = GestorDeAlumnos.darAltaAlumno(accesoBD, nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dateFromDateChooser,
+            boolean error = GestorAlumnos.darAltaAlumno(accesoBD, nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dateFromDateChooser,
                     numCuenta.getText(), domicilio.getText(), localidad.getText(),
                     Integer.parseInt(codPostal.getText()), provincia.getText(), colegio.getText(), nombrePadre.getText(),
                     nombreMadre.getText(), Integer.parseInt(telFijo.getText()), Integer.parseInt(telMovil.getText()), email.getText(), "",
@@ -838,13 +838,13 @@ public class AnadirAlumno extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AnadirAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AnadirAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AnadirAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AnadirAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaAlumno.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -852,7 +852,7 @@ public class AnadirAlumno extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new AnadirAlumno().setVisible(true);
+                new AltaAlumno().setVisible(true);
             }
         });
     }

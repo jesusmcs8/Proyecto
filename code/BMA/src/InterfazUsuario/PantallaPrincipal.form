@@ -147,7 +147,7 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="resultadosAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Resultados de los alumnos:"/>
           </Properties>
@@ -170,12 +170,12 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JButton" name="botonGuardarCambios">
+        <Component class="javax.swing.JButton" name="botonGuardarCambiosAl">
           <Properties>
             <Property name="text" type="java.lang.String" value="Guardar Cambios"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGuardarCambiosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonGuardarCambiosAlActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -196,7 +196,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="buscarAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar alumnos por:"/>
           </Properties>
@@ -206,7 +206,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="equipoAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Equipo"/>
           </Properties>
@@ -216,7 +216,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="grupoAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Grupo"/>
           </Properties>
@@ -226,7 +226,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel6">
+        <Component class="javax.swing.JLabel" name="edadAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Edad"/>
           </Properties>
@@ -236,7 +236,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel7">
+        <Component class="javax.swing.JLabel" name="entrenadorAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Entrenador"/>
           </Properties>
@@ -246,7 +246,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="nombreAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nombre"/>
           </Properties>
@@ -256,21 +256,21 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="textfield_nombre">
+        <Component class="javax.swing.JTextField" name="nombreAl">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="140" y="60" width="201" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="textfield_edad">
+        <Component class="javax.swing.JTextField" name="edadAl">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="780" y="60" width="80" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+        <Container class="javax.swing.JScrollPane" name="panelResulAl">
           <Properties>
             <Property name="autoscrolls" type="boolean" value="true"/>
           </Properties>
@@ -404,12 +404,12 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="boton_mostrar_alumnos">
+        <Component class="javax.swing.JButton" name="botonMostrarAlumnos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Mostrar Alumnos"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="boton_mostrar_alumnosActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonMostrarAlumnosActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -417,7 +417,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
+        <Component class="javax.swing.JLabel" name="categoriaAlLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Categoria"/>
           </Properties>
@@ -427,21 +427,21 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="textfield_apellido2">
+        <Component class="javax.swing.JTextField" name="segundoApellidoAl">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="570" y="60" width="201" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JTextField" name="textfield_apellido1">
+        <Component class="javax.swing.JTextField" name="primerApellidoAl">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="360" y="60" width="201" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel10">
+        <Component class="javax.swing.JLabel" name="primerApellidoLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Apellido Primero"/>
           </Properties>
@@ -451,7 +451,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel11">
+        <Component class="javax.swing.JLabel" name="segundoApellidoLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Apellido Segundo"/>
           </Properties>
@@ -461,7 +461,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel17">
+        <Component class="javax.swing.JLabel" name="temporadaLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Temporada"/>
           </Properties>

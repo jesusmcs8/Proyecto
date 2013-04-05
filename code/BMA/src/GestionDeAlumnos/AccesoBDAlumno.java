@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Carlos
  * @author Alexander Moreno Borrego
  */
-class AlumnoBD {
+class AccesoBDAlumno {
 
     public static void insertarAlumnoBD(BaseDatos accesoBD, Alumno alumnoNuevo) throws SQLException {
         String dateString = String.format("%1$tY-%1$tm-%1$td", alumnoNuevo.getFechaNacimiento());
@@ -39,12 +39,71 @@ class AlumnoBD {
         return retset;
     }
 
-    public void actualizaAlumnoBD(BaseDatos accesoBD, String actualizacion) {
+    public static boolean modificarDatosAlumno(BaseDatos accesoBD, String idAlumno, String nombre, String primerApellido, String segundoApellido, String fechaNac,
+            String cuentaCorriente, String domicilio, String localidad, String codPostal, String provincia, String colegio,
+            String nombrePadre, String nombreMadre, String telFijo, String telMovil, String email, String observaciones, String tallaAlumno) {
+        boolean exito = true;
+        String actualizacion = "UPDATE alumno SET ";
+        if (nombre != null) {
+            actualizacion = actualizacion + "nombre='" + nombre + "', ";
+        }
+        if (primerApellido != null) {
+            actualizacion = actualizacion + "primerApellido='" + primerApellido + "', ";
+        }
+        if (segundoApellido != null) {
+            actualizacion = actualizacion + "segundoApellido='" + segundoApellido + "', ";
+        }
+        if (fechaNac != null) {
+            actualizacion = actualizacion + "fechaNacimiento='" + segundoApellido + "', ";
+        }
+        if (cuentaCorriente != null) {
+            actualizacion = actualizacion + "numeroCuenta='" + cuentaCorriente + "', ";
+        }
+        if (domicilio != null) {
+            actualizacion = actualizacion + "domicilio='" + domicilio + "', ";
+        }
+        if (localidad != null) {
+            actualizacion = actualizacion + "localidad='" + localidad + "', ";
+        }
+        if (codPostal != null) {
+            actualizacion = actualizacion + "codigoPostal=" + codPostal + ", ";
+        }
+        if (provincia != null) {
+            actualizacion = actualizacion + "provincia='" + provincia + "', ";
+        }
+        if (colegio != null) {
+            actualizacion = actualizacion + "colegio='" + colegio + "', ";
+        }
+        if (nombrePadre != null) {
+            actualizacion = actualizacion + "nombrePadre='" + nombrePadre + "', ";
+        }
+        if (nombreMadre != null) {
+            actualizacion = actualizacion + "nombreMadre='" + nombreMadre + "', ";
+        }
+        if (telFijo != null) {
+            actualizacion = actualizacion + "telFijo=" + telFijo + ", ";
+        }
+        if (telMovil != null) {
+            actualizacion = actualizacion + "telMovil=" + telMovil + ", ";
+        }
+        if (email != null) {
+            actualizacion = actualizacion + "email='" + email + "', ";
+        }
+        if (observaciones != null) {
+            actualizacion = actualizacion + "observaciones='" + observaciones + "', ";
+        }
+        if (tallaAlumno != null) {
+            actualizacion = actualizacion + "talla='" + tallaAlumno + "', ";
+        }
+        actualizacion = actualizacion.substring(0, actualizacion.length() - 2);
+        actualizacion = actualizacion + " WHERE idAlumno=" + idAlumno;
         try {
             accesoBD.ejecutaActualizacion(actualizacion);
+            System.out.print("\nModificado act\n " + actualizacion);
         } catch (SQLException ex) {
-            Logger.getLogger(AlumnoBD.class.getName()).log(Level.SEVERE, null, ex);
+            exito = false;
         }
+        return exito;
     }
 
     public void eliminaAlumnoBD(BaseDatos accesoBD, Alumno alumnoNuevo) {
@@ -69,14 +128,14 @@ class AlumnoBD {
             try {
                 accesoBD.ejecutaActualizacion(delete);
             } catch (SQLException ex) {
-                Logger.getLogger(AlumnoBD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AccesoBDAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             String delete = "DELETE FROM alumno WHERE idAlumno = " + alumnoNuevo.getIdAlumno();
             try {
                 accesoBD.ejecutaActualizacion(delete);
             } catch (SQLException ex) {
-                Logger.getLogger(AlumnoBD.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AccesoBDAlumno.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

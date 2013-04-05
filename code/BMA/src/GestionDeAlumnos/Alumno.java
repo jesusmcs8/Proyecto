@@ -16,7 +16,7 @@ class Alumno {
     private String nombre;
     private String primerApellido;
     private String segundoApellido;
-    private java.util.Date fechaNacimiento;
+    private Date fechaNacimiento;
     private String cuentaCorriente;
     private String domicilio;
     private String localidad;

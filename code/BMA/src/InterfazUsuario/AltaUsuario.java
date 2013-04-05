@@ -4,7 +4,7 @@
  */
 package InterfazUsuario;
 
-import GestionDeUsuarios.GestorDeUsuarios;
+import GestionDeUsuarios.GestorUsuarios;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.awt.Color;
 import javax.swing.BorderFactory;
@@ -15,7 +15,7 @@ import javax.swing.border.Border;
  *
  * @author Alex
  */
-public class AnadirUsuario extends javax.swing.JFrame {
+public class AltaUsuario extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
     Border bordeOriginal, bordeError;
@@ -23,13 +23,13 @@ public class AnadirUsuario extends javax.swing.JFrame {
     /**
      * Creates new form AnadirUsuario
      */
-    public AnadirUsuario() {
+    public AltaUsuario() {
         initComponents();
         bordeOriginal = nombre.getBorder();
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
     }
     
-    public AnadirUsuario(BaseDatos acceso) {
+    public AltaUsuario(BaseDatos acceso) {
         accesoBD = acceso;
         initComponents();
         bordeOriginal = nombre.getBorder();
@@ -448,7 +448,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
             
             entrenador = ((String) tipo.getSelectedItem()).equals("Entrenador");
             
-            GestorDeUsuarios.darAltaUsuario(accesoBD, nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dni.getText(),
+            GestorUsuarios.darAltaUsuario(accesoBD, nombre.getText(), primerApellido.getText(), segundoApellido.getText(), dni.getText(),
                 clave.getText(), entrenador, Integer.parseInt(telMovil.getText()),
                 Integer.parseInt(telFijo.getText()), email.getText(), numeroCuenta.getText());
             JOptionPane.showMessageDialog(null, "Usuario creado con exito",
@@ -569,13 +569,13 @@ public class AnadirUsuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AnadirUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -583,7 +583,7 @@ public class AnadirUsuario extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new AnadirUsuario().setVisible(true);
+                new AltaUsuario().setVisible(true);
             }
         });
     }

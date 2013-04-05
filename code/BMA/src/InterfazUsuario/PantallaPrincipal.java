@@ -10,20 +10,20 @@
  */
 package InterfazUsuario;
 
-
-import GestionDeAlumnos.GestorDeAlumnos;
-import GestionDeUsuarios.GestorDeUsuarios;
+import GestionDeAlumnos.GestorAlumnos;
+import GestionDeUsuarios.GestorUsuarios;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Francisco
  */
-public class InterfazPrincipal extends javax.swing.JFrame {
+public class PantallaPrincipal extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
     String usuario;
@@ -37,11 +37,11 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form InterfazPrincipal
      */
-    public InterfazPrincipal() {
+    public PantallaPrincipal() {
         initComponents();
     }
 
-    public InterfazPrincipal(BaseDatos acceso, String usuario) {
+    public PantallaPrincipal(BaseDatos acceso, String usuario) {
         accesoBD = acceso;
         this.usuario = usuario;
         initComponents();
@@ -49,7 +49,7 @@ public class InterfazPrincipal extends javax.swing.JFrame {
     }
 
     private void initComponentsSegunUsuario() {
-        if (!GestorDeUsuarios.tengoPermisosAdministrador(accesoBD, usuario)) {
+        if (!GestorUsuarios.tengoPermisosAdministrador(accesoBD, usuario)) {
             System.out.print("\ninitcomponent segun user");
             barraMenu.remove(menuUsuarios);
             panelJugadores.remove(botonNuevoAlumno);
@@ -70,27 +70,27 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cerrarSesion = new javax.swing.JButton();
         panelJugadores = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        resultadosAlLabel = new javax.swing.JLabel();
         botonNuevoAlumno = new javax.swing.JButton();
-        botonGuardarCambios = new javax.swing.JButton();
+        botonGuardarCambiosAl = new javax.swing.JButton();
         deshacerCambiosAlumno = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        textfield_nombre = new javax.swing.JTextField();
-        textfield_edad = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        buscarAlLabel = new javax.swing.JLabel();
+        equipoAlLabel = new javax.swing.JLabel();
+        grupoAlLabel = new javax.swing.JLabel();
+        edadAlLabel = new javax.swing.JLabel();
+        entrenadorAlLabel = new javax.swing.JLabel();
+        nombreAlLabel = new javax.swing.JLabel();
+        nombreAl = new javax.swing.JTextField();
+        edadAl = new javax.swing.JTextField();
+        panelResulAl = new javax.swing.JScrollPane();
         tablaAlumnos = new javax.swing.JTable();
-        boton_mostrar_alumnos = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        textfield_apellido2 = new javax.swing.JTextField();
-        textfield_apellido1 = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        botonMostrarAlumnos = new javax.swing.JButton();
+        categoriaAlLabel = new javax.swing.JLabel();
+        segundoApellidoAl = new javax.swing.JTextField();
+        primerApellidoAl = new javax.swing.JTextField();
+        primerApellidoLabel = new javax.swing.JLabel();
+        segundoApellidoLabel = new javax.swing.JLabel();
+        temporadaLabel = new javax.swing.JLabel();
         consultaEntrenador = new javax.swing.JComboBox();
         consultaEquipo = new javax.swing.JComboBox();
         consultaGrupo = new javax.swing.JComboBox();
@@ -183,8 +183,8 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         panelJugadores.setVisible(false);
         panelJugadores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setText("Resultados de los alumnos:");
-        panelJugadores.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 20));
+        resultadosAlLabel.setText("Resultados de los alumnos:");
+        panelJugadores.add(resultadosAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 20));
 
         botonNuevoAlumno.setText("Nuevo Alumno");
         botonNuevoAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -194,13 +194,13 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         panelJugadores.add(botonNuevoAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, -1, -1));
 
-        botonGuardarCambios.setText("Guardar Cambios");
-        botonGuardarCambios.addActionListener(new java.awt.event.ActionListener() {
+        botonGuardarCambiosAl.setText("Guardar Cambios");
+        botonGuardarCambiosAl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGuardarCambiosActionPerformed(evt);
+                botonGuardarCambiosAlActionPerformed(evt);
             }
         });
-        panelJugadores.add(botonGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
+        panelJugadores.add(botonGuardarCambiosAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
 
         deshacerCambiosAlumno.setText("Deshacer Cambios");
         deshacerCambiosAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -210,27 +210,27 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         });
         panelJugadores.add(deshacerCambiosAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 690, -1, -1));
 
-        jLabel3.setText("Buscar alumnos por:");
-        panelJugadores.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, -1, -1));
+        buscarAlLabel.setText("Buscar alumnos por:");
+        panelJugadores.add(buscarAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, -1, -1));
 
-        jLabel4.setText("Equipo");
-        panelJugadores.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
+        equipoAlLabel.setText("Equipo");
+        panelJugadores.add(equipoAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, -1, -1));
 
-        jLabel5.setText("Grupo");
-        panelJugadores.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+        grupoAlLabel.setText("Grupo");
+        panelJugadores.add(grupoAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
-        jLabel6.setText("Edad");
-        panelJugadores.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, -1, -1));
+        edadAlLabel.setText("Edad");
+        panelJugadores.add(edadAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, -1, -1));
 
-        jLabel7.setText("Entrenador");
-        panelJugadores.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, -1));
+        entrenadorAlLabel.setText("Entrenador");
+        panelJugadores.add(entrenadorAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 100, -1, -1));
 
-        jLabel8.setText("Nombre");
-        panelJugadores.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 36, -1, -1));
-        panelJugadores.add(textfield_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 201, -1));
-        panelJugadores.add(textfield_edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 80, -1));
+        nombreAlLabel.setText("Nombre");
+        panelJugadores.add(nombreAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(142, 36, -1, -1));
+        panelJugadores.add(nombreAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 201, -1));
+        panelJugadores.add(edadAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, 80, -1));
 
-        jScrollPane1.setAutoscrolls(true);
+        panelResulAl.setAutoscrolls(true);
 
         tablaAlumnos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
@@ -274,33 +274,33 @@ public class InterfazPrincipal extends javax.swing.JFrame {
             }
         });
         tablaAlumnos.setColumnSelectionAllowed(true);
-        jScrollPane1.setViewportView(tablaAlumnos);
+        panelResulAl.setViewportView(tablaAlumnos);
         tablaAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaAlumnos.getColumnModel().getColumn(0).setMaxWidth(45);
 
-        panelJugadores.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, -1));
+        panelJugadores.add(panelResulAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, -1));
 
-        boton_mostrar_alumnos.setText("Mostrar Alumnos");
-        boton_mostrar_alumnos.addActionListener(new java.awt.event.ActionListener() {
+        botonMostrarAlumnos.setText("Mostrar Alumnos");
+        botonMostrarAlumnos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_mostrar_alumnosActionPerformed(evt);
+                botonMostrarAlumnosActionPerformed(evt);
             }
         });
-        panelJugadores.add(boton_mostrar_alumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
+        panelJugadores.add(botonMostrarAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
-        jLabel9.setText("Categoria");
-        panelJugadores.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
-        panelJugadores.add(textfield_apellido2, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 201, -1));
-        panelJugadores.add(textfield_apellido1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 201, -1));
+        categoriaAlLabel.setText("Categoria");
+        panelJugadores.add(categoriaAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, -1, -1));
+        panelJugadores.add(segundoApellidoAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 60, 201, -1));
+        panelJugadores.add(primerApellidoAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, 201, -1));
 
-        jLabel10.setText("Apellido Primero");
-        panelJugadores.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
+        primerApellidoLabel.setText("Apellido Primero");
+        panelJugadores.add(primerApellidoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, -1, -1));
 
-        jLabel11.setText("Apellido Segundo");
-        panelJugadores.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
+        segundoApellidoLabel.setText("Apellido Segundo");
+        panelJugadores.add(segundoApellidoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 40, -1, -1));
 
-        jLabel17.setText("Temporada");
-        panelJugadores.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
+        temporadaLabel.setText("Temporada");
+        panelJugadores.add(temporadaLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, -1, -1));
 
         consultaEntrenador.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "" }));
         panelJugadores.add(consultaEntrenador, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 120, 200, -1));
@@ -557,8 +557,10 @@ public class InterfazPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosActionPerformed
+private void botonGuardarCambiosAlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosAlActionPerformed
     ResultSet retsetMostrados;
+    int i = 0;
+    boolean fila_editada = false, algunaFilaEditada = false, error = false;
 
     //compruebo si se ha mostrado algún resultado antes de guardar los cambios, ya que si no se han mostrado no se ha podido modificar nada
     if (tablaAlumnos.getValueAt(0, 0) == null) {
@@ -566,64 +568,68 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
     }
     try {
         String consulta_alumnos = leeConsultaAlumnosInterfaz();
-        retsetMostrados = GestorDeAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
-        ultimaActualizacionAlumno = GestorDeAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
+        retsetMostrados = GestorAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
+        ultimaActualizacionAlumno = GestorAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
         ultimaConsultaAlumno = consulta_alumnos;
-        int i = 0;
-        String updateFila;
+
+        String idAlumno = null, nombre = null, primerApellido = null,
+                segundoApellido = null, fechaNac = null, talla = null,
+                nombrePadre = null, nombreMadre = null, email = null,
+                numeroCuenta = null, telFijo = null, telMovil = null,
+                provincia = null, localidad = null, domicilio = null,
+                codPostal = null, colegio = null, observaciones = null;
+
         while (retsetMostrados.next()) {
-            updateFila = "UPDATE alumno SET ";
-            boolean fila_editada = false;
             if (!retsetMostrados.getString("a.nombre").equals(tablaAlumnos.getValueAt(i, 0))) {
                 fila_editada = true;
                 if (tablaAlumnos.getValueAt(i, 0).toString().length() < 45) {
-                    updateFila = updateFila + " nombre='" + tablaAlumnos.getValueAt(i, 0) + "', ";
+                    nombre = tablaAlumnos.getValueAt(i, 0).toString();
                 } else {
-                    updateFila = updateFila + " nombre='" + tablaAlumnos.getValueAt(i, 0).toString().substring(0, 45) + "', ";
+                    nombre = tablaAlumnos.getValueAt(i, 0).toString().substring(0, 45);
                 }
             }
             if (!retsetMostrados.getString("a.primerApellido").equals(tablaAlumnos.getValueAt(i, 1))) {
                 fila_editada = true;
                 if (tablaAlumnos.getValueAt(i, 1).toString().length() < 45) {
-                    updateFila = updateFila + " primerApellido='" + tablaAlumnos.getValueAt(i, 1) + "', ";
+                    primerApellido = tablaAlumnos.getValueAt(i, 1).toString();
                 } else {
-                    updateFila = updateFila + " primerApellido='" + tablaAlumnos.getValueAt(i, 1).toString().substring(0, 45) + "', ";
+                    primerApellido = tablaAlumnos.getValueAt(i, 1).toString().substring(0, 45);
                 }
             }
             if (!retsetMostrados.getString("a.segundoApellido").equals(tablaAlumnos.getValueAt(i, 2))) {
                 fila_editada = true;
                 if (tablaAlumnos.getValueAt(i, 2).toString().length() < 45) {
-                    updateFila = updateFila + " segundoApellido='" + tablaAlumnos.getValueAt(i, 2) + "', ";
+                    segundoApellido = tablaAlumnos.getValueAt(i, 2).toString();
                 } else {
-                    updateFila = updateFila + " segundoApellido='" + tablaAlumnos.getValueAt(i, 2).toString().substring(0, 45) + "', ";
+                    segundoApellido = tablaAlumnos.getValueAt(i, 2).toString().substring(0, 45);
                 }
             }
             if (!retsetMostrados.getString("a.fechaNacimiento").equals(tablaAlumnos.getValueAt(i, 3))) {
                 fila_editada = true;
-                updateFila = updateFila + " fechaNacimiento='" + tablaAlumnos.getValueAt(i, 3) + "', ";
+                fechaNac = tablaAlumnos.getValueAt(i, 3).toString();
             }
             if (!retsetMostrados.getString("a.talla").equals(tablaAlumnos.getValueAt(i, 5))) {
                 fila_editada = true;
                 if (tablaAlumnos.getValueAt(i, 5).toString().length() < 12) {
-                    updateFila = updateFila + " talla='" + tablaAlumnos.getValueAt(i, 5) + "', ";
+                    talla = tablaAlumnos.getValueAt(i, 5).toString();
                 } else {
-                    updateFila = updateFila + " talla='" + tablaAlumnos.getValueAt(i, 5).toString().substring(0, 12) + "', ";
+                    talla = tablaAlumnos.getValueAt(i, 5).toString().substring(0, 12);
                 }
             }
             if (!retsetMostrados.getString("a.nombrepadre").equals(tablaAlumnos.getValueAt(i, 13))) {
                 fila_editada = true;
                 if (tablaAlumnos.getValueAt(i, 13).toString().length() < 100) {
-                    updateFila = updateFila + " nombrepadre='" + tablaAlumnos.getValueAt(i, 13) + "', ";
+                    nombrePadre = tablaAlumnos.getValueAt(i, 13).toString();
                 } else {
-                    updateFila = updateFila + " nombrepadre='" + tablaAlumnos.getValueAt(i, 13).toString().substring(0, 100) + "', ";
+                    nombrePadre = tablaAlumnos.getValueAt(i, 13).toString().substring(0, 100);
                 }
             }
             if (!retsetMostrados.getString("a.nombremadre").equals(tablaAlumnos.getValueAt(i, 14))) {
                 fila_editada = true;
                 if (tablaAlumnos.getValueAt(i, 14).toString().length() < 100) {
-                    updateFila = updateFila + " nombremadre='" + tablaAlumnos.getValueAt(i, 14) + "', ";
+                    nombreMadre = tablaAlumnos.getValueAt(i, 14).toString();
                 } else {
-                    updateFila = updateFila + " nombremadre='" + tablaAlumnos.getValueAt(i, 14).toString().substring(0, 100) + "', ";
+                    nombreMadre = tablaAlumnos.getValueAt(i, 14).toString().substring(0, 100);
                 }
             }
             if (tablaAlumnos.getValueAt(i, 4) != null) {
@@ -631,23 +637,23 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if (!retsetMostrados.getString("a.email").equals(tablaAlumnos.getValueAt(i, 4))) {
                         fila_editada = true;
                         if (tablaAlumnos.getValueAt(i, 4).toString().length() < 75) {
-                            updateFila = updateFila + " email='" + tablaAlumnos.getValueAt(i, 4) + "', ";
+                            email = tablaAlumnos.getValueAt(i, 4).toString();
                         } else {
-                            updateFila = updateFila + " email='" + tablaAlumnos.getValueAt(i, 4).toString().substring(0, 75) + "', ";
+                            email = tablaAlumnos.getValueAt(i, 4).toString().substring(0, 75);
                         }
                     }
                 } else {
                     fila_editada = true;
                     if (tablaAlumnos.getValueAt(i, 4).toString().length() < 75) {
-                        updateFila = updateFila + " email='" + tablaAlumnos.getValueAt(i, 4) + "', ";
+                        email = tablaAlumnos.getValueAt(i, 4).toString();
                     } else {
-                        updateFila = updateFila + " email='" + tablaAlumnos.getValueAt(i, 4).toString().substring(0, 75) + "', ";
+                        email = tablaAlumnos.getValueAt(i, 4).toString().substring(0, 75);
                     }
                 }
             } else {
                 if (retsetMostrados.getString("a.email") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " email=null, ";
+                    email = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 6) != null) {
@@ -655,23 +661,23 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if (!retsetMostrados.getString("a.numeroCuenta").equals(tablaAlumnos.getValueAt(i, 6))) {
                         fila_editada = true;
                         if (tablaAlumnos.getValueAt(i, 6).toString().length() < 40) {
-                            updateFila = updateFila + " numerocuenta='" + tablaAlumnos.getValueAt(i, 6) + "', ";
+                            numeroCuenta = tablaAlumnos.getValueAt(i, 6).toString();
                         } else {
-                            updateFila = updateFila + " numerocuenta='" + tablaAlumnos.getValueAt(i, 6).toString().substring(0, 40) + "', ";
+                            numeroCuenta = tablaAlumnos.getValueAt(i, 6).toString().substring(0, 40);
                         }
                     }
                 } else {
                     fila_editada = true;
                     if (tablaAlumnos.getValueAt(i, 6).toString().length() < 40) {
-                        updateFila = updateFila + " numerocuenta='" + tablaAlumnos.getValueAt(i, 6) + "', ";
+                        numeroCuenta = tablaAlumnos.getValueAt(i, 6).toString();
                     } else {
-                        updateFila = updateFila + " numerocuenta='" + tablaAlumnos.getValueAt(i, 6).toString().substring(0, 40) + "', ";
+                        numeroCuenta = tablaAlumnos.getValueAt(i, 6).toString().substring(0, 40);
                     }
                 }
             } else {
                 if (retsetMostrados.getString("a.numeroCuenta") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " numerocuenta=null, ";
+                    numeroCuenta = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 7) != null) {
@@ -680,17 +686,17 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                         if (!retsetMostrados.getString("a.telmovil").equals(tablaAlumnos.getValueAt(i, 7))) {
                             fila_editada = true;
                             if (tablaAlumnos.getValueAt(i, 7).toString().length() < 45) {
-                                updateFila = updateFila + " telmovil='" + tablaAlumnos.getValueAt(i, 7) + "', ";
+                                telMovil = tablaAlumnos.getValueAt(i, 7).toString();
                             } else {
-                                updateFila = updateFila + " telmovil='" + tablaAlumnos.getValueAt(i, 7).toString().substring(0, 45) + "', ";
+                                telMovil = tablaAlumnos.getValueAt(i, 7).toString().substring(0, 45);
                             }
                         }
                     } else {
                         fila_editada = true;
                         if (tablaAlumnos.getValueAt(i, 7).toString().length() < 45) {
-                            updateFila = updateFila + " telmovil='" + tablaAlumnos.getValueAt(i, 7) + "', ";
+                            telMovil = tablaAlumnos.getValueAt(i, 7).toString();
                         } else {
-                            updateFila = updateFila + " telmovil='" + tablaAlumnos.getValueAt(i, 7).toString().substring(0, 45) + "', ";
+                            telMovil = tablaAlumnos.getValueAt(i, 7).toString().substring(0, 45);
                         }
                     }
                 } else {
@@ -699,7 +705,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
             } else {
                 if (retsetMostrados.getString("a.telmovil") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " telmovil=null, ";
+                    telMovil = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 8) != null) {
@@ -708,14 +714,14 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                         if (!retsetMostrados.getString("a.telfijo").equals(tablaAlumnos.getValueAt(i, 8))) {
                             fila_editada = true;
                             if (tablaAlumnos.getValueAt(i, 8).toString().length() < 45) {
-                                updateFila = updateFila + " telfijo='" + tablaAlumnos.getValueAt(i, 8) + "', ";
+                                telFijo = tablaAlumnos.getValueAt(i, 8).toString();
                             } else {
-                                updateFila = updateFila + " telfijo='" + tablaAlumnos.getValueAt(i, 8).toString().substring(0, 45) + "', ";
+                                telFijo = tablaAlumnos.getValueAt(i, 8).toString().substring(0, 45);
                             }
                         }
                     } else {
                         fila_editada = true;
-                        updateFila = updateFila + " telfijo=" + tablaAlumnos.getValueAt(i, 8) + ", ";
+                        telFijo = tablaAlumnos.getValueAt(i, 8).toString();
                     }
                 } else {
                     errorModifFijo.setVisible(true);
@@ -723,7 +729,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
             } else {
                 if (retsetMostrados.getString("a.telfijo") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " telfijo=null, ";
+                    telFijo = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 9) != null) {
@@ -731,23 +737,23 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if (!retsetMostrados.getString("a.provincia").equals(tablaAlumnos.getValueAt(i, 9))) {
                         fila_editada = true;
                         if (tablaAlumnos.getValueAt(i, 9).toString().length() < 70) {
-                            updateFila = updateFila + " provincia='" + tablaAlumnos.getValueAt(i, 9) + "', ";
+                            provincia = tablaAlumnos.getValueAt(i, 9).toString();
                         } else {
-                            updateFila = updateFila + " provincia='" + tablaAlumnos.getValueAt(i, 9).toString().substring(0, 70) + "', ";
+                            provincia = tablaAlumnos.getValueAt(i, 9).toString().substring(0, 70);
                         }
                     }
                 } else {
                     fila_editada = true;
                     if (tablaAlumnos.getValueAt(i, 9).toString().length() < 70) {
-                        updateFila = updateFila + " provincia='" + tablaAlumnos.getValueAt(i, 9) + "', ";
+                        provincia = tablaAlumnos.getValueAt(i, 9).toString();
                     } else {
-                        updateFila = updateFila + " provincia='" + tablaAlumnos.getValueAt(i, 9).toString().substring(0, 70) + "', ";
+                        provincia = tablaAlumnos.getValueAt(i, 9).toString().substring(0, 70);
                     }
                 }
             } else {
                 if (retsetMostrados.getString("a.provincia") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " provincia=null, ";
+                    provincia = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 10) != null) {
@@ -755,23 +761,23 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if (!retsetMostrados.getString("a.localidad").equals(tablaAlumnos.getValueAt(i, 10))) {
                         fila_editada = true;
                         if (tablaAlumnos.getValueAt(i, 10).toString().length() < 45) {
-                            updateFila = updateFila + " localidad='" + tablaAlumnos.getValueAt(i, 10) + "', ";
+                            localidad = tablaAlumnos.getValueAt(i, 10).toString();
                         } else {
-                            updateFila = updateFila + " localidad='" + tablaAlumnos.getValueAt(i, 10).toString().substring(0, 45) + "', ";
+                            localidad = tablaAlumnos.getValueAt(i, 10).toString().substring(0, 45);
                         }
                     }
                 } else {
                     fila_editada = true;
                     if (tablaAlumnos.getValueAt(i, 10).toString().length() < 45) {
-                        updateFila = updateFila + " localidad='" + tablaAlumnos.getValueAt(i, 10) + "', ";
+                        localidad = tablaAlumnos.getValueAt(i, 10).toString();
                     } else {
-                        updateFila = updateFila + " localidad='" + tablaAlumnos.getValueAt(i, 10).toString().substring(0, 45) + "', ";
+                        localidad = tablaAlumnos.getValueAt(i, 10).toString().substring(0, 45);
                     }
                 }
             } else {
                 if (retsetMostrados.getString("a.localidad") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " localidad=null, ";
+                    localidad = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 11) != null) {
@@ -779,23 +785,23 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if (!retsetMostrados.getString("a.domicilio").equals(tablaAlumnos.getValueAt(i, 11))) {
                         fila_editada = true;
                         if (tablaAlumnos.getValueAt(i, 11).toString().length() < 100) {
-                            updateFila = updateFila + " domicilio='" + tablaAlumnos.getValueAt(i, 11) + "', ";
+                            domicilio = tablaAlumnos.getValueAt(i, 11).toString();
                         } else {
-                            updateFila = updateFila + " domicilio='" + tablaAlumnos.getValueAt(i, 11).toString().substring(0, 100) + "', ";
+                            domicilio = tablaAlumnos.getValueAt(i, 11).toString().substring(0, 100) + "', ";
                         }
                     }
                 } else {
                     fila_editada = true;
                     if (tablaAlumnos.getValueAt(i, 11).toString().length() < 100) {
-                        updateFila = updateFila + " domicilio='" + tablaAlumnos.getValueAt(i, 11) + "', ";
+                        domicilio = tablaAlumnos.getValueAt(i, 11).toString();
                     } else {
-                        updateFila = updateFila + " domicilio='" + tablaAlumnos.getValueAt(i, 11).toString().substring(0, 100) + "', ";
+                        domicilio = tablaAlumnos.getValueAt(i, 11).toString().substring(0, 100);
                     }
                 }
             } else {
                 if (retsetMostrados.getString("a.domicilio") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " domicilio=null, ";
+                    domicilio = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 12) != null) {
@@ -803,11 +809,11 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if (retsetMostrados.getString("a.codigopostal") != null) {
                         if (!retsetMostrados.getString("a.codigopostal").equals(tablaAlumnos.getValueAt(i, 12))) {
                             fila_editada = true;
-                            updateFila = updateFila + " codigopostal=" + tablaAlumnos.getValueAt(i, 12) + ", ";
+                            codPostal = tablaAlumnos.getValueAt(i, 12).toString();
                         }
                     } else {
                         fila_editada = true;
-                        updateFila = updateFila + " codigopostal=" + tablaAlumnos.getValueAt(i, 12) + ", ";
+                        codPostal = tablaAlumnos.getValueAt(i, 12).toString();
                     }
                 } else {
                     errorModifCP.setVisible(true);
@@ -815,7 +821,7 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
             } else {
                 if (retsetMostrados.getString("a.codigopostal") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " codigopostal=null, ";
+                    codPostal = "NULL";
                 }
             }
             if (tablaAlumnos.getValueAt(i, 15) != null) {
@@ -823,44 +829,46 @@ private void botonGuardarCambiosActionPerformed(java.awt.event.ActionEvent evt) 
                     if (!retsetMostrados.getString("a.colegio").equals(tablaAlumnos.getValueAt(i, 15))) {
                         fila_editada = true;
                         if (tablaAlumnos.getValueAt(i, 15).toString().length() < 45) {
-                            updateFila = updateFila + " colegio='" + tablaAlumnos.getValueAt(i, 15) + "', ";
+                            colegio = tablaAlumnos.getValueAt(i, 15).toString();
                         } else {
-                            updateFila = updateFila + " colegio='" + tablaAlumnos.getValueAt(i, 15).toString().substring(0, 45) + "', ";
+                            colegio = tablaAlumnos.getValueAt(i, 15).toString().substring(0, 45);
                         }
                     }
                 } else {
                     fila_editada = true;
                     if (tablaAlumnos.getValueAt(i, 15).toString().length() < 45) {
-                        updateFila = updateFila + " colegio='" + tablaAlumnos.getValueAt(i, 15) + "', ";
+                        colegio = tablaAlumnos.getValueAt(i, 15).toString();
                     } else {
-                        updateFila = updateFila + " colegio='" + tablaAlumnos.getValueAt(i, 15).toString().substring(0, 45) + "', ";
+                        colegio = tablaAlumnos.getValueAt(i, 15).toString().substring(0, 45);
                     }
                 }
             } else {
                 if (retsetMostrados.getString("a.colegio") != null) {
                     fila_editada = true;
-                    updateFila = updateFila + " colegio=null, ";
+                    colegio = "NULL";
                 }
             }
-            updateFila = updateFila.substring(0, updateFila.length() - 2);
-            updateFila = updateFila + " WHERE alumno.idalumno=" + retsetMostrados.getString("a.idalumno");
+            idAlumno = retsetMostrados.getString("a.idalumno");
             if (fila_editada == true) {
-                GestorDeAlumnos.actualizaAlumno(accesoBD, updateFila);
-                //accesoBD.ejecutaActualizacion(updateFila);
-                System.out.print("\nModificado " + i + " act\n " + updateFila);
+                error = GestorAlumnos.modificarDatos(accesoBD, idAlumno, nombre, primerApellido, segundoApellido, fechaNac,
+                        numeroCuenta, domicilio, localidad, codPostal, provincia, colegio,
+                        nombrePadre, nombreMadre, telFijo, telMovil, email, observaciones, talla);
+                idAlumno = nombre = primerApellido = segundoApellido = null;
+                fechaNac = talla = nombrePadre = nombreMadre = null;
+                email = numeroCuenta = telFijo = telMovil = provincia = null;
+                localidad = domicilio = codPostal = colegio = observaciones = null;
             }
             i++;
         }
     } catch (SQLException ex) {
         System.out.print(ex.getMessage());
     }
-}//GEN-LAST:event_botonGuardarCambiosActionPerformed
+}//GEN-LAST:event_botonGuardarCambiosAlActionPerformed
 
 private void menuInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInicioActionPerformed
 }//GEN-LAST:event_menuInicioActionPerformed
 
 private void menuJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuJugadoresActionPerformed
-
 }//GEN-LAST:event_menuJugadoresActionPerformed
 
 private void menuJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuJugadoresMouseClicked
@@ -895,7 +903,7 @@ private void menuJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
         while (consulta.next()) {
             consultaEntrenador.addItem(consulta.getString("nombre") + " " + consulta.getString("primerApellido"));
         }
-        
+
     } catch (SQLException ex) {
         System.out.print(ex.getMessage());
     }
@@ -914,25 +922,25 @@ private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
         String tablasImplicadas = " alumno a ";
         String condicionesConsulta = " WHERE ";
 
-        if (!textfield_nombre.getText().equals("") || !textfield_apellido1.getText().equals("") || !textfield_apellido2.getText().equals("")
-                || !textfield_edad.getText().equals("") || !consultaEquipo.getSelectedItem().equals("") || !consultaGrupo.getSelectedItem().equals("")
+        if (!nombreAl.getText().equals("") || !primerApellidoAl.getText().equals("") || !segundoApellidoAl.getText().equals("")
+                || !edadAl.getText().equals("") || !consultaEquipo.getSelectedItem().equals("") || !consultaGrupo.getSelectedItem().equals("")
                 || !consultaCategoria.getSelectedItem().equals("") || !consultaTemporada.getSelectedItem().equals("") || !consultaEntrenador.getSelectedItem().equals("")) {
-            if (!textfield_nombre.getText().equals("")) {
-                condicionesConsulta = condicionesConsulta + " a.nombre='" + textfield_nombre.getText() + "' AND ";
+            if (!nombreAl.getText().equals("")) {
+                condicionesConsulta = condicionesConsulta + " a.nombre='" + nombreAl.getText() + "' AND ";
             }
-            if (!textfield_apellido1.getText().equals("")) {
-                condicionesConsulta = condicionesConsulta + " a.primerapellido='" + textfield_apellido1.getText() + "' AND ";
+            if (!primerApellidoAl.getText().equals("")) {
+                condicionesConsulta = condicionesConsulta + " a.primerapellido='" + primerApellidoAl.getText() + "' AND ";
             }
-            if (!textfield_apellido2.getText().equals("")) {
-                condicionesConsulta = condicionesConsulta + " a.segundoapellido='" + textfield_apellido2.getText() + "' AND ";
+            if (!segundoApellidoAl.getText().equals("")) {
+                condicionesConsulta = condicionesConsulta + " a.segundoapellido='" + segundoApellidoAl.getText() + "' AND ";
             }
-            if (!textfield_edad.getText().equals("") && isInteger(textfield_edad.getText())) {
+            if (!edadAl.getText().equals("") && isInteger(edadAl.getText())) {
                 Calendar cal1 = Calendar.getInstance();  //con la hora actual del sistema calculamos la edad del alumno
                 int diaAct, mesAct, anoAct;
                 String fechaAnt, fechaPost;
                 diaAct = cal1.get(Calendar.DATE);
                 mesAct = cal1.get(Calendar.MONTH) + 1;
-                anoAct = cal1.get(Calendar.YEAR) - Integer.parseInt(textfield_edad.getText());
+                anoAct = cal1.get(Calendar.YEAR) - Integer.parseInt(edadAl.getText());
                 fechaAnt = anoAct + "-" + mesAct + "-" + diaAct;
                 fechaPost = (anoAct - 1) + "-" + mesAct + "-" + diaAct;
                 condicionesConsulta = condicionesConsulta + " a.fechaNacimiento <= '" + fechaAnt + "' AND " + " a.fechaNacimiento > '" + fechaPost + "' AND ";
@@ -971,11 +979,11 @@ private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
 
         return consulta_alumnos;
     }
-private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_alumnosActionPerformed
+private void botonMostrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarAlumnosActionPerformed
     try {
         String consulta_alumnos = leeConsultaAlumnosInterfaz();
         System.out.print("\nLA consulta a " + consulta_alumnos + "  y qui termina");
-        retset = GestorDeAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
+        retset = GestorAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                     {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -1060,10 +1068,10 @@ private void boton_mostrar_alumnosActionPerformed(java.awt.event.ActionEvent evt
         System.out.print(ex.getMessage());
     }
 
-}//GEN-LAST:event_boton_mostrar_alumnosActionPerformed
+}//GEN-LAST:event_botonMostrarAlumnosActionPerformed
 
 private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
-    new AnadirAlumno(accesoBD).setVisible(true);
+    new AltaAlumno(accesoBD).setVisible(true);
 }//GEN-LAST:event_botonNuevoAlumnoActionPerformed
 
     private boolean isInteger(String cadena) {
@@ -1078,205 +1086,214 @@ private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void deshacerCambiosAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosAlumnoActionPerformed
     ResultSet estadoActual;
-    estadoActual = GestorDeAlumnos.consultarAlumno(accesoBD, ultimaConsultaAlumno);
+    estadoActual = GestorAlumnos.consultarAlumno(accesoBD, ultimaConsultaAlumno);
+    String idAlumno = null, nombre = null, primerApellido = null,
+            segundoApellido = null, fechaNac = null, talla = null,
+            nombrePadre = null, nombreMadre = null, email = null,
+            numeroCuenta = null, telFijo = null, telMovil = null,
+            provincia = null, localidad = null, domicilio = null,
+            codPostal = null, colegio = null, observaciones = null;
     try {
         while (estadoActual.next()) {
             ultimaActualizacionAlumno.next();
-            String updateFila = "UPDATE alumno SET ";
             boolean fila_editada = false;
             if (!ultimaActualizacionAlumno.getString("a.nombre").equals(estadoActual.getString("a.nombre"))) {
                 fila_editada = true;
-                updateFila = updateFila + " nombre='" + ultimaActualizacionAlumno.getString("a.nombre") + "', ";
+                nombre = ultimaActualizacionAlumno.getString("a.nombre");
             }
             if (!ultimaActualizacionAlumno.getString("a.primerApellido").equals(estadoActual.getString("a.primerApellido"))) {
                 fila_editada = true;
-                updateFila = updateFila + " primerApellido='" + ultimaActualizacionAlumno.getString("a.primerApellido") + "', ";
+                primerApellido = ultimaActualizacionAlumno.getString("a.primerApellido");
             }
             if (!ultimaActualizacionAlumno.getString("a.segundoApellido").equals(estadoActual.getString("a.segundoApellido"))) {
                 fila_editada = true;
-                updateFila = updateFila + " segundoApellido='" + ultimaActualizacionAlumno.getString("a.segundoApellido") + "', ";
+                segundoApellido = ultimaActualizacionAlumno.getString("a.segundoApellido");
             }
             if (!ultimaActualizacionAlumno.getString("a.fechaNacimiento").equals(estadoActual.getString("a.fechaNacimiento"))) {
                 fila_editada = true;
-                updateFila = updateFila + " fechaNacimiento='" + ultimaActualizacionAlumno.getString("a.fechaNacimiento") + "', ";
+                fechaNac = ultimaActualizacionAlumno.getString("a.fechaNacimiento");
             }
             if (!ultimaActualizacionAlumno.getString("a.nombrepadre").equals(estadoActual.getString("a.nombrepadre"))) {
                 fila_editada = true;
-                updateFila = updateFila + " nombrepadre='" + ultimaActualizacionAlumno.getString("a.nombrepadre") + "', ";
+                nombrePadre = ultimaActualizacionAlumno.getString("a.nombrepadre");
             }
             if (!ultimaActualizacionAlumno.getString("a.nombremadre").equals(estadoActual.getString("a.nombremadre"))) {
                 fila_editada = true;
-                updateFila = updateFila + " nombremadre='" + ultimaActualizacionAlumno.getString("a.nombremadre") + "', ";
+                nombreMadre = ultimaActualizacionAlumno.getString("a.nombremadre");
             }
             if (ultimaActualizacionAlumno.getString("a.email") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.email") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.email").equals(estadoActual.getString("a.email"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " email='" + ultimaActualizacionAlumno.getString("a.email") + "', ";
+                        email = ultimaActualizacionAlumno.getString("a.email");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " email='" + ultimaActualizacionAlumno.getString("a.email") + "', ";
+                    email = ultimaActualizacionAlumno.getString("a.email");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.email") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " email=null, ";
+                    email = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.talla") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.talla") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.talla").equals(estadoActual.getString("a.talla"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " talla='" + ultimaActualizacionAlumno.getString("a.talla") + "', ";
+                        talla = ultimaActualizacionAlumno.getString("a.talla");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " talla='" + ultimaActualizacionAlumno.getString("a.talla") + "', ";
+                    talla = ultimaActualizacionAlumno.getString("a.talla");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.talla") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " talla=null, ";
+                    talla = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.numerocuenta") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.numerocuenta") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.numerocuenta").equals(estadoActual.getString("a.numerocuenta"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " numerocuenta='" + ultimaActualizacionAlumno.getString("a.numerocuenta") + "', ";
+                        numeroCuenta = ultimaActualizacionAlumno.getString("a.numerocuenta");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " numerocuenta='" + ultimaActualizacionAlumno.getString("a.numerocuenta") + "', ";
+                    numeroCuenta = ultimaActualizacionAlumno.getString("a.numerocuenta");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.numerocuenta") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " numerocuenta=null, ";
+                    numeroCuenta = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.telmovil") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.telmovil") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.telmovil").equals(estadoActual.getString("a.telmovil"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " telmovil=" + ultimaActualizacionAlumno.getString("a.telmovil") + ", ";
+                        telMovil = ultimaActualizacionAlumno.getString("a.telmovil");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " telmovil=" + ultimaActualizacionAlumno.getString("a.telmovil") + ", ";
+                    telMovil = ultimaActualizacionAlumno.getString("a.telmovil");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.telmovil") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " telmovil=null, ";
+                    telMovil = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.telfijo") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.telfijo") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.telfijo").equals(estadoActual.getString("a.telfijo"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " telfijo=" + ultimaActualizacionAlumno.getString("a.telfijo") + ", ";
+                        telFijo = ultimaActualizacionAlumno.getString("a.telfijo");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " telfijo=" + ultimaActualizacionAlumno.getString("a.telfijo") + ", ";
+                    telFijo = ultimaActualizacionAlumno.getString("a.telfijo");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.telfijo") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " telfijo=null, ";
+                    telFijo = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.provincia") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.provincia") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.provincia").equals(estadoActual.getString("a.provincia"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " provincia='" + ultimaActualizacionAlumno.getString("a.provincia") + "', ";
+                        provincia = ultimaActualizacionAlumno.getString("a.provincia");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " provincia='" + ultimaActualizacionAlumno.getString("a.provincia") + "', ";
+                    provincia = ultimaActualizacionAlumno.getString("a.provincia");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.provincia") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " provincia=null, ";
+                    provincia = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.localidad") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.localidad") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.localidad").equals(estadoActual.getString("a.localidad"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " localidad='" + ultimaActualizacionAlumno.getString("a.localidad") + "', ";
+                        localidad = ultimaActualizacionAlumno.getString("a.localidad");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " localidad='" + ultimaActualizacionAlumno.getString("a.localidad") + "', ";
+                    localidad = ultimaActualizacionAlumno.getString("a.localidad");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.localidad") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " localidad=null, ";
+                    localidad = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.domicilio") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.domicilio") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.domicilio").equals(estadoActual.getString("a.domicilio"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " domicilio='" + ultimaActualizacionAlumno.getString("a.domicilio") + "', ";
+                        domicilio = ultimaActualizacionAlumno.getString("a.domicilio");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " domicilio='" + ultimaActualizacionAlumno.getString("a.domicilio") + "', ";
+                    domicilio = ultimaActualizacionAlumno.getString("a.domicilio");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.domicilio") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " domicilio=null, ";
+                    domicilio = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.codigopostal") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.codigopostal") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.codigopostal").equals(estadoActual.getString("a.codigopostal"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " codigopostal=" + ultimaActualizacionAlumno.getString("a.codigopostal") + ", ";
+                        codPostal = ultimaActualizacionAlumno.getString("a.codigopostal");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " codigopostal=" + ultimaActualizacionAlumno.getString("a.codigopostal") + ", ";
+                    codPostal = ultimaActualizacionAlumno.getString("a.codigopostal");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.codigopostal") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " codigopostal=null, ";
+                    codPostal = "NULL";
                 }
             }
             if (ultimaActualizacionAlumno.getString("a.colegio") != null) { //antes no estaba a null
                 if (estadoActual.getString("a.colegio") != null) {    //ahora tampoco esta a null
                     if (!ultimaActualizacionAlumno.getString("a.colegio").equals(estadoActual.getString("a.colegio"))) {
                         fila_editada = true;
-                        updateFila = updateFila + " colegio='" + ultimaActualizacionAlumno.getString("a.colegio") + "', ";
+                        colegio = ultimaActualizacionAlumno.getString("a.colegio");
                     }
                 } else {                                         //ahora esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " colegio='" + ultimaActualizacionAlumno.getString("a.colegio") + "', ";
+                    colegio = ultimaActualizacionAlumno.getString("a.colegio");
                 }
             } else {                                            //antes estaba a null
                 if (estadoActual.getString("a.colegio") != null) {    //ahora no esta a null
                     fila_editada = true;
-                    updateFila = updateFila + " colegio=null, ";
+                    colegio = "NULL";
                 }
             }
-            updateFila = updateFila.substring(0, updateFila.length() - 2);
-            updateFila = updateFila + " WHERE alumno.idalumno=" + ultimaActualizacionAlumno.getString("a.idalumno");
+            idAlumno = ultimaActualizacionAlumno.getString("a.idalumno");
             if (fila_editada == true) {
-                GestorDeAlumnos.actualizaAlumno(accesoBD, updateFila);
-                System.out.print("\nModificado  act\n " + updateFila);
+                GestorAlumnos.modificarDatos(accesoBD, idAlumno, nombre, primerApellido, segundoApellido, fechaNac,
+                        numeroCuenta, domicilio, localidad, codPostal, provincia, colegio,
+                        nombrePadre, nombreMadre, telFijo, telMovil, email, observaciones, talla);
+                idAlumno = nombre = primerApellido = segundoApellido = null;
+                fechaNac = talla = nombrePadre = nombreMadre = null;
+                email = numeroCuenta = telFijo = telMovil = provincia = null;
+                localidad = domicilio = codPostal = colegio = observaciones = null;
             }
         }
 
-        boton_mostrar_alumnosActionPerformed(null);
+        botonMostrarAlumnosActionPerformed(null);
     } catch (SQLException ex) {
         System.out.print(ex.getMessage());
     }
@@ -1285,7 +1302,7 @@ private void deshacerCambiosAlumnoActionPerformed(java.awt.event.ActionEvent evt
 
 private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSesionActionPerformed
     this.dispose();
-    new InterfazAcceso().setVisible(true);
+    new Acceso().setVisible(true);
 }//GEN-LAST:event_cerrarSesionActionPerformed
 
 private void menuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuUsuariosMouseClicked
@@ -1321,7 +1338,7 @@ private void menuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_menuUsuariosMouseClicked
 
 private void botonNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoUsuarioActionPerformed
-    new AnadirUsuario(accesoBD).setVisible(true);
+    new AltaUsuario(accesoBD).setVisible(true);
 }//GEN-LAST:event_botonNuevoUsuarioActionPerformed
 
 private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosUsuarioActionPerformed
@@ -1333,8 +1350,8 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
     }
     try {
         String consultaUsuario = leeConsultaUsuariosInterfaz();
-        retsetMostrados = GestorDeUsuarios.consultarUsuario(accesoBD, consultaUsuario);
-        ultimaActualizacionUsuario = GestorDeUsuarios.consultarUsuario(accesoBD, consultaUsuario);
+        retsetMostrados = GestorUsuarios.consultarUsuario(accesoBD, consultaUsuario);
+        ultimaActualizacionUsuario = GestorUsuarios.consultarUsuario(accesoBD, consultaUsuario);
         ultimaConsultaUsuario = consultaUsuario;
         int i = 0;
         String updateFila;
@@ -1489,7 +1506,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
             updateFila = updateFila.substring(0, updateFila.length() - 2);
             updateFila = updateFila + " WHERE usuario.idusuario=" + retsetMostrados.getString("u.idUsuario");
             if (fila_editada == true) {
-                GestorDeUsuarios.actualizaUsuario(accesoBD, updateFila);
+                GestorUsuarios.actualizaUsuario(accesoBD, updateFila);
                 System.out.print("\nModificado " + i + " act\n " + updateFila);
             }
             i++;
@@ -1501,7 +1518,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
 
 private void deshacerCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosUsuarioActionPerformed
     ResultSet estadoActual;
-    estadoActual = GestorDeUsuarios.consultarUsuario(accesoBD, ultimaConsultaUsuario);
+    estadoActual = GestorUsuarios.consultarUsuario(accesoBD, ultimaConsultaUsuario);
     try {
         String updateFila;
         while (estadoActual.next()) {
@@ -1608,7 +1625,7 @@ private void deshacerCambiosUsuarioActionPerformed(java.awt.event.ActionEvent ev
             updateFila = updateFila + " WHERE usuario.idusuario=" + ultimaActualizacionUsuario.getString("u.idusuario");
             if (fila_editada == true) {
                 System.out.print("\nVuelta atras  act\n " + updateFila);
-                GestorDeUsuarios.actualizaUsuario(accesoBD, updateFila);
+                GestorUsuarios.actualizaUsuario(accesoBD, updateFila);
             }
         }
 
@@ -1674,7 +1691,7 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
     try {
         String consulta_usuarios = leeConsultaUsuariosInterfaz();
         System.out.print("\nLA consulta " + consulta_usuarios);
-        retset = GestorDeUsuarios.consultarUsuario(accesoBD, consulta_usuarios);
+        retset = GestorUsuarios.consultarUsuario(accesoBD, consulta_usuarios);
         //retset = accesoBD.ejecutaConsulta(consulta_alumnos);
         tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
@@ -1788,13 +1805,13 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PantallaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1802,18 +1819,20 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new InterfazPrincipal().setVisible(true);
+                new PantallaPrincipal().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
-    private javax.swing.JButton botonGuardarCambios;
+    private javax.swing.JButton botonGuardarCambiosAl;
     private javax.swing.JButton botonGuardarCambiosUsuario;
+    private javax.swing.JButton botonMostrarAlumnos;
     private javax.swing.JButton botonNuevoAlumno;
     private javax.swing.JButton botonNuevoUsuario;
     private javax.swing.JButton boton_mostrar_Usuarios;
-    private javax.swing.JButton boton_mostrar_alumnos;
+    private javax.swing.JLabel buscarAlLabel;
+    private javax.swing.JLabel categoriaAlLabel;
     private javax.swing.JButton cerrarSesion;
     private javax.swing.JComboBox consultaCategoria;
     private javax.swing.JComboBox consultaCategoriaUsuario;
@@ -1827,34 +1846,27 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JComboBox consultaTemporadaUsuario;
     private javax.swing.JButton deshacerCambiosAlumno;
     private javax.swing.JButton deshacerCambiosUsuario;
+    private javax.swing.JTextField edadAl;
+    private javax.swing.JLabel edadAlLabel;
+    private javax.swing.JLabel entrenadorAlLabel;
+    private javax.swing.JLabel equipoAlLabel;
     private javax.swing.JLabel errorModifCP;
     private javax.swing.JLabel errorModifFijo;
     private javax.swing.JLabel errorModifFijoUsuario;
     private javax.swing.JLabel errorModifMovil;
     private javax.swing.JLabel errorModifMovilUsuario;
+    private javax.swing.JLabel grupoAlLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JMenu menuActividades;
     private javax.swing.JMenu menuCategorias;
@@ -1865,17 +1877,22 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JMenu menuPagos;
     private javax.swing.JMenu menuTemporadas;
     private javax.swing.JMenu menuUsuarios;
+    private javax.swing.JTextField nombreAl;
+    private javax.swing.JLabel nombreAlLabel;
     private javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelJugadores;
+    private javax.swing.JScrollPane panelResulAl;
     private javax.swing.JPanel panelUsuarios;
+    private javax.swing.JTextField primerApellidoAl;
+    private javax.swing.JLabel primerApellidoLabel;
+    private javax.swing.JLabel resultadosAlLabel;
+    private javax.swing.JTextField segundoApellidoAl;
+    private javax.swing.JLabel segundoApellidoLabel;
     private javax.swing.JTable tablaAlumnos;
     private javax.swing.JTable tablaUsuarios;
-    private javax.swing.JTextField textfield_apellido1;
-    private javax.swing.JTextField textfield_apellido2;
+    private javax.swing.JLabel temporadaLabel;
     private javax.swing.JTextField textfield_apellidoPrimeroUsuario;
     private javax.swing.JTextField textfield_apellidoSegundoUsuario;
-    private javax.swing.JTextField textfield_edad;
-    private javax.swing.JTextField textfield_nombre;
     private javax.swing.JTextField textfield_nombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

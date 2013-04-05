@@ -13,13 +13,13 @@ import javax.swing.JOptionPane;
  * Interfaz de acceso
  * @author Francisco
  */
-public class InterfazAcceso extends javax.swing.JFrame {
+public class Acceso extends javax.swing.JFrame {
     Connection conexion;   
     Statement stmt;      
     ResultSet retset;
     
     /** Creates new form InterfazAcceso */
-    public InterfazAcceso() {
+    public Acceso() {
         initComponents();
     }
 
@@ -134,10 +134,10 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
             + usuario + "' AND clave='" + new String (pass) + "'";
     
     System.out.print("\npass "+consulta_acceso);
-    retset = GestorDeUsuarios.consultarUsuario(accesoBD, consulta_acceso);
+    retset = GestorUsuarios.consultarUsuario(accesoBD, consulta_acceso);
     try{
         if (retset.next()) {
-           (new InterfazPrincipal(accesoBD, usuario)).setVisible(true);
+           (new PantallaPrincipal(accesoBD, usuario)).setVisible(true);
             this.dispose();
         } else {          
             JOptionPane.showMessageDialog(null,
@@ -162,13 +162,13 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             javax.swing.UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfazAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Acceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfazAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Acceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfazAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Acceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfazAcceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Acceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -177,7 +177,7 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
             @Override
             public void run() {
-                new InterfazAcceso().setVisible(true);
+                new Acceso().setVisible(true);
             }
         });
     }
