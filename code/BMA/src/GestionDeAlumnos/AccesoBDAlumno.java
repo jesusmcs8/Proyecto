@@ -108,35 +108,49 @@ class AccesoBDAlumno {
 
     public void eliminaAlumnoBD(BaseDatos accesoBD, Alumno alumnoNuevo) {
 
-        if (alumnoNuevo.getIdAlumno() == -1) {
-
-            String selId = "SELECT a.idAlumno FROM alumno a WHERE" + "a.nombre=" + alumnoNuevo.getNombre() + ", a.primerApellido="
-                    + alumnoNuevo.getPrimerApellido() + ", a.segundoApellido=" + alumnoNuevo.getSegundoApellido() + ", a.nombrePadre="
-                    + alumnoNuevo.getNombrePadre() + ", a.nombreMadre=" + alumnoNuevo.getNombreMadre() + ", a.numeroCuenta="
-                    + alumnoNuevo.getCuentaCorriente() + "," + "a.telMovil" + alumnoNuevo.getTelMovil()
-                    + ", a.telFijo" + alumnoNuevo.getTelFijo() + ", a.email" + alumnoNuevo.getEmail();
-
-
-            ResultSet retset;
-            try {
-                retset = accesoBD.ejecutaConsulta(selId);
-                alumnoNuevo.setIdAlumno(retset.getInt("idAlumno"));
-            } catch (SQLException ex) {
-                System.out.print(ex.getMessage());
-            }
-            String delete = "DELETE FROM alumno WHERE idAlumno = " + alumnoNuevo.getIdAlumno();
-            try {
-                accesoBD.ejecutaActualizacion(delete);
-            } catch (SQLException ex) {
-                Logger.getLogger(AccesoBDAlumno.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            String delete = "DELETE FROM alumno WHERE idAlumno = " + alumnoNuevo.getIdAlumno();
-            try {
-                accesoBD.ejecutaActualizacion(delete);
-            } catch (SQLException ex) {
-                Logger.getLogger(AccesoBDAlumno.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        String selId=new String();
+        
+        selId="SELECT a.idAlumno FROM alumno a WHERE a.nombre='" + alumnoNuevo.getNombre() + "' AND a.primerApellido='"
+                + alumnoNuevo.getPrimerApellido() + "' AND a.segundoApellido='" + alumnoNuevo.getSegundoApellido() + "' AND a.nombrePadre='"
+                + alumnoNuevo.getNombrePadre() + "' AND a.nombreMadre='" + alumnoNuevo.getNombreMadre()+"' ";
+        if(alumnoNuevo.getCuentaCorriente()!=null){
+            selId=selId+" AND a.numeroCuenta='"+ alumnoNuevo.getCuentaCorriente()+ "' ";
         }
+        if(alumnoNuevo.getTelMovil()!=0){
+            selId=selId+" AND a.telMovil="+ alumnoNuevo.getTelMovil()+ " ";
+        }
+        if(alumnoNuevo.getTelFijo()!=0){
+            selId=selId+" AND a.telFijo="+ alumnoNuevo.getTelFijo()+ " ";
+        }
+        if(alumnoNuevo.getEmail()!=null){
+            selId=selId+" AND a.email='"+alumnoNuevo.getEmail()+ "' ";
+        }        
+
+        ResultSet retset;
+        try {
+            retset = accesoBD.ejecutaConsulta(selId);
+            if(retset.next()){
+                alumnoNuevo.setIdAlumno(retset.getInt("idAlumno"));
+            }
+        } catch (SQLException ex) {
+            System.out.print(ex.getMessage());
+        }
+
+        String delete1 = "delete from alumnoGrupo where alumnoGrupo.alumno_idalumno= " + alumnoNuevo.getIdAlumno();
+        String delete2 = "delete from alumnoEquipo where alumnoEquipo.alumno_idalumno= " + alumnoNuevo.getIdAlumno();
+        String delete3 = "delete from alumnoTemporada where alumnoTemporada.alumno_idalumno= " + alumnoNuevo.getIdAlumno();
+        String delete4 = "delete from pagoActividades where pagoActividades.alumno_idalumno= " + alumnoNuevo.getIdAlumno();
+        String delete5 = "DELETE FROM alumno WHERE idAlumno = " + alumnoNuevo.getIdAlumno();
+
+        try {
+            accesoBD.ejecutaActualizacion(delete1);
+            accesoBD.ejecutaActualizacion(delete2);
+            accesoBD.ejecutaActualizacion(delete3);
+            accesoBD.ejecutaActualizacion(delete4);
+            accesoBD.ejecutaActualizacion(delete5);
+        } catch (SQLException ex) {
+            Logger.getLogger(AccesoBDAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

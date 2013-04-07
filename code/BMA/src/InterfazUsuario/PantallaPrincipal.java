@@ -10,14 +10,18 @@
  */
 package InterfazUsuario;
 
-import GestionDeAlumnos.GestorAlumnos;
-import GestionDeUsuarios.GestorUsuarios;
+import GestionDeAlumnos.*;
+import GestionDeUsuarios.*;
 import ServiciosAlmacenamiento.BaseDatos;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /**
  *
@@ -33,7 +37,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     String ultimaConsultaAlumno;
     ResultSet ultimaActualizacionUsuario;
     String ultimaConsultaUsuario;
-
+    String consultaAlumnosMostrados;
+    String consultaUsuariosMostrados;
     /**
      * Creates new form InterfazPrincipal
      */
@@ -53,6 +58,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             System.out.print("\ninitcomponent segun user");
             barraMenu.remove(menuUsuarios);
             panelJugadores.remove(botonNuevoAlumno);
+            panelJugadores.remove(botonEliminarAlumno);
+            panelJugadores.remove(botonEliminarUsuario);
         }
     }
 
@@ -99,6 +106,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         errorModifMovil = new javax.swing.JLabel();
         errorModifFijo = new javax.swing.JLabel();
         errorModifCP = new javax.swing.JLabel();
+        botonEliminarAlumno = new javax.swing.JButton();
+        mensajeErrorEliminarAlumno = new javax.swing.JLabel();
         panelUsuarios = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         botonNuevoUsuario = new javax.swing.JButton();
@@ -126,6 +135,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         errorModifMovilUsuario = new javax.swing.JLabel();
         errorModifFijoUsuario = new javax.swing.JLabel();
         consultaEntrenadorUsuario = new javax.swing.JComboBox();
+        botonEliminarUsuario = new javax.swing.JButton();
+        errorEliminarUsuario = new javax.swing.JLabel();
         barraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuJugadores = new javax.swing.JMenu();
@@ -331,6 +342,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         errorModifCP.setVisible(false);
         panelJugadores.add(errorModifCP, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 210, -1, -1));
 
+        botonEliminarAlumno.setText("Eliminar Alumno");
+        botonEliminarAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarAlumnoActionPerformed(evt);
+            }
+        });
+        panelJugadores.add(botonEliminarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 690, 140, -1));
+
+        mensajeErrorEliminarAlumno.setForeground(new java.awt.Color(255, 0, 51));
+        mensajeErrorEliminarAlumno.setText("No ha seleccionado ningún alumno para ser eliminado");
+        panelJugadores.add(mensajeErrorEliminarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 690, -1, -1));
+        mensajeErrorEliminarAlumno.setVisible(false);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -489,6 +513,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         consultaEntrenadorUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Entrenador", "Administrador" }));
         panelUsuarios.add(consultaEntrenadorUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 60, -1, -1));
 
+        botonEliminarUsuario.setText("Eliminar Usuario");
+        botonEliminarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarUsuarioActionPerformed(evt);
+            }
+        });
+        panelUsuarios.add(botonEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 690, -1, -1));
+
+        errorEliminarUsuario.setForeground(new java.awt.Color(255, 0, 102));
+        errorEliminarUsuario.setText("No ha seleccionado ningún usuario para ser eliminado");
+        panelUsuarios.add(errorEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 690, -1, -1));
+        errorEliminarUsuario.setVisible(false);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -561,7 +598,7 @@ private void botonGuardarCambiosAlActionPerformed(java.awt.event.ActionEvent evt
     ResultSet retsetMostrados;
     int i = 0;
     boolean fila_editada = false, algunaFilaEditada = false, error = false;
-
+    ocultarMensajesError();
     //compruebo si se ha mostrado algún resultado antes de guardar los cambios, ya que si no se han mostrado no se ha podido modificar nada
     if (tablaAlumnos.getValueAt(0, 0) == null) {
         return;
@@ -915,7 +952,7 @@ private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
     panelUsuarios.setVisible(false);
 }//GEN-LAST:event_menuInicioMouseClicked
 
-    private String leeConsultaAlumnosInterfaz() {
+private String leeConsultaAlumnosInterfaz() {
         String consulta_alumnos = "SELECT a.idAlumno, a.talla, a.nombre, a.primerApellido, a.segundoApellido, a.nombrePadre, a.nombreMadre, a.numeroCuenta,"
                 + "a.telMovil, a.telFijo, a.observaciones, a.provincia, a.localidad, a.codigoPostal, a.colegio, a.domicilio, a.email, a.fechaNacimiento, "
                 + "a.Alumnocol FROM ";
@@ -946,30 +983,30 @@ private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
                 condicionesConsulta = condicionesConsulta + " a.fechaNacimiento <= '" + fechaAnt + "' AND " + " a.fechaNacimiento > '" + fechaPost + "' AND ";
             }
             if (!consultaGrupo.getSelectedItem().equals("") || !consultaCategoria.getSelectedItem().equals("") || !consultaTemporada.getSelectedItem().equals("") || !consultaEntrenador.getSelectedItem().equals("")) {
-                tablasImplicadas = tablasImplicadas + " , alumno_has_grupo ";
-                condicionesConsulta = condicionesConsulta + " alumno_has_grupo.alumno_idalumno=a.idalumno AND ";
+                tablasImplicadas = tablasImplicadas + " , alumnogrupo ";
+                condicionesConsulta = condicionesConsulta + " alumnogrupo.alumno_idalumno=a.idalumno AND ";
                 if (!consultaGrupo.getSelectedItem().equals("")) {
-                    condicionesConsulta = condicionesConsulta + " alumno_has_grupo.Grupo_idGrupo=" + consultaGrupo.getSelectedItem() + " AND ";
+                    condicionesConsulta = condicionesConsulta + " alumnogrupo.Grupo_idGrupo=" + consultaGrupo.getSelectedItem() + " AND ";
                 }
                 if (!consultaCategoria.getSelectedItem().equals("")) {
                     tablasImplicadas = tablasImplicadas + " , categoria ";
-                    condicionesConsulta = condicionesConsulta + " alumno_has_grupo.Grupo_Categoria_idCategoria=categoria.idCategoria AND categoria.tipo='" + consultaCategoria.getSelectedItem() + "' AND ";
-                }
-                if (!consultaTemporada.getSelectedItem().equals("")) {
-                    tablasImplicadas = tablasImplicadas + " , temporada ";
-                    condicionesConsulta = condicionesConsulta + " alumno_has_grupo.Grupo_Temporada_idTemporada=temporada.idTemporada and temporada.curso='" + consultaTemporada.getSelectedItem() + "' AND ";
+                    condicionesConsulta = condicionesConsulta + " alumnogrupo.Grupo_Categoria_idCategoria=categoria.idCategoria AND categoria.tipo='" + consultaCategoria.getSelectedItem() + "' AND ";
                 }
                 if (!consultaEntrenador.getSelectedItem().equals("")) {
                     tablasImplicadas = tablasImplicadas + " , usuario ";
                     String nombre, apellido;
                     int espacios;
                     espacios = consultaEntrenador.getSelectedItem().toString().indexOf(" ");
-                    condicionesConsulta = condicionesConsulta + " alumno_has_grupo.Grupo_Usuario_idUsuario=usuario.idUsuario and concat(usuario.nombre, ' ', usuario.primerApellido)='" + consultaEntrenador.getSelectedItem() + "' AND ";
+                    condicionesConsulta = condicionesConsulta + " alumnogrupo.Grupo_Usuario_idUsuario=usuario.idUsuario and concat(usuario.nombre, ' ', usuario.primerApellido)='" + consultaEntrenador.getSelectedItem() + "' AND ";
                 }
             }
             if (!consultaEquipo.getSelectedItem().equals("")) {
                 tablasImplicadas = tablasImplicadas + " , alumnoequipo ";
                 condicionesConsulta = condicionesConsulta + " alumnoequipo.Alumno_idAlumno=a.idalumno AND alumnoequipo.Equipo_idEquipo=" + consultaEquipo.getSelectedItem() + " AND ";
+            }
+            if (!consultaTemporada.getSelectedItem().equals("")) {
+                tablasImplicadas = tablasImplicadas + " , alumnotemporada, temporada ";
+                condicionesConsulta = condicionesConsulta + " alumnotemporada.alumno_idalumno=a.idalumno and alumnotemporada.temporada_idtemporada=temporada.idTemporada and temporada.curso='" + consultaTemporada.getSelectedItem() + "' AND ";
             }
 
             condicionesConsulta = condicionesConsulta.substring(0, condicionesConsulta.length() - 4);
@@ -979,11 +1016,23 @@ private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
 
         return consulta_alumnos;
     }
+public void ocultarMensajesError(){
+    mensajeErrorEliminarAlumno.setVisible(false); 
+    errorModifMovil.setVisible(false);
+    errorModifFijo.setVisible(false);
+    errorModifCP.setVisible(false);
+    errorModifMovilUsuario.setVisible(false);
+    errorModifFijoUsuario.setVisible(false);
+    errorEliminarUsuario.setVisible(false);
+}
+
 private void botonMostrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarAlumnosActionPerformed
     try {
         String consulta_alumnos = leeConsultaAlumnosInterfaz();
+        consultaAlumnosMostrados=consulta_alumnos;
         System.out.print("\nLA consulta a " + consulta_alumnos + "  y qui termina");
         retset = GestorAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
+        ocultarMensajesError();       
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                     {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -1071,6 +1120,7 @@ private void botonMostrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) 
 }//GEN-LAST:event_botonMostrarAlumnosActionPerformed
 
 private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoAlumnoActionPerformed
+    ocultarMensajesError();
     new AltaAlumno(accesoBD).setVisible(true);
 }//GEN-LAST:event_botonNuevoAlumnoActionPerformed
 
@@ -1087,6 +1137,7 @@ private void botonNuevoAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//
 private void deshacerCambiosAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosAlumnoActionPerformed
     ResultSet estadoActual;
     estadoActual = GestorAlumnos.consultarAlumno(accesoBD, ultimaConsultaAlumno);
+    ocultarMensajesError();
     String idAlumno = null, nombre = null, primerApellido = null,
             segundoApellido = null, fechaNac = null, talla = null,
             nombrePadre = null, nombreMadre = null, email = null,
@@ -1338,12 +1389,13 @@ private void menuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_menuUsuariosMouseClicked
 
 private void botonNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoUsuarioActionPerformed
+    ocultarMensajesError();
     new AltaUsuario(accesoBD).setVisible(true);
 }//GEN-LAST:event_botonNuevoUsuarioActionPerformed
 
 private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarCambiosUsuarioActionPerformed
     ResultSet retsetMostrados;
-
+    ocultarMensajesError();
     //compruebo si se ha mostrado algún resultado antes de guardar los cambios, ya que si no se han mostrado no se ha podido modificar nada
     if (tablaUsuarios.getValueAt(0, 0) == null) {
         return;
@@ -1519,6 +1571,7 @@ private void botonGuardarCambiosUsuarioActionPerformed(java.awt.event.ActionEven
 private void deshacerCambiosUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deshacerCambiosUsuarioActionPerformed
     ResultSet estadoActual;
     estadoActual = GestorUsuarios.consultarUsuario(accesoBD, ultimaConsultaUsuario);
+    ocultarMensajesError();
     try {
         String updateFila;
         while (estadoActual.next()) {
@@ -1689,7 +1742,9 @@ private void deshacerCambiosUsuarioActionPerformed(java.awt.event.ActionEvent ev
     }
 private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_mostrar_UsuariosActionPerformed
     try {
+        ocultarMensajesError();
         String consulta_usuarios = leeConsultaUsuariosInterfaz();
+        consultaUsuariosMostrados=consulta_usuarios;
         System.out.print("\nLA consulta " + consulta_usuarios);
         retset = GestorUsuarios.consultarUsuario(accesoBD, consulta_usuarios);
         //retset = accesoBD.ejecutaConsulta(consulta_alumnos);
@@ -1788,6 +1843,64 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
 
 }//GEN-LAST:event_boton_mostrar_UsuariosActionPerformed
 
+private void botonEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarAlumnoActionPerformed
+    ocultarMensajesError();
+    if(tablaAlumnos.getSelectedRow()==-1){
+        mensajeErrorEliminarAlumno.setVisible(true);
+    }else{
+        int posTabla=tablaAlumnos.getSelectedRow();        
+
+        try{
+            ResultSet alumnosMostrados = GestorAlumnos.consultarAlumno(accesoBD, consultaAlumnosMostrados);
+            int i=0;
+            while(i<=posTabla){
+                alumnosMostrados.next();
+                i++;
+            }
+            java.util.Date fechaNac = Date.valueOf((String) alumnosMostrados.getString("a.fechaNacimiento"));
+            GestorAlumnos.eliminaAlumno(accesoBD,
+               alumnosMostrados.getString("a.nombre"),alumnosMostrados.getString("a.primerApellido"),alumnosMostrados.getString("a.segundoApellido"),
+                fechaNac,alumnosMostrados.getString("a.numerocuenta"), alumnosMostrados.getString("a.domicilio"),
+                alumnosMostrados.getString("a.localidad"),alumnosMostrados.getInt("a.codigoPostal"),alumnosMostrados.getString("a.provincia"),
+                alumnosMostrados.getString("a.colegio"),alumnosMostrados.getString("a.nombrePadre"),alumnosMostrados.getString("a.nombreMadre"),
+                alumnosMostrados.getInt("a.telFijo"),alumnosMostrados.getInt("a.telMovil"),alumnosMostrados.getString("a.email"),
+                alumnosMostrados.getString("a.observaciones"),alumnosMostrados.getString("a.talla"));
+            botonMostrarAlumnosActionPerformed(null);
+        } catch (SQLException ex) {
+            System.out.print(ex.getMessage());
+        }
+    }
+}//GEN-LAST:event_botonEliminarAlumnoActionPerformed
+
+private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarUsuarioActionPerformed
+    ocultarMensajesError();
+    if(tablaUsuarios.getSelectedRow()==-1){
+        errorEliminarUsuario.setVisible(true);
+    }else{
+        int posTabla=tablaUsuarios.getSelectedRow();        
+
+        try{
+            ResultSet usuariosMostrados = GestorAlumnos.consultarAlumno(accesoBD, consultaUsuariosMostrados);
+            int i=0;
+            while(i<=posTabla){
+                usuariosMostrados.next();
+                i++;
+            }
+            
+            GestorUsuarios.eliminaUsuario(accesoBD,
+               usuariosMostrados.getString("u.nombre"),usuariosMostrados.getString("u.primerApellido"),usuariosMostrados.getString("u.segundoApellido"),
+               usuariosMostrados.getString("u.dni"),usuariosMostrados.getString("u.clave"),usuariosMostrados.getBoolean("u.entrenador"),
+               usuariosMostrados.getInt("u.telMovil"),usuariosMostrados.getInt("u.telFijo"),usuariosMostrados.getString("u.email"),
+               usuariosMostrados.getString("u.numeroCuenta"));
+
+            
+            boton_mostrar_UsuariosActionPerformed(null);
+        } catch (SQLException ex) {
+            System.out.print(ex.getMessage());
+        }
+    }
+}//GEN-LAST:event_botonEliminarUsuarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1825,6 +1938,8 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JButton botonEliminarAlumno;
+    private javax.swing.JButton botonEliminarUsuario;
     private javax.swing.JButton botonGuardarCambiosAl;
     private javax.swing.JButton botonGuardarCambiosUsuario;
     private javax.swing.JButton botonMostrarAlumnos;
@@ -1850,6 +1965,7 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JLabel edadAlLabel;
     private javax.swing.JLabel entrenadorAlLabel;
     private javax.swing.JLabel equipoAlLabel;
+    private javax.swing.JLabel errorEliminarUsuario;
     private javax.swing.JLabel errorModifCP;
     private javax.swing.JLabel errorModifFijo;
     private javax.swing.JLabel errorModifFijoUsuario;
@@ -1868,6 +1984,7 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel mensajeErrorEliminarAlumno;
     private javax.swing.JMenu menuActividades;
     private javax.swing.JMenu menuCategorias;
     private javax.swing.JMenu menuEntrenamientos;

@@ -56,4 +56,15 @@ public class GestorUsuarios {
             Logger.getLogger(GestorUsuarios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }    
+    public static void eliminaUsuario(BaseDatos accesoBD, String nombre, String primerApellido, String segundoApellido, 
+            String dni, String clave, boolean entrenador, int telMovil, int telFijo,
+            String email, String numeroCuenta ){
+        
+        AccesoBDUsuario usuarioBD=new AccesoBDUsuario();
+        Usuario usuarioEliminado = Usuario.crearUsuario(nombre,
+            primerApellido, segundoApellido, dni,
+            clave, entrenador, telMovil, telFijo,
+            email, numeroCuenta);
+        usuarioBD.eliminaUsuarioBD(accesoBD, usuarioEliminado);
+    }
 }

@@ -139,7 +139,7 @@ private void authenticateButtonActionPerformed(java.awt.event.ActionEvent evt) {
         if (retset.next()) {
            (new PantallaPrincipal(accesoBD, usuario)).setVisible(true);
             this.dispose();
-        } else {          
+        }else{          
             JOptionPane.showMessageDialog(null,
                     "Usuario o contraseña incorrectos", "Error",
                     JOptionPane.ERROR_MESSAGE);

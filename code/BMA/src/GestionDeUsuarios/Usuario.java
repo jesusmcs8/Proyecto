@@ -35,7 +35,9 @@ class Usuario {
         this.telFijo = telFijo;
         this.email = email;
     }
-
+    public void setIdUsuario(int idUsuario){
+        this.idUsuario=idUsuario;
+    }
     
     public static Usuario crearUsuario(String nombre,
             String primerApellido, String segundoApellido, String dni,
