@@ -17,11 +17,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.util.Calendar;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 /**
  *
@@ -39,6 +37,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     String ultimaConsultaUsuario;
     String consultaAlumnosMostrados;
     String consultaUsuariosMostrados;
+
     /**
      * Creates new form InterfazPrincipal
      */
@@ -149,6 +148,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         menuCategorias = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1400, 750));
+        setPreferredSize(new java.awt.Dimension(1400, 750));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Bienvenido a la aplicacion");
@@ -211,7 +212,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 botonGuardarCambiosAlActionPerformed(evt);
             }
         });
-        panelJugadores.add(botonGuardarCambiosAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
+        panelJugadores.add(botonGuardarCambiosAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 610, -1, -1));
 
         deshacerCambiosAlumno.setText("Deshacer Cambios");
         deshacerCambiosAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +220,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 deshacerCambiosAlumnoActionPerformed(evt);
             }
         });
-        panelJugadores.add(deshacerCambiosAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 690, -1, -1));
+        panelJugadores.add(deshacerCambiosAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 610, -1, -1));
 
         buscarAlLabel.setText("Buscar alumnos por:");
         panelJugadores.add(buscarAlLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, -1, -1));
@@ -289,7 +290,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         tablaAlumnos.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaAlumnos.getColumnModel().getColumn(0).setMaxWidth(45);
 
-        panelJugadores.add(panelResulAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, -1));
+        panelJugadores.add(panelResulAl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, 350));
 
         botonMostrarAlumnos.setText("Mostrar Alumnos");
         botonMostrarAlumnos.addActionListener(new java.awt.event.ActionListener() {
@@ -348,11 +349,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 botonEliminarAlumnoActionPerformed(evt);
             }
         });
-        panelJugadores.add(botonEliminarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 690, 140, -1));
+        panelJugadores.add(botonEliminarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 610, 140, -1));
 
         mensajeErrorEliminarAlumno.setForeground(new java.awt.Color(255, 0, 51));
         mensajeErrorEliminarAlumno.setText("No ha seleccionado ningún alumno para ser eliminado");
-        panelJugadores.add(mensajeErrorEliminarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 690, -1, -1));
+        panelJugadores.add(mensajeErrorEliminarAlumno, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 610, -1, -1));
         mensajeErrorEliminarAlumno.setVisible(false);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -386,7 +387,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 botonGuardarCambiosUsuarioActionPerformed(evt);
             }
         });
-        panelUsuarios.add(botonGuardarCambiosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 690, -1, -1));
+        panelUsuarios.add(botonGuardarCambiosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 610, -1, -1));
 
         deshacerCambiosUsuario.setText("Deshacer Cambios");
         deshacerCambiosUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -394,7 +395,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 deshacerCambiosUsuarioActionPerformed(evt);
             }
         });
-        panelUsuarios.add(deshacerCambiosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 690, -1, -1));
+        panelUsuarios.add(deshacerCambiosUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 610, -1, -1));
 
         jLabel19.setText("Buscar Usuarios por:");
         panelUsuarios.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 36, -1, -1));
@@ -465,7 +466,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tablaUsuarios);
         tablaUsuarios.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        panelUsuarios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, -1));
+        panelUsuarios.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 230, 1260, 350));
 
         boton_mostrar_Usuarios.setText("Mostrar Usuarios");
         boton_mostrar_Usuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -519,11 +520,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 botonEliminarUsuarioActionPerformed(evt);
             }
         });
-        panelUsuarios.add(botonEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 690, -1, -1));
+        panelUsuarios.add(botonEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 610, -1, -1));
 
         errorEliminarUsuario.setForeground(new java.awt.Color(255, 0, 102));
         errorEliminarUsuario.setText("No ha seleccionado ningún usuario para ser eliminado");
-        panelUsuarios.add(errorEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 690, -1, -1));
+        panelUsuarios.add(errorEliminarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 610, -1, -1));
         errorEliminarUsuario.setVisible(false);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -952,7 +953,7 @@ private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
     panelUsuarios.setVisible(false);
 }//GEN-LAST:event_menuInicioMouseClicked
 
-private String leeConsultaAlumnosInterfaz() {
+    private String leeConsultaAlumnosInterfaz() {
         String consulta_alumnos = "SELECT a.idAlumno, a.talla, a.nombre, a.primerApellido, a.segundoApellido, a.nombrePadre, a.nombreMadre, a.numeroCuenta,"
                 + "a.telMovil, a.telFijo, a.observaciones, a.provincia, a.localidad, a.codigoPostal, a.colegio, a.domicilio, a.email, a.fechaNacimiento, "
                 + "a.Alumnocol FROM ";
@@ -1016,23 +1017,24 @@ private String leeConsultaAlumnosInterfaz() {
 
         return consulta_alumnos;
     }
-public void ocultarMensajesError(){
-    mensajeErrorEliminarAlumno.setVisible(false); 
-    errorModifMovil.setVisible(false);
-    errorModifFijo.setVisible(false);
-    errorModifCP.setVisible(false);
-    errorModifMovilUsuario.setVisible(false);
-    errorModifFijoUsuario.setVisible(false);
-    errorEliminarUsuario.setVisible(false);
-}
+
+    public void ocultarMensajesError() {
+        mensajeErrorEliminarAlumno.setVisible(false);
+        errorModifMovil.setVisible(false);
+        errorModifFijo.setVisible(false);
+        errorModifCP.setVisible(false);
+        errorModifMovilUsuario.setVisible(false);
+        errorModifFijoUsuario.setVisible(false);
+        errorEliminarUsuario.setVisible(false);
+    }
 
 private void botonMostrarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarAlumnosActionPerformed
     try {
         String consulta_alumnos = leeConsultaAlumnosInterfaz();
-        consultaAlumnosMostrados=consulta_alumnos;
+        consultaAlumnosMostrados = consulta_alumnos;
         System.out.print("\nLA consulta a " + consulta_alumnos + "  y qui termina");
         retset = GestorAlumnos.consultarAlumno(accesoBD, consulta_alumnos);
-        ocultarMensajesError();       
+        ocultarMensajesError();
         tablaAlumnos.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
                     {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
@@ -1744,7 +1746,7 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
     try {
         ocultarMensajesError();
         String consulta_usuarios = leeConsultaUsuariosInterfaz();
-        consultaUsuariosMostrados=consulta_usuarios;
+        consultaUsuariosMostrados = consulta_usuarios;
         System.out.print("\nLA consulta " + consulta_usuarios);
         retset = GestorUsuarios.consultarUsuario(accesoBD, consulta_usuarios);
         //retset = accesoBD.ejecutaConsulta(consulta_alumnos);
@@ -1845,58 +1847,66 @@ private void boton_mostrar_UsuariosActionPerformed(java.awt.event.ActionEvent ev
 
 private void botonEliminarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarAlumnoActionPerformed
     ocultarMensajesError();
-    if(tablaAlumnos.getSelectedRow()==-1){
-        mensajeErrorEliminarAlumno.setVisible(true);
-    }else{
-        int posTabla=tablaAlumnos.getSelectedRow();        
+    int selection = JOptionPane.showConfirmDialog(this, "Desea eliminar el alumno?", "Eliminar usuario", JOptionPane.YES_NO_OPTION);
+    if (selection == JOptionPane.YES_OPTION) {
 
-        try{
-            ResultSet alumnosMostrados = GestorAlumnos.consultarAlumno(accesoBD, consultaAlumnosMostrados);
-            int i=0;
-            while(i<=posTabla){
-                alumnosMostrados.next();
-                i++;
+        if (tablaAlumnos.getSelectedRow() == -1) {
+            mensajeErrorEliminarAlumno.setVisible(true);
+        } else {
+            int posTabla = tablaAlumnos.getSelectedRow();
+
+            try {
+                ResultSet alumnosMostrados = GestorAlumnos.consultarAlumno(accesoBD, consultaAlumnosMostrados);
+                int i = 0;
+                while (i <= posTabla) {
+                    alumnosMostrados.next();
+                    i++;
+                }
+                Date fechaNac = Date.valueOf((String) alumnosMostrados.getString("a.fechaNacimiento"));
+                GestorAlumnos.eliminaAlumno(accesoBD,
+                        alumnosMostrados.getString("a.nombre"), alumnosMostrados.getString("a.primerApellido"), alumnosMostrados.getString("a.segundoApellido"),
+                        fechaNac, alumnosMostrados.getString("a.numerocuenta"), alumnosMostrados.getString("a.domicilio"),
+                        alumnosMostrados.getString("a.localidad"), alumnosMostrados.getInt("a.codigoPostal"), alumnosMostrados.getString("a.provincia"),
+                        alumnosMostrados.getString("a.colegio"), alumnosMostrados.getString("a.nombrePadre"), alumnosMostrados.getString("a.nombreMadre"),
+                        alumnosMostrados.getInt("a.telFijo"), alumnosMostrados.getInt("a.telMovil"), alumnosMostrados.getString("a.email"),
+                        alumnosMostrados.getString("a.observaciones"), alumnosMostrados.getString("a.talla"));
+                botonMostrarAlumnosActionPerformed(null);
+            } catch (SQLException ex) {
+                System.out.print(ex.getMessage());
             }
-            java.util.Date fechaNac = Date.valueOf((String) alumnosMostrados.getString("a.fechaNacimiento"));
-            GestorAlumnos.eliminaAlumno(accesoBD,
-               alumnosMostrados.getString("a.nombre"),alumnosMostrados.getString("a.primerApellido"),alumnosMostrados.getString("a.segundoApellido"),
-                fechaNac,alumnosMostrados.getString("a.numerocuenta"), alumnosMostrados.getString("a.domicilio"),
-                alumnosMostrados.getString("a.localidad"),alumnosMostrados.getInt("a.codigoPostal"),alumnosMostrados.getString("a.provincia"),
-                alumnosMostrados.getString("a.colegio"),alumnosMostrados.getString("a.nombrePadre"),alumnosMostrados.getString("a.nombreMadre"),
-                alumnosMostrados.getInt("a.telFijo"),alumnosMostrados.getInt("a.telMovil"),alumnosMostrados.getString("a.email"),
-                alumnosMostrados.getString("a.observaciones"),alumnosMostrados.getString("a.talla"));
-            botonMostrarAlumnosActionPerformed(null);
-        } catch (SQLException ex) {
-            System.out.print(ex.getMessage());
         }
     }
 }//GEN-LAST:event_botonEliminarAlumnoActionPerformed
 
 private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarUsuarioActionPerformed
     ocultarMensajesError();
-    if(tablaUsuarios.getSelectedRow()==-1){
-        errorEliminarUsuario.setVisible(true);
-    }else{
-        int posTabla=tablaUsuarios.getSelectedRow();        
+    int selection = JOptionPane.showConfirmDialog(this, "Desea eliminar el usuario?", "Eliminar usuario", JOptionPane.YES_NO_OPTION);
+    if (selection == JOptionPane.YES_OPTION) {
 
-        try{
-            ResultSet usuariosMostrados = GestorAlumnos.consultarAlumno(accesoBD, consultaUsuariosMostrados);
-            int i=0;
-            while(i<=posTabla){
-                usuariosMostrados.next();
-                i++;
+        if (tablaUsuarios.getSelectedRow() == -1) {
+            errorEliminarUsuario.setVisible(true);
+        } else {
+            int posTabla = tablaUsuarios.getSelectedRow();
+
+            try {
+                ResultSet usuariosMostrados = GestorAlumnos.consultarAlumno(accesoBD, consultaUsuariosMostrados);
+                int i = 0;
+                while (i <= posTabla) {
+                    usuariosMostrados.next();
+                    i++;
+                }
+
+                GestorUsuarios.eliminaUsuario(accesoBD,
+                        usuariosMostrados.getString("u.nombre"), usuariosMostrados.getString("u.primerApellido"), usuariosMostrados.getString("u.segundoApellido"),
+                        usuariosMostrados.getString("u.dni"), usuariosMostrados.getString("u.clave"), usuariosMostrados.getBoolean("u.entrenador"),
+                        usuariosMostrados.getInt("u.telMovil"), usuariosMostrados.getInt("u.telFijo"), usuariosMostrados.getString("u.email"),
+                        usuariosMostrados.getString("u.numeroCuenta"));
+
+
+                boton_mostrar_UsuariosActionPerformed(null);
+            } catch (SQLException ex) {
+                System.out.print(ex.getMessage());
             }
-            
-            GestorUsuarios.eliminaUsuario(accesoBD,
-               usuariosMostrados.getString("u.nombre"),usuariosMostrados.getString("u.primerApellido"),usuariosMostrados.getString("u.segundoApellido"),
-               usuariosMostrados.getString("u.dni"),usuariosMostrados.getString("u.clave"),usuariosMostrados.getBoolean("u.entrenador"),
-               usuariosMostrados.getInt("u.telMovil"),usuariosMostrados.getInt("u.telFijo"),usuariosMostrados.getString("u.email"),
-               usuariosMostrados.getString("u.numeroCuenta"));
-
-            
-            boton_mostrar_UsuariosActionPerformed(null);
-        } catch (SQLException ex) {
-            System.out.print(ex.getMessage());
         }
     }
 }//GEN-LAST:event_botonEliminarUsuarioActionPerformed
