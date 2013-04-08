@@ -10,7 +10,7 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
-
+import java.sql.*;
 /**
  *
  * @author Alex
@@ -396,6 +396,17 @@ public class AltaUsuario extends javax.swing.JFrame {
         } else if (dni.getText().length() > 12) {
             errores = errores + "La longitud del campo 'DNI' no puede superar los 12 caracteres\n";
             dni.setBorder(bordeError);
+        }else{
+            String consultaDNI=new String();
+            consultaDNI="SELECT * FROM usuario WHERE usuario.dni='"+dni.getText()+"'";
+            ResultSet retset=GestorUsuarios.consultarUsuario(accesoBD, consultaDNI);
+            try{
+                if(retset.next()){
+                    errores=errores+"Ya existe un usuario con ese DNI \n";
+                }
+            } catch (SQLException ex) {
+                System.out.print(ex);
+            }
         }
         if (email.getText().isEmpty()) {
             errores = errores + "Debes rellenar el campo 'Email'\n";
