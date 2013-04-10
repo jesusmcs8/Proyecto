@@ -6,6 +6,7 @@ package InterfazUsuario;
 
 import GestionDeAlumnos.GestorAlumnos;
 import ServiciosAlmacenamiento.BaseDatos;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Color;
 import java.util.Date;
 import javax.swing.BorderFactory;
@@ -29,6 +30,7 @@ public class AltaAlumno extends javax.swing.JFrame {
         bordeOriginal = nombre.getBorder();
         bordeDatePicker = fechaNac.getBorder();
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        ((JTextFieldDateEditor) fechaNac.getComponents()[1]).setEditable(false);
     }
 
     public AltaAlumno(BaseDatos acceso) {
@@ -37,6 +39,7 @@ public class AltaAlumno extends javax.swing.JFrame {
         bordeOriginal = nombre.getBorder();
         bordeDatePicker = fechaNac.getBorder();
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        ((JTextFieldDateEditor) fechaNac.getComponents()[1]).setEditable(false);
     }
 
     /**
@@ -571,7 +574,7 @@ public class AltaAlumno extends javax.swing.JFrame {
             errores = errores + "La longitud del campo 'Segundo apellido' no puede superar los 45 caracteres\n";
             segundoApellido.setBorder(bordeError);
         }
-        java.util.Date dateFromDateChooser = fechaNac.getDate();
+        Date dateFromDateChooser = fechaNac.getDate();
         String dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
         if (dateString.equals("null-null-null")) {
             errores = errores + "Debes rellenar el campo 'Fecha de nacimiento'\n";
