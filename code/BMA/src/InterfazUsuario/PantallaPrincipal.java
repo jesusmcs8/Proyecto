@@ -136,6 +136,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         consultaEntrenadorUsuario = new javax.swing.JComboBox();
         botonEliminarUsuario = new javax.swing.JButton();
         errorEliminarUsuario = new javax.swing.JLabel();
+        panelTemporadas = new javax.swing.JPanel();
         barraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuJugadores = new javax.swing.JMenu();
@@ -149,7 +150,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1400, 750));
-        setPreferredSize(new java.awt.Dimension(1400, 750));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel1.setText("Bienvenido a la aplicacion");
@@ -537,6 +537,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(22, 0, 22, 0);
         getContentPane().add(panelUsuarios, gridBagConstraints);
+
+        javax.swing.GroupLayout panelTemporadasLayout = new javax.swing.GroupLayout(panelTemporadas);
+        panelTemporadas.setLayout(panelTemporadasLayout);
+        panelTemporadasLayout.setHorizontalGroup(
+            panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelTemporadasLayout.setVerticalGroup(
+            panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(panelTemporadas, new java.awt.GridBagConstraints());
 
         menuInicio.setText("Inicio");
         menuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2009,6 +2022,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JPanel panelInicio;
     private javax.swing.JPanel panelJugadores;
     private javax.swing.JScrollPane panelResulAl;
+    private javax.swing.JPanel panelTemporadas;
     private javax.swing.JPanel panelUsuarios;
     private javax.swing.JTextField primerApellidoAl;
     private javax.swing.JLabel primerApellidoLabel;
