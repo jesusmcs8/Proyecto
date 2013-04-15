@@ -137,6 +137,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         botonEliminarUsuario = new javax.swing.JButton();
         errorEliminarUsuario = new javax.swing.JLabel();
         panelTemporadas = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         barraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuJugadores = new javax.swing.JMenu();
@@ -170,7 +178,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(299, 299, 299)
                 .addComponent(cerrarSesion)
-                .addContainerGap(633, Short.MAX_VALUE))
+                .addContainerGap(299, Short.MAX_VALUE))
         );
         panelInicioLayout.setVerticalGroup(
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -538,15 +546,75 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(22, 0, 22, 0);
         getContentPane().add(panelUsuarios, gridBagConstraints);
 
+        panelTemporadas.setVisible(false);
+
+        jTextField1.setText("jTextField1");
+
+        jButton1.setText("Buscar");
+
+        jButton2.setText("Nueva");
+
+        jButton3.setText("Modificar");
+
+        jButton4.setText("Eliminar");
+
+        jLabel3.setText("Temporadas");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout panelTemporadasLayout = new javax.swing.GroupLayout(panelTemporadas);
         panelTemporadas.setLayout(panelTemporadasLayout);
         panelTemporadasLayout.setHorizontalGroup(
             panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelTemporadasLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(panelTemporadasLayout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
+                    .addGroup(panelTemporadasLayout.createSequentialGroup()
+                        .addGroup(panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addGroup(panelTemporadasLayout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelTemporadasLayout.setVerticalGroup(
             panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(panelTemporadasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addGroup(panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTemporadasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton3)
+                        .addComponent(jButton4))
+                    .addGroup(panelTemporadasLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton2)))
+                .addGap(69, 69, 69))
         );
 
         getContentPane().add(panelTemporadas, new java.awt.GridBagConstraints());
@@ -595,6 +663,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         barraMenu.add(menuActividades);
 
         menuTemporadas.setText("Temporadas");
+        menuTemporadas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuTemporadasMouseClicked(evt);
+            }
+        });
         barraMenu.add(menuTemporadas);
 
         menuPagos.setText("Pagos");
@@ -926,6 +999,7 @@ private void menuJugadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIR
     panelInicio.setVisible(false);
     panelJugadores.setVisible(true);
     panelUsuarios.setVisible(false);
+    panelTemporadas.setVisible(false);
     ResultSet consulta;
 
     try {
@@ -964,6 +1038,7 @@ private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
     panelInicio.setVisible(true);
     panelJugadores.setVisible(false);
     panelUsuarios.setVisible(false);
+    panelTemporadas.setVisible(false);
 }//GEN-LAST:event_menuInicioMouseClicked
 
     private String leeConsultaAlumnosInterfaz() {
@@ -1374,7 +1449,9 @@ private void cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 private void menuUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuUsuariosMouseClicked
     panelInicio.setVisible(false);
     panelJugadores.setVisible(false);
+    panelTemporadas.setVisible(false);
     panelUsuarios.setVisible(true);
+    
     ResultSet consulta;
 
     try {
@@ -1924,6 +2001,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }
 }//GEN-LAST:event_botonEliminarUsuarioActionPerformed
 
+    private void menuTemporadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTemporadasMouseClicked
+        panelInicio.setVisible(false);
+        panelTemporadas.setVisible(true);
+        panelUsuarios.setVisible(false);
+        panelJugadores.setVisible(false);
+    }//GEN-LAST:event_menuTemporadasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1995,10 +2079,15 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel errorModifMovil;
     private javax.swing.JLabel errorModifMovilUsuario;
     private javax.swing.JLabel grupoAlLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel36;
@@ -2006,7 +2095,10 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel40;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel mensajeErrorEliminarAlumno;
     private javax.swing.JMenu menuActividades;
     private javax.swing.JMenu menuCategorias;
