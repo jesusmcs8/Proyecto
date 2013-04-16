@@ -15,6 +15,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
      */
     public NuevaTemporada() {
         initComponents();
+        this.setLocation(300, 300);
     }
 
     /**
