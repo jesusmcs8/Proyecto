@@ -35,7 +35,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
         labelCurso = new javax.swing.JLabel();
         jYearChooser1 = new com.toedter.calendar.JYearChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nueva Temporada");
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
