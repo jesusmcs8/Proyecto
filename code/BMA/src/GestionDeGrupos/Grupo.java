@@ -1,4 +1,4 @@
-package bma;
+package GestionDeGrupos;
 
 import java.util.Calendar;
 
