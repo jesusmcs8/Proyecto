@@ -7,7 +7,7 @@ package GestionDeUsuarios;
  * @author Alex Moreno
  * @version 1.0
  */
-class Usuario {
+public class Usuario {
 
     private int idUsuario;
     private String dni;

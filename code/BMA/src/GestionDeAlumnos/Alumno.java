@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Francisco
  */
-class Alumno {
+public class Alumno {
 
     private int idAlumno;
     private String nombre;
