@@ -13,6 +13,5 @@ public class Instalacion {
     private String localizacion;
     private String nombre;
     
-    private List<Grupo> grupos;
     private List<Actividad> actividades;
 }

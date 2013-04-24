@@ -4,6 +4,7 @@ import GestionDeAlumnos.Alumno;
 import GestionDeInstalaciones.Instalacion;
 import GestionDeTemporadas.Temporada;
 import GestionDeUsuarios.Usuario;
+import bma.Horario;
 import bma.Sexo;
 import java.util.List;
 
@@ -19,9 +20,10 @@ public class Grupo {
     //private Calendar[] horarios;
     
     private Sexo sexo;
-    private Temporada temp;
-    private List<Alumno> alumnos;// = new ArrayList<Alumno>(); 
     private Categoria categoria;
+    private Temporada temp;
+    private List<Alumno> alumnos;
+    private Horario horario;
+    
     private Usuario entrenador;
-    private Instalacion instalacion;
 }

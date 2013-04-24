@@ -5,6 +5,8 @@ import GestionDeInstalaciones.Instalacion;
 import GestionDeUsuarios.Usuario;
 import bma.Categoria;
 import GestionDeTemporadas.Temporada;
+import ServiciosAlmacenamiento.BaseDatos;
+import bma.Horario;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +18,8 @@ public class GestorGrupos {
     
     private List<Grupo> grupos;
     
-    public void InsertarGrupo(Temporada t, List<Alumno> al, Categoria cat, Usuario ent, Instalacion inst){
-        boolean validar = GruposBD.ConsultarGrupos(t, al, cat, ent, inst);
+    public void InsertarGrupo(BaseDatos accesoBD, Temporada temp, List<Alumno> als, Categoria cat, Horario hor, Usuario ent, Instalacion inst){
+        boolean validar = GruposBD.ConsultarGrupos(accesoBD, temp, cat, hor, inst);
     }
     
     public List<Grupo> ConsultarGrupo(Temporada t, List<Alumno> a, Categoria c, Usuario ent, Instalacion inst){

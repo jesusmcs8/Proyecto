@@ -18,8 +18,9 @@ public class Temporada {
     private String curso;
     
     private List<Equipo> equipos;
-    private List<Grupo> grupos;
     private List<Actividad> actividades;
+    private List<Grupo> grupos;
+    
     private List<Alumno> alumnos;
 
     public String getCurso() {
