@@ -1,7 +1,9 @@
-package bma;
+package GestionDeTemporadas;
 
 import GestionDeAlumnos.Alumno;
 import GestionDeGrupos.Grupo;
+import bma.Actividad;
+import bma.Equipo;
 import java.util.List;
 
 /**
@@ -19,4 +21,10 @@ public class Temporada {
     private List<Grupo> grupos;
     private List<Actividad> actividades;
     private List<Alumno> alumnos;
+
+    public String getCurso() {
+        return curso;
+    }
+    
+    
 }
