@@ -7,6 +7,7 @@ import bma.Categoria;
 import GestionDeTemporadas.Temporada;
 import ServiciosAlmacenamiento.BaseDatos;
 import bma.Horario;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class GestorGrupos {
     
     private List<Grupo> grupos;
     
-    public void InsertarGrupo(BaseDatos accesoBD, Temporada temp, List<Alumno> als, Categoria cat, Horario hor, Usuario ent, Instalacion inst){
+    public void InsertarGrupo(BaseDatos accesoBD, Temporada temp, List<Alumno> als, Categoria cat, Horario hor, Usuario ent, Instalacion inst) throws SQLException{
         boolean validar = GruposBD.ConsultarGrupos(accesoBD, temp, cat, hor, inst);
     }
     

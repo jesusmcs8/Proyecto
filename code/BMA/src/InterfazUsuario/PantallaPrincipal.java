@@ -2482,7 +2482,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }//GEN-LAST:event_menuTemporadasMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new NuevaTemporada().setVisible(true);
+        new NuevaTemporada(this).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -2733,5 +2733,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         panelUsuarios.setVisible(false);
         panelInstalaciones.setVisible(false);
         panelActividades.setVisible(false);
+    }
+
+    ResultSet ejecutarConsulta(String query) {
+        return accesoBD.ejecutaConsulta(query);
+    }
+
+    void ejecutarActualizacion(String query) throws SQLException {
+        accesoBD.ejecutaActualizacion(query);
     }
 }
