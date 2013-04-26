@@ -13,5 +13,5 @@ public class Instalacion {
     private String localizacion;
     private String nombre;
     
-    private List<Actividad> actividades;
+    //private List<Actividad> actividades;
 }

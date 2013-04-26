@@ -8,6 +8,7 @@ import GestionDeTemporadas.Temporada;
 import ServiciosAlmacenamiento.BaseDatos;
 import bma.Horario;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Time;
 import java.util.List;
 
@@ -17,8 +18,8 @@ import java.util.List;
  */
 public class GruposBD {
 
-    static boolean ConsultarGrupos(BaseDatos accesoBD, Temporada t, Categoria cat, Horario hor, Instalacion inst) {
-        String categoria = cat.getTipo();
+    static boolean ConsultarGrupos(BaseDatos accesoBD, Temporada t, Categoria cat, Horario hor, Instalacion inst) throws SQLException {
+        //String categoria = cat.getTipo();
         String temp = t.getCurso();
         String dia1 = hor.getDia1();
         String dia2 = hor.getDia2();

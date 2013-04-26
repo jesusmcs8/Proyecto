@@ -20,7 +20,7 @@ public class Grupo {
     //private Calendar[] horarios;
     
     private Sexo sexo;
-    private Categoria categoria;
+    //private Categoria categoria;
     private Temporada temp;
     private List<Alumno> alumnos;
     private Horario horario;
