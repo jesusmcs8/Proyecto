@@ -4,6 +4,7 @@
  */
 package InterfazUsuario;
 
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -116,21 +117,39 @@ public class NuevaTemporada extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void chooserCursoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_chooserCursoPropertyChange
-        int aux = chooserCurso.getYear()+1;
-        labelCurso.setText(Integer.toString(chooserCurso.getYear()).concat("/"+aux));
+        int aux1 = chooserCurso.getYear();
+        int aux2 = chooserCurso.getYear()+1;
+        String auxCurso = Integer.toString(aux1)+"/"+Integer.toString(aux2);
+        
+        String query2 = "SELECT * FROM Temporada WHERE curso='"+auxCurso+"'";
+        ResultSet res2 = creador.ejecutarConsulta(query2);
+        
+        System.out.println("hola");
+        try {
+            if(res2.next()){
+                //labelCurso.setForeground(Color.red);
+                //labelCurso.setText("La temporada "+auxCurso+" ya existe");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        labelCurso.setText(auxCurso);
     }//GEN-LAST:event_chooserCursoPropertyChange
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
         int aux1 = chooserCurso.getYear();
         int aux2 = chooserCurso.getYear()+1;
         String auxCurso = Integer.toString(aux1)+"/"+Integer.toString(aux2);
+       
 
-        String query = "SELECT * FROM Temporada WHERE curso='"+auxCurso+"'";
+        /*String query = "SELECT * FROM Temporada WHERE curso='"+auxCurso+"'";
         ResultSet res = creador.ejecutarConsulta(query);
         
         try {
             if(res.next()){
                 //Mostrar algun mensaje si se intenta crear
+                System.out.println();
                 System.out.println("La temporada ya existe");
             }
             else{
@@ -140,7 +159,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptarActionPerformed
 
