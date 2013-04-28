@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -121,19 +123,6 @@ public class NuevaTemporada extends javax.swing.JFrame {
         int aux2 = chooserCurso.getYear()+1;
         String auxCurso = Integer.toString(aux1)+"/"+Integer.toString(aux2);
         
-        String query2 = "SELECT * FROM Temporada WHERE curso='"+auxCurso+"'";
-        ResultSet res2 = creador.ejecutarConsulta(query2);
-        
-        System.out.println("hola");
-        try {
-            if(res2.next()){
-                //labelCurso.setForeground(Color.red);
-                //labelCurso.setText("La temporada "+auxCurso+" ya existe");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
         labelCurso.setText(auxCurso);
     }//GEN-LAST:event_chooserCursoPropertyChange
 
@@ -142,25 +131,32 @@ public class NuevaTemporada extends javax.swing.JFrame {
         int aux2 = chooserCurso.getYear()+1;
         String auxCurso = Integer.toString(aux1)+"/"+Integer.toString(aux2);
        
-
-        /*String query = "SELECT * FROM Temporada WHERE curso='"+auxCurso+"'";
+        String query = "SELECT * FROM Temporada WHERE curso='"+auxCurso+"'";
         ResultSet res = creador.ejecutarConsulta(query);
         
         try {
             if(res.next()){
-                //Mostrar algun mensaje si se intenta crear
-                System.out.println();
-                System.out.println("La temporada ya existe");
+                JOptionPane.showMessageDialog(this, "La temporada ya existe", "Error", JOptionPane.ERROR_MESSAGE);
             }
             else{
-                System.out.println("Temporada aun no creada");
-                query = "INSERT INTO Temporada (curso) VALUES ('"+auxCurso+"')";
-                creador.ejecutarActualizacion(query);
+
+                int conf = JOptionPane.showConfirmDialog(this, "¿Desea crear la temporada?");
+                if(conf == JOptionPane.YES_OPTION){
+                    JOptionPane.showMessageDialog(this, "Temporada creada", "Exito", JOptionPane.NO_OPTION);
+                    query = "INSERT INTO Temporada (curso) VALUES ('"+auxCurso+"')";
+                    creador.ejecutarActualizacion(query);
+                    this.setVisible(false);
+                }   
             }
         } catch (SQLException ex) {
             Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-        this.setVisible(false);
+        }
+        
+        try {
+            creador.actualizaComboBoxTemporadas();
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
