@@ -1,17 +1,31 @@
 package InterfazUsuario;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Diego
  */
 public class NuevoGrupo extends javax.swing.JFrame {
 
+    private PantallaPrincipal creador;
+    
     /**
      * Creates new form NuevoGrupo
      */
     public NuevoGrupo() {
         initComponents();
         this.setLocation(300, 300);
+    }
+    
+    public NuevoGrupo(PantallaPrincipal v) throws SQLException {
+        initComponents();
+        this.setLocation(300, 300);
+        creador = v;
+ 
+        actualizaComboTemp();
+        actualizaComboCat();
     }
 
     /**
@@ -28,8 +42,8 @@ public class NuevoGrupo extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         comboTemp = new javax.swing.JComboBox();
         comoEnt = new javax.swing.JComboBox();
-        comoCat = new javax.swing.JComboBox();
-        comoSexo = new javax.swing.JComboBox();
+        comboCat = new javax.swing.JComboBox();
+        comboSexo = new javax.swing.JComboBox();
         textMin = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         textHora = new javax.swing.JTextField();
@@ -61,9 +75,9 @@ public class NuevoGrupo extends javax.swing.JFrame {
 
         comoEnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Entrenador-", "Raul G. D.", "Paco S. J." }));
 
-        comoCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Categoria-", "Benjamin", "Alevin", "Infantil", "Cadete", "Junior" }));
+        comboCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Categoria-", "Benjamin", "Alevin", "Infantil", "Cadete", "Junior" }));
 
-        comoSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Sexo-", "Masculino", "Femenino", "Mixto" }));
+        comboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Sexo-", "Masculino", "Femenino", "Mixto" }));
 
         jLabel2.setText(":");
 
@@ -92,9 +106,9 @@ public class NuevoGrupo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(comboTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(comoCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(comoSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel4)
@@ -123,8 +137,8 @@ public class NuevoGrupo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comoCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comoSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -199,10 +213,10 @@ public class NuevoGrupo extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox comboCat;
+    private javax.swing.JComboBox comboSexo;
     private javax.swing.JComboBox comboTemp;
-    private javax.swing.JComboBox comoCat;
     private javax.swing.JComboBox comoEnt;
-    private javax.swing.JComboBox comoSexo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -213,4 +227,22 @@ public class NuevoGrupo extends javax.swing.JFrame {
     private javax.swing.JTextField textHora;
     private javax.swing.JTextField textMin;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizaComboTemp() throws SQLException {
+        comboTemp.removeAllItems();
+        String query = "SELECT curso FROM Temporada";
+        ResultSet res = creador.ejecutarConsulta(query);
+        while(res.next()){
+            comboTemp.addItem(res.getString(1));
+        }
+    }
+
+    private void actualizaComboCat() throws SQLException {
+        comboCat.removeAllItems();
+        String query = "SELECT tipo FROM Categoria";
+        ResultSet res = creador.ejecutarConsulta(query);
+        while(res.next()){
+            comboTemp.addItem(res.getString(1));
+        }
+    }
 }
