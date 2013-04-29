@@ -117,10 +117,11 @@ public class BaseDatos {
         return retset;
     }
 
-    public void ejecutaActualizacion(String actualizacion) throws SQLException {
+    public int ejecutaActualizacion(String actualizacion) throws SQLException {
         int i = comprobar();
         stmt = conexion.get(i).createStatement();
-        stmt.executeUpdate(actualizacion);
+        int res = stmt.executeUpdate(actualizacion);
+        return res;
     }
 
     public boolean eliminar(String delete) {

@@ -4,12 +4,14 @@
  */
 package InterfazUsuario;
 
-import java.awt.Color;
-import java.sql.ResultSet;
+import GestionDeAlumnos.Alumno;
+import GestionDeGrupos.Grupo;
+import GestionDeTemporadas.GestorTemporadas;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
@@ -96,6 +98,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(14, 16, 14, 16);
         getContentPane().add(jLabel2, gridBagConstraints);
 
+        labelCurso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelCurso.setText("2013/2014");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -127,7 +130,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
     }//GEN-LAST:event_chooserCursoPropertyChange
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        int aux1 = chooserCurso.getYear();
+        /*int aux1 = chooserCurso.getYear();
         int aux2 = chooserCurso.getYear()+1;
         String auxCurso = Integer.toString(aux1)+"/"+Integer.toString(aux2);
        
@@ -156,7 +159,29 @@ public class NuevaTemporada extends javax.swing.JFrame {
             creador.actualizaComboBoxTemporadas();
         } catch (SQLException ex) {
             Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        int curso = chooserCurso.getYear();
+        int correcto = 0;
+        try {
+            correcto = GestorTemporadas.InsertarTemporada(curso, creador.accesoBD);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        if(correcto == 1){
+            JOptionPane.showMessageDialog(this, "Temporada creada", "Exito", JOptionPane.NO_OPTION);
+            this.setVisible(false);
+        }
+        
+        List<String> temps = new ArrayList<String>();
+        
+        try {
+            temps = GestorTemporadas.getListaTemporadas(creador.accesoBD);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        creador.actualizaComboBoxTemporadas(temps);
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

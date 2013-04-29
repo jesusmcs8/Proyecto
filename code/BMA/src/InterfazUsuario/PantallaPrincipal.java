@@ -12,12 +12,15 @@ package InterfazUsuario;
 
 import GestionDeAlumnos.*;
 import GestionDeUsuarios.*;
+import GestionDeTemporadas.*;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
+import java.util.Iterator;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -2829,5 +2832,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         while(res.next()){
             comboTempEntr.addItem(res.getString(1));
         }
+    }
+
+    void actualizaComboBoxTemporadas(List<String> temps) {
+        /*Iterator itr = temps.iterator();
+        while(itr.hasNext())
+            comboTempo.addItem(itr.);*/
+        for(String s : temps)
+            comboTempo.addItem(s);
     }
 }

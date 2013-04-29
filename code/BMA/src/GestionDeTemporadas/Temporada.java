@@ -14,6 +14,10 @@ import java.util.List;
  */
 public class Temporada {
 
+    public Temporada(String c){
+        curso = c;
+    }
+    
     private int idTemporada;
     private String curso;
     
