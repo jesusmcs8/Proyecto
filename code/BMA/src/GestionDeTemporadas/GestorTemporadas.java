@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class GestorTemporadas {
 
-    private List<Temporada> temporadas;
+    //private List<Temporada> temporadas;
     
     public static List<String> getListaTemporadas(BaseDatos accesoBD) throws SQLException {
         List<String> res = new ArrayList<String>();

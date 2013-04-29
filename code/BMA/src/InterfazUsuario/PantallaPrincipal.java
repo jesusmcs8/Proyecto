@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
@@ -153,8 +154,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         comboTempEntr = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        comboCatGrup = new javax.swing.JComboBox();
+        comboEntGrup = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
@@ -162,6 +163,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        jLabel7 = new javax.swing.JLabel();
+        tfGrupEnt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         panelInstalaciones = new javax.swing.JPanel();
         TituloLabel = new javax.swing.JLabel();
@@ -671,11 +674,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel2.setText("Buscar:");
 
-        comboTempEntr.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Temporada-", "12/13", "13/14", "14/15" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Categoria-", "Benjamin", "Alevin", "Infantil", "Cadete", "Junior" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Entrenador-", "Entrenador1", "Entrenador2" }));
+        comboEntGrup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Entrenador-", "Entrenador1", "Entrenador2" }));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -701,6 +700,20 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Filtrar entrenador:");
+
+        tfGrupEnt.setText("Buscar...");
+        tfGrupEnt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfGrupEntMouseClicked(evt);
+            }
+        });
+        tfGrupEnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfGrupEntKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -713,21 +726,26 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comboTempEntr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton5))
                             .addComponent(jButton1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboTempEntr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboCatGrup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfGrupEnt)
+                        .addGap(18, 18, 18)
+                        .addComponent(comboEntGrup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -737,8 +755,10 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(comboTempEntr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboCatGrup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboEntGrup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(tfGrupEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2480,17 +2500,17 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
 }//GEN-LAST:event_botonEliminarUsuarioActionPerformed
 
     private void menuTemporadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTemporadasMouseClicked
-        /*panelInicio.setVisible(false);
-        panelTemporadas.setVisible(true);
-        panelUsuarios.setVisible(false);
-        panelJugadores.setVisible(false);
-        panelGrupos.setVisible(false);*/
         ocultarPaneles();
+        
+        List<String> temps = new ArrayList<String>();
+        
         try {
-            actualizaComboBoxTemporadas();
+            temps = GestorTemporadas.getListaTemporadas(accesoBD);
         } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
         }
+        actualizaComboBoxTemporadas(temps);
+
         panelTemporadas.setVisible(true);
     }//GEN-LAST:event_menuTemporadasMouseClicked
 
@@ -2507,18 +2527,20 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void menuEntrenamientosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEntrenamientosMouseClicked
-        /*panelInicio.setVisible(false);
-        panelTemporadas.setVisible(false);
-        panelUsuarios.setVisible(false);
-        panelJugadores.setVisible(false);
-        panelGrupos.setVisible(true);*/
         ocultarPaneles();
-        panelGrupos.setVisible(true);
+                
+        List<String> temps = new ArrayList<String>();
+        
         try {
-            actualizaComboTempEnt();
+            temps = GestorTemporadas.getListaTemporadas(accesoBD);
+            actualizaComboCatGrup();
         } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
         }
+        actualizaComboTempEnt(temps);
+        
+        
+        panelGrupos.setVisible(true);
     }//GEN-LAST:event_menuEntrenamientosMouseClicked
 
     private void menuInstalacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuInstalacionesActionPerformed
@@ -2542,11 +2564,14 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         
         JOptionPane.showMessageDialog(this, "Temporada modificada", "Exito", JOptionPane.NO_OPTION);
         
+        List<String> temps = new ArrayList<String>();
+        
         try {
-            actualizaComboBoxTemporadas();
+            temps = GestorTemporadas.getListaTemporadas(accesoBD);
         } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
         }
+        actualizaComboBoxTemporadas(temps);
     }//GEN-LAST:event_botonModTemActionPerformed
 
     private void mostrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarButtonActionPerformed
@@ -2606,12 +2631,36 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
             else
                 JOptionPane.showMessageDialog(this, "Temporada "+t.getCurso()+" eliminada", "Exito", JOptionPane.INFORMATION_MESSAGE);
         
+        List<String> temps = new ArrayList<String>();
+        
         try {
-            actualizaComboBoxTemporadas();
+            temps = GestorTemporadas.getListaTemporadas(accesoBD);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        actualizaComboBoxTemporadas(temps);
+        
+    }//GEN-LAST:event_botonElimTempActionPerformed
+
+    private void tfGrupEntKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfGrupEntKeyTyped
+        String sEnt = tfGrupEnt.getText();
+        List<String> ents = new ArrayList<String>();
+        
+        try {
+            ents = GestorUsuarios.getEntrenadores(accesoBD, sEnt);
         } catch (SQLException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_botonElimTempActionPerformed
+        
+        comboEntGrup.removeAllItems();
+        actualizaComboEntGrup(ents);
+
+    }//GEN-LAST:event_tfGrupEntKeyTyped
+
+    private void tfGrupEntMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfGrupEntMouseClicked
+        tfGrupEnt.setText("");
+        tfGrupEnt.requestFocus();
+    }//GEN-LAST:event_tfGrupEntMouseClicked
 
     /**
      * @param args the command line arguments
@@ -2676,6 +2725,8 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel buscarLabel;
     private javax.swing.JLabel categoriaAlLabel;
     private javax.swing.JButton cerrarSesion;
+    private javax.swing.JComboBox comboCatGrup;
+    private javax.swing.JComboBox comboEntGrup;
     private javax.swing.JComboBox comboTempEntr;
     private javax.swing.JComboBox comboTempo;
     private javax.swing.JComboBox consultaCategoria;
@@ -2710,8 +2761,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -2728,6 +2777,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -2779,6 +2829,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JTextField textfield_apellidoPrimeroUsuario;
     private javax.swing.JTextField textfield_apellidoSegundoUsuario;
     private javax.swing.JTextField textfield_nombreUsuario;
+    private javax.swing.JTextField tfGrupEnt;
     // End of variables declaration//GEN-END:variables
 
     private void ocultarPaneles() {
@@ -2816,12 +2867,34 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
             comboTempEntr.addItem(res.getString(1));
         }
     }
+    
+    /*
+     * Metodo provisional hasta que se implemente "CATEGORIA"
+     */
+    private void actualizaComboCatGrup() throws SQLException{
+        comboCatGrup.removeAllItems();
+        String query = "SELECT tipo FROM Categoria";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        while(res.next()){
+            comboCatGrup.addItem(res.getString(1));
+        }
+    }
+            
 
     void actualizaComboBoxTemporadas(List<String> temps) {
-        /*Iterator itr = temps.iterator();
-        while(itr.hasNext())
-            comboTempo.addItem(itr.);*/
         for(String s : temps)
             comboTempo.addItem(s);
     }
+
+    private void actualizaComboTempEnt(List<String> temps) {
+        for(String s : temps)
+            comboTempEntr.addItem(s);
+    }
+
+    private void actualizaComboEntGrup(List<String> ents) {
+        for(String s : ents)
+            comboEntGrup.addItem(s);
+    }
+
+    
 }

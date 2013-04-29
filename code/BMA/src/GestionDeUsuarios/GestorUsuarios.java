@@ -5,6 +5,8 @@
 package GestionDeUsuarios;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -66,5 +68,12 @@ public class GestorUsuarios {
             clave, entrenador, telMovil, telFijo,
             email, numeroCuenta);
         usuarioBD.eliminaUsuarioBD(accesoBD, usuarioEliminado);
+    }
+    
+    public static List<String> getEntrenadores(BaseDatos accesoBD, String s) throws SQLException{
+        List<String> res = new ArrayList<String>();        
+        res = AccesoBDUsuario.getListaTemporadas(accesoBD, s);
+
+        return res;
     }
 }

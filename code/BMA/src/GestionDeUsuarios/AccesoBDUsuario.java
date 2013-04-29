@@ -6,6 +6,8 @@ package GestionDeUsuarios;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -42,6 +44,21 @@ class AccesoBDUsuario {
     
     public static ResultSet consultaUsuarioBD(BaseDatos accesoBD, String consulta) {
         return accesoBD.ejecutaConsulta(consulta);
+    }
+
+    static List<String> getListaTemporadas(BaseDatos accesoBD, String s) throws SQLException {
+        String query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE "
+                +"nombre LIKE '%" + s + "%' AND entrenador='1'";
+        
+        ResultSet resCons = accesoBD.ejecutaConsulta(query);
+        
+        List<String> res = new ArrayList<String>();
+        
+        while(resCons.next()){
+            res.add(resCons.getString(1));
+        }
+        
+        return res;
     }
 
     public void actualizaUsuarioBD(BaseDatos accesoBD, String actualizacion) throws SQLException {
