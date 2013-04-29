@@ -130,36 +130,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
     }//GEN-LAST:event_chooserCursoPropertyChange
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        /*int aux1 = chooserCurso.getYear();
-        int aux2 = chooserCurso.getYear()+1;
-        String auxCurso = Integer.toString(aux1)+"/"+Integer.toString(aux2);
-       
-        String query = "SELECT * FROM Temporada WHERE curso='"+auxCurso+"'";
-        ResultSet res = creador.ejecutarConsulta(query);
-        
-        try {
-            if(res.next()){
-                JOptionPane.showMessageDialog(this, "La temporada ya existe", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-            else{
 
-                int conf = JOptionPane.showConfirmDialog(this, "¿Desea crear la temporada?");
-                if(conf == JOptionPane.YES_OPTION){
-                    JOptionPane.showMessageDialog(this, "Temporada creada", "Exito", JOptionPane.NO_OPTION);
-                    query = "INSERT INTO Temporada (curso) VALUES ('"+auxCurso+"')";
-                    creador.ejecutarActualizacion(query);
-                    this.setVisible(false);
-                }   
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        try {
-            creador.actualizaComboBoxTemporadas();
-        } catch (SQLException ex) {
-            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         int curso = chooserCurso.getYear();
         int correcto = 0;
         try {

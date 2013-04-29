@@ -23,6 +23,29 @@ public class GestorTemporadas {
         return res;
     }
 
+    public static int modificarTemporada(BaseDatos accesoBD, String cursoAnterior) throws SQLException {
+        int correcto = 0;
+        String auxCursoAnt = cursoAnterior;
+        
+        cursoAnterior = cursoAnterior.substring(0, 4);
+        String cursoNuevo = JOptionPane.showInputDialog(new PantallaPrincipal(), "Introduzca el nuevo año del curso", cursoAnterior);
+        
+        while(cursoNuevo.length() != 4){
+            JOptionPane.showMessageDialog(new PantallaPrincipal(), "Numero de digitos incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
+            cursoNuevo = JOptionPane.showInputDialog(new PantallaPrincipal(), "Introduzca el nuevo año del curso", cursoAnterior);
+        }
+        
+        int conf = JOptionPane.showConfirmDialog(new PantallaPrincipal(), "¿Desea modificar la temporada "+auxCursoAnt+"?");
+        if(conf == JOptionPane.YES_OPTION){
+            cursoAnterior = cursoAnterior +"/"+Integer.toString(Integer.parseInt(cursoAnterior)+1);
+            cursoNuevo = cursoNuevo + "/"+Integer.toString(Integer.parseInt(cursoNuevo)+1);
+            
+            correcto = TemporadaBD.modificarTemporada(accesoBD, cursoAnterior, cursoNuevo);
+        }
+        
+        return correcto;
+    }
+
     private List<Temporada> temporadas;
     
     public static int InsertarTemporada(int curso, BaseDatos accesoBD) throws SQLException {

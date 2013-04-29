@@ -121,7 +121,7 @@
                   <Component id="jLabel1" min="-2" pref="255" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="299" max="-2" attributes="0"/>
                   <Component id="cerrarSesion" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="1256" max="32767" attributes="0"/>
+                  <EmptySpace pref="633" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -133,7 +133,7 @@
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="cerrarSesion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="1335" max="32767" attributes="0"/>
+                  <EmptySpace pref="673" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1430,7 +1430,7 @@
                           <Component id="jScrollPane3" min="-2" pref="492" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="338" max="32767" attributes="0"/>
+                  <EmptySpace pref="174" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1463,7 +1463,7 @@
                       <Component id="modificarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="eliminarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="190" max="32767" attributes="0"/>
+                  <EmptySpace pref="98" max="32767" attributes="0"/>
                   <Component id="jScrollPane3" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -1644,7 +1644,7 @@
                           <Component id="Informacion" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="1135" max="32767" attributes="0"/>
+                  <EmptySpace pref="971" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1680,7 +1680,7 @@
                   <Component id="jScrollPane4" min="-2" pref="105" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="Informacion" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="415" max="32767" attributes="0"/>
+                  <EmptySpace pref="323" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

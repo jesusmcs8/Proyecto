@@ -47,5 +47,13 @@ public class TemporadaBD {
         
         return res;
     }
+
+    static int modificarTemporada(BaseDatos accesoBD, String cursoAnterior, String cursoNuevo) throws SQLException {
+        int correcto = 0;
+        String query = "UPDATE Temporada SET curso='"+cursoNuevo+"' WHERE curso='"+cursoAnterior+"'";
+        correcto = accesoBD.ejecutaActualizacion(query);
+        
+        return correcto;
+    }
     
 }

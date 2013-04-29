@@ -2532,31 +2532,15 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }//GEN-LAST:event_menuInstalacionesMouseClicked
 
     private void botonModTemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModTemActionPerformed
-
         String cursoAnterior = (String)comboTempo.getSelectedItem();
-        String auxCursoAnt = cursoAnterior;
-        String cursoNuevo;
-        
-        cursoAnterior = cursoAnterior.substring(0, 4);
-        cursoNuevo = JOptionPane.showInputDialog(this, "Introduzca el nuevo año del curso", cursoAnterior);
-        
-        while(cursoNuevo.length() != 4){
-            JOptionPane.showMessageDialog(this, "Numero de digitos incorrecto", "Error", JOptionPane.ERROR_MESSAGE);
-            cursoNuevo = JOptionPane.showInputDialog(this, "Introduzca el nuevo año del curso", cursoAnterior);
+        int correcto = 0;
+        try {
+            correcto = GestorTemporadas.modificarTemporada(accesoBD, cursoAnterior);
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        int conf = JOptionPane.showConfirmDialog(this, "¿Desea modificar la temporada "+auxCursoAnt+"?");
-        if(conf == JOptionPane.YES_OPTION){
-            cursoAnterior = cursoAnterior +"/"+Integer.toString(Integer.parseInt(cursoAnterior)+1);
-            cursoNuevo = cursoNuevo + "/"+Integer.toString(Integer.parseInt(cursoNuevo)+1);
-            
-            String query = "UPDATE Temporada SET curso='"+cursoNuevo+"' WHERE curso='"+cursoAnterior+"'";
-            System.out.println(query);
-            try {
-                accesoBD.ejecutaActualizacion(query);
-            } catch (SQLException ex) {
-                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        
+        JOptionPane.showMessageDialog(this, "Temporada modificada", "Exito", JOptionPane.NO_OPTION);
         
         try {
             actualizaComboBoxTemporadas();
