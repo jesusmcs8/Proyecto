@@ -2595,17 +2595,16 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
 
     private void botonElimTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElimTempActionPerformed
         
-        String cursoSel = (String)comboTempo.getSelectedItem();
-        int conf = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la temporada "+cursoSel+"?");
-        if(conf == JOptionPane.YES_OPTION){
-            
-            String query = "DELETE FROM Temporada WHERE curso='"+cursoSel+"'";
-            boolean eliminar = accesoBD.eliminar(query);
-            if(!eliminar)
-                JOptionPane.showMessageDialog(this, "No se ha podido eliminar la temporada", "Error", JOptionPane.ERROR_MESSAGE);
+        boolean correcto = false;
+        String curso = (String)comboTempo.getSelectedItem();
+        
+        Temporada t = new Temporada(curso);
+        correcto = GestorTemporadas.eliminarTemporada(accesoBD, t);
+        
+        if(!correcto)
+                JOptionPane.showMessageDialog(this, "No se ha eliminado la temporada", "Error", JOptionPane.ERROR_MESSAGE);
             else
-                JOptionPane.showMessageDialog(this, "Temporada "+cursoSel+" eliminada", "Exito", JOptionPane.INFORMATION_MESSAGE);
-        }
+                JOptionPane.showMessageDialog(this, "Temporada "+t.getCurso()+" eliminada", "Exito", JOptionPane.INFORMATION_MESSAGE);
         
         try {
             actualizaComboBoxTemporadas();

@@ -55,5 +55,13 @@ public class TemporadaBD {
         
         return correcto;
     }
+
+    static boolean eliminarTemporadaBD(BaseDatos accesoBD, Temporada t) {
+        boolean correcto = false;
+        String query = "DELETE FROM Temporada WHERE curso='"+t.getCurso()+"'";
+        correcto = accesoBD.eliminar(query);
+        
+        return correcto;
+    }
     
 }

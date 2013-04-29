@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class GestorTemporadas {
 
+    private List<Temporada> temporadas;
+    
     public static List<String> getListaTemporadas(BaseDatos accesoBD) throws SQLException {
         List<String> res = new ArrayList<String>();
         res = TemporadaBD.getListaTemporadas(accesoBD);
@@ -46,7 +48,17 @@ public class GestorTemporadas {
         return correcto;
     }
 
-    private List<Temporada> temporadas;
+    public static boolean eliminarTemporada(BaseDatos accesoBD, Temporada t) {
+        boolean correcto = false;
+        System.out.println("hola");
+        int conf = JOptionPane.showConfirmDialog(new PantallaPrincipal(), "¿Desea eliminar la temporada "+t.getCurso()+"?");
+        if(conf == JOptionPane.YES_OPTION)
+            correcto = TemporadaBD.eliminarTemporadaBD(accesoBD, t);
+        
+        return correcto;
+    }
+
+    
     
     public static int InsertarTemporada(int curso, BaseDatos accesoBD) throws SQLException {
         int correcto = 0;
