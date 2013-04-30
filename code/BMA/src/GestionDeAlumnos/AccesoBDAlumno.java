@@ -7,6 +7,8 @@ package GestionDeAlumnos;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +32,24 @@ class AccesoBDAlumno {
 
         System.out.print("\n inser " + inserccion);
         accesoBD.ejecutaActualizacion(inserccion);
+    }
+
+    static List<String> getListaAlumnos(BaseDatos accesoBD, String s) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        String query = "";
+        
+        if(!"".equals(s))
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno "
+                +"WHERE primerApellido LIKE '%"+"s%'";
+        else
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno";
+        
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        while(res.next())
+            als.add(res.getString(2)+", "+res.getString(3)+", "+res.getString(1));
+        
+        return als;
     }
 
     public ResultSet consultaAlumnoBD(BaseDatos accesoBD, String consulta) {

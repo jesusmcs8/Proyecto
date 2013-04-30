@@ -2,6 +2,8 @@ package GestionDeAlumnos;
 
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Clase que representa al alumno y sus datos personales, además de los nombres
  * del padre y la madre.
@@ -48,5 +50,12 @@ public class GestorAlumnos {
                 cuentaCorriente, domicilio, localidad, codPostal, provincia, colegio,
                 nombrePadre, nombreMadre, telFijo, telMovil, email, observaciones, tallaAlumno);
         alumnoBD.eliminaAlumnoBD(accesoBD, alumnoEliminado);
+    }
+
+    public static List<String> getAlumnos(BaseDatos accesoBD, String s) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        als = AccesoBDAlumno.getListaAlumnos(accesoBD, s);
+        
+        return als;
     }
 }
