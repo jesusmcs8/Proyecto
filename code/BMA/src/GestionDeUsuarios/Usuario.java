@@ -35,6 +35,10 @@ public class Usuario {
         this.telFijo = telFijo;
         this.email = email;
     }
+
+    public Usuario(String e) {
+        this.nombre = e;
+    }
     public void setIdUsuario(int idUsuario){
         this.idUsuario=idUsuario;
     }

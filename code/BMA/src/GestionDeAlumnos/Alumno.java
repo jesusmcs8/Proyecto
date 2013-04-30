@@ -31,6 +31,10 @@ public class Alumno {
     private String observaciones;
     private String tallaAlumno;
 
+    public Alumno(){
+        
+    }
+    
     Alumno(String nombre, String primerApellido, String segundoApellido, java.util.Date fechaNac,
             String cuentaCorriente, String domicilio, String localidad, int codPostal, String provincia, String colegio,
             String nombrePadre, String nombreMadre, int telFijo, int telMovil, String email, String observaciones, String tallaAlumno) {

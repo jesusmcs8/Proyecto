@@ -47,7 +47,7 @@ class AccesoBDAlumno {
         ResultSet res = accesoBD.ejecutaConsulta(query);
         
         while(res.next())
-            als.add(res.getString(2)+", "+res.getString(3)+", "+res.getString(1));
+            als.add(res.getString(2)+" "+res.getString(3)+" "+res.getString(1));
         
         return als;
     }

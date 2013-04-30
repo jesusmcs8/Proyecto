@@ -35,5 +35,22 @@ public class GruposBD {
             return true;
         
     }
+
+    static boolean ConsultarGrupos(BaseDatos accesoBD, String dia1, String dia2, String hora, String min) throws SQLException {
+        boolean validar = false;
+        
+        String query = "SELECT * FROM Horario, Usuario "
+                + "WHERE Horario.dia='"+dia1+"' "
+                    + "AND Horario.horaInicio='"+hora+"' "
+                    + "AND Horario.Grupo_Usuario_idUsuario='"+"Usuario.idUsuario'";
+        
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        if(res.next())
+            validar = false;
+        else
+            validar = true;
+        
+        return validar;
+    }
     
 }
