@@ -675,7 +675,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel2.setText("Buscar:");
 
         comboEntGrup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Entrenador-" }));
-        comboEntGrup.setMaximumSize(new java.awt.Dimension(87, 20));
+        comboEntGrup.setMaximumSize(new java.awt.Dimension(174, 20));
+        comboEntGrup.setMinimumSize(new java.awt.Dimension(174, 20));
+        comboEntGrup.setPreferredSize(new java.awt.Dimension(174, 20));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -2549,6 +2551,11 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
         actualizaComboTempEnt(temps);
         
+        
+        List<String> ents = new ArrayList<String>();
+        ents = getListaEntrenadores("");
+        comboEntGrup.removeAllItems();
+        actualizaComboEntGrup(ents);
         
         panelGrupos.setVisible(true);
     }//GEN-LAST:event_menuEntrenamientosMouseClicked

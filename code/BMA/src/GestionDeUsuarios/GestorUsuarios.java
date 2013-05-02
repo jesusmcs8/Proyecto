@@ -76,4 +76,11 @@ public class GestorUsuarios {
 
         return res;
     }
+
+    public static int getIdEnt(BaseDatos accesoBD, String entrenador) throws SQLException {
+        int res = AccesoBDUsuario.getIdEnt(accesoBD, entrenador);
+        
+        
+        return res;
+    }
 }

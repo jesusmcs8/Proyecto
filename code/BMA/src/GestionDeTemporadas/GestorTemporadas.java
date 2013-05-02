@@ -77,6 +77,12 @@ public class GestorTemporadas {
         }
         return correcto;
     }
+
+    public static int getIdTemporada(BaseDatos accesoBD, String temporada) throws SQLException {
+        int idTem = TemporadaBD.getIdTemporada(accesoBD, temporada);
+        
+        return idTem;
+    }
         
     public  List<Temporada> ConsultarTemporada(String curso){
         return new ArrayList<Temporada>();

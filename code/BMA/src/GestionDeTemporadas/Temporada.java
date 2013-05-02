@@ -14,9 +14,7 @@ import java.util.List;
  */
 public class Temporada {
 
-    public Temporada(String c){
-        curso = c;
-    }
+    
     
     private int idTemporada;
     private String curso;
@@ -26,6 +24,10 @@ public class Temporada {
     private List<Grupo> grupos;
     
     private List<Alumno> alumnos;
+    
+    public Temporada(String c){
+        curso = c;
+    }
 
     public String getCurso() {
         return curso;

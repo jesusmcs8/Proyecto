@@ -58,4 +58,11 @@ public class GestorAlumnos {
         
         return als;
     }
+
+    public static List<Integer> getIdAl(BaseDatos accesoBD, List<String> listaAlumnos) throws SQLException {
+        List<Integer> listaIDAl = new ArrayList<Integer>();
+        listaIDAl = AccesoBDAlumno.getIdAl(accesoBD, listaAlumnos);
+        
+        return listaIDAl;
+    }
 }

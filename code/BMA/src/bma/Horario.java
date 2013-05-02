@@ -22,7 +22,7 @@ public class Horario {
         Dia1 = dia1;
         Dia2 = dia2;
         
-        String aux1 = hora+":"+min;
+        String aux1 = hora.concat(":").concat(min);
         SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
         Hora1 = new Time(sdf.parse(aux1).getTime());
         Hora2 = new Time(sdf.parse(aux1).getTime());

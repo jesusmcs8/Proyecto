@@ -32,7 +32,8 @@ public class Grupo {
 
     Grupo(String sex, String temp, String dia1, String dia2, String hora, String min, String entrenador) throws ParseException {
         this.sexo = sex;
-        temporada = new Temporada(temp+"/"+Integer.toString(Integer.parseInt(temp)+1));
+        
+        temporada = new Temporada(temp);
         horario = new Horario(dia1, dia2, hora, min);
         this.entrenador = new Usuario(entrenador);
     }
