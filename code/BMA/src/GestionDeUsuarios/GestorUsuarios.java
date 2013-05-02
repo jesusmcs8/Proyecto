@@ -72,15 +72,18 @@ public class GestorUsuarios {
     
     public static List<String> getEntrenadores(BaseDatos accesoBD, String s) throws SQLException{
         List<String> res = new ArrayList<String>();        
-        res = AccesoBDUsuario.getListaTemporadas(accesoBD, s);
+        res = AccesoBDUsuario.getListaEntrenadores(accesoBD, s);
 
         return res;
     }
 
     public static int getIdEnt(BaseDatos accesoBD, String entrenador) throws SQLException {
         int res = AccesoBDUsuario.getIdEnt(accesoBD, entrenador);
-        
-        
+
         return res;
+    }
+
+    public static String getEntrenador(BaseDatos accesoBD, String s) throws SQLException {
+        return AccesoBDUsuario.getEntrenador(accesoBD, s);
     }
 }

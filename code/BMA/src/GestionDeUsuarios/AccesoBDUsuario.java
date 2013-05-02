@@ -46,27 +46,6 @@ class AccesoBDUsuario {
         return accesoBD.ejecutaConsulta(consulta);
     }
 
-    static List<String> getListaTemporadas(BaseDatos accesoBD, String s) throws SQLException {
-        String query = "";
-        if(!"".equals(s)){
-            query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE "
-                +"nombre LIKE '%" + s + "%' AND entrenador='1'";
-        }
-        else{
-            query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario";
-        }
-        
-        ResultSet resCons = accesoBD.ejecutaConsulta(query);
-        
-        List<String> res = new ArrayList<String>();
-        
-        while(resCons.next()){
-            res.add(resCons.getString(1)+" "+resCons.getString(2)+" "+resCons.getString(3));
-        }
-        
-        return res;
-    }
-
     static int getIdEnt(BaseDatos accesoBD, String entrenador) throws SQLException {
         int id=0;
         String nombre = "", apellido1 = "", apellido2 = "";
@@ -83,6 +62,40 @@ class AccesoBDUsuario {
             id = res.getInt(1);
         
         return id;
+    }
+
+    static List<String> getListaEntrenadores(BaseDatos accesoBD, String s) throws SQLException {
+        String query = "";
+        if(!"".equals(s)){
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE "
+                +"nombre LIKE '%" + s + "%' AND entrenador='1'";
+        }
+        else{
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE entrenador='1'";
+        }
+        
+        ResultSet resCons = accesoBD.ejecutaConsulta(query);
+        
+        List<String> res = new ArrayList<String>();
+        
+        while(resCons.next()){
+            res.add(resCons.getString(1)+" "+resCons.getString(2)+" "+resCons.getString(3));
+        }
+        
+        return res;
+    }
+
+    static String getEntrenador(BaseDatos accesoBD, String s) throws SQLException {
+        String query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario "
+                + "WHERE idUsuario='"+s+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+ 
+        String ent = "";
+        
+        if(res.next())
+            ent = (res.getString(1)+" "+res.getString(2)+" "+res.getString(3));
+        
+        return ent;
     }
 
     public void actualizaUsuarioBD(BaseDatos accesoBD, String actualizacion) throws SQLException {

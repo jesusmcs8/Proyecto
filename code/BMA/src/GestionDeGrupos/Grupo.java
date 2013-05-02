@@ -42,10 +42,20 @@ public class Grupo {
         return horario.getDia1();
     }
     
+    String getDia2() {
+        return horario.getDia2();
+    }
+    
     public String getHora1(){
         String s = horario.getHora1().toString();
         return s;
     }
+
+    Time getHora1Time() {
+        return horario.getHora1();
+    }
+
+    
     
     
 }

@@ -24,11 +24,18 @@ import javax.swing.JOptionPane;
  */
 public class GestorGrupos {
 
+    public static List<List<String>> getListaGrupos(BaseDatos accesoBD) throws SQLException {
+        List<List<String>> grupos = new ArrayList<List<String>>();
+        grupos = GruposBD.getListaGrupos(accesoBD);
+        
+        return grupos;
+    }
+
     private List<Grupo> grupos;
     
     public static void insertarDatosGrupo(BaseDatos accesoBD, List<String> listaAlumnos, 
             String temporada, String categoria, String sexo, String dia1, 
-            String dia2, String hora, String min, String entrenador) throws ParseException, SQLException {
+            String dia2, String hora, String min, String entrenador, String instalacion) throws ParseException, SQLException {
         
         
         
@@ -43,18 +50,29 @@ public class GestorGrupos {
             
             /***************************************************************/
             /**CODIGO PROVISIONAL HASTA TENER IMPLEMENTACION DE CATEGORIA **/
-            String query = "SELECT idCategoria FROM Categoria WHERE tipo='"+categoria+"'";
-            ResultSet res = accesoBD.ejecutaConsulta(query);
-            int idCat=0;
-            if(res.next())
-                idCat = res.getInt(1);
+            String query1 = "SELECT idCategoria FROM Categoria WHERE tipo='"+categoria+"'";
+            ResultSet res1 = accesoBD.ejecutaConsulta(query1);
+            int idCat = 0;
+            if(res1.next())
+                idCat = res1.getInt(1);
             /***************************************************************/
             /***************************************************************/
+            
             int idTemp = GestorTemporadas.getIdTemporada(accesoBD, temporada);
             
+            /***************************************************************/
+            /**CODIGO PROVISIONAL HASTA TENER IMPLEMENTACION DE INSTALACIONES **/
+            String auxString = instalacion.substring(0, instalacion.indexOf(","));
+            String query2 = "SELECT idInstalacion FROM Instalacion WHERE nombre='"+auxString+"'";
+            ResultSet res2 = accesoBD.ejecutaConsulta(query2);
+            int idInst = 0;
+            if(res2.next())
+                idInst = res2.getInt(1);
+            /***************************************************************/
+            /***************************************************************/
             Grupo g = new Grupo(sexo, temporada, dia1, dia2, hora, min, entrenador);
             
-            GruposBD.crearGruposBD(accesoBD, g, listaIDAl, idEnt, idCat, idTemp);
+            GruposBD.crearGruposBD(accesoBD, g, listaIDAl, idEnt, idCat, idTemp, idInst);
         }
        
     }
