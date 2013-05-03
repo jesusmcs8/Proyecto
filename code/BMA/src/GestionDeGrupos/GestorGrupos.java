@@ -31,6 +31,13 @@ public class GestorGrupos {
         return grupos;
     }
 
+    public static List<List<String>> getListaGruposFiltro(BaseDatos accesoBD, String temporada, String categoria, String entrenador) throws SQLException {
+        List<List<String>> grupos = new ArrayList<List<String>>();
+        grupos = GruposBD.getListaGruposFiltro(accesoBD, temporada, categoria, entrenador);
+        
+        return grupos;
+    }
+
     private List<Grupo> grupos;
     
     public static void insertarDatosGrupo(BaseDatos accesoBD, List<String> listaAlumnos, 

@@ -1,5 +1,7 @@
 package GestionDeGrupos;
 
+import GestionDeTemporadas.GestorTemporadas;
+import GestionDeUsuarios.GestorUsuarios;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -108,6 +110,44 @@ public class GruposBD {
                 + "Usuario_idUsuario, Temporada_idTemporada "
                 + "FROM Grupo";
         ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        List<String> aux;
+        
+        while(res.next()){
+            aux = new ArrayList<String>();
+            aux.add(res.getString(1)+","+res.getString(2)+","+res.getString(3)+","+res.getString(4));
+            grupos.add(aux);
+        }
+        
+        return grupos;
+    }
+
+    static List<List<String>> getListaGruposFiltro(BaseDatos accesoBD, String temporada, String categoria, String entrenador) throws SQLException {
+        int idTemp, idCat = 0, idEnt;
+        idTemp = GestorTemporadas.getIdTemporada(accesoBD, temporada);
+        
+        /*****************************************/
+        /*********PROVISIONAL*********************/
+        String auxQ = "SELECT idCategoria FROM Categoria WHERE tipo='"+categoria+"'";
+        ResultSet auxR = accesoBD.ejecutaConsulta(auxQ);
+        if(auxR.next())
+            idCat = auxR.getInt(1);
+        /*****************************************/
+        
+        idEnt = GestorUsuarios.getIdEnt(accesoBD, entrenador);
+        
+        List<List<String>> grupos = new ArrayList<List<String>>();
+
+        String query = "SELECT n_alumnos, Categoria_idCategoria, "
+                + "Usuario_idUsuario, Temporada_idTemporada "
+                + "FROM Grupo WHERE Categoria_idCategoria='"+idCat+"' AND "
+                + "Usuario_idUsuario='"+idEnt+"' AND "
+                + "Temporada_idTemporada='"+idTemp+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        
+        System.out.println();
+        System.out.println(query);
         
         List<String> aux;
         
