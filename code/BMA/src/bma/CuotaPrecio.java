@@ -1,15 +1,19 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package bma;
 
+import java.sql.Date;
+
 /**
- * Clase que indica las cuotas de todos los pagos que se realizarán a la
- * Fundación.
  *
- * @author Alex Moreno
- * @version 1.0
+ * @author David
  */
 public class CuotaPrecio {
-
+    
+    private Date fechaPago;
     private int idCuotaPrecio;
-    private int impote;
+    private float importe;
     private boolean pagado;
 }

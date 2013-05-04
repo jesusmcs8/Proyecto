@@ -12,4 +12,8 @@ public class Categoria {
     private String tipo;
     private String descripcion;
     private int edadMaxima;
+    
+    public Categoria(String categoria){
+        this.tipo = categoria;
+    }
 }

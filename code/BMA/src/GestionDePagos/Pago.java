@@ -2,13 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package bma;
+package GestionDePagos;
 
 /**
  *
  * @author David
  */
-public class PagoTemporada {
+public class Pago {
     
-    private int idPagoTemporada;
 }
