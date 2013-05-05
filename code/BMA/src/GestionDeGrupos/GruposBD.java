@@ -289,7 +289,7 @@ public class GruposBD {
         if(res2.next())
             idInst = res2.getInt(1);
         
-        String query3 = "SELECT nombre FROM Instalacion WHERE "
+        String query3 = "SELECT nombre, localizacion FROM Instalacion WHERE "
                 + "idInstalacion='"+idInst+"'";
         ResultSet res3 = accesoBD.ejecutaConsulta(query3);
         
@@ -297,7 +297,7 @@ public class GruposBD {
         
         String inst = "";
         if(res3.next())
-            inst = res3.getString(1);
+            inst = (res3.getString(1)+","+res3.getString(2));
         
      
         
@@ -339,6 +339,24 @@ public class GruposBD {
             System.out.println("se ha eliminado");
         else
             System.out.println("no se ha eliminado");
+    }
+
+    static String getEntrenador(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        String query = "SELECT Usuario_idUsuario FROM Grupo WHERE "
+                + "idGrupo='"+idGrupo+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        int idEnt = 0;
+        if(res.next())
+            idEnt = res.getInt(1);
+        
+        String ent = GestorUsuarios.getEntrenador(accesoBD, idEnt);
+        
+        return ent;
+    }
+
+    static void ModificarGruposBD(Grupo g) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
     
 }

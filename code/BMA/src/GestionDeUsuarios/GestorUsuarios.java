@@ -86,4 +86,16 @@ public class GestorUsuarios {
     public static String getEntrenador(BaseDatos accesoBD, String s) throws SQLException {
         return AccesoBDUsuario.getEntrenador(accesoBD, s);
     }
+
+    public static String getEntrenador(BaseDatos accesoBD, int idEnt) throws SQLException {
+        String query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE "
+                + "idUsuario='"+idEnt+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        String ent = "";
+        if(res.next())
+            ent = (res.getString(1)+" "+res.getString(2)+" "+res.getString(3));
+        
+        return ent;
+    }
 }

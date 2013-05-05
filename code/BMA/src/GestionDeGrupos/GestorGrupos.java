@@ -74,6 +74,14 @@ public class GestorGrupos {
         GruposBD.eliminarAlumnoIntroducido(accesoBD, idGrupo, idAl);
     }
 
+    public static String getEntrenador(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getEntrenador(accesoBD, idGrupo);
+    }
+
+    public static void modificarGrupo(BaseDatos accesoBD, Grupo g, String idGrupo) {
+        Grupo.Modificar(g);
+    }
+
     private List<Grupo> grupos;
     
     public static void insertarDatosGrupo(BaseDatos accesoBD, List<String> listaAlumnos, 

@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class Grupo {
 
+    static void Modificar(Grupo g) {
+        GruposBD.ModificarGruposBD(g);
+    }
+
     private int idGrupo;
     //private Calendar[] horarios;
     
@@ -30,7 +34,7 @@ public class Grupo {
     
     private Usuario entrenador;
 
-    Grupo(String sex, String temp, String dia1, String dia2, String hora, String min, String entrenador) throws ParseException {
+    public Grupo(String sex, String temp, String dia1, String dia2, String hora, String min, String entrenador) throws ParseException {
         this.sexo = sex;
         
         temporada = new Temporada(temp);

@@ -7,9 +7,12 @@ package InterfazUsuario;
 import GestionDeAlumnos.Alumno;
 import GestionDeAlumnos.GestorAlumnos;
 import GestionDeGrupos.GestorGrupos;
+import GestionDeGrupos.Grupo;
+import GestionDeGrupos.GruposBD;
 import bma.DiasSemana;
 import java.awt.Color;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -51,6 +54,7 @@ public class ConsultarGrupo extends javax.swing.JFrame {
         String dia1 = GestorGrupos.getDia1(creador.accesoBD, idGrupo);
         String dia2 = GestorGrupos.getDia2(creador.accesoBD, idGrupo);
         String inst = GestorGrupos.getInstalacion(creador.accesoBD, idGrupo);
+        String ent = GestorGrupos.getEntrenador(creador.accesoBD, idGrupo);
         
         labelTemp.setText(temp);
         labelCat.setText(cat);
@@ -59,6 +63,7 @@ public class ConsultarGrupo extends javax.swing.JFrame {
         labelDia1.setText(dia1);
         labelDia2.setText(dia2);
         labelInstalacion.setText(inst);
+        labelEntrenador.setText(ent);
         
         List<String> aux = new ArrayList<String>();
         
@@ -98,7 +103,15 @@ public class ConsultarGrupo extends javax.swing.JFrame {
         comboDia2.addItem(DiasSemana.Jueves);
         comboDia2.addItem(DiasSemana.Viernes);
         comboDia2.addItem(DiasSemana.Sabado);
-        comboDia2.addItem(DiasSemana.Domingo);
+        comboDia2.addItem(DiasSemana.Domingo); 
+        
+        comboEnt.setSelectedItem(ent);
+        comboInst.setSelectedItem(inst);
+        System.out.println();
+        System.out.println(hora1);
+        textHora.setText(hora1);
+        comboDia1.setSelectedIndex(DiasSemana.getNumeroDia(dia1));
+        comboDia2.setSelectedIndex(DiasSemana.getNumeroDia(dia2));
     }
 
     /**
@@ -160,6 +173,10 @@ public class ConsultarGrupo extends javax.swing.JFrame {
         tfBuscarAlIntr = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         botonQuitarAlumno = new javax.swing.JButton();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        labelEntrenador = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -233,8 +250,8 @@ public class ConsultarGrupo extends javax.swing.JFrame {
         jLabel8.setText("Entrenador");
 
         comboInst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        comboInst.setMinimumSize(new java.awt.Dimension(117, 20));
-        comboInst.setPreferredSize(new java.awt.Dimension(117, 20));
+        comboInst.setMinimumSize(new java.awt.Dimension(174, 20));
+        comboInst.setPreferredSize(new java.awt.Dimension(174, 20));
 
         tfBuscarEnt.setText("Buscar...");
         tfBuscarEnt.setMinimumSize(new java.awt.Dimension(70, 20));
@@ -296,7 +313,7 @@ public class ConsultarGrupo extends javax.swing.JFrame {
             }
         });
 
-        botonAceptar.setText("Aceptar");
+        botonAceptar.setText("Modificar");
         botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptarActionPerformed(evt);
@@ -334,6 +351,20 @@ public class ConsultarGrupo extends javax.swing.JFrame {
             }
         });
 
+        jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel17.setText("Datos ya introducidos");
+
+        jLabel18.setText("Entrenador:");
+
+        labelEntrenador.setText("jLabel19");
+
+        jButton1.setText("Aceptar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -341,14 +372,6 @@ public class ConsultarGrupo extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(botonAceptar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonCancelar))
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -409,7 +432,7 @@ public class ConsultarGrupo extends javax.swing.JFrame {
                                         .addGap(72, 72, 72)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(comboInst, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(comboInst, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -429,10 +452,6 @@ public class ConsultarGrupo extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(labelCat))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labelSexo))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel1)
@@ -445,18 +464,38 @@ public class ConsultarGrupo extends javax.swing.JFrame {
                                         .addGap(115, 115, 115)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(tfBuscarAlIntr, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel16))))
+                                            .addComponent(jLabel16)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel18)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelEntrenador))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelSexo)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonQuitarAlumno)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(botonQuitarAlumno))
+                            .addComponent(jLabel17))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(botonAceptar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(botonCancelar))
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -481,13 +520,19 @@ public class ConsultarGrupo extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelDia2)
                             .addComponent(labelHora2))
+                        .addGap(7, 7, 7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(labelEntrenador))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(labelSexo)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonQuitarAlumno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -606,10 +651,6 @@ public class ConsultarGrupo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonAnadirActionPerformed
 
-    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_botonAceptarActionPerformed
-
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_botonCancelarActionPerformed
@@ -653,6 +694,25 @@ public class ConsultarGrupo extends javax.swing.JFrame {
         
         actualizaListaAlumnosIntroducidos(aux);
     }//GEN-LAST:event_botonQuitarAlumnoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+        Grupo g = null;
+        try {
+            g = new Grupo((String)comboSexo.getSelectedItem(), (String) comboTemp.getSelectedItem(), 
+                    (String) comboDia1.getSelectedItem(), (String) comboDia2.getSelectedItem(), 
+                    textHora.getText(), textMin.getText(), (String) comboEnt.getSelectedItem());
+        } catch (ParseException ex) {
+            Logger.getLogger(ConsultarGrupo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        GestorGrupos.modificarGrupo(creador.accesoBD, g, idGrupo);
+        
+        this.setVisible(false);
+    }//GEN-LAST:event_botonAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -708,6 +768,7 @@ public class ConsultarGrupo extends javax.swing.JFrame {
     private javax.swing.JComboBox comboInst;
     private javax.swing.JComboBox comboSexo;
     private javax.swing.JComboBox comboTemp;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -716,6 +777,8 @@ public class ConsultarGrupo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -734,6 +797,7 @@ public class ConsultarGrupo extends javax.swing.JFrame {
     private javax.swing.JLabel labelCat;
     private javax.swing.JLabel labelDia1;
     private javax.swing.JLabel labelDia2;
+    private javax.swing.JLabel labelEntrenador;
     private javax.swing.JLabel labelError;
     private javax.swing.JLabel labelHora1;
     private javax.swing.JLabel labelHora2;
