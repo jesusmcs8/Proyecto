@@ -4,6 +4,8 @@
  */
 package GestionDePagos;
 
+import java.util.List;
+
 /**
  *
  * @author David
@@ -11,4 +13,11 @@ package GestionDePagos;
 public class PagoTemporada {
     
     private int idPagoTemporada;
+    
+    private List<CuotaPrecio> cuotas;
+    
+    PagoTemporada(CuotaPrecio cuota){
+        
+    }
+    
 }

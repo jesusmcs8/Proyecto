@@ -4,6 +4,7 @@
  */
 package GestionDeEquipos;
 
+import InterfazUsuario.NuevaTemporada;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -54,6 +55,12 @@ public class GestorEquipos {
         boolean equipoEliminado;
 
         equipoEliminado = EquipoBD.EliminarEquipoBD(accesoBD, e);
+        
+        if(equipoEliminado==true)
+            JOptionPane.showMessageDialog(new NuevaTemporada(), "Equipo eliminado", "Equipo", JOptionPane.INFORMATION_MESSAGE);
+        else
+            JOptionPane.showMessageDialog(new NuevaTemporada(), "No se puede eliminar el equipo", "Error", JOptionPane.ERROR_MESSAGE);
+            
 
         return equipoEliminado;
     }
