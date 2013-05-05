@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package bma;
+package GestionDePagos;
 
 import java.sql.Date;
 
@@ -16,4 +16,13 @@ public class CuotaPrecio {
     private int idCuotaPrecio;
     private float importe;
     private boolean pagado;
+    
+    CuotaPrecio(String fecha, float importe, boolean pagado){
+        //this.fechaPago = new Date();
+        this.importe = importe;
+        this.pagado = pagado;
+    }
+    CuotaPrecio(float importe){
+        this.importe = importe;
+    }
 }

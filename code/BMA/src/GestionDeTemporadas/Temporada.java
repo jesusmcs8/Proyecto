@@ -3,7 +3,7 @@ package GestionDeTemporadas;
 import GestionDeAlumnos.Alumno;
 import GestionDeGrupos.Grupo;
 import bma.Actividad;
-import bma.Equipo;
+import GestionDeEquipos.Equipo;
 import java.util.List;
 
 /**
