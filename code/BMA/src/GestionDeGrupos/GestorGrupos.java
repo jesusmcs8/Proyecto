@@ -38,6 +38,42 @@ public class GestorGrupos {
         return grupos;
     }
 
+    public static String getTemporada(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getTemporada(accesoBD, idGrupo);
+    }
+
+    public static String getCategoria(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getCategoria(accesoBD, idGrupo);
+    }
+
+    public static String getHora1(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getHora1(accesoBD, idGrupo);
+    }
+
+    public static String getHora2(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getHora2(accesoBD, idGrupo);
+    }
+
+    public static String getDia1(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getDia1(accesoBD, idGrupo);
+    }
+
+    public static String getDia2(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getDia2(accesoBD, idGrupo);
+    }
+
+    public static String getInstalacion(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.getInstalacion(accesoBD, idGrupo);
+    }
+
+    public static List<String> getListaAlumnosIntroducidos(BaseDatos accesoBD, String idGrupo) throws SQLException {
+        return GruposBD.geteListaAlumnosIntroducidos(accesoBD, idGrupo);
+    }
+
+    public static void eliminarAlumnoIntroducido(BaseDatos accesoBD, int idGrupo, int idAl) {
+        GruposBD.eliminarAlumnoIntroducido(accesoBD, idGrupo, idAl);
+    }
+
     private List<Grupo> grupos;
     
     public static void insertarDatosGrupo(BaseDatos accesoBD, List<String> listaAlumnos, 

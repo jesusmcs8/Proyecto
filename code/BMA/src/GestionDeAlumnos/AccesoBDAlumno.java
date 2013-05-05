@@ -76,6 +76,28 @@ class AccesoBDAlumno {
         return listaIDAl;
     }
 
+    static int getIdAl(BaseDatos accesoBD, String s) throws SQLException {
+        int idAl = 0;
+        String aux, apellido1="", apellido2="";
+
+        aux = s;
+        
+        apellido1 = aux.substring(0, aux.indexOf(" "));
+        apellido2 = aux.substring(aux.indexOf(" ")+1, aux.indexOf(" ", aux.indexOf(" ")+1));
+            
+        String query = "SELECT idAlumno FROM Alumno WHERE primerApellido='"+apellido1+"'"
+                + " AND segundoApellido='"+apellido2+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+          
+        System.out.println(","+apellido1+","+apellido2+",");
+        
+        if(res.next())
+            idAl = res.getInt(1);
+        //System.out.println();
+        System.out.println(idAl);
+        return idAl;
+    }
+
     public ResultSet consultaAlumnoBD(BaseDatos accesoBD, String consulta) {
         ResultSet retset;
         retset = accesoBD.ejecutaConsulta(consulta);

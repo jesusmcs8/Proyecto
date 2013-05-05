@@ -1,7 +1,5 @@
 package GestionDeTemporadas;
 
-import GestionDeAlumnos.Alumno;
-import GestionDeGrupos.Grupo;
 import InterfazUsuario.NuevaTemporada;
 import InterfazUsuario.PantallaPrincipal;
 import ServiciosAlmacenamiento.BaseDatos;
@@ -86,6 +84,10 @@ public class GestorTemporadas {
 
     public static String getTemporada(BaseDatos accesoBD, String s) throws SQLException {
         return TemporadaBD.getTemporada(accesoBD, s);
+    }
+
+    public static String getTemporada(BaseDatos accesoBD, int idTemp) throws SQLException {
+        return TemporadaBD.getTemporada(accesoBD, idTemp);
     }
         
     public  List<Temporada> ConsultarTemporada(String curso){

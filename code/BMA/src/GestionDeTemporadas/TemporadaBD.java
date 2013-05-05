@@ -86,5 +86,16 @@ public class TemporadaBD {
         
         return temp;
     }
+
+    static String getTemporada(BaseDatos accesoBD, int idTemp) throws SQLException {
+        String query = "SELECT curso FROM Temporada WHERE idTemporada='"+idTemp+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        String temp = "";
+        
+        if(res.next())
+            temp = res.getString(1);
+        
+        return temp;
+    }
     
 }

@@ -66,5 +66,9 @@ public class GestorAlumnos {
         return listaIDAl;
     }
 
+    public static int getIdAl(BaseDatos accesoBD, String alumno) throws SQLException {
+        return AccesoBDAlumno.getIdAl(accesoBD, alumno);
+    }
+
     
 }

@@ -157,7 +157,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         comboEntGrup = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaGrupos = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
+        botonConsGrupo = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         botonNuevoGrupEnt = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -235,7 +235,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(299, 299, 299)
                 .addComponent(cerrarSesion)
-                .addContainerGap(633, Short.MAX_VALUE))
+                .addContainerGap(1256, Short.MAX_VALUE))
         );
         panelInicioLayout.setVerticalGroup(
             panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +244,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cerrarSesion))
-                .addContainerGap(673, Short.MAX_VALUE))
+                .addContainerGap(1335, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -708,7 +708,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaGrupos);
 
-        jButton6.setText("Modificar");
+        botonConsGrupo.setText("Consultar");
+        botonConsGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsGrupoActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Eliminar");
 
@@ -762,7 +767,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
+                        .addComponent(botonConsGrupo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -812,7 +817,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton6)
+                        .addComponent(botonConsGrupo)
                         .addComponent(jButton5))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -834,7 +839,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelGruposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelGruposLayout.setVerticalGroup(
             panelGruposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -955,7 +960,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addGroup(panelInstalacionesLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(174, Short.MAX_VALUE))
+                .addContainerGap(338, Short.MAX_VALUE))
         );
         panelInstalacionesLayout.setVerticalGroup(
             panelInstalacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -983,7 +988,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(mostrarButton)
                     .addComponent(modificarButton)
                     .addComponent(eliminarButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -1089,7 +1094,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addGroup(panelActividadesLayout.createSequentialGroup()
                         .addGap(415, 415, 415)
                         .addComponent(Informacion)))
-                .addContainerGap(971, Short.MAX_VALUE))
+                .addContainerGap(1135, Short.MAX_VALUE))
         );
         panelActividadesLayout.setVerticalGroup(
             panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1119,7 +1124,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Informacion)
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(415, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2744,6 +2749,17 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void botonConsGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsGrupoActionPerformed
+        int filaSel = tablaGrupos.getSelectedRow();
+        String idGrupo = (String) tablaGrupos.getValueAt(filaSel, 0);
+      
+        try {
+            new ConsultarGrupo(this, idGrupo).setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_botonConsGrupoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2792,6 +2808,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JLabel actividadesLabel;
     private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JButton botonConsGrupo;
     private javax.swing.JButton botonElimTemp;
     private javax.swing.JButton botonEliminarAlumno;
     private javax.swing.JButton botonEliminarUsuario;
@@ -2844,7 +2861,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -3040,22 +3056,25 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         grupos = GestorGrupos.getListaGrupos(accesoBD);
         
         DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("ID Grupo");
         dtm.addColumn("Numero Alumnos");
         dtm.addColumn("Categoria");
         dtm.addColumn("Entrenador");
         dtm.addColumn("Temporada");
         
         String aux;
-        Object[] fila = new Object[4];
+        Object[] fila = new Object[5];
         for(List<String> it : grupos){
             aux = it.get(0);
             fila[0] = aux.substring(0, aux.indexOf(","));
             aux = aux.substring(aux.indexOf(",")+1, aux.length());
-            fila[1] = getCategoria(aux.substring(0, aux.indexOf(",")));
+            fila[1] = aux.substring(0, aux.indexOf(","));
             aux = aux.substring(aux.indexOf(",")+1, aux.length());
-            fila[2] = getEntrenador(aux.substring(0, aux.indexOf(",")));
+            fila[2] = getCategoria(aux.substring(0, aux.indexOf(",")));
             aux = aux.substring(aux.indexOf(",")+1, aux.length());
-            fila[3] = getTemporada(aux);
+            fila[3] = getEntrenador(aux.substring(0, aux.indexOf(",")));
+            aux = aux.substring(aux.indexOf(",")+1, aux.length());
+            fila[4] = getTemporada(aux);
             dtm.addRow(fila);
         }
         
@@ -3097,15 +3116,18 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         grupos = GestorGrupos.getListaGruposFiltro(accesoBD, temporada, categoria, entrenador);
         
         DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("ID Grupo");
         dtm.addColumn("Numero Alumnos");
         dtm.addColumn("Categoria");
         dtm.addColumn("Entrenador");
         dtm.addColumn("Temporada");
         
         String aux;
-        Object[] fila = new Object[4];
+        Object[] fila = new Object[5];
         for(List<String> it : grupos){
             aux = it.get(0);
+            fila[0] = aux.substring(0, aux.indexOf(","));
+            aux = aux.substring(aux.indexOf(",")+1, aux.length());
             fila[0] = aux.substring(0, aux.indexOf(","));
             aux = aux.substring(aux.indexOf(",")+1, aux.length());
             fila[1] = getCategoria(aux.substring(0, aux.indexOf(",")));
@@ -3117,6 +3139,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
         
         tablaGrupos.setModel(dtm);
+    }
+
+    List<String> getlistaAlumnosIntroducidos(String idGrupo) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        als = GestorGrupos.getListaAlumnosIntroducidos(accesoBD, idGrupo);
+        
+        return als;
     }
 
     
