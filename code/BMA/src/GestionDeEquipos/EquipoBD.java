@@ -39,7 +39,7 @@ public class EquipoBD {
             if(entrenador2!=null)
                 condicion += "Rango.Usuario_idUsuario='"+getIdUsuario(accesoBD, entrenador2, "segundo")+"' AND";
         }
-        condicion.substring(0, condicion.length()-4);
+        //condicion.substring(0, condicion.length()-4);
         
         consulta += condicion;
         
