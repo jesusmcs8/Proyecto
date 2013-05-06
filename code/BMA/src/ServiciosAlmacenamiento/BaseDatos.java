@@ -129,7 +129,7 @@ public class BaseDatos {
             int i = comprobar();
             stmt = conexion.get(i).createStatement();
             int del = stmt.executeUpdate(delete);
-            if (del == 1) {
+            if (del >= 1) {
                 return true;
             } else {
                 return false;

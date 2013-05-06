@@ -4,7 +4,7 @@
  */
 package GestionDeEquipos;
 
-import InterfazUsuario.NuevaTemporada;
+import InterfazUsuario.NuevoEquipo;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,9 +35,9 @@ public class GestorEquipos {
         equipos = EquipoBD.BuscarEquipos(accesoBD, nombre, sexo, temporada, categoria, entrenador, entrenador2);
 
         while (equipos.next()) {
-            n = equipos.getString(nombre);
-            sex = equipos.getString(sexo);
-            temp = equipos.getString(temporada);
+            n = equipos.getString("nombre");
+            sex = equipos.getString("sexo");
+            temp = equipos.getString("curso");
             cat = equipos.getString(categoria);
             entrena = equipos.getString(entrenador);
             entrena2 = equipos.getString(entrenador2);
@@ -57,9 +57,9 @@ public class GestorEquipos {
         equipoEliminado = EquipoBD.EliminarEquipoBD(accesoBD, e);
         
         if(equipoEliminado==true)
-            JOptionPane.showMessageDialog(new NuevaTemporada(), "Equipo eliminado", "Equipo", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(new NuevoEquipo(), "Equipo eliminado", "Equipo", JOptionPane.INFORMATION_MESSAGE);
         else
-            JOptionPane.showMessageDialog(new NuevaTemporada(), "No se puede eliminar el equipo", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(new NuevoEquipo(), "No se puede eliminar el equipo", "Error", JOptionPane.ERROR_MESSAGE);
             
 
         return equipoEliminado;
@@ -68,13 +68,13 @@ public class GestorEquipos {
     public void InsertarDatosEquipo(BaseDatos accesoBD, String nombre, String sexo,
             String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
                 
-        /*boolean validar = EquipoBD.ConsultarEquipo(accesoBD, nombre, sexo, temporada, categoria, entrenador, entrenador2);
+        boolean validar = EquipoBD.ConsultarEquipo(accesoBD, nombre, sexo, temporada, categoria, entrenador, entrenador2);
         
-        if(validar==false)
-            //JOptionPane.showMessageDialog(new NuevoEquipo(), "El grupo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        if(validar==true)
+            JOptionPane.showMessageDialog(new NuevoEquipo(), "El equipo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
         else{
             
         }
-        */
+        
     }
 }

@@ -17,7 +17,7 @@ public class PagoTemporada {
     private List<CuotaPrecio> cuotas;
     
     PagoTemporada(CuotaPrecio cuota){
-        
+       cuotas.add(cuota);
     }
     
 }

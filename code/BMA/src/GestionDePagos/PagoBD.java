@@ -75,7 +75,8 @@ public class PagoBD {
             cantidad = res.getFloat(importe);
             pago = res.getBoolean(pagado);
             
-            PagoTemporada pt = new PagoTemporada(date, Float.toString(cantidad), Boolean.toString(pago));
+            CuotaPrecio cuota = new CuotaPrecio(date, Float.toString(cantidad), Boolean.toString(pago));
+            PagoTemporada pt = new PagoTemporada(cuota);
             
             pagos.add(pt);
         }

@@ -4,6 +4,8 @@
  */
 package GestionDeEquipos;
 
+import GestionDeTemporadas.GestorTemporadas;
+import GestionDeTemporadas.TemporadaBD;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,16 +18,27 @@ import java.util.logging.Logger;
  */
 public class EquipoBD {
     
-    static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String sexo, String temporada, String categoria, String entrenador, String entrenador2){
+    static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String sexo, String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
+
+        ResultSet res = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo="+categoria);
         
-        ResultSet listaEquipos;
-        
-        String consulta;
-        
-        
+        int idCategoria = res.getInt("idCategoria");
         //Arreglar consulta
-        consulta = "SELECT nombre, Temporada.curso, categoria, entrenador FROM Equipo WHERE Equipo.nombre='"+nombre+"'";
-        listaEquipos = accesoBD.ejecutaConsulta(consulta);
+        String consulta = "SELECT Equipo.nombre FROM Equipo, Rango WHERE Equipo.nombre='"+nombre+"'";
+        String condicion = "WHERE";
+        
+        if(nombre!=null || categoria!=null || temporada!=null || entrenador!=null || entrenador2!=null){
+            if(nombre!=null)
+                condicion += "Equipo.nombre='"+nombre+"' AND";
+            if(categoria!=null)
+                consulta += "Categoria.idCategoria='"+idCategoria+"' AND";
+            if(temporada!="")
+                consulta += "Temporada.idTemporada='"+GestorTemporadas.getIdTemporada(accesoBD, temporada)+"' AND";
+            if(entrenador!=null)
+                condicion += "Rango.idUsuario='"+getIdUsuario()+"' AND";
+        }
+        //consulta += "AND ='"++"'";
+        ResultSet listaEquipos = accesoBD.ejecutaConsulta(consulta);
         
         return listaEquipos;
     }
@@ -44,6 +57,33 @@ public class EquipoBD {
             id = res.getInt(1);
         }
         return id;
+    }
+    
+    static int getIdUsuario(BaseDatos accesoBD, String nombre, String tipo) throws SQLException{
+        
+        int id=0;
+        
+        String consulta = "SELECT idUsuario FROM Usuario, Rango WHERE Usuario.nombre='"+nombre+"'";
+        consulta = "AND Rango.tipo="+tipo;
+        
+        ResultSet res = accesoBD.ejecutaConsulta(consulta);
+        
+        if(res.next())
+            id = res.getInt(1);
+        
+        return id;
+    }
+    
+    static String getNombreUsuario(BaseDatos accesoBD, int id) throws SQLException{
+        String usuario;
+        
+        String consulta="SELECT nombre FROM Usuario WHERE idUsuario="+id;
+        
+        ResultSet res = accesoBD.ejecutaConsulta(consulta);
+        
+        usuario = res.getString("nombre");
+        
+        return usuario;
     }
         
     static boolean EliminarEquipoBD(BaseDatos accesoBD, Equipo e) throws SQLException{
@@ -67,6 +107,7 @@ public class EquipoBD {
         } catch (SQLException ex) {
             equipoEliminado = false;
         }
+        
         return equipoEliminado;
     }
     
@@ -86,5 +127,14 @@ public class EquipoBD {
             validar = false;
         
         return validar; 
+    }
+    
+    static void crearEquipoBD(BaseDatos accesoBD, String nombre, String sexo,
+            String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
+        
+        String consulta="";
+        
+        accesoBD.ejecutaActualizacion(consulta);
+        
     }
 }
