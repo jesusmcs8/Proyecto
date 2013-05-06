@@ -18,31 +18,28 @@ import javax.swing.JOptionPane;
  */
 public class GestorEquipos {
 
-    public List<Equipo> ConsultaEquipo(BaseDatos accesoBD, String nombre, String sexo,
-            String temporada, String categoria, String entrenador, String entrenador2) throws SQLException {
+    public static List<Equipo> ConsultaEquipo(BaseDatos accesoBD, String nombre,
+                            String temporada, String categoria, String entrenador, String entrenador2) throws SQLException {
 
         List<Equipo> listaEquipos = new ArrayList();
-        ResultSet equipos;
         Equipo eq;
 
         String n;
-        String sex;
         String temp;
         String cat;
         String entrena;
         String entrena2;
 
-        equipos = EquipoBD.BuscarEquipos(accesoBD, nombre, sexo, temporada, categoria, entrenador, entrenador2);
+        ResultSet res = EquipoBD.BuscarEquipos(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
 
-        while (equipos.next()) {
-            n = equipos.getString("nombre");
-            sex = equipos.getString("sexo");
-            temp = equipos.getString("curso");
-            cat = equipos.getString(categoria);
-            entrena = equipos.getString(entrenador);
-            entrena2 = equipos.getString(entrenador2);
+        while (res.next()) {
+            n = res.getString(1);
+            temp = res.getString(2);
+            cat = res.getString(3);
+            entrena = res.getString(4);
+            entrena2 = res.getString(5);
 
-            eq = new Equipo(n, sex, temp, cat, entrena, entrena2);
+            eq = new Equipo(n, temp, cat, entrena, entrena2);
 
             listaEquipos.add(eq);
         }
@@ -61,14 +58,13 @@ public class GestorEquipos {
         else
             JOptionPane.showMessageDialog(new NuevoEquipo(), "No se puede eliminar el equipo", "Error", JOptionPane.ERROR_MESSAGE);
             
-
         return equipoEliminado;
     }
     
-    public void InsertarDatosEquipo(BaseDatos accesoBD, String nombre, String sexo,
+    public void InsertarDatosEquipo(BaseDatos accesoBD, String nombre,
             String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
                 
-        boolean validar = EquipoBD.ConsultarEquipo(accesoBD, nombre, sexo, temporada, categoria, entrenador, entrenador2);
+        boolean validar = EquipoBD.ConsultarEquipo(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
         
         if(validar==true)
             JOptionPane.showMessageDialog(new NuevoEquipo(), "El equipo ya existe", "Error", JOptionPane.ERROR_MESSAGE);

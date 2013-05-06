@@ -18,13 +18,13 @@ import java.util.logging.Logger;
  */
 public class EquipoBD {
     
-    static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String sexo, String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
+    static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
 
         ResultSet res = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo="+categoria);
         
         int idCategoria = res.getInt("idCategoria");
-        //Arreglar consulta
-        String consulta = "SELECT Equipo.nombre FROM Equipo, Rango WHERE Equipo.nombre='"+nombre+"'";
+
+        String consulta = "SELECT Equipo.nombre, Categoria.tipo, Usuario.nombre FROM Equipo, Rango WHERE Equipo.nombre='"+nombre+"'";
         String condicion = "WHERE";
         
         if(nombre!=null || categoria!=null || temporada!=null || entrenador!=null || entrenador2!=null){
@@ -35,9 +35,14 @@ public class EquipoBD {
             if(temporada!="")
                 consulta += "Temporada.idTemporada='"+GestorTemporadas.getIdTemporada(accesoBD, temporada)+"' AND";
             if(entrenador!=null)
-                condicion += "Rango.idUsuario='"+getIdUsuario()+"' AND";
+                condicion += "Rango.Usuario_idUsuario='"+getIdUsuario(accesoBD, entrenador, "primero")+"' AND";
+            if(entrenador2!=null)
+                condicion += "Rango.Usuario_idUsuario='"+getIdUsuario(accesoBD, entrenador2, "segundo")+"' AND";
         }
-        //consulta += "AND ='"++"'";
+        condicion.substring(0, condicion.length()-4);
+        
+        consulta += condicion;
+        
         ResultSet listaEquipos = accesoBD.ejecutaConsulta(consulta);
         
         return listaEquipos;
@@ -89,10 +94,8 @@ public class EquipoBD {
     static boolean EliminarEquipoBD(BaseDatos accesoBD, Equipo e) throws SQLException{
         
         boolean equipoEliminado = true;
-        String consulta;
         
-        //Arreglar consulta
-        consulta = "";
+        String consulta="";
         
         int idEquipo = getIdEq(accesoBD, e.getNombre());
         
@@ -111,8 +114,8 @@ public class EquipoBD {
         return equipoEliminado;
     }
     
-    static boolean ConsultarEquipo(BaseDatos accesoBD, String nombre, String sexo,
-            String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
+    static boolean ConsultarEquipo(BaseDatos accesoBD, String nombre, String temporada,
+                                   String categoria, String entrenador, String entrenador2) throws SQLException{
         
         boolean validar = false;
         String consulta;
@@ -129,8 +132,8 @@ public class EquipoBD {
         return validar; 
     }
     
-    static void crearEquipoBD(BaseDatos accesoBD, String nombre, String sexo,
-            String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
+    static void crearEquipoBD(BaseDatos accesoBD, String nombre, String temporada,
+                              String categoria, String entrenador, String entrenador2) throws SQLException{
         
         String consulta="";
         

@@ -14,6 +14,7 @@ import GestionDeAlumnos.*;
 import GestionDeGrupos.GestorGrupos;
 import GestionDeUsuarios.*;
 import GestionDeTemporadas.*;
+import GestionDeEquipos.*;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -219,6 +220,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
         panelPagos = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
@@ -750,6 +752,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         jButton5.setText("Eliminar");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         botonNuevoGrupEnt.setText("Nuevo");
         botonNuevoGrupEnt.addActionListener(new java.awt.event.ActionListener() {
@@ -1197,6 +1204,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel14.setText("Segundo Entrenador:");
 
         buscarEquipo.setText("Buscar");
+        buscarEquipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarEquipoActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -1214,6 +1226,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jButton3.setText("Modificar");
 
         jButton4.setText("Eliminar");
+
+        jButton9.setText("Info");
 
         javax.swing.GroupLayout panelEquiposLayout = new javax.swing.GroupLayout(panelEquipos);
         panelEquipos.setLayout(panelEquiposLayout);
@@ -1248,14 +1262,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addGroup(panelEquiposLayout.createSequentialGroup()
                                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(58, 58, 58)
-                                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton4)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                     .addGroup(panelEquiposLayout.createSequentialGroup()
                         .addGap(249, 249, 249)
                         .addComponent(buscarEquipo)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         panelEquiposLayout.setVerticalGroup(
             panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1283,13 +1298,16 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEquiposLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelEquiposLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEquiposLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton9)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton4)
+                        .addGap(63, 63, 63))))
         );
 
         getContentPane().add(panelEquipos, new java.awt.GridBagConstraints());
@@ -1373,7 +1391,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addGroup(panelPagosLayout.createSequentialGroup()
                         .addGap(278, 278, 278)
                         .addComponent(jButton6)))
-                .addGap(0, 159, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         panelPagosLayout.setVerticalGroup(
             panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1383,16 +1401,17 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addComponent(jLabel16)
                 .addGap(24, 24, 24)
-                .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel21)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel23)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel22)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel17)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel21)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel23)
+                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
                 .addComponent(jButton6)
                 .addGap(31, 31, 31)
@@ -1402,7 +1421,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addComponent(jButton7)
                         .addGap(18, 18, 18)
                         .addComponent(jButton8)))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelPagos, new java.awt.GridBagConstraints());
@@ -1434,6 +1453,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         barraMenu.add(menuJugadores);
 
         menuEquipos.setText("Equipos");
+        menuEquipos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuEquiposMouseClicked(evt);
+            }
+        });
         barraMenu.add(menuEquipos);
 
         menuUsuarios.setText("Usuarios");
@@ -3037,6 +3061,46 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField5ActionPerformed
 
+    private void buscarEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarEquipoActionPerformed
+       /* 
+        List<Equipo> equipos = new ArrayList();
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("Nombre");
+        model.addColumn("Categoria");
+        model.addColumn("Primer Entrenador");
+        model.addColumn("Segundo Entrenador");
+        
+        try {
+            equipos = GestorEquipos.ConsultaEquipo(accesoBD, nombreEquipo.getText(), temporadaEquipo.getSelectedItem().toString(),
+                                                   categoriaEquipo.getSelectedItem().toString(), entrenador1.getText(), entrenador2.getText());
+            int i=0;
+            
+            for(Equipo e: equipos){
+                model.setValueAt(e.getNombre(), i, 0);
+                model.setValueAt(e.getCategoria(), i, 1);
+                model.setValueAt(e.getEntrenador(), i, 2);
+                model.setValueAt(e.getEntrenador2(), i, 3);
+                i++;
+            }
+            
+            this.jTable1.setModel(model);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     */   
+    }//GEN-LAST:event_buscarEquipoActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void menuEquiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEquiposMouseClicked
+        ocultarPaneles();
+        panelEquipos.setVisible(true);
+    }//GEN-LAST:event_menuEquiposMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -3147,6 +3211,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JComboBox jComboBox3;
@@ -3251,6 +3316,8 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         panelUsuarios.setVisible(false);
         panelInstalaciones.setVisible(false);
         panelActividades.setVisible(false);
+        panelEquipos.setVisible(false);
+        panelPagos.setVisible(false);
     }
 
     ResultSet ejecutarConsulta(String query) {

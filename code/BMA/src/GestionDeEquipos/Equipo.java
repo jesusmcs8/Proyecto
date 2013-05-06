@@ -15,16 +15,14 @@ import bma.Categoria;
 public class Equipo {
     private int idEquipo;
     private String nombre;
-    private String sexo;
     
     private Temporada temporada;
     private Categoria categoria;
     private Usuario entrenador;
     private Usuario entrenador2;
     
-    public Equipo(String nombre, String sexo, String temporada, String categoria, String entrenador, String entrenador2){
+    public Equipo(String nombre, String temporada, String categoria, String entrenador, String entrenador2){
         this.nombre = nombre;
-        this.sexo = sexo;
         this.temporada = new Temporada(temporada);
         this.categoria = new Categoria(categoria);
         this.entrenador = new Usuario(entrenador);
@@ -43,13 +41,6 @@ public class Equipo {
      */
     public String getNombre() {
         return nombre;
-    }
-
-    /**
-     * @return the sexo
-     */
-    public String getSexo() {
-        return sexo;
     }
 
     /**
