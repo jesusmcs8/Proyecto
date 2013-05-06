@@ -98,6 +98,34 @@ class AccesoBDAlumno {
         return idAl;
     }
 
+    static List<String> getListaAlumnosSinGrupo(BaseDatos accesoBD, String s) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        String query = "";
+        if(!"".equals(s)){     
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno "
+                +"WHERE primerApellido LIKE '%"+s+"%'";
+        }
+        else{
+            query = "SELECT nombre, primerApellido, segundoApellido from Alumno"
+                    + " WHERE idAlumno "
+                    + "NOT IN "
+                    + "(SELECT Alumno_idAlumno from Alumnogrupo) ";
+            //ResultSet res1 = accesoBD.ejecutaConsulta(query1);
+            //List<String> idAls = new ArrayList<String>();
+            //while(res1.next()){
+              //  idAls.add(res1.getString(2)+" "+res1.getString(3)+" "+res1.getString(1));
+            //}
+            
+            //query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno";
+        }
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        while(res.next())
+            als.add(res.getString(2)+" "+res.getString(3)+" "+res.getString(1));
+
+        return als;
+    }
+
     public ResultSet consultaAlumnoBD(BaseDatos accesoBD, String consulta) {
         ResultSet retset;
         retset = accesoBD.ejecutaConsulta(consulta);

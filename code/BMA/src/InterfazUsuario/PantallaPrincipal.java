@@ -15,6 +15,7 @@ import GestionDeGrupos.GestorGrupos;
 import GestionDeUsuarios.*;
 import GestionDeTemporadas.*;
 import GestionDeEquipos.*;
+import GestionDeGrupos.Grupo;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -3098,7 +3099,87 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }//GEN-LAST:event_buscarEquipoActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        int idGrup=0, idCat=0, idEnt=0, idInst=0, idTemp=0;
+        int filaSelec = tablaGrupos.getSelectedRow();
+        String cat="", ent="", inst="", temp = "";
+        
+        idGrup = Integer.parseInt((String)tablaGrupos.getValueAt(filaSelec, 0));
+        cat = (String) tablaGrupos.getValueAt(filaSelec, 2);
+        ent = (String) tablaGrupos.getValueAt(filaSelec, 3);
+        inst = (String) tablaGrupos.getValueAt(filaSelec, 4);
+        
+        /************************************************************************/
+        /********PROVISIONAL HASTA TENER CATEGORIAS******************************/
+        String query = "SELECT idCategoria FROM Categoria WHERE tipo='"+cat+"'";
+        ResultSet res1 = accesoBD.ejecutaConsulta(query);
+        try {
+            if(res1.next())
+                idCat = res1.getInt(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /************************************************************************/
+        
+        try {
+            idEnt = GestorUsuarios.getIdEnt(accesoBD, ent);
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /************************************************************************/
+        /************PROVISIONAL HASTA TENER INSTALACIONES***********************/
+        query = "SELECT idInstalacion FROM Instalacion WHERE "
+                + "nombre='"+inst+"'";
+        ResultSet res2 = accesoBD.ejecutaConsulta(query);
+        try {
+            if(res2.next())
+                idInst = res2.getInt(1);
+  
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        try {
+            idTemp = GestorGrupos.getIdTemporada(accesoBD, idGrup);
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        try {
+            temp = GestorTemporadas.getTemporada(accesoBD, idTemp);
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Grupo g = new Grupo(cat, ent, inst, temp);
+        g.setIdGrupo(idGrup);
+        g.setIdCat(idCat);
+        g.setIdEnt(idEnt);
+        g.setIdInst(idInst);
+        g.setIdTemp(idTemp);
+        
+        boolean GrupoEliminado = false;
+        
+        try {
+            GrupoEliminado = GestorGrupos.EliminarGrupos(accesoBD, g);
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(GrupoEliminado)
+            JOptionPane.showMessageDialog(this, "Grupo Eliminado con exito", "Exito", JOptionPane.NO_OPTION);
+        else
+            JOptionPane.showMessageDialog(this, "No se ha podido borrar el grupo", "Error", JOptionPane.ERROR_MESSAGE);
+        
+        
+        try {
+            actualizaTablaGrupos();
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void menuEquiposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEquiposMouseClicked
@@ -3531,6 +3612,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     List<String> getlistaAlumnosIntroducidos(String idGrupo) throws SQLException {
         List<String> als = new ArrayList<String>();
         als = GestorGrupos.getListaAlumnosIntroducidos(accesoBD, idGrupo);
+        
+        return als;
+    }
+
+    List<String> getListaAlumnosSinGrupo(String s) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        als = GestorAlumnos.getAlumnosSinGrupo(accesoBD, s);
         
         return als;
     }

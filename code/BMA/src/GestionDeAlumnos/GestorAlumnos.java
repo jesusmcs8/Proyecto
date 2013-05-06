@@ -70,5 +70,12 @@ public class GestorAlumnos {
         return AccesoBDAlumno.getIdAl(accesoBD, alumno);
     }
 
+    public static List<String> getAlumnosSinGrupo(BaseDatos accesoBD, String s) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        als = AccesoBDAlumno.getListaAlumnosSinGrupo(accesoBD, s);
+        
+        return als;
+    }
+
     
 }

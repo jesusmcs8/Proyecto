@@ -21,4 +21,16 @@ public class CategoriaBD {
         
         return cat;
     }
+
+    static int getIdCategoria(BaseDatos accesoBD, String categoria) throws SQLException {
+        String query = "SELECT idCategoria FROM Categoria WHERE "
+                + "tipo='"+categoria+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        int idCat = 0;
+        if(res.next())
+            idCat = res.getInt(1);
+        
+        return idCat;
+    }
 }

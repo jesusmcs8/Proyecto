@@ -82,6 +82,19 @@ public class GestorGrupos {
         Grupo.Modificar(g);
     }
 
+    public static void modificarGrupo(BaseDatos accesoBD, Grupo gNuevo, Grupo gViejo, String idGrupo, List<String> listaAlumnos) throws SQLException {
+        Grupo.Modificar(accesoBD, gNuevo, gViejo, idGrupo, listaAlumnos);
+    }
+
+    public static int getIdTemporada(BaseDatos accesoBD, int idGrup) throws SQLException {
+        return GruposBD.getIdTemporada(accesoBD, idGrup);
+    }
+
+    public static boolean EliminarGrupos(BaseDatos accesoBD, Grupo g) throws SQLException {
+        boolean GrupoEliminado = GruposBD.EliminarGrupo(accesoBD, g);
+        return GrupoEliminado;
+    }
+
     private List<Grupo> grupos;
     
     public static void insertarDatosGrupo(BaseDatos accesoBD, List<String> listaAlumnos, 
@@ -121,7 +134,7 @@ public class GestorGrupos {
                 idInst = res2.getInt(1);
             /***************************************************************/
             /***************************************************************/
-            Grupo g = new Grupo(sexo, temporada, dia1, dia2, hora, min, entrenador);
+            Grupo g = new Grupo(sexo, temporada, dia1, dia2, hora, min, entrenador, categoria, auxString);
             
             GruposBD.crearGruposBD(accesoBD, g, listaIDAl, idEnt, idCat, idTemp, idInst);
         }

@@ -96,4 +96,8 @@ public class Usuario {
     public boolean getEntrenador() {
         return entrenador;
     }
+
+    public void setIdEnt(int idEnt) {
+        this.idUsuario = idEnt;
+    }
 }

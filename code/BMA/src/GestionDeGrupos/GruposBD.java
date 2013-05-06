@@ -1,5 +1,6 @@
 package GestionDeGrupos;
 
+import GestionDeAlumnos.GestorAlumnos;
 import GestionDeCategorias.GestorCategorias;
 import GestionDeTemporadas.GestorTemporadas;
 import GestionDeUsuarios.GestorUsuarios;
@@ -357,6 +358,207 @@ public class GruposBD {
 
     static void ModificarGruposBD(Grupo g) {
         throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    static void ModificarGruposBD(BaseDatos accesoBD, Grupo gNuevo, Grupo gViejo, String idGrupo, List<String> listaAlumnos) throws SQLException {
+        //String query = "UPDATE Temporada SET curso='"+cursoNuevo+"' WHERE curso='"+cursoAnterior+"'";
+        boolean horMod = false, dia1Mod = false, dia2Mod = false;
+        String query1 = "", query2 = "";
+        int res1 = 0, idTemp=0, idEnt=0, idCat = 0, idDia1 = 0;
+        ResultSet res2;
+        
+        idCat = GestorCategorias.getIdCategoria(accesoBD, gViejo.getCategoria());
+        
+        if(gNuevo.getTemporada() != gViejo.getTemporada()){
+            idTemp = GestorTemporadas.getIdTemporada(accesoBD, gNuevo.getTemporada());
+            query1 = "UPDATE Grupo SET Temporada_idTemporada='"+idTemp+"' "
+                    + "WHERE idGrupo='"+idGrupo+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);
+            query1 = "UPDATE AlumnoGrupo SET Grupo_Temporada_idTemporada='"+idTemp+"' "
+                    + "WHERE Grupo_idGrupo='"+idGrupo+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);
+        }
+        
+        if(gNuevo.getEntrenador() != gViejo.getEntrenador()){
+            idEnt = GestorUsuarios.getIdEnt(accesoBD, gNuevo.getEntrenador());
+            query1 = "UPDATE Grupo SET Usuario_idUsuario='"+idEnt+"' "
+                    + "WHERE idGrupo='"+idGrupo+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);
+            query1 = "UPDATE AlumnoGrupo SET Grupo_Usuario_idUsuario='"+idEnt+"' "
+                    + "WHERE Grupo_idGrupo='"+idGrupo+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);
+        }
+        
+        
+        
+        if(gNuevo.getDia1() != gViejo.getDia1()){
+            query1 = "SELECT Horario_idHorario FROM Grupo WHERE "
+                    + "idGrupo='"+idGrupo+"'";
+            res2 = accesoBD.ejecutaConsulta(query1);
+            int idHor = 0;
+            if(res2.next())
+                idHor = res2.getInt(1);
+            
+            query1 = "UPDATE Horario SET dia1='"+gNuevo.getDia1()+"' "
+                    + "WHERE idHorario='"+idHor+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);
+            
+            dia1Mod = true;
+        }
+        
+        if(gNuevo.getDia2() != gViejo.getDia2()){
+            query1 = "SELECT Horario_idHorario FROM Grupo WHERE "
+                    + "idGrupo='"+idGrupo+"'";
+            res2 = accesoBD.ejecutaConsulta(query1);
+            int idHor = 0;
+            if(res2.next())
+                idHor = res2.getInt(1);
+            
+            query1 = "UPDATE Horario SET dia2='"+gNuevo.getDia2()+"' "
+                    + "WHERE idHorario='"+idHor+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);
+            
+            dia2Mod = true;
+        }
+        
+        if(gNuevo.getHora1() != gViejo.getHora1()){
+            query1 = "SELECT Horario_idHorario FROM Grupo WHERE "
+                    + "idGrupo='"+idGrupo+"'";
+            res2 = accesoBD.ejecutaConsulta(query1);
+            int idHor = 0;
+            if(res2.next())
+                idHor = res2.getInt(1);
+            
+            query1 = "UPDATE Horario SET hora1='"+gNuevo.getHora1()+"' "
+                    + "WHERE idHorario='"+idHor+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);
+            
+            horMod = true;
+        }
+            
+        if(gNuevo.getInstalacion() != gViejo.getInstalacion()){
+            String auxInstN, auxInstV;
+            
+            auxInstN = gNuevo.getInstalacion();
+            auxInstN = auxInstN.substring(0, auxInstN.indexOf(","));
+            
+            auxInstV = gViejo.getInstalacion();
+            auxInstV = auxInstV.substring(0, auxInstV.indexOf(","));
+            
+            query1 = "SELECT idInstalacion FROM Instalacion "
+                    + "WHERE nombre='"+auxInstV+"'";
+            res2 = accesoBD.ejecutaConsulta(query1);
+            
+            int idInstV = 0;
+            if(res2.next())
+                idInstV = res2.getInt(1);
+            
+            query1 = "SELECT idInstalacion FROM Instalacion "
+                    + "WHERE nombre='"+auxInstN+"'";
+            res2 = accesoBD.ejecutaConsulta(query1);
+            
+            int idInstN = 0;
+            if(res2.next())
+                idInstN = res2.getInt(1);
+            
+            query1 = "SELECT Horario_idHorario FROM Grupo "
+                    + "WHERE idGrupo='"+idGrupo+"'";
+            res2 = accesoBD.ejecutaConsulta(query1);
+            
+            int idHor = 0;
+            if(res2.next())
+                idHor = res2.getInt(1);
+
+            query1 = "UPDATE Horario SET Instalacion_idInstalacion='"+idInstN+"' "
+                   + "WHERE idHorario='"+idHor+"' AND Instalacion_idInstalacion='"+idInstV+"'";
+
+            
+            res1 = accesoBD.ejecutaActualizacion(query1);
+
+            query1 = "UPDATE Grupo SET Horario_Instalacion_idInstalacion='"+idInstN+"' "
+                    + "WHERE idGrupo='"+idGrupo+"' AND "
+                    + "Horario_Instalacion_idInstalacion='"+idInstV+"' "
+                    + "AND Horario_idHorario='"+idHor+"'";
+            res1 = accesoBD.ejecutaActualizacion(query1);   
+        }
+        
+        if(listaAlumnos.size() > 0){
+            List<Integer> idAls = GestorAlumnos.getIdAl(accesoBD, listaAlumnos);
+            
+            String auxQ = "SELECT Categoria_idCategoria FROM Grupo WHERE "
+                    + "idGrupo='"+idGrupo+"'";
+            ResultSet auxR = accesoBD.ejecutaConsulta(auxQ);
+            if(auxR.next())
+                idCat = auxR.getInt(1);
+            
+            auxQ = "SELECT Usuario_idUsuario FROM Grupo WHERE "
+                    + "idGrupo='"+idGrupo+"'";
+            auxR = accesoBD.ejecutaConsulta(auxQ);
+            if(auxR.next())
+                idEnt = auxR.getInt(1);
+            
+            auxQ = "SELECT Temporada_idTemporada FROM Grupo WHERE "
+                    + "idGrupo='"+idGrupo+"'";
+            auxR = accesoBD.ejecutaConsulta(auxQ);
+            if(auxR.next())
+                idTemp = auxR.getInt(1);
+            
+            String query = "";
+            int res = 0;
+            for(Integer it : idAls){
+                query = "INSERT INTO Alumnogrupo (Alumno_idAlumno, Grupo_idGrupo, "
+                        + "Grupo_Categoria_idCategoria, Grupo_Usuario_idUsuario, "
+                        + "Grupo_Temporada_idTemporada) VALUES "
+                        + "('"+it+"','"+idGrupo+"','"+idCat+"','"+idEnt+"','"+idTemp+"')";
+                res = accesoBD.ejecutaActualizacion(query);
+            }
+        }
+    }
+
+    static int getIdTemporada(BaseDatos accesoBD, int idGrup) throws SQLException {
+        String query = "SELECT Temporada_idTemporada FROM Grupo WHERE "
+                + "idGrupo='"+idGrup+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        int idTemp = 0;
+        if(res.next())
+            idTemp = res.getInt(1);
+        
+        return idTemp;
+    }
+
+    static boolean EliminarGrupo(BaseDatos accesoBD, Grupo g) throws SQLException {
+        boolean GrupoEliminado = false;
+        
+        String query1 = "SELECT Horario_idHorario FROM Grupo WHERE "
+                + "idGrupo='"+g.getIdGrupo()+"'";
+        ResultSet res1 = accesoBD.ejecutaConsulta(query1);
+        
+        int idHor = 0;
+        if(res1.next())
+            idHor = res1.getInt(1);
+        
+        
+        
+        String query3 = "DELETE FROM AlumnoGrupo WHERE "
+                + "Grupo_idGrupo='"+g.getIdGrupo()+"'";
+        boolean eliminaAlumGrup = accesoBD.eliminar(query3);
+        
+        
+        
+        String query4 = "DELETE FROM Grupo WHERE "
+                + "idGrupo='"+g.getIdGrupo()+"'";
+        boolean eliminaGrupo = accesoBD.eliminar(query4);
+        
+        String query2 = "DELETE FROM Horario WHERE idHorario='"+idHor+"'";
+        boolean eliminaHor = accesoBD.eliminar(query2);
+        
+        if(eliminaHor == true && eliminaGrupo == true && eliminaAlumGrup == true)
+            GrupoEliminado = true;
+        else
+            GrupoEliminado = false;
+        
+        return GrupoEliminado;
     }
     
 }

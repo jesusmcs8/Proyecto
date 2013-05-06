@@ -16,4 +16,13 @@ public class Categoria {
     public Categoria(String categoria){
         this.tipo = categoria;
     }
+
+    public String getNombreCategoria() {
+        return this.tipo;
+    }
+
+    public void setIdCat(int idCat) {
+        this.idCategoria = idCat;
+    }
+
 }

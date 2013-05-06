@@ -32,6 +32,14 @@ public class Temporada {
     public String getCurso() {
         return curso;
     }
+
+    public String getTemporada() {
+        return curso;
+    }
+
+    public void setIdTemporada(int idTemp) {
+        this.idTemporada = idTemp;
+    }
     
     
 }

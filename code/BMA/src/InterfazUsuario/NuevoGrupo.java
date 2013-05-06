@@ -46,7 +46,7 @@ public class NuevoGrupo extends javax.swing.JFrame {
         aux = creador.getListaCategorias();
         actualizaComboCat(aux);
         
-        aux = creador.getListaAlumnos("");
+        aux = creador.getListaAlumnosSinGrupo("");
         actualizaModeloLista(aux);
         
         aux = creador.getListaEntrenadores("");
