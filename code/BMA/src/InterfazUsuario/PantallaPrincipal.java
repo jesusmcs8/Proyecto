@@ -10,12 +10,14 @@
  */
 package InterfazUsuario;
 
+import GestionActividades.GestorActividad;
 import GestionDeAlumnos.*;
 import GestionDeGrupos.GestorGrupos;
 import GestionDeUsuarios.*;
 import GestionDeTemporadas.*;
 import GestionDeEquipos.*;
 import GestionDeGrupos.Grupo;
+import GestionDeInstalaciones.GestorInstalacion;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -24,9 +26,11 @@ import java.sql.Statement;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -45,6 +49,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
     String ultimaConsultaUsuario;
     String consultaAlumnosMostrados;
     String consultaUsuariosMostrados;
+    String consultaInstalacionesMostradas;
+    String consultaActividadesMostradas;
+    Border bordeError;
     
     /**
      * Creates new form InterfazPrincipal
@@ -173,36 +180,20 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         TituloLabel = new javax.swing.JLabel();
         BuscarporLabel = new javax.swing.JLabel();
         NombreInsLabel = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        nombreIns = new javax.swing.JTextField();
+        nombreCalleInst = new javax.swing.JTextField();
         MenuDireccionLabel = new javax.swing.JComboBox();
         NumeroLabel = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        numeroInst = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        capacidadInst = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaInstalacion = new javax.swing.JTable();
         introducirButton = new javax.swing.JButton();
         mostrarButton = new javax.swing.JButton();
         modificarButton = new javax.swing.JButton();
         eliminarButton = new javax.swing.JButton();
-        panelActividades = new javax.swing.JPanel();
-        actividadesLabel = new javax.swing.JLabel();
-        buscarLabel = new javax.swing.JLabel();
-        nombreLabel = new javax.swing.JLabel();
-        nombreTextField = new javax.swing.JTextField();
-        fechaInicioLabel = new javax.swing.JLabel();
-        fechaInicioDateChooser = new com.toedter.calendar.JDateChooser();
-        fechaFinLabel = new javax.swing.JLabel();
-        fechaFinDateChooser = new com.toedter.calendar.JDateChooser();
-        Mostrar = new javax.swing.JButton();
-        Insertar = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
-        Modificar = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        Informacion = new javax.swing.JButton();
         panelEquipos = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -238,6 +229,32 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jTable4 = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        AñadirAlumnoActividad = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        listaAlumnosActividad = new javax.swing.JList();
+        Añadir_Alumno = new javax.swing.JButton();
+        SalirAñadir = new javax.swing.JButton();
+        panelActividades = new javax.swing.JPanel();
+        actividadesLabel = new javax.swing.JLabel();
+        buscarLabel = new javax.swing.JLabel();
+        nombreLabel = new javax.swing.JLabel();
+        nombreTextField = new javax.swing.JTextField();
+        fechaInicioLabel = new javax.swing.JLabel();
+        fechaInicioDateChooser = new com.toedter.calendar.JDateChooser();
+        fechaFinLabel = new javax.swing.JLabel();
+        fechaFinDateChooser = new com.toedter.calendar.JDateChooser();
+        Mostrar = new javax.swing.JButton();
+        Insertar = new javax.swing.JButton();
+        Eliminar = new javax.swing.JButton();
+        Modificar = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        actividadesTable = new javax.swing.JTable();
+        Informacion = new javax.swing.JButton();
+        AñaridAlumno = new javax.swing.JButton();
+        AñarirAlumno = new javax.swing.JButton();
         barraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuJugadores = new javax.swing.JMenu();
@@ -903,7 +920,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         NombreInsLabel.setText("Nombre");
 
-        MenuDireccionLabel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Calle", "Avenida", "Plaza", "Carretera", " " }));
+        MenuDireccionLabel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Calle", "Avenida", "Plaza", "Carretera" }));
         MenuDireccionLabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MenuDireccionLabelActionPerformed(evt);
@@ -916,24 +933,32 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel6.setText("Capacidad");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        capacidadInst.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                capacidadInstActionPerformed(evt);
             }
         });
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaInstalacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "nombre", "Direccion", "Capacidad"
             }
-        ));
-        jScrollPane3.setViewportView(jTable2);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tablaInstalacion);
 
         introducirButton.setText("Introducir");
         introducirButton.addActionListener(new java.awt.event.ActionListener() {
@@ -957,6 +982,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         });
 
         eliminarButton.setText("Eliminar");
+        eliminarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelInstalacionesLayout = new javax.swing.GroupLayout(panelInstalaciones);
         panelInstalaciones.setLayout(panelInstalacionesLayout);
@@ -973,14 +1003,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addGap(68, 68, 68)
                         .addComponent(NombreInsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nombreIns, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelInstalacionesLayout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addGroup(panelInstalacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelInstalacionesLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(capacidadInst, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(17, 17, 17)
                                 .addComponent(introducirButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -994,13 +1024,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(MenuDireccionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nombreCalleInst, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(NumeroLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(numeroInst, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelInstalacionesLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
+                        .addGap(53, 53, 53)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(174, Short.MAX_VALUE))
         );
@@ -1014,25 +1044,25 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(panelInstalacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NombreInsLabel)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombreIns, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addGroup(panelInstalacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombreCalleInst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MenuDireccionLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NumeroLabel)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numeroInst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(10, 10, 10)
                 .addGroup(panelInstalacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(capacidadInst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(introducirButton)
                     .addComponent(mostrarButton)
                     .addComponent(modificarButton)
                     .addComponent(eliminarButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1044,141 +1074,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         gridBagConstraints.ipady = 92;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         getContentPane().add(panelInstalaciones, gridBagConstraints);
-
-        panelInstalaciones.setVisible(false);
-        panelActividades.setMinimumSize(new java.awt.Dimension(1300, 640));
-
-        actividadesLabel.setText("Actividades");
-
-        buscarLabel.setText("Buscar por");
-
-        nombreLabel.setText("Nombre");
-
-        fechaInicioLabel.setText("Fecha inicio");
-
-        fechaFinLabel.setText("Fecha Fin");
-
-        Mostrar.setText("Mostrar");
-
-        Insertar.setText("Insertar");
-        Insertar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InsertarActionPerformed(evt);
-            }
-        });
-
-        Eliminar.setText("Eliminar");
-
-        Modificar.setText("Modificar");
-        Modificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ModificarActionPerformed(evt);
-            }
-        });
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable3);
-
-        Informacion.setText("Info");
-        Informacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InformacionActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout panelActividadesLayout = new javax.swing.GroupLayout(panelActividades);
-        panelActividades.setLayout(panelActividadesLayout);
-        panelActividadesLayout.setHorizontalGroup(
-            panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelActividadesLayout.createSequentialGroup()
-                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelActividadesLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscarLabel)
-                            .addComponent(actividadesLabel)))
-                    .addGroup(panelActividadesLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(Mostrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelActividadesLayout.createSequentialGroup()
-                                .addComponent(Insertar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Eliminar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Modificar))
-                            .addGroup(panelActividadesLayout.createSequentialGroup()
-                                .addComponent(fechaInicioLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(fechaFinLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelActividadesLayout.createSequentialGroup()
-                                .addComponent(nombreLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(panelActividadesLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelActividadesLayout.createSequentialGroup()
-                        .addGap(415, 415, 415)
-                        .addComponent(Informacion)))
-                .addContainerGap(971, Short.MAX_VALUE))
-        );
-        panelActividadesLayout.setVerticalGroup(
-            panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelActividadesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelActividadesLayout.createSequentialGroup()
-                        .addComponent(actividadesLabel)
-                        .addGap(29, 29, 29)
-                        .addComponent(buscarLabel)
-                        .addGap(24, 24, 24)
-                        .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nombreLabel)
-                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addComponent(fechaInicioLabel))
-                    .addComponent(fechaFinLabel)
-                    .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Mostrar)
-                    .addComponent(Insertar)
-                    .addComponent(Eliminar)
-                    .addComponent(Modificar))
-                .addGap(51, 51, 51)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Informacion)
-                .addContainerGap(323, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 164;
-        gridBagConstraints.ipady = 92;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        gridBagConstraints.insets = new java.awt.Insets(22, 0, 22, 0);
-        getContentPane().add(panelActividades, gridBagConstraints);
 
         jLabel8.setText("Equipos");
 
@@ -1296,13 +1191,13 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(entrenador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(buscarEquipo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEquiposLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEquiposLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton9)
                         .addGap(18, 18, 18)
                         .addComponent(jButton3)
@@ -1431,6 +1326,258 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
 
         getContentPane().add(panelPagos, new java.awt.GridBagConstraints());
+
+        jLabel24.setText("Añadir Alumno");
+
+        jLabel25.setText("Buscar por nombre");
+
+        listaAlumnosActividad.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane7.setViewportView(listaAlumnosActividad);
+
+        Añadir_Alumno.setText("Añadir Alumno");
+        Añadir_Alumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Añadir_AlumnoActionPerformed(evt);
+            }
+        });
+
+        SalirAñadir.setText("Salir");
+        SalirAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirAñadirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AñadirAlumnoActividadLayout = new javax.swing.GroupLayout(AñadirAlumnoActividad);
+        AñadirAlumnoActividad.setLayout(AñadirAlumnoActividadLayout);
+        AñadirAlumnoActividadLayout.setHorizontalGroup(
+            AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
+                .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel24)
+                            .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(174, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AñadirAlumnoActividadLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Añadir_Alumno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(SalirAñadir)
+                .addGap(27, 27, 27))
+        );
+        AñadirAlumnoActividadLayout.setVerticalGroup(
+            AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24)
+                .addGap(23, 23, 23)
+                .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Añadir_Alumno)
+                    .addComponent(SalirAñadir))
+                .addGap(28, 28, 28))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 164;
+        gridBagConstraints.ipady = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        getContentPane().add(AñadirAlumnoActividad, gridBagConstraints);
+
+        panelInstalaciones.setVisible(false);
+        panelActividades.setMinimumSize(new java.awt.Dimension(1300, 640));
+
+        actividadesLabel.setText("Actividades");
+
+        buscarLabel.setText("Buscar por");
+
+        nombreLabel.setText("Nombre");
+
+        fechaInicioLabel.setText("Fecha inicio");
+
+        fechaInicioDateChooser.setDateFormatString("dd-MM-yyyy");
+
+        fechaFinLabel.setText("Fecha Fin");
+
+        fechaFinDateChooser.setDateFormatString("dd-MM-yyyy");
+
+        Mostrar.setText("Mostrar");
+        Mostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MostrarActionPerformed(evt);
+            }
+        });
+
+        Insertar.setText("Insertar");
+        Insertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InsertarActionPerformed(evt);
+            }
+        });
+
+        Eliminar.setText("Eliminar");
+
+        Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
+
+        actividadesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Fecha de Inicio", "Fecha Fin"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(actividadesTable);
+
+        Informacion.setText("Info");
+        Informacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                InformacionActionPerformed(evt);
+            }
+        });
+
+        AñaridAlumno.setText("Añadir Alumno");
+        AñaridAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñaridAlumnoActionPerformed(evt);
+            }
+        });
+
+        AñarirAlumno.setText("Añarir Instalacion");
+        AñarirAlumno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AñarirAlumnoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelActividadesLayout = new javax.swing.GroupLayout(panelActividades);
+        panelActividades.setLayout(panelActividadesLayout);
+        panelActividadesLayout.setHorizontalGroup(
+            panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelActividadesLayout.createSequentialGroup()
+                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelActividadesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(AñaridAlumno)
+                        .addGap(18, 18, 18)
+                        .addComponent(AñarirAlumno)
+                        .addGap(26, 26, 26)
+                        .addComponent(Informacion))
+                    .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelActividadesLayout.createSequentialGroup()
+                            .addGap(27, 27, 27)
+                            .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(buscarLabel)
+                                .addComponent(actividadesLabel)))
+                        .addGroup(panelActividadesLayout.createSequentialGroup()
+                            .addGap(54, 54, 54)
+                            .addComponent(Mostrar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelActividadesLayout.createSequentialGroup()
+                                    .addComponent(Insertar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Eliminar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(Modificar))
+                                .addGroup(panelActividadesLayout.createSequentialGroup()
+                                    .addComponent(fechaInicioLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(37, 37, 37)
+                                    .addComponent(fechaFinLabel)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(panelActividadesLayout.createSequentialGroup()
+                                    .addComponent(nombreLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(panelActividadesLayout.createSequentialGroup()
+                            .addGap(76, 76, 76)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(936, Short.MAX_VALUE))
+        );
+        panelActividadesLayout.setVerticalGroup(
+            panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelActividadesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelActividadesLayout.createSequentialGroup()
+                        .addComponent(actividadesLabel)
+                        .addGap(29, 29, 29)
+                        .addComponent(buscarLabel)
+                        .addGap(24, 24, 24)
+                        .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nombreLabel)
+                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addComponent(fechaInicioLabel))
+                    .addComponent(fechaFinLabel)
+                    .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Mostrar)
+                    .addComponent(Insertar)
+                    .addComponent(Eliminar)
+                    .addComponent(Modificar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Informacion)
+                    .addComponent(AñaridAlumno)
+                    .addComponent(AñarirAlumno))
+                .addContainerGap(363, Short.MAX_VALUE))
+        );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
+        gridBagConstraints.gridheight = 3;
+        gridBagConstraints.ipadx = 164;
+        gridBagConstraints.ipady = 92;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
+        gridBagConstraints.insets = new java.awt.Insets(22, 0, 22, 0);
+        getContentPane().add(panelActividades, gridBagConstraints);
 
         menuInicio.setText("Inicio");
         menuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2949,17 +3096,114 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
 
     private void mostrarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarButtonActionPerformed
         // TODO add your handling code here:
+        ActualizarTabla();
     }//GEN-LAST:event_mostrarButtonActionPerformed
 
+    protected void ActualizarTabla() {
+        try {
+            String consulta_instalaciones = leeConsultaInstalacionInterfaz();
+            consultaInstalacionesMostradas = consulta_instalaciones;
+            System.out.print("\nLA consulta a " + consulta_instalaciones + "  y qui termina");
+            retset = GestorInstalacion.consultaInstalacion(accesoBD, consulta_instalaciones);
+            ocultarMensajesError();
+            tablaInstalacion.setModel(new javax.swing.table.DefaultTableModel(
+                    new Object[][]{
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+                    new String[]{
+                "Nombre", "Direccion", "Capacidad para Equipos"
+            }));
+            javax.swing.table.TableModel modelo_tabla = new javax.swing.table.DefaultTableModel();
+            modelo_tabla = tablaInstalacion.getModel();
+            int i = 0;
+
+            while (retset.next()) {
+
+
+                if (i < 25) {
+                    tablaInstalacion.setValueAt(retset.getString("i.nombre"), i, 0);
+                    tablaInstalacion.setValueAt(retset.getString("i.localizacion"), i, 1);
+                    tablaInstalacion.setValueAt(retset.getString("i.capacidadEquipos"), i, 2);
+                } else {
+                    javax.swing.table.DefaultTableModel temp = (javax.swing.table.DefaultTableModel) tablaInstalacion.getModel();
+                    Object nuevo[] = {"", "", ""};
+                    temp.addRow(nuevo);
+                    tablaInstalacion.setValueAt(retset.getString("i.nombre"), i, 0);
+                    tablaInstalacion.setValueAt(retset.getString("i.localizacion"), i, 1);
+                    tablaInstalacion.setValueAt(retset.getString("i.capacidadEquipos"), i, 2);
+                }
+                i++;
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.print(ex.getMessage());
+        }
+    }
+    
+    protected String leeConsultaInstalacionInterfaz() {
+        String consulta_instalaciones = "SELECT i.idInstalacion, i.nombre, i.capacidadEquipos, i.localizacion FROM ";
+        String TablasImplicadas = " Instalacion i ";
+        String condicionConsulta = " WHERE ";
+
+        if (!nombreIns.getText().equals("") || MenuDireccionLabel.getSelectedItem() != "-" || !nombreCalleInst.getText().equals("")
+                || !numeroInst.getText().equals("") || !capacidadInst.getText().equals("")) {
+            if (!nombreIns.getText().equals("")) {
+                condicionConsulta = condicionConsulta + " i.nombre= '" + nombreIns.getText() + "' AND ";
+            }
+
+            if (!capacidadInst.getText().equals("")) {
+                condicionConsulta = condicionConsulta + " i.capacidadEquipos = '" + capacidadInst.getText() + "' AND ";
+            }
+            if (MenuDireccionLabel.getSelectedItem() != "-" || !nombreCalleInst.getText().equals("") || !numeroInst.getText().equals("")) {
+                condicionConsulta = condicionConsulta + " i.localizacion= '" + MenuDireccionLabel.getSelectedItem() + " " + nombreCalleInst.getText()
+                        + " " + numeroInst.getText() + "' AND ";
+            }
+
+
+            condicionConsulta = condicionConsulta.substring(0, condicionConsulta.length() - 4);
+            TablasImplicadas = TablasImplicadas + condicionConsulta;
+        }
+
+
+        consulta_instalaciones = consulta_instalaciones + TablasImplicadas;
+
+        return consulta_instalaciones;
+
+    }
     private void introducirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_introducirButtonActionPerformed
         // TODO add your handling code here:
-        new AltaInstalacion().setVisible(true);
+        new AltaInstalacion(accesoBD).setVisible(true);
 
     }//GEN-LAST:event_introducirButtonActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void capacidadInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capacidadInstActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_capacidadInstActionPerformed
 
     private void MenuDireccionLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuDireccionLabelActionPerformed
         // TODO add your handling code here
@@ -2967,7 +3211,45 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
 
     private void modificarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarButtonActionPerformed
         // TODO add your handling code here:
-        new ModificarInstalacion().setVisible(true);
+                ResultSet retsetMostrados;
+
+        int idInstalacion;
+
+        int indiceTabla = tablaInstalacion.getSelectedRow();
+
+        String consulta_instalacion = "SELECT idInstalacion FROM Instalacion"
+                + " WHERE nombre = \"" + tablaInstalacion.getValueAt(indiceTabla, 0)
+                + "\" AND capacidadEquipos = \'" + Integer.parseInt(tablaInstalacion.getValueAt(indiceTabla, 2).toString())
+                + "\' AND localizacion = \"" + tablaInstalacion.getValueAt(indiceTabla, 1)
+                + "\"";
+
+        System.out.println("\nConsulta idInstalacion " + consulta_instalacion);
+
+
+
+        retsetMostrados = accesoBD.ejecutaConsulta(consulta_instalacion);
+        try {
+            if (retsetMostrados.next()) {
+                idInstalacion = retsetMostrados.getInt("idInstalacion");
+                new ModificarInstalacion(accesoBD, tablaInstalacion.getValueAt(indiceTabla, 0).toString(),
+                        tablaInstalacion.getValueAt(indiceTabla, 2).toString(),
+                        tablaInstalacion.getValueAt(indiceTabla, 1).toString(), idInstalacion).setVisible(true);
+            }
+
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        //System.out.println("\n idInstalacion " + idInstalacion);
+        System.out.println("\n retsetMostrados " + retsetMostrados);
+        this.mostrarButton.doClick();
+        /* new ModificarInstalacion(accesoBD, tablaInstalacion.getValueAt(indiceTabla, 0).toString(),
+         tablaInstalacion.getValueAt(indiceTabla, 2).toString(), 
+         tablaInstalacion.getValueAt(indiceTabla, 1).toString(), idInstalacion).setVisible(true);
+         */
+    
     }//GEN-LAST:event_modificarButtonActionPerformed
 
     private void menuActividadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuActividadesMouseClicked
@@ -2975,21 +3257,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         ocultarPaneles();
         panelActividades.setVisible(true);
     }//GEN-LAST:event_menuActividadesMouseClicked
-
-    private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
-        // TODO add your handling code here:
-        new AltaActividad().setVisible(true);
-    }//GEN-LAST:event_InsertarActionPerformed
-
-    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-        // TODO add your handling code here:
-        new ModificarActividad().setVisible(true);
-    }//GEN-LAST:event_ModificarActionPerformed
-
-    private void InformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformacionActionPerformed
-        // TODO add your handling code here:
-        new InformacionActividad().setVisible(true);
-    }//GEN-LAST:event_InformacionActionPerformed
 
     private void botonElimTempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElimTempActionPerformed
         
@@ -3191,6 +3458,303 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void Añadir_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Añadir_AlumnoActionPerformed
+        // TODO add your handling code here:
+
+        int idTemporada = getIDTemporada();
+        int idActividad = getIDActividad();
+        int idCuota = 0;
+        int idalumno = 0;
+
+        String nombreCompleto = listaAlumnosActividad.getSelectedValue().toString();
+        String nombre = nombreCompleto.substring(0, nombreCompleto.indexOf(" "));
+        String aux = nombreCompleto.substring(nombreCompleto.indexOf(" "), nombreCompleto.length());
+        String pApellido = aux.substring(0, aux.indexOf(" "));
+        String sApellido = aux.substring(aux.indexOf(" "), aux.length());
+
+        ResultSet rts;
+        ResultSet retset;
+        String consulta = "SELEC idAlumno FROM alumno WHERE nombre = '" + nombre + ", AND primerApellido = '"
+        + pApellido + "' AND segundoApellido = '" + sApellido + "'";
+
+        rts = accesoBD.ejecutaConsulta(consulta);
+        try {
+            if(rts.next()){
+                idalumno = rts.getInt("idAlumno");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_Añadir_AlumnoActionPerformed
+
+    private int getIDTemporada() {
+
+        int indiceTabla = actividadesTable.getSelectedRow();
+        ResultSet rts;
+        int idTemporada = 0;
+
+        String actividad = "SELECT Temporada_idTemporada FROM actividades WHERE nombre = '"
+                + actividadesTable.getValueAt(indiceTabla, 0) + "' AND fechaInicio = '"
+                + actividadesTable.getValueAt(indiceTabla, 1) + "' AND fechaFin = '"
+                + actividadesTable.getValueAt(indiceTabla, 2) + "'";
+
+
+
+        rts = accesoBD.ejecutaConsulta(actividad);
+        System.out.print("\n\n Busaca " + rts + "\n\n");
+        try {
+            if (rts.next()) {
+                idTemporada = rts.getInt("Temporada_idTemporada");
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idTemporada;
+    }
+    
+    private int getIDActividad() {
+
+        int indiceTabla = actividadesTable.getSelectedRow();
+        ResultSet rts;
+        int idActividad = 0;
+
+        String actividad = "SELECT idActividades FROM actividades WHERE nombre = '"
+                + actividadesTable.getValueAt(indiceTabla, 0) + "' AND fechaInicio = '"
+                + actividadesTable.getValueAt(indiceTabla, 1) + "' AND fechaFin = '"
+                + actividadesTable.getValueAt(indiceTabla, 2) + "'";
+
+
+
+        rts = accesoBD.ejecutaConsulta(actividad);
+        System.out.print("\n\n Busaca " + rts + "\n\n");
+        try {
+            if (rts.next()) {
+                idActividad = rts.getInt("idActividades");
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idActividad;
+    }
+    
+    private void SalirAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirAñadirActionPerformed
+        // TODO add your handling code here:
+        AñadirAlumnoActividad.setVisible(false);
+        AñadirAlumnoActividad.setEnabled(false);
+    }//GEN-LAST:event_SalirAñadirActionPerformed
+
+    private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
+        // TODO add your handling code here:
+        String error = "";
+
+        int indiceTabla = tablaInstalacion.getSelectedRow();
+        int selection = JOptionPane.showConfirmDialog(this, "Desea eliminar la Instalacion?", "Instalacion usuario", JOptionPane.YES_NO_OPTION);
+        if (selection == JOptionPane.YES_OPTION) {
+            if (Integer.parseInt(tablaInstalacion.getValueAt(indiceTabla, 2).toString()) <= 0) {
+                error = "Numero de capacidad menor o igual que cero";
+                eliminarButton.setBorder(bordeError);
+            }
+            GestorInstalacion.eliminaInstalacion(accesoBD, tablaInstalacion.getValueAt(indiceTabla, 0).toString(),
+                    Integer.parseInt(tablaInstalacion.getValueAt(indiceTabla, 2).toString()),
+                    tablaInstalacion.getValueAt(indiceTabla, 1).toString());
+
+        }
+    }//GEN-LAST:event_eliminarButtonActionPerformed
+
+    private String leeConsultaActividad() {
+
+
+        String consulta_actividades = "SELECT a.idActividades, a.nAlumnos, a.descripcion, a.precioSocio,"
+                + " a.precioNoSocio, a.Temporada_idTemporada, a.fechaInicio, a.fechaFin, a.nombre FROM ";
+        String TablasImplicadas = " actividades a";
+        String condicionConsulta = " WHERE";
+
+        //Date fechaInicio = (Date) fechaInicioDateChooser.getDate();
+        //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+
+        if (!nombreTextField.getText().equals("") || !fechaInicioDateChooser.getDateFormatString().equals("dd-MMM-yyyy")
+                || !fechaFinDateChooser.getDateFormatString().equals("dd-MMM-yyyy")) {
+            if (!nombreTextField.getText().equals("")) {
+                condicionConsulta = condicionConsulta + " a.nombre= '" + nombreTextField.getText() + "' AND ";
+            }
+
+            if (!fechaInicioDateChooser.getDateFormatString().equals("dd-MM-yyyy")) {
+                condicionConsulta = condicionConsulta + " a.fechaInicio = " + fechaInicioDateChooser.getDateFormatString() + " AND ";
+                System.out.print("\n\n fecha" + fechaInicioDateChooser.getDateFormatString());
+            }
+            if (!fechaFinDateChooser.getDateFormatString().equals("dd-MM-yyyy")) {
+                condicionConsulta = condicionConsulta + " a.fechaFin = " + fechaFinDateChooser.getDateFormatString() + " AND  ";
+            }
+
+
+            condicionConsulta = condicionConsulta.substring(0, condicionConsulta.length() - 5);
+            TablasImplicadas = TablasImplicadas + condicionConsulta;
+        }
+
+
+        consulta_actividades = consulta_actividades + TablasImplicadas;
+
+
+        return consulta_actividades;
+
+
+    }
+    
+    private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
+        try {
+            // TODO add your handling code here:
+            String consulta_actividades = leeConsultaActividad();
+            consultaActividadesMostradas = consulta_actividades;
+            System.out.print("\nLA consulta a " + consulta_actividades + "  y aqui termina ");
+            retset = GestorActividad.consultaActividad(accesoBD, consulta_actividades);
+            ocultarMensajesError();
+            actividadesTable.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null},
+                    {null, null, null}
+                },
+                new String[]{
+                    "Nombre", "Fecha Inicio", "Fecha Fin"
+                }));
+                javax.swing.table.TableModel modelo_tabla = new javax.swing.table.DefaultTableModel();
+                modelo_tabla = actividadesTable.getModel();
+                int i = 0;
+                while (retset.next()) {
+
+                    if (i < 25) {
+                        actividadesTable.setValueAt(retset.getString("a.nombre"), i, 0);
+                        actividadesTable.setValueAt(retset.getString("a.fechaInicio"), i, 1);
+                        actividadesTable.setValueAt(retset.getString("a.fechaFin"), i, 2);
+                    } else {
+                        javax.swing.table.DefaultTableModel temp = (javax.swing.table.DefaultTableModel) tablaInstalacion.getModel();
+                        Object nuevo[] = {"", "", ""};
+                        temp.addRow(nuevo);
+                        actividadesTable.setValueAt(retset.getString("a.nombre"), i, 0);
+                        actividadesTable.setValueAt(retset.getString("a.fechaInicio"), i, 1);
+                        actividadesTable.setValueAt(retset.getString("a.fechaFin"), i, 2);
+                    }
+                    i++;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_MostrarActionPerformed
+
+    private void InsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InsertarActionPerformed
+        // TODO add your handling code here:
+        new AltaActividad(accesoBD).setVisible(true);
+    }//GEN-LAST:event_InsertarActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        // TODO add your handling code here:
+        ResultSet retsetMostrados;
+
+        int idActividad;
+        String decripcion = new String();
+
+        int indiceTabla = actividadesTable.getSelectedRow();
+
+        String consulta = "SELECT idActividades, descripcion FROM actividades WHERE nombre = '"
+        + actividadesTable.getValueAt(indiceTabla, 0) + "' AND fechaInicio = '"
+        + actividadesTable.getValueAt(indiceTabla, 1) + "' AND fechaFin = '"
+        + actividadesTable.getValueAt(indiceTabla, 2) + "'";
+
+        retsetMostrados = accesoBD.ejecutaConsulta(consulta);
+
+        try {
+            if (retsetMostrados.next()) {
+                idActividad = retsetMostrados.getInt("idActividades");
+                decripcion = retsetMostrados.getString("descripcion");
+
+                new ModificarActividad(accesoBD, actividadesTable.getValueAt(indiceTabla, 0).toString(),
+                    actividadesTable.getValueAt(indiceTabla, 1).toString(),
+                    actividadesTable.getValueAt(indiceTabla, 2).toString(), idActividad, decripcion).setVisible(true);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void InformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InformacionActionPerformed
+        // TODO add your handling code here:
+        new InformacionActividad().setVisible(true);
+    }//GEN-LAST:event_InformacionActionPerformed
+
+    private void AñaridAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñaridAlumnoActionPerformed
+        // TODO add your handling code here:
+        AñadirAlumnoActividad.setVisible(true);
+        AñadirAlumnoActividad.setEnabled(true);
+
+        List<String> listaAlumnos = new ArrayList<String>();
+
+        ResultSet rts;
+        ResultSet retset1;
+        String consulta = "SELECT a.nombre, a.primerApellido, a.segundoApellido FROM alumno a, alumnotemporada t"
+        + "WHERE";
+        int indiceTabla = actividadesTable.getSelectedRow();
+        int idTemporada = 0;
+        String actividad = "SELECT Temporada_idTemporada FROM actividades WHERE nombre = '"
+        + actividadesTable.getValueAt(indiceTabla, 0) + "' AND fechaInicio = '"
+        + actividadesTable.getValueAt(indiceTabla, 1) + "' AND fechaFin = '"
+        + actividadesTable.getValueAt(indiceTabla, 2) + "'";
+
+        try {
+            rts = accesoBD.ejecutaConsulta(actividad);
+            System.out.print("\n\n Busaca " + rts + "\n\n");
+            if (rts.next()) {
+                idTemporada = rts.getInt("Temporada_idTemporada");
+            }
+            consulta = consulta + " t.Temporada_idTemporada= " + idTemporada + " AND a.idAlumno = t.Alumno_idAlumno";
+            retset1 = accesoBD.ejecutaConsulta(consulta);
+            while (retset1.next()) {
+                listaAlumnos.add(retset1.getString(1) + " " + retset1.getString(2) + " " + retset1.getString(3));
+            }
+            DefaultListModel modelo = new DefaultListModel();
+            for (String s : listaAlumnos) {
+                modelo.addElement(s);
+            }
+            listaAlumnosActividad.removeAll();
+            listaAlumnosActividad.setModel(modelo);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_AñaridAlumnoActionPerformed
+
+    private void AñarirAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñarirAlumnoActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_AñarirAlumnoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3227,6 +3791,10 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AñadirAlumnoActividad;
+    private javax.swing.JButton Añadir_Alumno;
+    private javax.swing.JButton AñaridAlumno;
+    private javax.swing.JButton AñarirAlumno;
     private javax.swing.JLabel BuscarporLabel;
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Informacion;
@@ -3236,8 +3804,10 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton Mostrar;
     private javax.swing.JLabel NombreInsLabel;
     private javax.swing.JLabel NumeroLabel;
+    private javax.swing.JButton SalirAñadir;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JLabel actividadesLabel;
+    private javax.swing.JTable actividadesTable;
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JButton botonConsGrupo;
     private javax.swing.JButton botonElimTemp;
@@ -3255,6 +3825,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel buscarAlLabel;
     private javax.swing.JButton buscarEquipo;
     private javax.swing.JLabel buscarLabel;
+    private javax.swing.JTextField capacidadInst;
     private javax.swing.JLabel categoriaAlLabel;
     private javax.swing.JComboBox categoriaEquipo;
     private javax.swing.JButton cerrarSesion;
@@ -3321,6 +3892,8 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
@@ -3342,18 +3915,15 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JList listaAlumnosActividad;
     private javax.swing.JLabel mensajeErrorEliminarAlumno;
     private javax.swing.JMenu menuActividades;
     private javax.swing.JMenu menuCategorias;
@@ -3369,9 +3939,12 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton mostrarButton;
     private javax.swing.JTextField nombreAl;
     private javax.swing.JLabel nombreAlLabel;
+    private javax.swing.JTextField nombreCalleInst;
     private javax.swing.JTextField nombreEquipo;
+    private javax.swing.JTextField nombreIns;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
+    private javax.swing.JTextField numeroInst;
     private javax.swing.JPanel panelActividades;
     private javax.swing.JPanel panelEquipos;
     private javax.swing.JPanel panelGrupos;
@@ -3389,6 +3962,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel segundoApellidoLabel;
     private javax.swing.JTable tablaAlumnos;
     private javax.swing.JTable tablaGrupos;
+    private javax.swing.JTable tablaInstalacion;
     private javax.swing.JTable tablaUsuarios;
     private javax.swing.JComboBox temporadaEquipo;
     private javax.swing.JLabel temporadaLabel;
@@ -3408,6 +3982,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         panelActividades.setVisible(false);
         panelEquipos.setVisible(false);
         panelPagos.setVisible(false);
+        AñadirAlumnoActividad.setVisible(false);
     }
 
     ResultSet ejecutarConsulta(String query) {

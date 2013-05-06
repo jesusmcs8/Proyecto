@@ -4,17 +4,60 @@
  */
 package InterfazUsuario;
 
+import GestionDeInstalaciones.*;
+import InterfazUsuario.PantallaPrincipal;
+import ServiciosAlmacenamiento.BaseDatos;
+import java.awt.Color;
+import java.sql.*;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+
 /**
  *
  * @author jesusmcs
  */
 public class ModificarInstalacion extends javax.swing.JFrame {
 
+    BaseDatos accesoBD;
+    Border bordeError;
+    ResultSet rst;
+    int id;
+
     /**
      * Creates new form ModificarInstalacion
      */
     public ModificarInstalacion() {
         initComponents();
+        bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+    }
+
+    public ModificarInstalacion(BaseDatos acceso, String nombre, String capacidad, String localizacion, int i ) {
+        accesoBD = acceso;
+        initComponents();
+        int aux = 0, aux1;
+        String numero;
+        id = i;
+        bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        nombreTextField.setText(nombre);
+        
+         if(localizacion.substring(0, 3) == "Calle" || localizacion.substring(0, 4) == "Plaza" ){
+         aux = 4;
+         }else if(localizacion.substring(0, 6) == "Avenida"){
+         aux = 6;
+         }else if(localizacion.substring(0, 8) == "Carretera"){
+         aux = 8;
+         }
+         numero = localizacion.substring(aux);
+         aux1 = localizacion.indexOf(" ");
+         
+        direccionTextField.setText(localizacion);
+        //numeroTextField.setText(localizacion.substring(aux1 + 1));
+        capacidadTextField.setText(capacidad);
     }
 
     /**
@@ -30,10 +73,7 @@ public class ModificarInstalacion extends javax.swing.JFrame {
         nombreLabel = new javax.swing.JLabel();
         nombreTextField = new javax.swing.JTextField();
         direccionLabel = new javax.swing.JLabel();
-        calleComboBox = new javax.swing.JComboBox();
         direccionTextField = new javax.swing.JTextField();
-        numeroLabel = new javax.swing.JLabel();
-        numeroTextField = new javax.swing.JTextField();
         capacidadLabel = new javax.swing.JLabel();
         capacidadTextField = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
@@ -48,13 +88,14 @@ public class ModificarInstalacion extends javax.swing.JFrame {
 
         direccionLabel.setText("Direccion");
 
-        calleComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Calle", "Avenida", "Plaza", "Carretera" }));
-
-        numeroLabel.setText("Nº");
-
         capacidadLabel.setText("Capacidad");
 
         Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
 
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,16 +121,10 @@ public class ModificarInstalacion extends javax.swing.JFrame {
                             .addComponent(direccionLabel)
                             .addComponent(capacidadLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(calleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(capacidadTextField))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(direccionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(numeroLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(numeroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(55, 55, 55))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(capacidadTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(direccionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(132, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Guardar)
@@ -109,10 +144,7 @@ public class ModificarInstalacion extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(direccionLabel)
-                    .addComponent(calleComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(direccionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numeroLabel)
-                    .addComponent(numeroTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(direccionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(capacidadLabel)
@@ -126,11 +158,66 @@ public class ModificarInstalacion extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        String errores = "";
+        
+         
+
+        if (nombreTextField.getText().isEmpty()) {
+            errores = errores + "Debes rellenar el campo 'Nombre'\n";
+            nombreTextField.setBorder(bordeError);
+        } else if (nombreTextField.getText().length() > 85) {
+            errores = errores + "La longitud del campo 'Nombre' no puede superar los 45 caracteres\n";
+            nombreTextField.setBorder(bordeError);
+        }
+        if (direccionTextField.getText().isEmpty()) {
+            errores = errores + "Debes rellenar el campo 'Direccion'\n";
+            direccionTextField.setBorder(bordeError);
+        } else if (direccionTextField.getText().length() > 140) {
+            errores = errores + "La longitud del campo 'Direccion' no puede superar los 140 caracteres\n";
+            direccionTextField.setBorder(bordeError);
+
+        }
+        if (capacidadTextField.getText().isEmpty()) {
+            errores = errores + "Debes rellenar el campo 'Capacidad'\n";
+            capacidadTextField.setBorder(bordeError);
+        }
+
+        if (errores.isEmpty()) {
+
+
+            boolean exito = GestorInstalacion.modificaInstalacion(accesoBD, id,
+                    nombreTextField.getText(), capacidadTextField.getText(), direccionTextField.getText());
+
+            if (!exito) {
+                JOptionPane.showMessageDialog(null, "Ha habido un error en la base de datos",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Instalacion modificada con exito",
+                        "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                        
+                //InterfazUsuario.PantallaPrincipal.ActualizarTabla();
+                this.setVisible(false);
+                //this.setEnabled(false);
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    errores.substring(0, errores.length() - 1),
+                    "Errores en el formulario", JOptionPane.ERROR_MESSAGE);
+        }
+
+
+
+    }//GEN-LAST:event_GuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,7 +256,6 @@ public class ModificarInstalacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancelar;
     private javax.swing.JButton Guardar;
-    private javax.swing.JComboBox calleComboBox;
     private javax.swing.JLabel capacidadLabel;
     private javax.swing.JTextField capacidadTextField;
     private javax.swing.JLabel direccionLabel;
@@ -177,7 +263,5 @@ public class ModificarInstalacion extends javax.swing.JFrame {
     private javax.swing.JLabel modificarLabel;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
-    private javax.swing.JLabel numeroLabel;
-    private javax.swing.JTextField numeroTextField;
     // End of variables declaration//GEN-END:variables
 }
