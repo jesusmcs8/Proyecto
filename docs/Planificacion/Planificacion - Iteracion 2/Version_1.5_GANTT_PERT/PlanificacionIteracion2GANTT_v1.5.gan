@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Untitled Gantt Project" company="" webLink="http://" view-date="2013-04-25" view-index="0" gantt-divider-location="351" resource-divider-location="300" version="2.0" locale="es">
+    <description/>
+    <view zooming-state="default:0" id="gantt-chart">
+        <field id="tpd3" name="Nombre" width="100" order="0"/>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nombre" width="50" order="0"/>
+        <field id="1" name="Función" width="50" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <calendar id="1" name="default">
+                <default-week sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+                <only-show-weekends value="true"/>
+                <overriden-day-types/>
+                <days/>
+            </calendar>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+            <taskproperty id="tpc0" name="" type="custom" valuetype="text"/>
+            <taskproperty id="tpc1" name="" type="custom" valuetype="text"/>
+            <taskproperty id="tpc2" name="" type="custom" valuetype="text"/>
+            <taskproperty id="tpc3" name="" type="custom" valuetype="text"/>
+            <taskproperty id="tpc4" name="" type="custom" valuetype="text"/>
+        </taskproperties>
+        <task id="193" name="Auditorias" color="#8cb6ce" meeting="false" start="2013-04-25" duration="11" complete="0" expand="true">
+            <task id="96" name="Prueba de software generado por el equipo de implementación" color="#8cb6ce" meeting="false" start="2013-04-25" duration="4" complete="0" expand="true"/>
+            <task id="173" name="Prueba de la IU" color="#8cb6ce" meeting="false" start="2013-05-05" duration="1" complete="0" expand="true"/>
+        </task>
+        <task id="188" name="Equipo de Planificacion" color="#8cb6ce" meeting="false" start="2013-04-02" duration="34" complete="52" expand="true">
+            <task id="72" name="Planificación de recursos y tareas para la segunda iteración." color="#8cb6ce" meeting="false" start="2013-04-02" duration="9" complete="100" expand="true">
+                <depend id="74" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="74" name="Creación de diagramas de tiempos (Gantt)" color="#8cb6ce" meeting="false" start="2013-04-11" duration="3" complete="0" expand="true">
+                <depend id="76" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="76" name="Creación de la red de tareas (Pert)" color="#8cb6ce" meeting="false" start="2013-04-14" duration="2" complete="0" expand="true">
+                <depend id="197" type="2" difference="0" hardness="Strong"/>
+            </task>
+            <task id="94" name="Revisión de los documentos de los equipos de Diseño e Implementación" color="#8cb6ce" meeting="false" start="2013-05-05" duration="1" complete="0" expand="true">
+                <depend id="198" type="2" difference="0" hardness="Rubber"/>
+            </task>
+            <task id="197" name="Generar Documentacion (revisiones, entregas, etc)" color="#8cb6ce" meeting="false" start="2013-04-16" duration="1" complete="0" expand="true">
+                <depend id="198" type="2" difference="0" hardness="Rubber"/>
+            </task>
+            <task id="198" name="Generar Documentacion de la segunda Iteracion" color="#8cb6ce" meeting="true" start="2013-05-06" duration="0" complete="0" expand="true"/>
+        </task>
+        <task id="186" name="Equipo de Diseño" color="#8cb6ce" meeting="false" start="2013-04-03" duration="19" complete="6" expand="true">
+            <task id="184" name="Modelado de requisitos" color="#8cb6ce" meeting="false" start="2013-04-03" duration="8" complete="30" expand="true">
+                <task id="13" name="Obtención de requisitos funcionales y no funcionales" color="#8cb6ce" meeting="false" start="2013-04-03" duration="4" complete="100" expand="true">
+                    <task id="200" name="Identificacion y justificación de Actores del Sistema" color="#8cb6ce" meeting="false" start="2013-04-03" duration="1" complete="0" expand="true">
+                        <depend id="199" type="2" difference="0" hardness="Strong"/>
+                    </task>
+                    <task id="201" name="Identificar CU y descripcion detallada de los mismos." color="#8cb6ce" meeting="false" start="2013-04-04" duration="3" complete="0" expand="true">
+                        <depend id="199" type="1" difference="2" hardness="Strong"/>
+                        <depend id="204" type="2" difference="4" hardness="Strong"/>
+                    </task>
+                </task>
+                <task id="137" name="Refinar el Diagrama de Clases si fuera necesario" color="#8cb6ce" meeting="false" start="2013-04-08" duration="1" complete="0" expand="true">
+                    <depend id="202" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="199" name="Obtener Diagrama de Casos de Uso" color="#8cb6ce" meeting="false" start="2013-04-06" duration="1" complete="0" expand="true">
+                    <depend id="19" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="194" name="Documento Fase Requisitos" color="#8cb6ce" meeting="true" start="2013-04-11" duration="0" complete="0" expand="true"/>
+            </task>
+            <task id="185" name="Analisis" color="#8cb6ce" meeting="false" start="2013-04-06" duration="13" complete="0" expand="true">
+                <task id="22" name="Obtener clases, relaciones y atributos" color="#8cb6ce" meeting="false" start="2013-04-06" duration="1" complete="0" expand="true">
+                    <depend id="25" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="25" name="Obtener Diagrama de Clases" color="#8cb6ce" meeting="false" start="2013-04-07" duration="1" complete="0" expand="true">
+                    <depend id="113" type="1" difference="1" hardness="Strong"/>
+                    <depend id="118" type="2" difference="1" hardness="Strong"/>
+                    <depend id="137" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="202" name="Contratos de operaciones de DSS" color="#8cb6ce" meeting="false" start="2013-04-09" duration="3" complete="0" expand="true">
+                    <depend id="135" type="1" difference="1" hardness="Strong"/>
+                </task>
+                <task id="135" name="Obtener Diagramas de Secuencia de los contratos" color="#8cb6ce" meeting="false" start="2013-04-10" duration="9" complete="0" expand="true">
+                    <depend id="143" type="1" difference="0" hardness="Strong"/>
+                    <depend id="195" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="195" name="Documento Fase Analisis" color="#8cb6ce" meeting="true" start="2013-04-19" duration="0" complete="0" expand="true">
+                    <depend id="159" type="1" difference="0" hardness="Strong"/>
+                </task>
+            </task>
+            <task id="189" name="Diseño" color="#8cb6ce" meeting="false" start="2013-04-06" duration="16" complete="0" expand="true">
+                <task id="19" name="Diagrama de Secuencia del Sistema de todos los casos de uso." color="#8cb6ce" meeting="false" start="2013-04-06" duration="2" complete="0" expand="true">
+                    <depend id="22" type="1" difference="0" hardness="Strong"/>
+                    <depend id="194" type="2" difference="0" hardness="Rubber"/>
+                    <depend id="202" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="159" name="Descomposición del sistema en subsistemas de diseño" color="#8cb6ce" meeting="false" start="2013-04-19" duration="1" complete="0" expand="true">
+                    <depend id="165" type="2" difference="0" hardness="Strong"/>
+                    <depend id="208" type="1" difference="2" hardness="Strong"/>
+                </task>
+                <task id="208" name="Obtener Diagrama de Secuencia de Diseño" color="#8cb6ce" meeting="false" start="2013-04-21" duration="1" complete="0" expand="true"/>
+                <task id="113" name="Paso de clases a modelo relacional" color="#8cb6ce" meeting="false" start="2013-04-08" duration="3" complete="0" expand="true"/>
+                <task id="163" name="Modelar Diagrama de Componentes" color="#8cb6ce" meeting="false" start="2013-04-21" duration="1" complete="0" expand="true">
+                    <depend id="161" type="1" difference="0" hardness="Strong"/>
+                </task>
+                <task id="161" name="Encajar el Diagrama de Clases en la arquitectura obtenida" color="#8cb6ce" meeting="false" start="2013-04-21" duration="1" complete="0" expand="true">
+                    <depend id="70" type="2" difference="0" hardness="Rubber"/>
+                </task>
+                <task id="165" name="Obtener Diagrama de Despliegue de Diseño" color="#8cb6ce" meeting="false" start="2013-04-20" duration="1" complete="0" expand="true">
+                    <depend id="163" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="70" name="Documento Fase Diseño" color="#8cb6ce" meeting="true" start="2013-04-22" duration="0" complete="0" expand="true"/>
+            </task>
+        </task>
+        <task id="187" name="Equipo de Implementacion" color="#8cb6ce" meeting="false" start="2013-04-04" duration="32" complete="0" expand="true">
+            <task id="214" name="Entrega 1" color="#8cb6ce" meeting="false" start="2013-04-04" duration="13" complete="0" expand="true">
+                <task id="104" name="Primeros bocetos de IU de la gestión de entrenamientos e interacciones posibles." color="#8cb6ce" meeting="false" start="2013-04-04" duration="6" complete="100" expand="true">
+                    <depend id="204" type="2" difference="8" hardness="Strong"/>
+                </task>
+                <task id="212" name="Implementación del acceso remoto a la BD." color="#8cb6ce" meeting="false" start="2013-04-09" duration="8" complete="0" expand="true"/>
+            </task>
+            <task id="225" name="Entrega 2" color="#8cb6ce" meeting="false" start="2013-04-09" duration="27" complete="0" expand="true">
+                <task id="118" name="Implementacion del sistema a partir del nuevo Diagrama de Clases." color="#8cb6ce" meeting="false" start="2013-04-09" duration="9" complete="0" expand="true">
+                    <depend id="96" type="2" difference="1" hardness="Strong"/>
+                    <depend id="143" type="2" difference="0" hardness="Strong"/>
+                </task>
+                <task id="204" name="Bocetos de IU de Gestion de Entrenamientos y sus interacciones posibles." color="#8cb6ce" meeting="false" start="2013-04-18" duration="1" complete="0" expand="true"/>
+                <task id="143" name="Implementacion de las operaciones del sistema" color="#8cb6ce" meeting="false" start="2013-04-18" duration="6" complete="0" expand="true">
+                    <depend id="96" type="2" difference="1" hardness="Strong"/>
+                </task>
+                <task id="205" name="Implementacion de la IU" color="#8cb6ce" meeting="false" start="2013-04-20" duration="15" complete="0" expand="true">
+                    <depend id="94" type="2" difference="0" hardness="Rubber"/>
+                    <depend id="173" type="2" difference="0" hardness="Rubber"/>
+                    <depend id="196" type="2" difference="0" hardness="Rubber"/>
+                </task>
+                <task id="196" name="Documento Implementacion" color="#8cb6ce" meeting="true" start="2013-05-06" duration="0" complete="0" expand="true"/>
+            </task>
+        </task>
+    </tasks>
+    <resources>
+        <resource id="0" name="Moisés Gautier Gómez" function="SoftwareDevelopment:8" contacts="" phone=""/>
+        <resource id="1" name="Julio Ros Martínez" function="SoftwareDevelopment:8" contacts="" phone=""/>
+        <resource id="2" name="Francisco Javier Gomez del Olmo" function="SoftwareDevelopment:8" contacts="" phone=""/>
+        <resource id="3" name="Francisco Santolalla Quiñonero" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="4" name="Carlos Jesús Fernández Basso" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="5" name="Alexander Moreno Borrego" function="SoftwareDevelopment:2" contacts="" phone=""/>
+        <resource id="6" name="David Saldaña Lopez" function="SoftwareDevelopment:3" contacts="" phone=""/>
+        <resource id="7" name="Jesus Manuel Contreras Siles" function="SoftwareDevelopment:3" contacts="" phone=""/>
+        <resource id="8" name="Diego Muñoz Rio" function="SoftwareDevelopment:3" contacts="" phone=""/>
+    </resources>
+    <allocations>
+        <allocation task-id="13" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="19" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="25" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="135" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="137" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="159" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="161" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="163" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="165" resource-id="0" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="13" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="19" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="25" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="135" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="137" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="159" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="161" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="163" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="165" resource-id="1" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="13" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="19" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="22" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="25" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="135" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="137" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="159" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="161" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="163" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="165" resource-id="2" function="SoftwareDevelopment:8" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="104" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="118" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="143" resource-id="3" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="104" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="118" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="143" resource-id="4" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="104" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="113" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="118" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="143" resource-id="5" function="SoftwareDevelopment:2" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="6" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="72" resource-id="6" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="74" resource-id="6" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="76" resource-id="6" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="94" resource-id="6" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="96" resource-id="6" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="173" resource-id="6" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="70" resource-id="7" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="72" resource-id="7" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="74" resource-id="7" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="76" resource-id="7" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="94" resource-id="7" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="96" resource-id="7" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="173" resource-id="7" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="72" resource-id="8" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="74" resource-id="8" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="76" resource-id="8" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="94" resource-id="8" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="96" resource-id="8" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+        <allocation task-id="173" resource-id="8" function="SoftwareDevelopment:3" responsible="false" load="100.0"/>
+    </allocations>
+    <vacations/>
+    <taskdisplaycolumns>
+        <displaycolumn property-id="tpc0" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpc1" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpc2" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpc3" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpc4" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd2" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd9" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd8" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd6" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd5" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd4" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd10" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd11" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd1" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd7" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd0" order="-1" width="75" visible="false"/>
+        <displaycolumn property-id="tpd3" order="0" width="332" visible="true"/>
+    </taskdisplaycolumns>
+    <previous/>
+    <roles roleset-name="Default"/>
+    <roles roleset-name="SoftwareDevelopment"/>
+</project>
