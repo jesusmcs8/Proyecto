@@ -1077,6 +1077,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         getContentPane().add(panelInstalaciones, gridBagConstraints);
 
+        panelEquipos.setVisible(false);
+
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Equipos");
 
@@ -1232,6 +1234,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
 
         getContentPane().add(panelEquipos, new java.awt.GridBagConstraints());
+
+        panelPagos.setVisible(false);
 
         jLabel15.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel15.setText("Pagos");
@@ -3802,6 +3806,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }//GEN-LAST:event_botonNuevoPagosActionPerformed
 
     private void menuPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPagosMouseClicked
+        ocultarPaneles();
         panelPagos.setVisible(true);
     }//GEN-LAST:event_menuPagosMouseClicked
 
@@ -4094,6 +4099,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }
     
     void actualizaComboBoxTemporadas(List<String> temps) {
+        comboTempo.removeAllItems();
         for(String s : temps)
             comboTempo.addItem(s);
     }

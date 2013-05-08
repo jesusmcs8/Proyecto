@@ -44,14 +44,14 @@ public class ModificarInstalacion extends javax.swing.JFrame {
         id = i;
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
         nombreTextField.setText(nombre);
-        
+        /*
          if(localizacion.substring(0, 3) == "Calle" || localizacion.substring(0, 4) == "Plaza" ){
          aux = 4;
          }else if(localizacion.substring(0, 6) == "Avenida"){
          aux = 6;
          }else if(localizacion.substring(0, 8) == "Carretera"){
          aux = 8;
-         }
+         }*/
          numero = localizacion.substring(aux);
          aux1 = localizacion.indexOf(" ");
          
