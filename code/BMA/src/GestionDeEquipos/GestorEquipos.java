@@ -61,7 +61,7 @@ public class GestorEquipos {
         return equipoEliminado;
     }
     
-    public void InsertarDatosEquipo(BaseDatos accesoBD, String nombre,
+    public static void InsertarDatosEquipo(BaseDatos accesoBD, String nombre,
             String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
                 
         boolean validar = EquipoBD.ConsultarEquipo(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
