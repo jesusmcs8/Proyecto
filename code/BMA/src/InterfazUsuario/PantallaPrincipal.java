@@ -198,15 +198,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        nombreEquipo = new javax.swing.JTextField();
+        textNombreEquipo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         comboCatEquipo = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
         comboTempEquipo = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
-        entrenador1 = new javax.swing.JTextField();
+        textEntEquipo = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        entrenador2 = new javax.swing.JTextField();
+        textEnt2Equipo = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaEquipos = new javax.swing.JTable();
@@ -1086,9 +1086,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel10.setText("Nombre:");
 
-        nombreEquipo.addActionListener(new java.awt.event.ActionListener() {
+        textNombreEquipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreEquipoActionPerformed(evt);
+                textNombreEquipoActionPerformed(evt);
             }
         });
 
@@ -1109,9 +1109,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel14.setText("Segundo Entrenador:");
 
-        entrenador2.addActionListener(new java.awt.event.ActionListener() {
+        textEnt2Equipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entrenador2ActionPerformed(evt);
+                textEnt2EquipoActionPerformed(evt);
             }
         });
 
@@ -1162,15 +1162,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                             .addGroup(panelEquiposLayout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addGap(18, 18, 18)
-                                .addComponent(nombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textNombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panelEquiposLayout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addGap(18, 18, 18)
-                                .addComponent(entrenador1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(textEntEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEquiposLayout.createSequentialGroup()
                                 .addComponent(jLabel14)
                                 .addGap(18, 18, 18)
-                                .addComponent(entrenador2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(textEnt2Equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelEquiposLayout.createSequentialGroup()
@@ -1204,19 +1204,19 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(nombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textNombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(comboCatEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(entrenador1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textEntEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(comboTempEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(entrenador2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textEnt2Equipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addComponent(botonBuscar)
                 .addGap(25, 25, 25)
@@ -3371,12 +3371,17 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
     }//GEN-LAST:event_botonConsGrupoActionPerformed
 
-    private void nombreEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreEquipoActionPerformed
+    private void textNombreEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreEquipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nombreEquipoActionPerformed
+    }//GEN-LAST:event_textNombreEquipoActionPerformed
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
-        
+        try {
+            actualizaTablaEquipos(textNombreEquipo.getText(),comboTempEquipo.getSelectedItem().toString(),comboCatEquipo.getSelectedItem().toString(),
+                                  textEntEquipo.getText(),textEnt2Equipo.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_botonBuscarActionPerformed
 
@@ -3777,9 +3782,9 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCatEquipoActionPerformed
 
-    private void entrenador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrenador2ActionPerformed
+    private void textEnt2EquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEnt2EquipoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_entrenador2ActionPerformed
+    }//GEN-LAST:event_textEnt2EquipoActionPerformed
 
     private void botonNuevoEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoEquipoActionPerformed
         try {
@@ -3915,8 +3920,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JTextField edadAl;
     private javax.swing.JLabel edadAlLabel;
     private javax.swing.JButton eliminarButton;
-    private javax.swing.JTextField entrenador1;
-    private javax.swing.JTextField entrenador2;
     private javax.swing.JLabel entrenadorAlLabel;
     private javax.swing.JLabel equipoAlLabel;
     private javax.swing.JLabel errorEliminarUsuario;
@@ -3995,7 +3998,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JTextField nombreAl;
     private javax.swing.JLabel nombreAlLabel;
     private javax.swing.JTextField nombreCalleInst;
-    private javax.swing.JTextField nombreEquipo;
     private javax.swing.JTextField nombreIns;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
@@ -4022,7 +4024,10 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JTable tablaPagos;
     private javax.swing.JTable tablaUsuarios;
     private javax.swing.JLabel temporadaLabel;
+    private javax.swing.JTextField textEnt2Equipo;
+    private javax.swing.JTextField textEntEquipo;
     private javax.swing.JTextField textFechaPagos;
+    private javax.swing.JTextField textNombreEquipo;
     private javax.swing.JTextField textfield_apellidoPrimeroUsuario;
     private javax.swing.JTextField textfield_apellidoSegundoUsuario;
     private javax.swing.JTextField textfield_nombreUsuario;
@@ -4197,6 +4202,29 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
         
         tablaGrupos.setModel(dtm);
+    }
+    
+    public void actualizaTablaEquipos(String nombre, String temporada, String categoria, String entrenador, String entrenador2) throws SQLException {
+        List<Equipo> equipos = new ArrayList<Equipo>();
+        
+        equipos = GestorEquipos.ConsultaEquipo(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
+        
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("Nombre");
+        dtm.addColumn("Categoria");
+        dtm.addColumn("Primer Entrenador");
+        dtm.addColumn("Segundo Entrenador");
+        
+        Object[] fila = new Object[4];
+        for(Equipo it : equipos){
+            fila[0] = it.getNombre();
+            fila[1] = it.getCategoria();
+            fila[2] = it.getEntrenador();
+            fila[3] = it.getEntrenador2();
+            dtm.addRow(fila);
+        }
+        
+        tablaEquipos.setModel(dtm);
     }
     
     /**
