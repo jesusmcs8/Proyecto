@@ -17,26 +17,24 @@ import java.util.List;
  */
 public class PagoBD {
     
-    static List<PagoActividad> consultaPagoActividadBD(BaseDatos accesoBD, String recibo, String fecha, String importe, String pagado) throws SQLException, ParseException{
+    static List<PagoActividad> consultaPagoActividadBD(BaseDatos accesoBD, String fecha, String importe, String pagado) throws SQLException, ParseException{
         List<PagoActividad> pagos = new ArrayList();
         ResultSet res;
         
-        String consulta="SELECT recibo, ";
+        String consulta="SELECT importe, fecha, pagado FROM Cuota, PagoActividades WHERE Cuota.idCuota=pagoactividades.Cuota_idCuota";
         
         res = accesoBD.ejecutaConsulta(consulta);
         
-        String reci;
         String date;
         float cantidad;
         boolean pago;
         
         while(res.next()){
-            reci = res.getString(recibo);
             date = res.getString(fecha);
             cantidad = res.getFloat(importe);
             pago = res.getBoolean(pagado);
             
-            PagoActividad pa = new PagoActividad(reci, date, Float.toString(cantidad), Boolean.toString(pago));
+            PagoActividad pa = new PagoActividad(date, Float.toString(cantidad), Boolean.toString(pago));
             
             pagos.add(pa);
         }

@@ -17,10 +17,10 @@ import java.util.List;
  */
 public class GestorPagos {
     
-    public List<PagoActividad> ConsultarPagoActividad(BaseDatos accesoBD, String recibo, String fecha, String importe, String pagado) throws SQLException, ParseException{
+    public List<PagoActividad> ConsultarPagoActividad(BaseDatos accesoBD, String fecha, String importe, String pagado) throws SQLException, ParseException{
         List<PagoActividad> pagos = new ArrayList();
         
-        pagos = PagoBD.consultaPagoActividadBD(accesoBD, recibo, fecha, fecha, recibo);
+        pagos = PagoBD.consultaPagoActividadBD(accesoBD, fecha, importe, pagado);
         
         return pagos;
     }

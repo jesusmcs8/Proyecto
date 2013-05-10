@@ -17,8 +17,7 @@ public class PagoActividad {
     
     private CuotaPrecio cuota;
     
-    public PagoActividad(String recibo, String fecha, String importe, String pagado) throws ParseException{
-        this.recibo = recibo;
+    public PagoActividad(String fecha, String importe, String pagado) throws ParseException{
         cuota = new CuotaPrecio(fecha, importe, pagado);
     }
 }

@@ -20,39 +20,47 @@ public class EquipoBD {
 
     static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String temporada, String categoria, String entrenador, String entrenador2) throws SQLException {
 
+        //System.out.println("\n ID DE USUARIo: " + getIdUsuario(accesoBD, entrenador, "primero"));
         int idCategoria = 0;
 
-        ResultSet res = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo=" + categoria);
+        ResultSet res = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE idCategoria=1");
+        //WHERE tipo=" + categoria
+        if(res.next())
+            idCategoria = res.getInt(1);
+    
+        String consulta = "SELECT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre FROM Equipo, Categoria, Temporada, Rango, Usuario ";
+        String condicion = "WHERE ";
 
-        idCategoria = res.getInt(1);
-        System.out.println("ID Categoria:"+idCategoria);
-
-        String consulta = "SELECT Equipo.nombre, Categoria.tipo, Usuario.nombre FROM Equipo, Rango WHERE Equipo.nombre='" + nombre + "'";
-        String condicion = "WHERE";
-
-        if (nombre != null || categoria != null || temporada != null || entrenador != null || entrenador2 != null) {
-            if (nombre != null) {
-                condicion += "Equipo.nombre='" + nombre + "' AND";
+        if (!"".equals(nombre) || !"".equals(categoria) || !"".equals(temporada) || !"".equals(entrenador) || !"".equals(entrenador2)) {
+            if (!"".equals(nombre)) {
+                condicion += "Equipo.nombre='" + nombre + "' AND ";
             }
-            if (categoria != null) {
-                consulta += "Categoria.idCategoria='" + idCategoria + "' AND";
+            if (!"".equals(categoria)) {
+                condicion += "Categoria.idCategoria='" + idCategoria + "' AND ";
             }
-            if (temporada != "") {
-                consulta += "Temporada.idTemporada='" + GestorTemporadas.getIdTemporada(accesoBD, temporada) + "' AND";
+            
+            if (!"".equals(temporada)) {
+                condicion += "Temporada.idTemporada='" + GestorTemporadas.getIdTemporada(accesoBD, temporada) + "' AND ";
             }
-            if (entrenador != null) {
-                condicion += "Rango.Usuario_idUsuario='" + getIdUsuario(accesoBD, entrenador, "primero") + "' AND";
+            
+            if (!"".equals(entrenador)) {
+                condicion += "Usuario.idUsuario=Rango.Usuario_idUsuario AND ";
+                condicion+= "Rango.Usuario_idUsuario='" + getIdUsuario(accesoBD, entrenador, "primero") + "' AND ";
             }
+            /*
             if (entrenador2 != null) {
                 condicion += "Rango.Usuario_idUsuario='" + getIdUsuario(accesoBD, entrenador2, "segundo") + "' AND";
             }
+            */
         }
-        //condicion.substring(0, condicion.length()-4);
+        condicion = condicion.substring(0, condicion.length()-5);
+        
 
         consulta += condicion;
 
+        System.out.println("\nLa consulta es: " + consulta);
         ResultSet listaEquipos = accesoBD.ejecutaConsulta(consulta);
-
+ 
         return listaEquipos;
     }
 
@@ -77,7 +85,7 @@ public class EquipoBD {
         int id = 0;
 
         String consulta = "SELECT idUsuario FROM Usuario, Rango WHERE Usuario.nombre='" + nombre + "'";
-        consulta = "AND Rango.tipo=" + tipo;
+        consulta += " AND Rango.tipo='" + tipo + "'";
 
         ResultSet res = accesoBD.ejecutaConsulta(consulta);
 
@@ -85,6 +93,7 @@ public class EquipoBD {
             id = res.getInt(1);
         }
 
+        System.out.println("\nID de usuario: " + id);
         return id;
     }
 

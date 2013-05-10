@@ -31,19 +31,18 @@ public class GestorEquipos {
         String entrena2;
 
         ResultSet res = EquipoBD.BuscarEquipos(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
-
+        
         while (res.next()) {
             n = res.getString(1);
-            temp = res.getString(2);
-            cat = res.getString(3);
+            cat = res.getString(2);
+            temp = res.getString(3);
             entrena = res.getString(4);
-            entrena2 = res.getString(5);
-
-            eq = new Equipo(n, temp, cat, entrena, entrena2);
+            eq = new Equipo(n, temp, cat, entrena, "");
 
             listaEquipos.add(eq);
         }
 
+        System.out.println("\nNumero de equipos: " + listaEquipos.size());
         return listaEquipos;
     }
 

@@ -4208,19 +4208,19 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         List<Equipo> equipos = new ArrayList<Equipo>();
         
         equipos = GestorEquipos.ConsultaEquipo(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
-        
+                
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("Nombre");
         dtm.addColumn("Categoria");
-        dtm.addColumn("Primer Entrenador");
-        dtm.addColumn("Segundo Entrenador");
+        dtm.addColumn("Temporada");
+        dtm.addColumn("Entrenador");
         
         Object[] fila = new Object[4];
         for(Equipo it : equipos){
             fila[0] = it.getNombre();
-            fila[1] = it.getCategoria();
-            fila[2] = it.getEntrenador();
-            fila[3] = it.getEntrenador2();
+            fila[1] = it.getCategoria().getNombreCategoria().toString();
+            fila[2] = it.getTemporada().getCurso();
+            fila[3] = it.getEntrenador().getNombre().toString();
             dtm.addRow(fila);
         }
         
