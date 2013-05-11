@@ -37,38 +37,50 @@ public class GestorEquipos {
             cat = res.getString(2);
             temp = res.getString(3);
             entrena = res.getString(4);
-            eq = new Equipo(n, temp, cat, entrena, "");
+            entrena2 = res.getString(5);
+            eq = new Equipo(n, temp, cat, entrena, entrena2);
 
             listaEquipos.add(eq);
         }
 
-        System.out.println("\nNumero de equipos: " + listaEquipos.size());
         return listaEquipos;
     }
 
-    public boolean EliminarEquipo(BaseDatos accesoBD, Equipo e) throws SQLException {
+    public static List<Equipo> getListaEquipos(BaseDatos accesoBD) throws SQLException{
+       
+        List<Equipo> equipos = new ArrayList<Equipo>();
+        
+        equipos = EquipoBD.getListaEquipos(accesoBD);
+        
+        return equipos;
+    }
+    
+    public static boolean EliminarEquipo(BaseDatos accesoBD, Equipo e) throws SQLException {
 
         boolean equipoEliminado;
 
         equipoEliminado = EquipoBD.EliminarEquipoBD(accesoBD, e);
         
-        if(equipoEliminado==true)
+/*        if(equipoEliminado==true)
             JOptionPane.showMessageDialog(new NuevoEquipo(), "Equipo eliminado", "Equipo", JOptionPane.INFORMATION_MESSAGE);
         else
             JOptionPane.showMessageDialog(new NuevoEquipo(), "No se puede eliminar el equipo", "Error", JOptionPane.ERROR_MESSAGE);
-            
+*/            
         return equipoEliminado;
     }
     
     public static void InsertarDatosEquipo(BaseDatos accesoBD, String nombre,
             String temporada, String categoria, String entrenador, String entrenador2) throws SQLException{
                 
-        boolean validar = EquipoBD.ConsultarEquipo(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
+        boolean validar = EquipoBD.ConsultarEquipo(accesoBD, nombre, temporada, categoria);
         
-        if(validar==true)
+        if(validar==false)
             JOptionPane.showMessageDialog(new NuevoEquipo(), "El equipo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
         else{
+            Equipo equipo;
+            equipo = new Equipo(nombre, temporada, categoria, entrenador, entrenador2);
             
+            EquipoBD.crearEquipoBD(accesoBD, equipo);
         }
         
     }
