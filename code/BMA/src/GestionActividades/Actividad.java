@@ -21,6 +21,7 @@ public class Actividad {
     private Date fechaFin;
     private String nombre;
 
+    
     Actividad(String descripcion, int nAlumnos, float precioSocio, float precioNoSocio, int idTemporada, Date fechaInicio, Date fechaFin, String nombre) {
 
         this.descripcion = descripcion;
@@ -34,11 +35,15 @@ public class Actividad {
 
     }
 
+    public Actividad(String nombre){
+        this.nombre = nombre;
+    }
+    
     public static Actividad creaActividad(String descripcion, int nAlumnos, float precioSocio, float precioNoSocio, int idTemporada, Date fechaInicio, Date fechaFin, String nombre) {
 
         return new Actividad(descripcion, nAlumnos, precioSocio, precioNoSocio, idTemporada, fechaInicio, fechaFin, nombre);
     }
-
+    
     public int getIdActividad() {
         return this.idActividad;
     }

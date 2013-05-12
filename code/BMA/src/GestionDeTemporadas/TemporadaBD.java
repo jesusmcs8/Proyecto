@@ -64,7 +64,7 @@ public class TemporadaBD {
         return correcto;
     }
 
-    public static int getIdTemporada(BaseDatos accesoBD, String temporada) throws SQLException {
+    static int getIdTemporada(BaseDatos accesoBD, String temporada) throws SQLException {
         int idTemp = 0;
         
         String query = "SELECT idTemporada FROM Temporada WHERE curso='"+temporada+"'";

@@ -195,7 +195,7 @@ public class EquipoBD {
 
     static void crearEquipoBD(BaseDatos accesoBD, Equipo equipo) throws SQLException {
         
-        int idTemporada = TemporadaBD.getIdTemporada(accesoBD, equipo.getTemporada().getCurso());
+        int idTemporada = GestorTemporadas.getIdTemporada(accesoBD, equipo.getTemporada().getCurso());
         int idCategoria = 0;
 
         ResultSet res = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo='"+equipo.getCategoria().getNombreCategoria()+"'");

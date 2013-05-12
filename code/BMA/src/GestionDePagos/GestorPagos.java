@@ -17,23 +17,23 @@ import java.util.List;
  */
 public class GestorPagos {
     
-    public List<PagoActividad> ConsultarPagoActividad(BaseDatos accesoBD, String fecha, String importe, String pagado) throws SQLException, ParseException{
+    public static List<PagoActividad> ConsultarPagoActividad(BaseDatos accesoBD, String alumno, String actividad, String temporada, String fecha, String pagado) throws SQLException, ParseException{
         List<PagoActividad> pagos = new ArrayList();
         
-        pagos = PagoBD.consultaPagoActividadBD(accesoBD, fecha, importe, pagado);
+        pagos = PagoBD.consultaPagoActividadBD(accesoBD, alumno, actividad, temporada, fecha, pagado);
         
         return pagos;
     }
     
-    public List<PagoTemporada> ConsultarPagoTemporada(BaseDatos accesoBD, String fecha, String importe, String pagado) throws SQLException, ParseException{
+    public static List<PagoTemporada> ConsultarPagoTemporada(BaseDatos accesoBD, String alumno, String fecha, String temporada, String pagado) throws SQLException, ParseException{
         List<PagoTemporada> pagos = new ArrayList();
         
-        pagos = PagoBD.consultaPagoTemporadaBD(accesoBD, fecha, importe, pagado);
+        pagos = PagoBD.consultaPagoTemporadaBD(accesoBD, alumno, fecha, temporada, pagado);
         
         return pagos;
     }
     
-    public boolean EliminarPagoActividad(BaseDatos accesoBD, PagoActividad pago){
+    public static boolean EliminarPagoActividad(BaseDatos accesoBD, PagoActividad pago){
         boolean valido = false;
         
         valido = PagoBD.eliminarPagoActividadBD(accesoBD, pago);
@@ -41,7 +41,7 @@ public class GestorPagos {
         return valido;
     }
     
-    public boolean EliminarPagoTemporada(BaseDatos accesoBD, PagoTemporada pago){
+    public static boolean EliminarPagoTemporada(BaseDatos accesoBD, PagoTemporada pago){
         boolean valido = false;
         
         valido = PagoBD.eliminarPagoTemporadaBD(accesoBD, pago);
