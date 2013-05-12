@@ -241,7 +241,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         textAlumnoPagos = new javax.swing.JTextField();
         comboAlumnoPagos = new javax.swing.JComboBox();
-        comboCategoriaPagos = new javax.swing.JComboBox();
         comboActividad = new javax.swing.JComboBox();
         AñadirAlumnoActividad = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -1352,8 +1351,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         comboAlumnoPagos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        comboCategoriaPagos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Categoria-" }));
-
         comboActividad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Actividad-" }));
 
         javax.swing.GroupLayout panelPagosLayout = new javax.swing.GroupLayout(panelPagos);
@@ -1375,36 +1372,32 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                             .addGroup(panelPagosLayout.createSequentialGroup()
                                                 .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel26)
-                                                    .addComponent(textActividadPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                    .addComponent(textActividadPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(18, 18, 18)
                                                 .addComponent(comboActividad, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(panelPagosLayout.createSequentialGroup()
-                                                .addComponent(textFechaPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(textFechaPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(comboTipoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(comboPagadoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGap(18, 18, 18)
-                                        .addComponent(comboTempPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelPagosLayout.createSequentialGroup()
-                                        .addComponent(comboCategoriaPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(105, 105, 105)
-                                        .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panelPagosLayout.createSequentialGroup()
-                                                .addComponent(textAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(comboAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jLabel27))))
-                                .addGap(41, 41, 41)
+                                        .addComponent(comboTempPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(40, 40, 40)
                                 .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(botonModificarPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(botonEliminarPagos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(botonNuevoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel16)))
+                            .addComponent(jLabel16)
+                            .addGroup(panelPagosLayout.createSequentialGroup()
+                                .addComponent(textAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel27)))
                     .addGroup(panelPagosLayout.createSequentialGroup()
                         .addGap(211, 211, 211)
                         .addComponent(botonBuscarPagos)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
         panelPagosLayout.setVerticalGroup(
             panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1413,15 +1406,12 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel15)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel16)
-                .addGap(11, 11, 11)
-                .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(comboCategoriaPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelPagosLayout.createSequentialGroup()
-                        .addComponent(jLabel27)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboAlumnoPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1432,7 +1422,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(comboTempPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel26)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPagosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(textActividadPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboActividad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1447,7 +1437,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(botonEliminarPagos))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
 
         getContentPane().add(panelPagos, new java.awt.GridBagConstraints());
@@ -3894,27 +3884,28 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }//GEN-LAST:event_botonNuevoEquipoActionPerformed
 
     private void botonBuscarPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarPagosActionPerformed
-        if(comboTipoPagos.getSelectedItem().toString()=="Actividad"){
-            List<PagoActividad> pagoActividades = new ArrayList<PagoActividad>();
+        if("Actividad".equals(comboTipoPagos.getSelectedItem().toString())){
             try {
-                pagoActividades = GestorPagos.ConsultarPagoActividad(accesoBD, comboAlumnoPagos.getSelectedItem().toString(), comboActividad.getSelectedItem().toString(),
-                        comboTempPagos.getSelectedItem().toString(), textFechaPagos.getText(), comboPagadoPagos.getSelectedItem().toString());
+                actualizaTablaPagoActividad(comboAlumnoPagos.getSelectedItem().toString(), comboActividad.getSelectedItem().toString(),
+                            comboTempPagos.getSelectedItem().toString(), textFechaPagos.getText(), comboPagadoPagos.getSelectedItem().toString());
+            } catch (SQLException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }   
+        else if("Temporada".equals(comboTipoPagos.getSelectedItem().toString())){
+            try {
+                actualizaTablaPagoTemporada(comboAlumnoPagos.getSelectedItem().toString(), comboActividad.getSelectedItem().toString(),
+                            comboTempPagos.getSelectedItem().toString(), textFechaPagos.getText(), comboPagadoPagos.getSelectedItem().toString());
             } catch (SQLException ex) {
                 Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ParseException ex) {
                 Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        else if(comboTipoPagos.getSelectedItem().toString()=="Temporada"){
-            List<PagoTemporada> pagoTemporadas = new ArrayList<PagoTemporada>();
-            try {
-                pagoTemporadas = GestorPagos.ConsultarPagoTemporada(accesoBD, comboAlumnoPagos.getSelectedItem().toString(),
-                            textFechaPagos.getText(), comboTempPagos.getSelectedItem().toString(), comboPagadoPagos.getSelectedItem().toString());
-            } catch (SQLException ex) {
-                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ParseException ex) {
-                Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        else{
+            
         }
     }//GEN-LAST:event_botonBuscarPagosActionPerformed
 
@@ -4065,7 +4056,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JComboBox comboAlumnoPagos;
     private javax.swing.JComboBox comboCatEquipo;
     private javax.swing.JComboBox comboCatGrup;
-    private javax.swing.JComboBox comboCategoriaPagos;
     private javax.swing.JComboBox comboEntGrup;
     private javax.swing.JComboBox comboPagadoPagos;
     private javax.swing.JComboBox comboTempEntr;
@@ -4435,6 +4425,81 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         labelNumeroEquipos.setText(Integer.toString(tablaEquipos.getRowCount()));
     }
 
+    public void actualizaTablaPagoActividad(String alumno, String actividad, String temporada, String fecha, String pagado) throws SQLException, ParseException{
+        List<PagoActividad> pagos = new ArrayList<PagoActividad>();
+
+        pagos = GestorPagos.ConsultarPagoActividad(accesoBD, alumno, actividad, temporada, fecha, pagado);
+
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("Alumno");
+        dtm.addColumn("Actividad");
+        dtm.addColumn("Temporada");
+        dtm.addColumn("Fecha");
+        dtm.addColumn("Pagado");
+
+        //Mostrar en tabla
+        Object[] fila = new Object[5];
+        for (PagoActividad it : pagos) {
+            fila[0] = it.getNombre();
+            fila[1] = it.getCategoria().getNombreCategoria().toString();
+            fila[2] = it.getTemporada().getCurso().toString();
+            fila[3] = it.getEntrenador().getNombre().toString();
+            fila[4] = it.getEntrenador2().getNombre().toString();
+            dtm.addRow(fila);
+        }
+
+        tablaPagos.setModel(dtm);
+    }
+    
+    public void actualizaTablaPagoActividad(){
+        List<PagoActividad> pagos = new ArrayList<PagoActividad>();
+
+        //pagos = GestorPagos
+
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("Nombre");
+        dtm.addColumn("Categoria");
+        dtm.addColumn("Temporada");
+        dtm.addColumn("Primer Entrenador");
+        dtm.addColumn("Segundo Entrenador");
+
+        Object[] fila = new Object[5];
+        for (Equipo it : equipos) {
+            fila[0] = it.getNombre();
+            fila[1] = it.getCategoria().getNombreCategoria().toString();
+            fila[2] = it.getTemporada().getCurso().toString();
+            fila[3] = it.getEntrenador().getNombre().toString();
+            fila[4] = it.getEntrenador2().getNombre().toString();
+            dtm.addRow(fila);
+        }
+
+        tablaEquipos.setModel(dtm);
+    }
+            
+    public void actualizaTablaPagoTemporada(String alumno, String actividad, String temporada, String fecha, String pagado) throws SQLException, ParseException{
+        List<PagoTemporada> pagos = new ArrayList<PagoTemporada>();
+
+        pagos = GestorPagos.ConsultarPagoTemporada(accesoBD, alumno, temporada, fecha, pagado);
+
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("Alumno");
+        dtm.addColumn("Temporada");
+        dtm.addColumn("Fecha");
+        dtm.addColumn("Pagado");
+
+        //Mostrar en tabla
+        Object[] fila = new Object[5];
+        for (PagoTemporada it : pagos) {
+            fila[0] = it.getNombre();
+            fila[1] = it.getCategoria().getNombreCategoria().toString();
+            fila[2] = it.getTemporada().getCurso().toString();
+            fila[3] = it.getEntrenador().getNombre().toString();
+            fila[4] = it.getEntrenador2().getNombre().toString();
+            dtm.addRow(fila);
+        }
+
+        tablaPagos.setModel(dtm);
+    }
     /**
      * METODO PROVISIONAL HASTA TENER GESTOR DE CATEGORIA
      *

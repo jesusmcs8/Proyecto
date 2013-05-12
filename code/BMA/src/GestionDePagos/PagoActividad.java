@@ -26,4 +26,40 @@ public class PagoActividad {
         this.temporada = new Temporada(temporada);
         cuota = new CuotaPrecio(fecha, importe, pagado);
     }
+
+    /**
+     * @return the idPagoActividad
+     */
+    public int getIdPagoActividad() {
+        return idPagoActividad;
+    }
+
+    /**
+     * @return the recibo
+     */
+    public String getRecibo() {
+        return recibo;
+    }
+
+    /**
+     * @return the actividad
+     */
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    /**
+     * @return the cuota
+     */
+    public CuotaPrecio getCuota() {
+        return cuota;
+    }
+
+    /**
+     * @return the temporada
+     */
+    public Temporada getTemporada() {
+        return temporada;
+    }
+    
 }

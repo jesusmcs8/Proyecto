@@ -31,7 +31,7 @@ public class PagoBD {
                 condicion += "Alumno.idAlumno='"+GestorAlumnos.getIdAl(accesoBD, alumno)+"' AND ";
             }
             if(!"".equals(actividad)){
-                condicion += "PagoActividades.Actividades.idActividades='"+PagoBD.getIdPagoActividad(accesoBD, actividad, temporada)+"' AND ";
+                condicion += "PagoActividades.Actividades.idActividades='"+PagoBD.getIdActividad(accesoBD, actividad, temporada)+"' AND ";
             }
             if(!"".equals(temporada)){
                 condicion += "Actividades_Temporada_idTemporada='"+GestorTemporadas.getIdTemporada(accesoBD, temporada)+"' AND ";
@@ -95,10 +95,10 @@ public class PagoBD {
         return pagos;
     }
     
-    static int getIdPagoActividad(BaseDatos accesoBD, String nombre, String temporada) throws SQLException{
+    static int getIdActividad(BaseDatos accesoBD, String actividad, String temporada) throws SQLException{
         int id=0;
 
-        String consulta = "SELECT idActividades FROM Actividades WHERE Actividad.nombre='"+nombre+"' "
+        String consulta = "SELECT idActividades FROM Actividades WHERE Actividad.nombre='"+actividad+"' "
                 + "AND Temporada_idTemporada='"+GestorTemporadas.getIdTemporada(accesoBD, temporada)+"'";
         
         ResultSet res = accesoBD.ejecutaConsulta(consulta);
@@ -110,12 +110,27 @@ public class PagoBD {
         
     }
     
-    static List<String> getListaAlumnosPagosActividad(BaseDatos accesoBD, int idCuota) throws SQLException {
+    static List<PagoActividad> getListaPagoActividad(){
+        List<PagoActividad> pagos = new ArrayList<PagoActividad>();
         
-        String query = "SELECT Alumno_idAlumno FROM PagoActividades WHERE "
-                + "Grupo_idGrupo='"+idCuota+"'";
+        //String consulta = "SELECT fecha, pagado, importe FROM PagoActividades, Cuota WHERE";
+        return pagos;
+    }
+    
+    static List<String> getListaAlumnosPagoActividad(BaseDatos accesoBD, String actividad, String temporada, String fecha, String pagado) throws SQLException {
         
-        ResultSet res = accesoBD.ejecutaConsulta(query);
+        String consulta = "SELECT Alumno_idAlumno FROM PagoActividades, Cuota ";
+        String condicion = "WHERE Actividades_Temporada_idTemporada='"+GestorTemporadas.getIdTemporada(accesoBD, temporada)+"' AND ";
+        
+        if(!"".equals(actividad) || !"".equals(temporada) || !"".equals(fecha) || !"".equals(pagado)){
+            if(!"".equals(actividad)){
+                condicion += "Actividades_idActividades='"+getIdActividad(accesoBD, actividad, temporada)+"' AND ";
+            }
+            if(!"".equals(fecha)){
+                condicion += "Cuota.fecha='"+fecha+"' AND ";
+            }
+        }
+        ResultSet res = accesoBD.ejecutaConsulta(consulta);
              
         int idAl  = 0;
         String query2 = "";
@@ -134,13 +149,48 @@ public class PagoBD {
         
         return alumnos;
     }
-            
-    static boolean eliminarPagoActividadBD(BaseDatos accesoBD, PagoActividad pago){
+           
+    static int getIdCuotaActividad(BaseDatos accesoBD, String alumno, PagoActividad pago) throws SQLException{
+        int idCuota = 0;
+        int idAlumno = GestorAlumnos.getIdAl(accesoBD, alumno);
+        
+        String consulta = "SELECT Cuota_idCuota FROM PagoActividad WHERE Alumno_idAlumno='"+idAlumno+"' AND "
+                        + "Actividades_idActividades='"+getIdActividad(accesoBD, pago.getActividad().getNombre(), pago.getTemporada().getCurso())+"' AND "
+                        + "Actividades_Temporada_idTemporada='"+pago.getTemporada().getCurso()+"'";
+        
+        ResultSet res = accesoBD.ejecutaConsulta(consulta);
+        
+        if(res.next())
+            idCuota = res.getInt(1);
+        
+        return idCuota;
+    }
+    
+    static boolean eliminarPagoActividadBD(BaseDatos accesoBD, String alumno, PagoActividad pago) throws SQLException{
         boolean valido = false;
+        boolean delete1 = false;
+        boolean delete2 = false;
         
-        String consulta="";
+        int idAlumno = GestorAlumnos.getIdAl(accesoBD, alumno);
         
-        valido = accesoBD.eliminar(consulta);
+        int idActividad = getIdActividad(accesoBD, pago.getActividad().getNombre(), pago.getTemporada().getCurso());
+        int idCuota = getIdCuotaActividad(accesoBD, alumno, pago);
+        
+        String consulta = "DELETE FROM PagoActividad WHERE Actividades_idActividades='"+idActividad+"' AND "
+                        + "Actividades_Temporada_idTemporada='"+GestorTemporadas.getIdTemporada(accesoBD, pago.getTemporada().getCurso())+"' AND "
+                        + "Alumno_idAlumno='"+idAlumno+"' AND "
+                        + "Cuota_idCuota='"+idCuota+"'";
+        
+        delete1 = accesoBD.eliminar(consulta);
+        
+        String consulta2 = "DELETE FROM Cuota WHERE idCuota='"+idCuota+"'";
+        
+        delete2 = accesoBD.eliminar(consulta2);
+        
+        if(delete1 == false || delete2 == false)
+            valido = false;
+        else
+            valido = true;
         
         return valido;
     }
@@ -155,9 +205,81 @@ public class PagoBD {
         return valido;
     }
     
-    static boolean IntroducirPagoActividadBD(BaseDatos accesoBD, CuotaPrecio cuota){
-        boolean valido = false;
+    static boolean IntroducirPagoActividadBD(BaseDatos accesoBD, String alumno, String actividad, String temporada, String fecha,
+                                             String importe, String pagado) throws SQLException{
+       
+        boolean valido=false;
         
+        int idAlumno = GestorAlumnos.getIdAl(accesoBD, alumno);
+        int idActividad = getIdActividad(accesoBD, actividad, temporada);
+        int idTemporada = GestorTemporadas.getIdTemporada(accesoBD, temporada);
+        int idCuota = 0; 
+                
+        String consulta = "INSERT INTO Cuota (importe, fecha, pagado) VALUES ('"+importe+"', '"+fecha+"', '"+pagado+"')";
+        
+        int res1;
+        res1 = accesoBD.ejecutaActualizacion(consulta);
+        
+        if(res1!=0){
+            String consultaCuota = "SELECT MAX(idCuota) FROM Cuota";
+            ResultSet res = accesoBD.ejecutaConsulta(consultaCuota);
+        
+            if(res.next())
+                idCuota = res.getInt(1);
+            
+            String consulta2 = "INSERT INTO PagoActividad (Alumno_idAlumno, Actividades_idActividades, Actividades_Temporada_idTemporada, Cuota_idCuota) "
+                         + "VALUES ('"+idAlumno+"', '"+idActividad+"', '"+idTemporada+"', '"+idCuota+"')";
+        
+            int res2;
+            res2 = accesoBD.ejecutaActualizacion(consulta2);
+            
+            if(res2!=0){
+                valido = true;
+            }
+        }    
+        else
+            valido = false;
+
+        return valido;
+    }
+    
+    static boolean IntroducirPagoTemporadaBD(BaseDatos accesoBD, String alumno, String temporada, String fecha,
+                                             String importe, String pagado) throws SQLException{
+       
+        boolean valido=false;
+        
+        int idAlumno = GestorAlumnos.getIdAl(accesoBD, alumno);
+        int idTemporada = GestorTemporadas.getIdTemporada(accesoBD, temporada);
+        int idGrupo = 0;
+        int idCategoria = 0;
+        int idCuota = 0; 
+                
+        String consulta = "INSERT INTO Cuota (importe, fecha, pagado) VALUES ('"+importe+"', '"+fecha+"', '"+pagado+"')";
+        
+        int res1;
+        res1 = accesoBD.ejecutaActualizacion(consulta);
+        
+        if(res1!=0){
+            String consultaCuota = "SELECT MAX(idCuota) FROM Cuota";
+            ResultSet res = accesoBD.ejecutaConsulta(consultaCuota);
+        
+            if(res.next())
+                idCuota = res.getInt(1);
+            
+            String consulta2 = "INSERT INTO PagoTemporada (Cuota_idCuota, AlumnoTemporada_Alumno_idAlumno, AlumnoTemporada_Alumno_Grupo_idGrupo,"
+                             + "AlumnoTemporada_Alumno_Grupo_Categoria_idCategoria, AlumnoTemporada_Temporada_idTemporada) "
+                             + "VALUES ('"+idCuota+"', '"+idAlumno+"', '"+idGrupo+"', '"+idCategoria+"', '"+idTemporada+"')";
+        
+            int res2;
+            res2 = accesoBD.ejecutaActualizacion(consulta2);
+            
+            if(res2!=0){
+                valido = true;
+            }
+        }    
+        else
+            valido = false;
+
         return valido;
     }
 }

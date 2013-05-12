@@ -33,10 +33,10 @@ public class GestorPagos {
         return pagos;
     }
     
-    public static boolean EliminarPagoActividad(BaseDatos accesoBD, PagoActividad pago){
+    public static boolean EliminarPagoActividad(BaseDatos accesoBD, String alumno, PagoActividad pago) throws SQLException{
         boolean valido = false;
         
-        valido = PagoBD.eliminarPagoActividadBD(accesoBD, pago);
+        valido = PagoBD.eliminarPagoActividadBD(accesoBD, alumno, pago);
         
         return valido;
     }
@@ -49,10 +49,22 @@ public class GestorPagos {
         return valido;
     }
     
-    public void InsertarPagoActividad(){
+    public static boolean InsertarPagoActividad(BaseDatos accesoBD, String alumno, String actividad, String temporada, String fecha,
+                                             String importe, String pagado) throws SQLException{
+        boolean valido;
+        
+        valido = PagoBD.IntroducirPagoActividadBD(accesoBD, alumno, actividad, temporada, fecha, importe, pagado);
+       
+        return valido;
     }
     
-    public void InsertarPagoTemporada(){
+    public static boolean InsertarPagoTemporada(BaseDatos accesoBD, String alumno, String temporada, String fecha,
+                                             String importe, String pagado) throws SQLException{
+        boolean valido;
+        
+        valido = PagoBD.IntroducirPagoTemporadaBD(accesoBD, alumno, temporada, fecha, importe, pagado);
+       
+        return valido;
     }
     
     public void ModificarPagoActividad(){
