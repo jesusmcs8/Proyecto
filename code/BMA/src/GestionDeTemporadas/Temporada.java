@@ -1,8 +1,8 @@
 package GestionDeTemporadas;
 
+import GestionActividades.Actividad;
 import GestionDeAlumnos.Alumno;
 import GestionDeGrupos.Grupo;
-import bma.Actividad;
 import GestionDeEquipos.Equipo;
 import java.util.List;
 
