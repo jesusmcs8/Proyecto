@@ -205,7 +205,7 @@ public class PagoBD {
         return valido;
     }
     
-    static boolean IntroducirPagoActividadBD(BaseDatos accesoBD, String alumno, String actividad, String temporada, String fecha,
+    public static boolean IntroducirPagoActividadBD(BaseDatos accesoBD, String alumno, String actividad, String temporada, String fecha,
                                              String importe, String pagado) throws SQLException{
        
         boolean valido=false;

@@ -242,14 +242,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         textAlumnoPagos = new javax.swing.JTextField();
         comboAlumnoPagos = new javax.swing.JComboBox();
         comboActividad = new javax.swing.JComboBox();
-        AñadirAlumnoActividad = new javax.swing.JPanel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        listaAlumnosActividad = new javax.swing.JList();
-        Añadir_Alumno = new javax.swing.JButton();
-        SalirAñadir = new javax.swing.JButton();
         panelActividades = new javax.swing.JPanel();
         actividadesLabel = new javax.swing.JLabel();
         buscarLabel = new javax.swing.JLabel();
@@ -1441,84 +1433,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         );
 
         getContentPane().add(panelPagos, new java.awt.GridBagConstraints());
-
-        jLabel24.setText("Añadir Alumno");
-
-        jLabel25.setText("Buscar por nombre");
-
-        listaAlumnosActividad.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane7.setViewportView(listaAlumnosActividad);
-
-        Añadir_Alumno.setText("Añadir Alumno");
-        Añadir_Alumno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Añadir_AlumnoActionPerformed(evt);
-            }
-        });
-
-        SalirAñadir.setText("Salir");
-        SalirAñadir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalirAñadirActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout AñadirAlumnoActividadLayout = new javax.swing.GroupLayout(AñadirAlumnoActividad);
-        AñadirAlumnoActividad.setLayout(AñadirAlumnoActividadLayout);
-        AñadirAlumnoActividadLayout.setHorizontalGroup(
-            AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
-                .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel24)
-                            .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
-                                .addComponent(jLabel25)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(174, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AñadirAlumnoActividadLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(Añadir_Alumno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(SalirAñadir)
-                .addGap(27, 27, 27))
-        );
-        AñadirAlumnoActividadLayout.setVerticalGroup(
-            AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AñadirAlumnoActividadLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel24)
-                .addGap(23, 23, 23)
-                .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel25)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addGroup(AñadirAlumnoActividadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Añadir_Alumno)
-                    .addComponent(SalirAñadir))
-                .addGap(28, 28, 28))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridwidth = 3;
-        gridBagConstraints.gridheight = 3;
-        gridBagConstraints.ipadx = 164;
-        gridBagConstraints.ipady = 92;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
-        getContentPane().add(AñadirAlumnoActividad, gridBagConstraints);
 
         panelInstalaciones.setVisible(false);
         panelActividades.setMinimumSize(new java.awt.Dimension(1300, 640));
@@ -3571,36 +3485,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
     }//GEN-LAST:event_menuEquiposMouseClicked
 
-    private void Añadir_AlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Añadir_AlumnoActionPerformed
-        // TODO add your handling code here:
-
-        int idTemporada = getIDTemporada();
-        int idActividad = getIDActividad();
-        int idCuota = 0;
-        int idalumno = 0;
-
-        String nombreCompleto = listaAlumnosActividad.getSelectedValue().toString();
-        String nombre = nombreCompleto.substring(0, nombreCompleto.indexOf(" "));
-        String aux = nombreCompleto.substring(nombreCompleto.indexOf(" "), nombreCompleto.length());
-        String pApellido = aux.substring(0, aux.indexOf(" "));
-        String sApellido = aux.substring(aux.indexOf(" "), aux.length());
-
-        ResultSet rts;
-        ResultSet retset;
-        String consulta = "SELEC idAlumno FROM alumno WHERE nombre = '" + nombre + ", AND primerApellido = '"
-                + pApellido + "' AND segundoApellido = '" + sApellido + "'";
-
-        rts = accesoBD.ejecutaConsulta(consulta);
-        try {
-            if (rts.next()) {
-                idalumno = rts.getInt("idAlumno");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_Añadir_AlumnoActionPerformed
-
     private int getIDTemporada() {
 
         int indiceTabla = actividadesTable.getSelectedRow();
@@ -3652,12 +3536,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
         return idActividad;
     }
-
-    private void SalirAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirAñadirActionPerformed
-        // TODO add your handling code here:
-        AñadirAlumnoActividad.setVisible(false);
-        AñadirAlumnoActividad.setEnabled(false);
-    }//GEN-LAST:event_SalirAñadirActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
         // TODO add your handling code here:
@@ -3823,44 +3701,12 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
 
     private void AñaridAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñaridAlumnoActionPerformed
         // TODO add your handling code here:
-        AñadirAlumnoActividad.setVisible(true);
-        AñadirAlumnoActividad.setEnabled(true);
-
-        List<String> listaAlumnos = new ArrayList<String>();
-
-        ResultSet rts;
-        ResultSet retset1;
-        String consulta = "SELECT a.nombre, a.primerApellido, a.segundoApellido FROM alumno a, alumnotemporada t"
-                + "WHERE";
-        int indiceTabla = actividadesTable.getSelectedRow();
         int idTemporada = 0;
-        String actividad = "SELECT Temporada_idTemporada FROM actividades WHERE nombre = '"
-                + actividadesTable.getValueAt(indiceTabla, 0) + "' AND fechaInicio = '"
-                + actividadesTable.getValueAt(indiceTabla, 1) + "' AND fechaFin = '"
-                + actividadesTable.getValueAt(indiceTabla, 2) + "'";
-
-        try {
-            rts = accesoBD.ejecutaConsulta(actividad);
-            System.out.print("\n\n Busaca " + rts + "\n\n");
-            if (rts.next()) {
-                idTemporada = rts.getInt("Temporada_idTemporada");
-            }
-            consulta = consulta + " t.Temporada_idTemporada= " + idTemporada + " AND a.idAlumno = t.Alumno_idAlumno";
-            retset1 = accesoBD.ejecutaConsulta(consulta);
-            while (retset1.next()) {
-                listaAlumnos.add(retset1.getString(1) + " " + retset1.getString(2) + " " + retset1.getString(3));
-            }
-            DefaultListModel modelo = new DefaultListModel();
-            for (String s : listaAlumnos) {
-                modelo.addElement(s);
-            }
-            listaAlumnosActividad.removeAll();
-            listaAlumnosActividad.setModel(modelo);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        int idActividad = 0;
+        
+        idTemporada = getIDTemporada();
+        idActividad = getIDActividad();
+        new AñadirAlumno(accesoBD,idTemporada, idActividad).setVisible(true);
     }//GEN-LAST:event_AñaridAlumnoActionPerformed
 
     private void AñarirAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñarirAlumnoActionPerformed
@@ -4007,8 +3853,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AñadirAlumnoActividad;
-    private javax.swing.JButton Añadir_Alumno;
     private javax.swing.JButton AñaridAlumno;
     private javax.swing.JButton AñarirAlumno;
     private javax.swing.JLabel BuscarporLabel;
@@ -4020,7 +3864,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton Mostrar;
     private javax.swing.JLabel NombreInsLabel;
     private javax.swing.JLabel NumeroLabel;
-    private javax.swing.JButton SalirAñadir;
     private javax.swing.JLabel TituloLabel;
     private javax.swing.JLabel actividadesLabel;
     private javax.swing.JTable actividadesTable;
@@ -4109,8 +3952,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
@@ -4134,15 +3975,12 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel labelEquiposMostrados;
     private javax.swing.JLabel labelNumeroEquipos;
-    private javax.swing.JList listaAlumnosActividad;
     private javax.swing.JLabel mensajeErrorEliminarAlumno;
     private javax.swing.JMenu menuActividades;
     private javax.swing.JMenu menuCategorias;
@@ -4207,7 +4045,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         panelActividades.setVisible(false);
         panelEquipos.setVisible(false);
         panelPagos.setVisible(false);
-        AñadirAlumnoActividad.setVisible(false);
     }
 
     ResultSet ejecutarConsulta(String query) {
@@ -4436,7 +4273,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         dtm.addColumn("Temporada");
         dtm.addColumn("Fecha");
         dtm.addColumn("Pagado");
-
+/*
         //Mostrar en tabla
         Object[] fila = new Object[5];
         for (PagoActividad it : pagos) {
@@ -4447,7 +4284,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
             fila[4] = it.getEntrenador2().getNombre().toString();
             dtm.addRow(fila);
         }
-
+*/
         tablaPagos.setModel(dtm);
     }
     
@@ -4464,7 +4301,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         dtm.addColumn("Segundo Entrenador");
 
         Object[] fila = new Object[5];
-        for (Equipo it : equipos) {
+/*        for (Equipo it : equipos) {
             fila[0] = it.getNombre();
             fila[1] = it.getCategoria().getNombreCategoria().toString();
             fila[2] = it.getTemporada().getCurso().toString();
@@ -4472,7 +4309,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
             fila[4] = it.getEntrenador2().getNombre().toString();
             dtm.addRow(fila);
         }
-
+*/
         tablaEquipos.setModel(dtm);
     }
             
@@ -4486,7 +4323,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         dtm.addColumn("Temporada");
         dtm.addColumn("Fecha");
         dtm.addColumn("Pagado");
-
+/*
         //Mostrar en tabla
         Object[] fila = new Object[5];
         for (PagoTemporada it : pagos) {
@@ -4497,7 +4334,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
             fila[4] = it.getEntrenador2().getNombre().toString();
             dtm.addRow(fila);
         }
-
+*/
         tablaPagos.setModel(dtm);
     }
     /**

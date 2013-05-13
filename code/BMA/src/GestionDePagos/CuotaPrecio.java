@@ -20,10 +20,14 @@ public class CuotaPrecio {
     private float importe;
     private boolean pagado;
 
-    CuotaPrecio(String fecha, String importe, String pagado) throws ParseException {
+    public CuotaPrecio(String fecha, String importe, String pagado) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         this.fechaPago = (Date) formato.parse(fecha);
         this.importe = Float.parseFloat(importe);
         this.pagado = Boolean.parseBoolean(pagado);
+    }
+    
+    public int getIdCuotaPrecio(){
+        return this.idCuotaPrecio;
     }
 }
