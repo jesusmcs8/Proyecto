@@ -4,12 +4,14 @@ import GestionDeAlumnos.GestorAlumnos;
 import GestionDeCategorias.GestorCategorias;
 import GestionDeTemporadas.GestorTemporadas;
 import GestionDeUsuarios.GestorUsuarios;
+import InterfazUsuario.PantallaPrincipal;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,8 +37,8 @@ public class GruposBD {
         
     }*/
 
-    static boolean ConsultarGrupos(BaseDatos accesoBD, String dia1, String dia2, String hora, String min) throws SQLException {
-        boolean validar = false;
+    static boolean ConsultarGrupos(BaseDatos accesoBD, String dia1, String dia2, String hora, String min, String cat, String instalacion) throws SQLException {
+        /*boolean validar = false;
         
         String query = "SELECT * FROM Horario, Usuario, Grupo "
                 + "WHERE Horario.dia1='"+dia1+"' "
@@ -49,6 +51,76 @@ public class GruposBD {
         else
             validar = true;
         
+        return validar;*/
+        
+        boolean validar = false;
+        
+        String query = "SELECT idCategoria FROM Categoria WHERE tipo='"+cat+"'";
+       
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        int idCat = 0;
+        while(res.next())
+            idCat = res.getInt(1);
+        
+        System.out.println();
+        
+        query = "SELECT count(*) from mydb.categoria, mydb.Grupo, mydb.horario, mydb.instalacion where "
+                + "horario.Instalacion_idInstalacion=instalacion.idInstalacion AND "
+                + "horario.hora1='18:00:00' AND grupo.categoria_idCategoria=categoria.idCategoria AND "
+                + "grupo.Categoria_idCategoria='1' ";
+        
+        res = accesoBD.ejecutaConsulta(query);
+        System.out.println(query);
+        
+        int nCons = 0, nCons2 = 0;
+        while(res.next())
+            nCons = res.getInt(1);
+        
+        nCons = nCons*1;
+        
+        query = "select count(*) from mydb.categoria, mydb.Grupo, mydb.horario, mydb.instalacion where "
+                + "horario.Instalacion_idInstalacion=instalacion.idInstalacion AND "
+                + "horario.hora1='18:00:00' AND grupo.categoria_idCategoria=categoria.idCategoria AND "
+                + "grupo.Categoria_idCategoria<>'1' ";
+        res = accesoBD.ejecutaConsulta(query);
+        System.out.println(query);
+        
+        while(res.next())
+            nCons2 = res.getInt(1);
+        nCons2 = nCons2*2;
+        
+        
+        
+        instalacion = instalacion.substring(0, instalacion.indexOf(",", 0));
+        
+        query = "SELECT idInstalacion FROM instalacion WHERE nombre='"+instalacion+"'";
+        res = accesoBD.ejecutaConsulta(query);
+        int idInst = 0;
+        while(res.next())
+            idInst = res.getInt(1);
+        
+        query = "SELECT capacidadEquipos FROM instalacion WHERE idInstalacion='"+idInst+"'";
+        res = accesoBD.ejecutaConsulta(query);
+        
+        int capacidad = 0;
+        while(res.next())
+            capacidad = res.getInt(1);
+        
+        int resta = capacidad - (nCons + nCons2);
+        
+        System.out.println(capacidad);
+        System.out.println(nCons);
+        System.out.println(nCons2);
+        
+        if(resta == 0){
+            JOptionPane.showMessageDialog(new PantallaPrincipal(), "La instalacion esta llena", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(idCat != 1 && resta == 1)
+            JOptionPane.showMessageDialog(new PantallaPrincipal(), "No hay capacidad", "Error", JOptionPane.ERROR_MESSAGE);
+        else
+            validar = true;
+            
+            
         return validar;
     }
 

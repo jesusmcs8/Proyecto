@@ -43,9 +43,8 @@ public class Grupo {
     private Usuario entrenador;
     private Instalacion instalacion;
 
-    public Grupo(String sex, String temp, String dia1, String dia2, String hora, String min, String entrenador, String cat, String inst) throws ParseException {
-        this.sexo = sex;
-        
+    public Grupo(String temp, String dia1, String dia2, String hora, String min, String entrenador, String cat, String inst) throws ParseException {
+                
         temporada = new Temporada(temp);
         horario = new Horario(dia1, dia2, hora, min);
         this.entrenador = new Usuario(entrenador);

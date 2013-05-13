@@ -98,12 +98,10 @@ public class GestorGrupos {
     private List<Grupo> grupos;
     
     public static void insertarDatosGrupo(BaseDatos accesoBD, List<String> listaAlumnos, 
-            String temporada, String categoria, String sexo, String dia1, 
+            String temporada, String categoria, String dia1, 
             String dia2, String hora, String min, String entrenador, String instalacion) throws ParseException, SQLException {
         
-        
-        
-        boolean validar = GruposBD.ConsultarGrupos(accesoBD, dia1, dia2, hora, min);
+        boolean validar = GruposBD.ConsultarGrupos(accesoBD, dia1, dia2, hora, min, categoria, instalacion);
         if(validar == false)
             JOptionPane.showMessageDialog(new NuevoGrupo(), "El grupo ya existe", "Error", JOptionPane.ERROR_MESSAGE);
         else{
@@ -134,7 +132,7 @@ public class GestorGrupos {
                 idInst = res2.getInt(1);
             /***************************************************************/
             /***************************************************************/
-            Grupo g = new Grupo(sexo, temporada, dia1, dia2, hora, min, entrenador, categoria, auxString);
+            Grupo g = new Grupo(temporada, dia1, dia2, hora, min, entrenador, categoria, auxString);
             
             GruposBD.crearGruposBD(accesoBD, g, listaIDAl, idEnt, idCat, idTemp, idInst);
         }

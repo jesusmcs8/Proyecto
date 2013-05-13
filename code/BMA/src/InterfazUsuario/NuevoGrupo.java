@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,12 +29,12 @@ public class NuevoGrupo extends javax.swing.JFrame {
      */
     public NuevoGrupo() {
         initComponents();
-        this.setLocation(300, 300);
+        this.setLocation(300, 150);
     }
     
     public NuevoGrupo(PantallaPrincipal v) throws SQLException {
         initComponents();
-        this.setLocation(300, 300);
+        this.setLocation(300, 150);
         creador = v;
         alumnosSel = new ArrayList<Alumno>();
         listaAlumnos = new ArrayList<String>();
@@ -92,7 +93,6 @@ public class NuevoGrupo extends javax.swing.JFrame {
         comboTemp = new javax.swing.JComboBox();
         comboEnt = new javax.swing.JComboBox();
         comboCat = new javax.swing.JComboBox();
-        comboSexo = new javax.swing.JComboBox();
         textMin = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         textHora = new javax.swing.JTextField();
@@ -147,9 +147,19 @@ public class NuevoGrupo extends javax.swing.JFrame {
 
         comboCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Categoria-", "Benjamin", "Alevin", "Infantil", "Cadete", "Junior" }));
 
-        comboSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "MASCULINO", "FEMENINO", "MIXTO" }));
+        textMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textMinKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText(":");
+
+        textHora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textHoraKeyTyped(evt);
+            }
+        });
 
         jLabel3.setText("Horario");
 
@@ -253,9 +263,7 @@ public class NuevoGrupo extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(comboTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfBuscarEnt, javax.swing.GroupLayout.DEFAULT_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,8 +329,7 @@ public class NuevoGrupo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -379,25 +386,41 @@ public class NuevoGrupo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        try {
-            GestorGrupos.insertarDatosGrupo(creador.accesoBD, listaAlumnos, 
+        boolean salir = false;
+        
+        while(!salir){
+            if(textHora.getText() != null || 
+                !Character.isLetter(textHora.getText().charAt(0)) || 
+                !Character.isLetter(textHora.getText().charAt(1)) || 
+                textMin.getText() != null || 
+                !Character.isLetter(textMin.getText().charAt(0)) || 
+                !Character.isLetter(textMin.getText().charAt(1)) ){
+            try {
+                GestorGrupos.insertarDatosGrupo(creador.accesoBD, listaAlumnos, 
                     comboTemp.getSelectedItem().toString(), comboCat.getSelectedItem().toString(), 
-                    comboSexo.getSelectedItem().toString(), comboDia1.getSelectedItem().toString(), 
+                    comboDia1.getSelectedItem().toString(), 
                     comboDia2.getSelectedItem().toString(), textHora.getText(), textMin.getText(), 
                     comboEnt.getSelectedItem().toString(), comboInst.getSelectedItem().toString());
-        } catch (ParseException ex) {
-            Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                
+            } catch (ParseException ex) {
+                Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
-        /* Actualizar la tabla de grupos */
-        try {
-            creador.actualizaTablaGrupos();
-        } catch (SQLException ex) {
-            Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+            /* Actualizar la tabla de grupos */
+            try {
+                creador.actualizaTablaGrupos();
+            } catch (SQLException ex) {
+                Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            salir = true;
+            this.setVisible(false);
         }
-        this.setVisible(false);
+        else
+            JOptionPane.showMessageDialog(this, "Error en los campos de la hora", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -463,6 +486,16 @@ public class NuevoGrupo extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonAnadirActionPerformed
 
+    private void textHoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textHoraKeyTyped
+        if(textHora.getText().length() >= 2)
+            evt.consume();
+    }//GEN-LAST:event_textHoraKeyTyped
+
+    private void textMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textMinKeyTyped
+       if(textMin.getText().length() >= 2)
+            evt.consume();
+    }//GEN-LAST:event_textMinKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -514,7 +547,6 @@ public class NuevoGrupo extends javax.swing.JFrame {
     private javax.swing.JComboBox comboDia2;
     private javax.swing.JComboBox comboEnt;
     private javax.swing.JComboBox comboInst;
-    private javax.swing.JComboBox comboSexo;
     private javax.swing.JComboBox comboTemp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
