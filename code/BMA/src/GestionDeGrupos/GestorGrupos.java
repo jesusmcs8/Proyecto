@@ -5,7 +5,7 @@ import GestionDeAlumnos.GestorAlumnos;
 import GestionDeInstalaciones.Instalacion;
 import GestionDeTemporadas.GestorTemporadas;
 import GestionDeUsuarios.Usuario;
-import bma.Categoria;
+import GestionDeCategorias.Categoria;
 import GestionDeTemporadas.Temporada;
 import GestionDeUsuarios.GestorUsuarios;
 import InterfazUsuario.NuevoGrupo;

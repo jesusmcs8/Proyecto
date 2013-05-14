@@ -12,6 +12,8 @@ package InterfazUsuario;
 
 import GestionActividades.GestorActividad;
 import GestionDeAlumnos.*;
+import GestionDeCategorias.Categoria;
+import GestionDeCategorias.GestorCategorias;
 import GestionDeGrupos.GestorGrupos;
 import GestionDeUsuarios.*;
 import GestionDeTemporadas.*;
@@ -260,6 +262,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         Informacion = new javax.swing.JButton();
         AñaridAlumno = new javax.swing.JButton();
         AñarirAlumno = new javax.swing.JButton();
+        panelCategorias = new javax.swing.JPanel();
+        jLabel17 = new javax.swing.JLabel();
+        botonNuevaCat = new javax.swing.JButton();
+        botonModCat = new javax.swing.JButton();
+        botonElimCat = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JSeparator();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        tablaCategorias = new javax.swing.JTable();
         barraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuJugadores = new javax.swing.JMenu();
@@ -1608,6 +1618,93 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(22, 0, 22, 0);
         getContentPane().add(panelActividades, gridBagConstraints);
 
+        panelTemporadas.setVisible(false);
+        panelCategorias.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        panelTemporadas.setLocation(150, 100);
+
+        jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel17.setText("Categorias");
+
+        botonNuevaCat.setText("Nueva");
+        botonNuevaCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevaCatActionPerformed(evt);
+            }
+        });
+
+        botonModCat.setText("Modificar");
+        botonModCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonModCatActionPerformed(evt);
+            }
+        });
+
+        botonElimCat.setText("Eliminar");
+        botonElimCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonElimCatActionPerformed(evt);
+            }
+        });
+
+        tablaCategorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(tablaCategorias);
+
+        javax.swing.GroupLayout panelCategoriasLayout = new javax.swing.GroupLayout(panelCategorias);
+        panelCategorias.setLayout(panelCategoriasLayout);
+        panelCategoriasLayout.setHorizontalGroup(
+            panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCategoriasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel17)
+                    .addGroup(panelCategoriasLayout.createSequentialGroup()
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(botonModCat)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonElimCat))
+                    .addComponent(botonNuevaCat)
+                    .addComponent(jSeparator5))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelCategoriasLayout.setVerticalGroup(
+            panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelCategoriasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCategoriasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonModCat)
+                        .addComponent(botonElimCat))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(botonNuevaCat)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelCategorias, new java.awt.GridBagConstraints());
+
         menuInicio.setText("Inicio");
         menuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1683,6 +1780,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         barraMenu.add(menuPagos);
 
         menuCategorias.setText("Categorías");
+        menuCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuCategoriasMouseClicked(evt);
+            }
+        });
         barraMenu.add(menuCategorias);
 
         menuInstalaciones.setText("Instalaciones");
@@ -3817,6 +3919,32 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
     }//GEN-LAST:event_botonEliminarEquipoActionPerformed
 
+    private void botonNuevaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaCatActionPerformed
+        new NuevaCategoria(this).setVisible(true);
+    }//GEN-LAST:event_botonNuevaCatActionPerformed
+
+    private void botonModCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonModCatActionPerformed
+        String tipoCat = (String) tablaCategorias.getValueAt(tablaCategorias.getSelectedRow(), 0);
+        String descCat = (String) tablaCategorias.getValueAt(tablaCategorias.getSelectedRow(), 1);
+        
+        Categoria c = new Categoria(tipoCat, descCat);
+        GestorCategorias.ModificarCategoria(accesoBD, c);
+    }//GEN-LAST:event_botonModCatActionPerformed
+
+    private void botonElimCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElimCatActionPerformed
+        
+    }//GEN-LAST:event_botonElimCatActionPerformed
+
+    private void menuCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCategoriasMouseClicked
+        ocultarPaneles();
+        panelCategorias.setVisible(true);
+        try {
+            actualizaTablaCategorias();
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_menuCategoriasMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -3871,6 +3999,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonBuscarPagos;
     private javax.swing.JButton botonConsGrupo;
+    private javax.swing.JButton botonElimCat;
     private javax.swing.JButton botonElimTemp;
     private javax.swing.JButton botonEliminarAlumno;
     private javax.swing.JButton botonEliminarEquipo;
@@ -3879,10 +4008,12 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JButton botonGuardarCambiosAl;
     private javax.swing.JButton botonGuardarCambiosUsuario;
     private javax.swing.JButton botonInfoEquipo;
+    private javax.swing.JButton botonModCat;
     private javax.swing.JButton botonModTem;
     private javax.swing.JButton botonModificarEquipo;
     private javax.swing.JButton botonModificarPagos;
     private javax.swing.JButton botonMostrarAlumnos;
+    private javax.swing.JButton botonNuevaCat;
     private javax.swing.JButton botonNuevaTemp;
     private javax.swing.JButton botonNuevoAlumno;
     private javax.swing.JButton botonNuevoEquipo;
@@ -3947,6 +4078,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -3975,10 +4107,12 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel labelEquiposMostrados;
     private javax.swing.JLabel labelNumeroEquipos;
     private javax.swing.JLabel mensajeErrorEliminarAlumno;
@@ -4002,6 +4136,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JTextField numeroInst;
     private javax.swing.JPanel panelActividades;
+    private javax.swing.JPanel panelCategorias;
     private javax.swing.JPanel panelEquipos;
     private javax.swing.JPanel panelGrupos;
     private javax.swing.JPanel panelInicio;
@@ -4017,6 +4152,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JTextField segundoApellidoAl;
     private javax.swing.JLabel segundoApellidoLabel;
     private javax.swing.JTable tablaAlumnos;
+    private javax.swing.JTable tablaCategorias;
     private javax.swing.JTable tablaEquipos;
     private javax.swing.JTable tablaGrupos;
     private javax.swing.JTable tablaInstalacion;
@@ -4045,6 +4181,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         panelActividades.setVisible(false);
         panelEquipos.setVisible(false);
         panelPagos.setVisible(false);
+        panelCategorias.setVisible(false);
     }
 
     ResultSet ejecutarConsulta(String query) {
@@ -4385,13 +4522,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
             aux = it.get(0);
             fila[0] = aux.substring(0, aux.indexOf(","));
             aux = aux.substring(aux.indexOf(",") + 1, aux.length());
-            fila[0] = aux.substring(0, aux.indexOf(","));
+            fila[1] = aux.substring(0, aux.indexOf(","));
             aux = aux.substring(aux.indexOf(",") + 1, aux.length());
-            fila[1] = getCategoria(aux.substring(0, aux.indexOf(",")));
+            fila[2] = getCategoria(aux.substring(0, aux.indexOf(",")));
             aux = aux.substring(aux.indexOf(",") + 1, aux.length());
-            fila[2] = getEntrenador(aux.substring(0, aux.indexOf(",")));
+            fila[3] = getEntrenador(aux.substring(0, aux.indexOf(",")));
             aux = aux.substring(aux.indexOf(",") + 1, aux.length());
-            fila[3] = getTemporada(aux);
+            fila[4] = getTemporada(aux);
             dtm.addRow(fila);
         }
 
@@ -4410,5 +4547,27 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         als = GestorAlumnos.getAlumnosSinGrupo(accesoBD, s);
 
         return als;
+    }
+
+    void actualizaTablaCategorias() throws SQLException {
+        List<List<String>> listaCats = new ArrayList<List<String>>();
+        listaCats = GestorCategorias.getListaCategorias(accesoBD);
+        
+        DefaultTableModel dtm = new DefaultTableModel();
+        dtm.addColumn("Tipo");
+        dtm.addColumn("Descripcion");
+
+        String aux;
+        Object[] fila = new Object[2];
+        for (List<String> it : listaCats) {
+            aux = it.get(0);
+            fila[0] = aux.substring(0, aux.indexOf(" "));
+            aux = aux.substring(aux.indexOf(" ") + 1, aux.length());
+            fila[1] = aux.substring(0, aux.length());
+            dtm.addRow(fila);
+        }
+
+        tablaCategorias.setModel(dtm);
+        
     }
 }

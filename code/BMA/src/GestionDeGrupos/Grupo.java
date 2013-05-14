@@ -5,7 +5,7 @@ import GestionDeInstalaciones.Instalacion;
 import GestionDeTemporadas.Temporada;
 import GestionDeUsuarios.Usuario;
 import ServiciosAlmacenamiento.BaseDatos;
-import bma.Categoria;
+import GestionDeCategorias.Categoria;
 import bma.Entrenador;
 import bma.Horario;
 import bma.Sexo;

@@ -6,7 +6,7 @@ package GestionDeEquipos;
 
 import GestionDeTemporadas.Temporada;
 import GestionDeUsuarios.Usuario;
-import bma.Categoria;
+import GestionDeCategorias.Categoria;
 
 /**
  *
