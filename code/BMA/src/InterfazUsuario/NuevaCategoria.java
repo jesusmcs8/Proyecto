@@ -46,6 +46,7 @@ public class NuevaCategoria extends javax.swing.JFrame {
         botoAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Nueva Temporada");
@@ -61,6 +62,11 @@ public class NuevaCategoria extends javax.swing.JFrame {
         textDesc.setPreferredSize(new java.awt.Dimension(100, 20));
 
         botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         botoAceptar.setText("Aceptar");
         botoAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +123,7 @@ public class NuevaCategoria extends javax.swing.JFrame {
     private void botoAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoAceptarActionPerformed
         boolean validar = false;
         
-        if(textTipo.getText() != null && textDesc.getText() != null){
+        if(textTipo.getText().length()>0 && textDesc.getText().length()>0){
             try {
                 GestorCategorias.InsertarDatosCategorias(creador.accesoBD, textTipo.getText(), textDesc.getText());
             } catch (SQLException ex) {
@@ -134,6 +140,10 @@ public class NuevaCategoria extends javax.swing.JFrame {
             Logger.getLogger(NuevaCategoria.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botoAceptarActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+       this.setVisible(false);
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
      * @param args the command line arguments

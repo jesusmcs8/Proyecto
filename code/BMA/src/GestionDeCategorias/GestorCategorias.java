@@ -1,6 +1,8 @@
 package GestionDeCategorias;
 
+import InterfazUsuario.ModificarCategoria;
 import InterfazUsuario.NuevaCategoria;
+import InterfazUsuario.PantallaPrincipal;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.SQLException;
 import java.util.List;
@@ -46,8 +48,36 @@ public class GestorCategorias {
         return CategoriaBD.getListaCategorias(accesoBD);
     }
 
-    public static void ModificarCategoria(BaseDatos accesoBD, Categoria c) {
-        int aceptadaModificacion = Categoria.Modificar(accesoBD, c);
+    public static void ModificarCategoria(BaseDatos accesoBD, Categoria cNuevo, Categoria cViejo) throws SQLException {
+        boolean existe = false;
+        existe = existeCategoria(accesoBD, cNuevo);
+        
+        int aceptadaModificacion = 0;
+                
+        if(!existe){
+            aceptadaModificacion = Categoria.Modificar(accesoBD, cNuevo, cViejo);
+            if(aceptadaModificacion > 0)
+                JOptionPane.showMessageDialog(new ModificarCategoria(), "Categoria modificada", "Exito", JOptionPane.NO_OPTION);
+        }
+        else{
+            JOptionPane.showMessageDialog(new ModificarCategoria(), "La categoria ya existe", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+       
+    }
+
+    private static boolean existeCategoria(BaseDatos accesoBD, Categoria c) throws SQLException {
+        return CategoriaBD.existeCategoria(accesoBD, c);
+    }
+
+    public static void EliminarCategorias(BaseDatos accesoBD, Categoria c) {
+        boolean categoriaEliminada = false;
+        
+        categoriaEliminada = CategoriaBD.EliminarCategoria(accesoBD, c);
+        
+        if(categoriaEliminada)
+            JOptionPane.showMessageDialog(new PantallaPrincipal(), "Categoria eliminada", "Exito", JOptionPane.NO_OPTION);
+        else
+            JOptionPane.showMessageDialog(new PantallaPrincipal(), "Error al eliminar", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     

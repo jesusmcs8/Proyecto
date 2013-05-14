@@ -1,5 +1,12 @@
 package InterfazUsuario;
 
+import GestionDeCategorias.Categoria;
+import GestionDeCategorias.GestorCategorias;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Diego
@@ -18,6 +25,8 @@ public class ModificarCategoria extends javax.swing.JFrame {
     public ModificarCategoria(PantallaPrincipal v, String t, String d) {
         initComponents();
         this.creador = v;
+        
+        this.setLocation(300, 300);
         
         this.labelTipo.setText(t);
         this.labelDesc.setText(d);
@@ -48,10 +57,11 @@ public class ModificarCategoria extends javax.swing.JFrame {
         textTipo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         textDesc = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
+        botonAceptar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Modificar Categoria");
@@ -80,9 +90,19 @@ public class ModificarCategoria extends javax.swing.JFrame {
         textDesc.setMinimumSize(new java.awt.Dimension(100, 20));
         textDesc.setPreferredSize(new java.awt.Dimension(100, 20));
 
-        jButton1.setText("Cancelar");
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Aceptar");
+        botonAceptar.setText("Aceptar");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAceptarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,9 +114,9 @@ public class ModificarCategoria extends javax.swing.JFrame {
                     .addComponent(jSeparator1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(botonAceptar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(botonCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -154,13 +174,38 @@ public class ModificarCategoria extends javax.swing.JFrame {
                     .addComponent(textDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botonCancelar)
+                    .addComponent(botonAceptar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+        if(labelTipo.getText() != textTipo.getText() || 
+            labelDesc.getText() != textDesc.getText() ){
+            
+            int continuar = JOptionPane.showConfirmDialog(new ModificarCategoria(), "¿Desea modificar la categoria?", "Pregunta", JOptionPane.YES_NO_CANCEL_OPTION);
+            
+            if(continuar == JOptionPane.YES_OPTION){
+                Categoria cNuevo = new Categoria(textTipo.getText(), textDesc.getText());
+                Categoria cViejo = new Categoria(labelTipo.getText(), labelDesc.getText());
+                try {
+                    GestorCategorias.ModificarCategoria(creador.accesoBD, cNuevo, cViejo);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ModificarCategoria.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                this.setVisible(false);
+            }
+        }
+        
+    }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -204,8 +249,8 @@ public class ModificarCategoria extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton botonCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

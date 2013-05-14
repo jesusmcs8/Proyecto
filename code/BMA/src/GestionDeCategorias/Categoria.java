@@ -1,6 +1,7 @@
 package GestionDeCategorias;
 
 import ServiciosAlmacenamiento.BaseDatos;
+import java.sql.SQLException;
 
 /**
  * Clase que representa las categorías a las que puede pertenecer un alumno.
@@ -10,8 +11,8 @@ import ServiciosAlmacenamiento.BaseDatos;
  */
 public class Categoria {
 
-    static int Modificar(BaseDatos accesoBD, Categoria c) {
-        return CategoriaBD.ModificarCategoria(accesoBD, c);
+    static int Modificar(BaseDatos accesoBD, Categoria cNuevo, Categoria cViejo) throws SQLException {
+        return CategoriaBD.ModificarCategoria(accesoBD, cNuevo, cViejo);
     }
 
     private int idCategoria;

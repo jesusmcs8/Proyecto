@@ -1205,8 +1205,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     .addGroup(panelEquiposLayout.createSequentialGroup()
                                         .addGap(101, 101, 101)
                                         .addComponent(botonBuscar)
-                                        .addGap(35, 35, 35)
-                                        .addGap(10, 10, 10)
+                                        .addGap(45, 45, 45)
                                         .addComponent(jButton3)))))
                         .addGap(331, 331, 331))
                     .addGroup(panelEquiposLayout.createSequentialGroup()
@@ -1604,9 +1603,9 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(22, 0, 22, 0);
         getContentPane().add(panelActividades, gridBagConstraints);
 
-        panelTemporadas.setVisible(false);
+        panelCategorias.setVisible(false);
         panelCategorias.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        panelTemporadas.setLocation(150, 100);
+        panelCategorias.setLocation(150, 100);
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel17.setText("Categorias");
@@ -3909,12 +3908,18 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         String tipoCat = (String) tablaCategorias.getValueAt(tablaCategorias.getSelectedRow(), 0);
         String descCat = (String) tablaCategorias.getValueAt(tablaCategorias.getSelectedRow(), 1);
         
-        Categoria c = new Categoria(tipoCat, descCat);
-        GestorCategorias.ModificarCategoria(accesoBD, c);
+        
+        new ModificarCategoria(this, tipoCat, descCat).setVisible(true);
     }//GEN-LAST:event_botonModCatActionPerformed
 
     private void botonElimCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElimCatActionPerformed
+        String tipoCat = (String) tablaCategorias.getValueAt(tablaCategorias.getSelectedRow(), 0);
+        String descCat = (String) tablaCategorias.getValueAt(tablaCategorias.getSelectedRow(), 1);
         
+        Categoria c = new Categoria(tipoCat, descCat);
+        int continuar = JOptionPane.showConfirmDialog(this, "¿Desea eliminar la temporada?", "Confirmar", JOptionPane.YES_NO_CANCEL_OPTION);
+        if(continuar == JOptionPane.YES_OPTION)
+            GestorCategorias.EliminarCategorias(accesoBD, c);
     }//GEN-LAST:event_botonElimCatActionPerformed
 
     private void menuCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCategoriasMouseClicked

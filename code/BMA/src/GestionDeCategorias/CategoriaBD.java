@@ -72,10 +72,54 @@ public class CategoriaBD {
         return listaCats;
     }
 
-    static int ModificarCategoria(BaseDatos accesoBD, Categoria c) {
+    static int ModificarCategoria(BaseDatos accesoBD, Categoria cNuevo, Categoria cViejo) throws SQLException {
         int correcto = 0;
         
+        String query = "SELECT idCategoria FROM Categoria WHERE "
+                + "tipo='"+cViejo.getNombreCategoria()+"' AND "
+                + "descripcion='"+cViejo.getDescripcion()+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        int idCat = 0;
+        while(res.next())
+            idCat = res.getInt(1);
+        
+        query = "UPDATE Categoria SET tipo='"+cNuevo.getNombreCategoria()+"', "
+                + "descripcion='"+cNuevo.getDescripcion()+"' WHERE "
+                + "idCategoria='"+idCat+"'";
+        
+        correcto = accesoBD.ejecutaActualizacion(query);
         
         return correcto;
+    }
+
+    static boolean existeCategoria(BaseDatos accesoBD, Categoria c) throws SQLException {
+        boolean existe = false;
+        String query = "SELECT * FROM Categoria WHERE "
+                + "tipo='"+c.getNombreCategoria()+"' AND "
+                + "descripcion='"+c.getDescripcion()+"'";
+        
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        if(res.next())
+            existe = true;
+        else
+            existe = false;
+        
+        System.out.println();
+        System.out.println("existe vale:"+existe);
+        
+        return existe;
+    }
+
+    static boolean EliminarCategoria(BaseDatos accesoBD, Categoria c) {
+        String query = "DELETE FROM Categoria WHERE "
+                + "tipo='"+c.getNombreCategoria()+"' AND "
+                + "descripcion='"+c.getDescripcion()+"'";
+        System.out.println(query);
+        boolean res = accesoBD.eliminar(query);
+        
+        
+        return res;
     }
 }
