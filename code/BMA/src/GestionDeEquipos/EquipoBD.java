@@ -4,6 +4,7 @@
  */
 package GestionDeEquipos;
 
+import GestionDeCategorias.GestorCategorias;
 import GestionDeTemporadas.GestorTemporadas;
 import GestionDeTemporadas.TemporadaBD;
 import ServiciosAlmacenamiento.BaseDatos;
@@ -20,19 +21,15 @@ import java.util.logging.Logger;
  */
 public class EquipoBD {
 
-    static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String temporada, String categoria, String entrenador, String entrenador2) throws SQLException {
+    static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String temporada, String categoria, String entrenador) throws SQLException {
 
-        int idCategoria = 0;
-
-        ResultSet res = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo='"+categoria+"'");
-        if(res.next())
-            idCategoria = res.getInt(1);
+        int idCategoria = GestorCategorias.getIdCategoria(accesoBD, categoria);
     
-        String consulta = "SELECT DISTINCT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre, u.nombre "
-                        + "FROM Equipo, Categoria, Temporada, Rango, Rango r, Usuario, Usuario u ";
+        String consulta = "SELECT DISTINCT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre "
+                        + "FROM Equipo, Categoria, Temporada, Rango, Rango r, Usuario ";
         String condicion = "WHERE ";
 
-        if (!"".equals(nombre) || !"".equals(categoria) || !"".equals(temporada) || !"".equals(entrenador) || !"".equals(entrenador2)) {
+        if (!"".equals(nombre) || !"".equals(categoria) || !"".equals(temporada) || !"".equals(entrenador)) {
             
             if (!"".equals(nombre)) {
                 condicion += "Equipo.nombre='" + nombre + "' AND ";
@@ -46,15 +43,10 @@ public class EquipoBD {
             if (!"".equals(entrenador)) {
                 condicion += "Rango.Usuario_idUsuario='" + getIdUsuario(accesoBD, entrenador, "primero") + "' AND ";
                 condicion += "Usuario.idUsuario=Rango.Usuario_idUsuario AND ";   
-            }          
-            if (!"".equals(entrenador2)) {
-                condicion += "r.Usuario_idUsuario='" + getIdUsuario(accesoBD, entrenador2, "segundo") + "' AND ";
-                condicion += "u.idUsuario=r.Usuario_idUsuario AND ";              
-            }
+            }    
             
         }
         condicion = condicion.substring(0, condicion.length()-5);
-        //condicion += " GROUP BY Equipo.nombre";
         consulta += condicion;
 
         System.out.println("\nLa consulta es: " + consulta);
@@ -67,13 +59,7 @@ public class EquipoBD {
 
         int idEquipo = 0;
         
-        int idCategoria = 0;
-
-        ResultSet cat = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo='"+categoria+"'");
-        if(cat.next())
-            idCategoria = cat.getInt(1);
-
-        //System.out.println("\nID CATEGORIA: " + idCategoria);
+        int idCategoria = GestorCategorias.getIdCategoria(accesoBD, categoria);
         
         String consulta = "SELECT idEquipo FROM Equipo WHERE Equipo.nombre='" + nombre + "' AND Categoria_idCategoria='" + idCategoria + "'";
 
@@ -98,7 +84,6 @@ public class EquipoBD {
             id = res.getInt(1);
         }
 
-        System.out.println("\nID de usuario: " + id);
         return id;
     }
     
@@ -106,16 +91,18 @@ public class EquipoBD {
         
         List<Equipo> equipos = new ArrayList();
         
-        //Filtrar repetidos
-        String consulta = "SELECT DISTINCT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre, u.nombre "
-                        + "FROM Equipo, Categoria, Temporada, Rango, Usuario, Usuario u GROUP BY Equipo.nombre";
+        String consulta = "SELECT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre "
+                        + "FROM Equipo, Categoria, Temporada, Usuario, Rango "
+                        + "WHERE Equipo.Categoria_idCategoria=Categoria.idCategoria AND "
+                        + "Usuario.idUsuario = Rango.Usuario_idUsuario AND Rango.Equipo_idEquipo=Equipo.idEquipo AND Rango.tipo='primero'";
+        
         ResultSet res = accesoBD.ejecutaConsulta(consulta);
         
         String n;
         String temp;
         String cat;
         String entrena;
-        String entrena2;
+        String entrena2="";
         Equipo eq;
         
         while(res.next()){
@@ -123,12 +110,13 @@ public class EquipoBD {
             cat = res.getString(2);
             temp = res.getString(3);
             entrena = res.getString(4);
-            entrena2 = res.getString(5);
             eq = new Equipo(n, temp, cat, entrena, entrena2);
 
             equipos.add(eq);
         }
             
+        System.out.println("\nLa consulta es: " + consulta);
+        
         return equipos;
     }
 
@@ -136,28 +124,20 @@ public class EquipoBD {
 
         boolean equipoEliminado = true;
 
-        int idCategoria = 0;
-
-        ResultSet cat = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo='"+e.getCategoria().getNombreCategoria()+"'");
-        if(cat.next())
-            idCategoria = cat.getInt(1);
-                
-        System.out.println("\nID CATEGORIA: " + idCategoria);
-  
+        int idCategoria = GestorCategorias.getIdCategoria(accesoBD, e.getCategoria().getNombreCategoria());
         int idEquipo = getIdEq(accesoBD, e.getNombre(), e.getCategoria().getNombreCategoria());
-        System.out.println("\nID EQUIPO: " + idEquipo);
         
-        String delete1 = "DELETE FROM Rango WHERE Equipo_idEquipo='" + idEquipo + "' AND Equipo_Categoria_idCategoria='"+idCategoria+"'";
-        String delete2 = "DELETE FROM TemporadaEquipo where temporadaequipo.Equipo_idEquipo= " + idEquipo;
+        //String delete1 = "DELETE FROM Rango WHERE Equipo_idEquipo='" + idEquipo + "' AND Equipo_Categoria_idCategoria='"+idCategoria+"'";
+        //String delete2 = "DELETE FROM TemporadaEquipo where temporadaequipo.Equipo_idEquipo= " + idEquipo;
         String delete3 = "DELETE FROM Equipo WHERE Equipo.idEquipo= " + idEquipo;
 
-        equipoEliminado = accesoBD.eliminar(delete1);
-        equipoEliminado = accesoBD.eliminar(delete2);
-        equipoEliminado = accesoBD.eliminar(delete3);
+        //equipoEliminado = accesoBD.eliminar(delete1);
+        //equipoEliminado = accesoBD.eliminar(delete2);
+        //equipoEliminado = accesoBD.eliminar(delete3);
 
         //equipoEliminado = false;
-        System.out.println("\nDELETE 1: " + delete1);
-        System.out.println("\nDELETE 2: " + delete2);
+        //System.out.println("\nDELETE 1: " + delete1);
+        //System.out.println("\nDELETE 2: " + delete2);
         System.out.println("\nDELETE 3: " + delete3);
         
         return equipoEliminado;
@@ -168,11 +148,7 @@ public class EquipoBD {
 
         boolean validar;
 
-        int idCategoria = 0;
-
-        ResultSet cat = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo='" + categoria + "'");
-        if(cat.next())
-            idCategoria = cat.getInt(1);
+        int idCategoria = GestorCategorias.getIdCategoria(accesoBD, categoria);
         
         String consulta = "SELECT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre, u.nombre "
                         + "FROM Equipo, Categoria, Temporada, Rango, Usuario, Usuario u "
@@ -196,12 +172,7 @@ public class EquipoBD {
     static void crearEquipoBD(BaseDatos accesoBD, Equipo equipo) throws SQLException {
         
         int idTemporada = GestorTemporadas.getIdTemporada(accesoBD, equipo.getTemporada().getCurso());
-        int idCategoria = 0;
-
-        ResultSet res = accesoBD.ejecutaConsulta("SELECT idCategoria FROM Categoria WHERE tipo='"+equipo.getCategoria().getNombreCategoria()+"'");
-        if(res.next())
-            idCategoria = res.getInt(1);
-        
+        int idCategoria = GestorCategorias.getIdCategoria(accesoBD, equipo.getCategoria().getNombreCategoria());        
         int idEntrenador = getIdUsuario(accesoBD, equipo.getEntrenador().getNombre(), "primero");
         int idEntrenador2 = getIdUsuario(accesoBD, equipo.getEntrenador2().getNombre(), "segundo");
 

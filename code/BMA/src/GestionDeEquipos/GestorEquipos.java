@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class GestorEquipos {
 
     public static List<Equipo> ConsultaEquipo(BaseDatos accesoBD, String nombre,
-                            String temporada, String categoria, String entrenador, String entrenador2) throws SQLException {
+                            String temporada, String categoria, String entrenador) throws SQLException {
 
         List<Equipo> listaEquipos = new ArrayList();
         Equipo eq;
@@ -28,16 +28,15 @@ public class GestorEquipos {
         String temp;
         String cat;
         String entrena;
-        String entrena2;
+        String entrena2="";
 
-        ResultSet res = EquipoBD.BuscarEquipos(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
+        ResultSet res = EquipoBD.BuscarEquipos(accesoBD, nombre, temporada, categoria, entrenador);
         
         while (res.next()) {
             n = res.getString(1);
             cat = res.getString(2);
             temp = res.getString(3);
             entrena = res.getString(4);
-            entrena2 = res.getString(5);
             eq = new Equipo(n, temp, cat, entrena, entrena2);
 
             listaEquipos.add(eq);

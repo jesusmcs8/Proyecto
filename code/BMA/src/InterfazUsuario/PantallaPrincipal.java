@@ -211,8 +211,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         comboTempEquipo = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
         textEntEquipo = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
-        textEnt2Equipo = new javax.swing.JTextField();
         botonBuscar = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         tablaEquipos = new javax.swing.JTable();
@@ -1120,14 +1118,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
         jLabel13.setText("Primer Entrenador:");
 
-        jLabel14.setText("Segundo Entrenador:");
-
-        textEnt2Equipo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textEnt2EquipoActionPerformed(evt);
-            }
-        });
-
         botonBuscar.setText("Buscar");
         botonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1183,14 +1173,15 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         panelEquiposLayout.setHorizontalGroup(
             panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEquiposLayout.createSequentialGroup()
+                .addGap(50, 50, 50)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEquiposLayout.createSequentialGroup()
                         .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8)
                             .addGroup(panelEquiposLayout.createSequentialGroup()
-                                .addGap(50, 50, 50)
+                                .addGap(12, 12, 12)
                                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8)
                                     .addGroup(panelEquiposLayout.createSequentialGroup()
                                         .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                             .addGroup(panelEquiposLayout.createSequentialGroup()
@@ -1200,43 +1191,41 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                             .addGroup(panelEquiposLayout.createSequentialGroup()
                                                 .addComponent(jLabel13)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(textEntEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEquiposLayout.createSequentialGroup()
-                                                .addComponent(jLabel14)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(botonBuscar)
-                                                    .addComponent(textEnt2Equipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                        .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panelEquiposLayout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addGroup(panelEquiposLayout.createSequentialGroup()
-                                                        .addComponent(jLabel11)
-                                                        .addGap(25, 25, 25)
-                                                        .addComponent(comboCatEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGroup(panelEquiposLayout.createSequentialGroup()
-                                                        .addComponent(jLabel12)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(comboTempEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGroup(panelEquiposLayout.createSequentialGroup()
-                                                .addGap(10, 10, 10)
-                                                .addComponent(jButton3))))
-                                    .addGroup(panelEquiposLayout.createSequentialGroup()
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(40, 40, 40)
+                                                .addComponent(textEntEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(18, 18, 18)
                                         .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(botonModificarEquipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(botonInfoEquipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(botonEliminarEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(botonNuevoEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addGroup(panelEquiposLayout.createSequentialGroup()
+                                                .addComponent(jLabel11)
+                                                .addGap(25, 25, 25)
+                                                .addComponent(comboCatEquipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(panelEquiposLayout.createSequentialGroup()
+                                                .addComponent(jLabel12)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(comboTempEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(panelEquiposLayout.createSequentialGroup()
+                                        .addGap(101, 101, 101)
+                                        .addComponent(botonBuscar)
+                                        .addGap(35, 35, 35)
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jButton3)))))
+                        .addGap(331, 331, 331))
+                    .addGroup(panelEquiposLayout.createSequentialGroup()
+                        .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelEquiposLayout.createSequentialGroup()
-                                .addGap(207, 207, 207)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(botonModificarEquipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonInfoEquipo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonEliminarEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(botonNuevoEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panelEquiposLayout.createSequentialGroup()
+                                .addGap(157, 157, 157)
                                 .addComponent(labelEquiposMostrados)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(labelNumeroEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(50, 50, 50))
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jSeparator4)))
                 .addContainerGap())
         );
         panelEquiposLayout.setVerticalGroup(
@@ -1258,32 +1247,29 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                     .addComponent(textEntEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
                     .addComponent(comboTempEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(textEnt2Equipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addGap(37, 37, 37)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonBuscar)
                     .addComponent(jButton3))
-                .addGap(20, 20, 20)
-                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addGap(46, 46, 46)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelEquiposLayout.createSequentialGroup()
-                        .addComponent(botonNuevoEquipo)
+                        .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelEquiposLayout.createSequentialGroup()
+                                .addComponent(botonNuevoEquipo)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonInfoEquipo)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonModificarEquipo)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonEliminarEquipo)))
                         .addGap(18, 18, 18)
-                        .addComponent(botonInfoEquipo)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonModificarEquipo)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonEliminarEquipo)))
-                .addGap(18, 18, 18)
-                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelEquiposMostrados)
-                    .addComponent(labelNumeroEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50))
+                        .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelEquiposMostrados)
+                            .addComponent(labelNumeroEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(80, 80, 80))
         );
 
         this.labelEquiposMostrados.setVisible(false);
@@ -3470,7 +3456,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         try {
             actualizaTablaEquiposFiltro(textNombreEquipo.getText(), comboTempEquipo.getSelectedItem().toString(), comboCatEquipo.getSelectedItem().toString(),
-                    textEntEquipo.getText(), textEnt2Equipo.getText());
+                    textEntEquipo.getText());
             labelEquiposMostrados.setVisible(true);
             labelNumeroEquipos.setVisible(true);
         } catch (SQLException ex) {
@@ -3819,10 +3805,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         // TODO add your handling code here:
     }//GEN-LAST:event_comboCatEquipoActionPerformed
 
-    private void textEnt2EquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEnt2EquipoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textEnt2EquipoActionPerformed
-
     private void botonNuevoEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoEquipoActionPerformed
         try {
             new NuevoEquipo(this).setVisible(true);
@@ -4075,7 +4057,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -4161,7 +4142,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel temporadaLabel;
     private javax.swing.JTextField textActividadPagos;
     private javax.swing.JTextField textAlumnoPagos;
-    private javax.swing.JTextField textEnt2Equipo;
     private javax.swing.JTextField textEntEquipo;
     private javax.swing.JTextField textFechaPagos;
     private javax.swing.JTextField textNombreEquipo;
@@ -4345,25 +4325,23 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         tablaGrupos.setModel(dtm);
     }
 
-    public void actualizaTablaEquiposFiltro(String nombre, String temporada, String categoria, String entrenador, String entrenador2) throws SQLException {
+    public void actualizaTablaEquiposFiltro(String nombre, String temporada, String categoria, String entrenador) throws SQLException {
         List<Equipo> equipos = new ArrayList<Equipo>();
 
-        equipos = GestorEquipos.ConsultaEquipo(accesoBD, nombre, temporada, categoria, entrenador, entrenador2);
+        equipos = GestorEquipos.ConsultaEquipo(accesoBD, nombre, temporada, categoria, entrenador);
 
         DefaultTableModel dtm = new DefaultTableModel();
         dtm.addColumn("Nombre");
         dtm.addColumn("Categoria");
         dtm.addColumn("Temporada");
         dtm.addColumn("Primer Entrenador");
-        dtm.addColumn("Segundo Entrenador");
 
-        Object[] fila = new Object[5];
+        Object[] fila = new Object[4];
         for (Equipo it : equipos) {
             fila[0] = it.getNombre();
             fila[1] = it.getCategoria().getNombreCategoria().toString();
             fila[2] = it.getTemporada().getCurso().toString();
             fila[3] = it.getEntrenador().getNombre().toString();
-            fila[4] = it.getEntrenador2().getNombre().toString();
             dtm.addRow(fila);
         }
 
@@ -4382,15 +4360,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         dtm.addColumn("Categoria");
         dtm.addColumn("Temporada");
         dtm.addColumn("Primer Entrenador");
-        dtm.addColumn("Segundo Entrenador");
 
-        Object[] fila = new Object[5];
+        Object[] fila = new Object[4];
         for (Equipo it : equipos) {
             fila[0] = it.getNombre();
             fila[1] = it.getCategoria().getNombreCategoria().toString();
             fila[2] = it.getTemporada().getCurso().toString();
             fila[3] = it.getEntrenador().getNombre().toString();
-            fila[4] = it.getEntrenador2().getNombre().toString();
             dtm.addRow(fila);
         }
 
