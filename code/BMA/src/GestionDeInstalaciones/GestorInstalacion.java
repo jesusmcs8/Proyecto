@@ -6,6 +6,7 @@ package GestionDeInstalaciones;
 
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.*;
+import java.util.List;
 
 /**
  *
@@ -17,7 +18,7 @@ public class GestorInstalacion {
             int capacidad, String localizacion) {
 
         boolean exito = true;
-        Instalacion instalacion = Instalacion.crearInstalacion(nombre, capacidad, localizacion);
+        Instalacion instalacion = new Instalacion(nombre, capacidad, localizacion);
 
         try {
             AccesoBDInstalacion.insertarInstalacionBD(accesoBD, instalacion);
@@ -51,5 +52,13 @@ public class GestorInstalacion {
         
         instalacionBD.eliminarInstalacionBD(accesoBD, instalacionEliminada);
         
+    }
+
+    public static int getIdInstalacion(BaseDatos accesoBD, String inst) throws SQLException {
+        return AccesoBDInstalacion.getIdInstalacion(accesoBD, inst);
+    }
+
+    public static List<String> getListaInstalaciones(BaseDatos accesoBD) throws SQLException {
+        return AccesoBDInstalacion.getListaInstalaciones(accesoBD);
     }
 }

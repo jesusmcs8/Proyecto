@@ -122,4 +122,17 @@ public class CategoriaBD {
         
         return res;
     }
+
+    static List<String> getTipoCategorias(BaseDatos accesoBD) throws SQLException {
+        List<String> listaCats = new ArrayList<String>();
+        
+        String query = "SELECT tipo FROM Categoria";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        while (res.next()) {
+            listaCats.add(res.getString(1));
+        }
+        
+        return listaCats;
+    }
 }

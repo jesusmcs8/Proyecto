@@ -1,6 +1,7 @@
 package InterfazUsuario;
 
 import GestionDeAlumnos.Alumno;
+import GestionDeCategorias.GestorCategorias;
 import GestionDeGrupos.GestorGrupos;
 import bma.DiasSemana;
 import java.awt.Color;
@@ -44,7 +45,8 @@ public class NuevoGrupo extends javax.swing.JFrame {
         aux = creador.getListaTemps();
         actualizaComboTemp(aux);
         
-        aux = creador.getListaCategorias();
+        //aux = creador.getListaCategorias();
+        aux = GestorCategorias.getTipoCategorias(creador.accesoBD);
         actualizaComboCat(aux);
         
         aux = creador.getListaAlumnosSinGrupo("");

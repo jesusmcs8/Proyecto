@@ -41,6 +41,8 @@ public class AltaActividad extends javax.swing.JFrame {
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
         ((JTextFieldDateEditor) fechaInicioDateChooser.getComponents()[1]).setEditable(false);
         ((JTextFieldDateEditor) fechaFinDateChooser.getComponents()[1]).setEditable(false);
+         temporadaComboBox.removeAllItems();
+         instalacion.removeAllItems();
 
         ResultSet retset;
         String consulta = "SELECT nombre FROM instalacion";

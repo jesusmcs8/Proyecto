@@ -71,7 +71,6 @@ public class InformacionActividad extends javax.swing.JFrame {
         descripcionLabel = new javax.swing.JLabel();
         descripcionScrollPane = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        Alumnos = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -91,13 +90,6 @@ public class InformacionActividad extends javax.swing.JFrame {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         descripcionScrollPane.setViewportView(jTextArea1);
-
-        Alumnos.setText("Alumnos");
-        Alumnos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AlumnosActionPerformed(evt);
-            }
-        });
 
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -140,8 +132,6 @@ public class InformacionActividad extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Alumnos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Salir)
                 .addGap(27, 27, 27))
         );
@@ -169,9 +159,7 @@ public class InformacionActividad extends javax.swing.JFrame {
                     .addComponent(descripcionLabel)
                     .addComponent(descripcionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Alumnos)
-                    .addComponent(Salir))
+                .addComponent(Salir)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -209,10 +197,6 @@ public class InformacionActividad extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_SalirActionPerformed
 
-    private void AlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlumnosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AlumnosActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -248,7 +232,6 @@ public class InformacionActividad extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Alumnos;
     private javax.swing.JButton Salir;
     private javax.swing.JLabel descripcionLabel;
     private javax.swing.JScrollPane descripcionScrollPane;

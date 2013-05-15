@@ -197,26 +197,50 @@ public class GruposBD {
     }
 
     static List<List<String>> getListaGruposFiltro(BaseDatos accesoBD, String temporada, String categoria, String entrenador) throws SQLException {
-        int idTemp, idCat = 0, idEnt;
-        idTemp = GestorTemporadas.getIdTemporada(accesoBD, temporada);
+        int idTemp = 0, idCat = 0, idEnt = 0;
         
-        /*****************************************/
-        /*********PROVISIONAL*********************/
-        String auxQ = "SELECT idCategoria FROM Categoria WHERE tipo='"+categoria+"'";
-        ResultSet auxR = accesoBD.ejecutaConsulta(auxQ);
-        if(auxR.next())
-            idCat = auxR.getInt(1);
-        /*****************************************/
+        if(temporada != "-Ninguno-")
+            idTemp = GestorTemporadas.getIdTemporada(accesoBD, temporada);
         
-        idEnt = GestorUsuarios.getIdEnt(accesoBD, entrenador);
+        
+        if(categoria != "-Ninguno-")
+            idCat = GestorCategorias.getIdCategoria(accesoBD, categoria);
+        
+          
+        if(entrenador != "-Ninguno-")
+            idEnt = GestorUsuarios.getIdEnt(accesoBD, entrenador);
         
         List<List<String>> grupos = new ArrayList<List<String>>();
-
-        String query = "SELECT idGrupo, n_alumnos, Categoria_idCategoria, "
+        String query;
+        /*String query = "SELECT idGrupo, n_alumnos, Categoria_idCategoria, "
                 + "Usuario_idUsuario, Temporada_idTemporada "
                 + "FROM Grupo WHERE Categoria_idCategoria='"+idCat+"' AND "
                 + "Usuario_idUsuario='"+idEnt+"' AND "
-                + "Temporada_idTemporada='"+idTemp+"'";
+                + "Temporada_idTemporada='"+idTemp+"'";*/
+        
+        if(idEnt != 0 || idCat != 0 || idTemp != 0)
+            query = "SELECT idGrupo, n_alumnos, Categoria_idCategoria, "
+                    + "Usuario_idUsuario, Temporada_idTemporada "
+                    + "FROM Grupo WHERE";
+        else
+            query = "SELECT idGrupo, n_alumnos, Categoria_idCategoria, "
+                    + "Usuario_idUsuario, Temporada_idTemporada "
+                    + "FROM Grupo ";
+        
+        if(idEnt != 0)
+            query = query.concat(" Usuario_idUsuario='"+idEnt+"' AND");
+        
+        
+        if(idCat != 0)
+            query = query.concat(" Categoria_idCategoria='"+idCat+"' AND");
+        
+        if(idTemp != 0)
+            query = query.concat(" Temporada_idTemporada='"+idTemp+"' AND");
+        
+        
+        if(idEnt != 0 || idCat != 0 || idTemp != 0)
+            query = query.substring(0, query.length()-4);
+        
         ResultSet res = accesoBD.ejecutaConsulta(query);
         
         

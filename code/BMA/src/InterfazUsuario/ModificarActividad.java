@@ -42,7 +42,8 @@ public class ModificarActividad extends javax.swing.JFrame {
         jTextArea1.append(descp);
         plazasTextField.setText(Integer.toString(plazas));
         idActividad = id;
-
+        instalacion.removeAllItems();
+        jComboBox1.removeAllItems();
 
         ResultSet retset;
         String consulta = "SELECT nombre FROM instalacion";

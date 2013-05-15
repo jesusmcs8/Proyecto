@@ -7,6 +7,8 @@ package GestionDeInstalaciones;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -29,6 +31,31 @@ public class AccesoBDInstalacion {
         System.out.print("\n inser " + insercion);
         accesoBD.ejecutaActualizacion(insercion);
 
+    }
+
+    static int getIdInstalacion(BaseDatos accesoBD, String inst) throws SQLException {
+        String query = "SELECT idInstalacion FROM Instalacion WHERE "
+                + "nombre='" + inst + "'";
+        ResultSet res2 = accesoBD.ejecutaConsulta(query);
+       
+        int idInst = 0;
+        if (res2.next()) {
+            idInst = res2.getInt(1);
+        }
+        
+        return idInst;
+    }
+
+    static List<String> getListaInstalaciones(BaseDatos accesoBD) throws SQLException {
+        List<String> inst = new ArrayList<String>();
+        String query = "SELECT nombre, localizacion FROM Instalacion";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+
+        while (res.next()) {
+            inst.add(res.getString(1) + "," + res.getString(2));
+        }
+
+        return inst;
     }
 
     public ResultSet consultaInstalacionBD(BaseDatos accesoBD, String consulta) {
