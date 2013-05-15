@@ -4,7 +4,6 @@
  */
 package InterfazUsuario;
 
-
 import InterfazUsuario.PantallaPrincipal;
 import GestionActividades.*;
 import ServiciosAlmacenamiento.BaseDatos;
@@ -17,23 +16,58 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+
 /**
  *
  * @author jesusmcs
  */
 public class ModificarActividad extends javax.swing.JFrame {
-    
-    
+
+    BaseDatos accesoBD;
+    int idActividad;
+
     /**
      * Creates new form ModificarActividad
      */
     public ModificarActividad() {
         initComponents();
     }
-    public ModificarActividad(BaseDatos accesoBD, String nombre, String fechaInicio, String fechaFin, int id, String descp){
-        
+
+    public ModificarActividad(BaseDatos acceso, String nombre, String fechaInicio, String fechaFin, int id, String descp, int plazas) {
+        accesoBD = acceso;
         initComponents();
-        
+        nombreTextField.setText(nombre);
+        fechaInicioInicial.setText(fechaInicio);
+        FechaFinInicial.setText(fechaFin);
+        jTextArea1.append(descp);
+        plazasTextField.setText(Integer.toString(plazas));
+        idActividad = id;
+
+
+        ResultSet retset;
+        String consulta = "SELECT nombre FROM instalacion";
+        retset = accesoBD.ejecutaConsulta(consulta);
+        try {
+            while (retset.next()) {
+                System.out.print("\n" + retset.getString(1));
+                instalacion.addItem(retset.getString(1).toString());
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AltaActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        ResultSet rts;
+        String consultaCurso = "SELECT curso FROM temporada";
+        rts = accesoBD.ejecutaConsulta(consultaCurso);
+        try {
+            while (rts.next()) {
+                jComboBox1.addItem(rts.getString(1).toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AltaActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -63,6 +97,8 @@ public class ModificarActividad extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
         fechaInicioInicial = new javax.swing.JLabel();
         FechaFinInicial = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        instalacion = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -81,6 +117,11 @@ public class ModificarActividad extends javax.swing.JFrame {
         descripcionScrollPane.setViewportView(jTextArea1);
 
         Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
 
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,15 +140,28 @@ public class ModificarActividad extends javax.swing.JFrame {
 
         FechaFinInicial.setText("jLabel3");
 
+        jLabel3.setText("Instalacion");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Guardar)
+                .addGap(18, 18, 18)
+                .addComponent(Cancelar)
+                .addGap(34, 34, 34))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
-                        .addComponent(modificarLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modificarLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(nombreLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -118,69 +172,79 @@ public class ModificarActividad extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(descripcionLabel)
-                                        .addGap(20, 20, 20))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(nombreLabel)
-                                        .addGap(18, 18, 18)))))
+                                .addComponent(descripcionLabel)
+                                .addGap(20, 20, 20)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(fechaInicioInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(121, 121, 121)
+                                .addComponent(FechaFinInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(descripcionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(90, 90, 90)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(fechaInicioInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(96, 96, 96))
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                                        .addComponent(fechaFinLabel)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(fechaFinLabel))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(FechaFinInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jComboBox1, 0, 90, Short.MAX_VALUE)
+                                            .addComponent(instalacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
                 .addContainerGap(43, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Guardar)
-                .addGap(18, 18, 18)
-                .addComponent(Cancelar)
-                .addGap(34, 34, 34))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(modificarLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombreLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fechaInicioInicial)
-                    .addComponent(FechaFinInicial))
-                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(modificarLabel)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(nombreLabel)
+                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(fechaInicioInicial)
+                                    .addComponent(FechaFinInicial))
+                                .addGap(11, 11, 11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fechaInicioLabel)
+                                    .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(fechaFinLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(fechaInicioLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fechaFinLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(instalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(descripcionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(descripcionLabel))
@@ -198,6 +262,62 @@ public class ModificarActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private int getIDTemporada() {
+        ResultSet retset;
+        String consulta = ("SELECT idTemporada FROM temporada WHERE curso = '" + jComboBox1.getSelectedItem().toString()
+                + "'");
+        int temporada = 0;
+
+        retset = accesoBD.ejecutaConsulta(consulta);
+        try {
+            if (retset.next()) {
+                temporada = retset.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ModificarActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return temporada;
+
+    }
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        boolean exito;
+        String errores = "";
+        int idTemporada = getIDTemporada();
+        String FechaInicio = (Integer.toString(fechaInicioDateChooser.getCalendar().get(java.util.Calendar.YEAR)) + "-" + 
+        Integer.toString(fechaInicioDateChooser.getCalendar().get(java.util.Calendar.MONTH)) + "-" + 
+        Integer.toString(fechaInicioDateChooser.getCalendar().get(java.util.Calendar.DATE)));
+        
+        System.out.print(FechaInicio);
+  
+        String FechaFin = (Integer.toString(fechaFinDateChooser.getCalendar().get(java.util.Calendar.YEAR)) + "-" + 
+        Integer.toString(fechaFinDateChooser.getCalendar().get(java.util.Calendar.MONTH)) + "-" + 
+        Integer.toString(fechaFinDateChooser.getCalendar().get(java.util.Calendar.DATE)));
+  
+        
+        if(fechaInicioDateChooser == null || fechaFinDateChooser == null){
+            JOptionPane.showMessageDialog(null, "No has seleccionado una fecha",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        exito = GestorActividad.modificaActividad(accesoBD, idActividad, jTextArea1.getText(), plazasTextField.getText(),
+                "50", "70", Integer.toString(idTemporada), FechaInicio, FechaFin, nombreTextField.getText());
+
+        if (!exito) {
+            JOptionPane.showMessageDialog(null, "Ha habido un error en la base de datos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Actividad modificada con exito",
+                    "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+
+            //InterfazUsuario.PantallaPrincipal.ActualizarTabla();
+            this.setVisible(false);
+            //this.setEnabled(false);
+            this.dispose();
+        }
+    }//GEN-LAST:event_GuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,9 +364,11 @@ public class ModificarActividad extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser fechaInicioDateChooser;
     private javax.swing.JLabel fechaInicioInicial;
     private javax.swing.JLabel fechaInicioLabel;
+    private javax.swing.JComboBox instalacion;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel modificarLabel;
     private javax.swing.JLabel nombreLabel;

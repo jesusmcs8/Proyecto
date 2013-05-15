@@ -47,7 +47,7 @@ public class AccesoBDActividad {
 
         boolean exito = true;
 
-        String actualizacion = "UPDATE Actividad SET ";
+        String actualizacion = "UPDATE actividades SET ";
 
         if (descripcion != null) {
             actualizacion = actualizacion + "descripcion = \"" + descripcion + "\" , ";
@@ -62,7 +62,7 @@ public class AccesoBDActividad {
             actualizacion = actualizacion + "precioNoSocio = \"" + precioNoSocio + "\" , ";
         }
         if (idTemporada != null) {
-            actualizacion = actualizacion + "idTemporada = \"" + idTemporada + "\" , ";
+            actualizacion = actualizacion + "Temporada_idTemporada = \"" + idTemporada + "\" , ";
         }
         if (fechaInicio != null) {
             actualizacion = actualizacion + "fechaInicio = \"" + fechaInicio + "\" , ";
@@ -75,7 +75,9 @@ public class AccesoBDActividad {
         }
 
         actualizacion = actualizacion.substring(0, actualizacion.length() - 2);
-        actualizacion = actualizacion + " WHERE idActividad= " + idActividad;
+        actualizacion = actualizacion + " WHERE idActividades= " + idActividad;
+        
+        System.out.print("\n" + actualizacion);
 
         try {
             accesoBD.ejecutaActualizacion(actualizacion);
@@ -91,28 +93,28 @@ public class AccesoBDActividad {
     public static void eliminarActividadBD(BaseDatos accesoBD, Actividad nuevaActividad) {
         String selId = new String();
 
-        selId = "SELECT a.idActividad FROM Actividad a WHERE a.nAlumnos = "
+        selId = "SELECT a.idActividades FROM actividades a WHERE a.nAlumnos = "
                 + nuevaActividad.getNAlumnos();
         if (nuevaActividad.getDescripcion() != null) {
-            selId = selId + " AND a.descripcion = \" " + nuevaActividad.getDescripcion() + "\" ";
+            selId = selId + " AND a.descripcion = \"" + nuevaActividad.getDescripcion() + "\" ";
         }
         if (nuevaActividad.getPrecioSocio() > 0) {
-            selId = selId + "AND a.precioSocio = " + nuevaActividad.getPrecioSocio();
+            selId = selId + " AND a.precioSocio = " + nuevaActividad.getPrecioSocio();
         }
         if (nuevaActividad.getPrecioNoSocio() > 0) {
             selId = selId + " AND a.precioNoSocio = " + nuevaActividad.getPrecioNoSocio();
         }
         if (nuevaActividad.getIdTemporada() != 0) {
-            selId = selId + " AND a.idTemporada = " + nuevaActividad.getIdTemporada();
+            selId = selId + " AND a.Temporada_idTemporada = " + nuevaActividad.getIdTemporada();
         }
         if (nuevaActividad.getFechaInicio() != null) {
-            selId = selId + "AND a.fechaInicio = \"" + nuevaActividad.getFechaInicio() + "\" ";
+            selId = selId + " AND a.fechaInicio = \"" + nuevaActividad.getFechaInicio() + "\" ";
         }
         if (nuevaActividad.getFechaFin() != null) {
-            selId = selId + "AND a.fechaFin = \"" + nuevaActividad.getFechaFin() + "\" ";
+            selId = selId + " AND a.fechaFin = \"" + nuevaActividad.getFechaFin() + "\" ";
         }
         if (nuevaActividad.getNombre() != null) {
-            selId = selId + "AND a.nombre = \"" + nuevaActividad.getNombre() + "\" ";
+            selId = selId + " AND a.nombre = \"" + nuevaActividad.getNombre() + "\" ";
         }
 
         System.out.println("Consulta eliminar " + selId);
@@ -120,15 +122,17 @@ public class AccesoBDActividad {
         try {
             retset = accesoBD.ejecutaConsulta(selId);
             if (retset.next()) {
-                nuevaActividad.setIdActividad(retset.getInt("idActividad"));
+                nuevaActividad.setIdActividad(retset.getInt(1));
             }
         } catch (SQLException ex) {
             System.out.print(ex.getMessage());
         }
 
-        String delete = "DELETE FROM Actividad WHERE idActividad = "
+        String delete = "DELETE FROM actividades WHERE idActividades = "
                 + nuevaActividad.getIdActividad();
 
+        System.out.print(delete);
+        
         boolean exito = accesoBD.eliminar(delete);
         if (!exito) {
             JOptionPane.showMessageDialog(null, "Ha habido un error en la base de datos",

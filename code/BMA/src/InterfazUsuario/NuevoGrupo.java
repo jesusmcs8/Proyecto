@@ -243,6 +243,11 @@ public class NuevoGrupo extends javax.swing.JFrame {
         comboInst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboInst.setMinimumSize(new java.awt.Dimension(117, 20));
         comboInst.setPreferredSize(new java.awt.Dimension(117, 20));
+        comboInst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboInstActionPerformed(evt);
+            }
+        });
 
         jTextField1.setText("Buscar...");
         jTextField1.setMinimumSize(new java.awt.Dimension(70, 20));
@@ -494,6 +499,10 @@ public class NuevoGrupo extends javax.swing.JFrame {
        if(textMin.getText().length() >= 2)
             evt.consume();
     }//GEN-LAST:event_textMinKeyTyped
+
+    private void comboInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboInstActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboInstActionPerformed
 
     /**
      * @param args the command line arguments

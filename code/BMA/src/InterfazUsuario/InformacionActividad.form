@@ -44,12 +44,8 @@
                           </Group>
                           <Component id="informacionLabel" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="lugarLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="lugarTextField" min="-2" pref="133" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                               <Component id="plazasLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="plazasTextField" min="-2" pref="58" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -91,8 +87,6 @@
               </Group>
               <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lugarLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lugarTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="plazasLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="plazasTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -138,13 +132,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="fechaFinTextField">
     </Component>
-    <Component class="javax.swing.JLabel" name="lugarLabel">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Lugar"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="lugarTextField">
-    </Component>
     <Component class="javax.swing.JLabel" name="plazasLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Plazas"/>
@@ -176,6 +163,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Alumnos"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AlumnosActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Salir">
       <Properties>

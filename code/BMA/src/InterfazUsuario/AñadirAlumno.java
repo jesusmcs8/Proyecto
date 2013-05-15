@@ -31,7 +31,9 @@ public class AñadirAlumno extends javax.swing.JFrame {
     int idTemporada, idActividad;
     BaseDatos accesoBD;
     List<String> listaAlumnos = new ArrayList<String>();
+    List<String> listaAlumnosQuitados = new ArrayList<String>();
     List<Integer> listaIDAlumnos = new ArrayList<Integer>();
+    List<Integer> listaIDAlumnosQuitados = new ArrayList<Integer>();
 
     /**
      * Creates new form AñadirAlumno
@@ -72,8 +74,13 @@ public class AñadirAlumno extends javax.swing.JFrame {
         AlumnosSelecionados = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ListaAlumnos = new javax.swing.JList();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        AlumnosMostrados = new javax.swing.JList();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        Quitar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Titulo.setText("Añadir alumno");
 
@@ -119,6 +126,19 @@ public class AñadirAlumno extends javax.swing.JFrame {
 
         jScrollPane2.setViewportView(ListaAlumnos);
 
+        jScrollPane1.setViewportView(AlumnosMostrados);
+
+        jLabel2.setText("Alumnos Apuntados:");
+
+        jLabel3.setText("0");
+
+        Quitar.setText("Quitar");
+        Quitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QuitarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,6 +149,17 @@ public class AñadirAlumno extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(PrimerApellido)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Mostrar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Quitar)
+                                .addGap(4, 4, 4)
+                                .addComponent(Añadir)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Guardar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Salir))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(34, 34, 34)
                                 .addComponent(PrimerApellidoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -136,26 +167,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
                                 .addComponent(SegundoApellido)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(SegundoApellidoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(Mostrar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Añadir)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Guardar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Salir))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(AlumnosSelecionados))
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(9, 9, 9))))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Buscar)
@@ -165,7 +177,23 @@ public class AñadirAlumno extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AlumnosSelecionados)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)))
+                .addGap(41, 41, 41))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,16 +215,21 @@ public class AñadirAlumno extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(AlumnosSelecionados))
+                    .addComponent(AlumnosSelecionados)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Salir)
                     .addComponent(Guardar)
                     .addComponent(Añadir)
-                    .addComponent(Mostrar))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(Mostrar)
+                    .addComponent(Quitar))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -215,7 +248,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirActionPerformed
 
     private String leerConsulta() {
-        String consulta = new String("SELECT nombre, primerApellido, segundoApellido from alumno");
+        String consulta = new String("SELECT nombre, primerApellido, segundoApellido from alumno ");
         String condicion = new String("WHERE ");
 
         if (!NombreTextField.getText().equals("") || !PrimerApellidoTextField.getText().equals("")
@@ -230,13 +263,45 @@ public class AñadirAlumno extends javax.swing.JFrame {
                 condicion = condicion + " segundoApellido = '" + SegundoApellidoTextField.getText() + "' AND";
             }
 
-            condicion = condicion.substring(0, condicion.length() - 3);
-            consulta = consulta + condicion;
-            
+            //condicion = condicion.substring(0, condicion.length() - 3);
+
+
+
+
         }
 
+        condicion = condicion + " idAlumno NOT IN (select Alumno_idAlumno from pagoactividades WHERE Actividades_idActividades = "
+                + idActividad + ")";
+        consulta = consulta + condicion;
+        System.out.print("\n\n Consulta todos alumnos" + consulta);
         return consulta;
     }
+
+    private void alumnosSelecionados() {
+
+        String consulta = ("SELECT nombre, primerApellido, segundoApellido from alumno WHERE idAlumno IN "
+                + "(select Alumno_idAlumno from pagoactividades where Actividades_idActividades =" + idActividad + ")");
+
+        ResultSet retset;
+        int nAl = 0;
+
+        retset = accesoBD.ejecutaConsulta(consulta);
+
+        DefaultListModel modelo = new DefaultListModel();
+        try {
+            while (retset.next()) {
+                modelo.addElement(retset.getString("primerApellido")
+                        + " " + retset.getString("segundoApellido") + " " + retset.getString("nombre"));
+                nAl++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AñadirAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        AlumnosMostrados.setModel(modelo);
+        jLabel3.setText(Integer.toString(nAl));
+
+    }
+
     private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
         try {
             // TODO add your handling code here:
@@ -306,6 +371,8 @@ public class AñadirAlumno extends javax.swing.JFrame {
             Logger.getLogger(AñadirAlumno.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        alumnosSelecionados();
+
     }//GEN-LAST:event_MostrarActionPerformed
 
     public int getIDCuota() throws SQLException {
@@ -364,6 +431,35 @@ public class AñadirAlumno extends javax.swing.JFrame {
 
     }//GEN-LAST:event_GuardarActionPerformed
 
+    private void QuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuitarActionPerformed
+        // TODO add your handling code here:
+        listaAlumnosQuitados.addAll(AlumnosMostrados.getSelectedValuesList());
+        try {
+            listaIDAlumnosQuitados = GestorAlumnos.getIdAl(accesoBD, listaAlumnosQuitados);
+        } catch (SQLException ex) {
+            Logger.getLogger(AñadirAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (listaIDAlumnosQuitados.size() > 0) {
+            String delete;
+            ResultSet retset;
+            for (int i = 0; i < listaIDAlumnosQuitados.size(); i++) {
+                delete = "DELETE FROM pagoactividades WHERE Alumno_idAlumno =" + listaIDAlumnosQuitados.get(i);
+                boolean exito = accesoBD.eliminar(delete);
+                if (!exito) {
+                    JOptionPane.showMessageDialog(null, "Error al eliminar",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+             JOptionPane.showMessageDialog(null, "Alumnos eliminados",
+                    "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(null, "No has seleccionado alumnos",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+
+    }//GEN-LAST:event_QuitarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,6 +501,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList AlumnosMostrados;
     private javax.swing.JLabel AlumnosSelecionados;
     private javax.swing.JButton Añadir;
     private javax.swing.JLabel Buscar;
@@ -415,11 +512,15 @@ public class AñadirAlumno extends javax.swing.JFrame {
     private javax.swing.JTextField NombreTextField;
     private javax.swing.JLabel PrimerApellido;
     private javax.swing.JTextField PrimerApellidoTextField;
+    private javax.swing.JButton Quitar;
     private javax.swing.JButton Salir;
     private javax.swing.JLabel SegundoApellido;
     private javax.swing.JTextField SegundoApellidoTextField;
     private javax.swing.JLabel Titulo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

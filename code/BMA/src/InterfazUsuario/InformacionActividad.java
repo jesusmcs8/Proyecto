@@ -4,17 +4,50 @@
  */
 package InterfazUsuario;
 
+import ServiciosAlmacenamiento.BaseDatos;
+import java.awt.Color;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+
 /**
  *
  * @author jesusmcs
  */
 public class InformacionActividad extends javax.swing.JFrame {
 
+    BaseDatos accesoBD;
+    String nombreAct, fechainicio, fechafin;
+
     /**
      * Creates new form InformacionActividad
      */
     public InformacionActividad() {
         initComponents();
+    }
+
+    public InformacionActividad(BaseDatos acceso, String nombre, String fInicio, String fFin) throws SQLException {
+        accesoBD = acceso;
+        initComponents();
+        nombreAct = nombre;
+        fechainicio = fInicio;
+        fechafin = fFin;
+
+        nombreTextField.setEditable(false);
+        fechaInicioTextField.setEditable(false);
+        fechaFinTextField.setEditable(false);
+        //lugarTextField.setEditable(false);
+        plazasTextField.setEditable(false);
+        jTextArea1.setEditable(false);
+
+        nombreTextField.setText(nombre);
+        fechaInicioTextField.setText(fInicio);
+        fechaFinTextField.setText(fFin);
+        mostrarActividad();
+
     }
 
     /**
@@ -33,8 +66,6 @@ public class InformacionActividad extends javax.swing.JFrame {
         fechaInicioTextField = new javax.swing.JTextField();
         fechaFinLabel = new javax.swing.JLabel();
         fechaFinTextField = new javax.swing.JTextField();
-        lugarLabel = new javax.swing.JLabel();
-        lugarTextField = new javax.swing.JTextField();
         plazasLabel = new javax.swing.JLabel();
         plazasTextField = new javax.swing.JTextField();
         descripcionLabel = new javax.swing.JLabel();
@@ -53,8 +84,6 @@ public class InformacionActividad extends javax.swing.JFrame {
 
         fechaFinLabel.setText("Fecha Fin");
 
-        lugarLabel.setText("Lugar");
-
         plazasLabel.setText("Plazas");
 
         descripcionLabel.setText("Descripcion");
@@ -64,6 +93,11 @@ public class InformacionActividad extends javax.swing.JFrame {
         descripcionScrollPane.setViewportView(jTextArea1);
 
         Alumnos.setText("Alumnos");
+        Alumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AlumnosActionPerformed(evt);
+            }
+        });
 
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
@@ -95,12 +129,8 @@ public class InformacionActividad extends javax.swing.JFrame {
                                 .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(informacionLabel)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lugarLabel)
-                                .addGap(15, 15, 15)
-                                .addComponent(lugarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(77, 77, 77)
                                 .addComponent(plazasLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(descripcionLabel)
@@ -132,8 +162,6 @@ public class InformacionActividad extends javax.swing.JFrame {
                     .addComponent(fechaFinTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lugarLabel)
-                    .addComponent(lugarTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(plazasLabel)
                     .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
@@ -150,10 +178,40 @@ public class InformacionActividad extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void mostrarActividad() {
+        ResultSet retset;
+        String consulta = "SELECT nAlumnos, descripcion FROM actividades WHERE "
+                + "nombre = '" + nombreAct + "' AND fechaInicio = '" + fechainicio
+                + "' AND fechafin = '" + fechafin + "'";
+        String plazas = "Error";
+        String descripcion = "Error";
+
+        retset = accesoBD.ejecutaConsulta(consulta);
+        System.out.print("\n\nConsulta MostrarActividad " + retset);
+        System.out.print("\n\nConsulta MostrarActividad " + consulta + "\n");
+
+        try {
+            if (retset.next()) {
+                plazas = retset.getString(1).toString();
+                descripcion = retset.getString(2).toString();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(InformacionActividad.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.print("\n\nNo entra en el try\n\n");
+        }
+
+
+        plazasTextField.setText(plazas);
+        jTextArea1.append(descripcion);
+    }
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_SalirActionPerformed
+
+    private void AlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AlumnosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AlumnosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -200,8 +258,6 @@ public class InformacionActividad extends javax.swing.JFrame {
     private javax.swing.JTextField fechaInicioTextField;
     private javax.swing.JLabel informacionLabel;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel lugarLabel;
-    private javax.swing.JTextField lugarTextField;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
     private javax.swing.JLabel plazasLabel;
