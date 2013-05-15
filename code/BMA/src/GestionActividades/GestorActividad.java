@@ -17,7 +17,7 @@ public class GestorActividad {
     public static boolean darAltaActividad (BaseDatos accesoBD,String descripcion, int nAlumnos, float precioSocio, float precioNoSocio, int idTemporada, Date fechaInicio, Date fechaFin, String nombre){
        
         boolean exito = true;
-        Actividad actividad = Actividad.creaActividad(descripcion, nAlumnos, precioSocio, precioNoSocio, idTemporada, fechaInicio, fechaFin, nombre);
+        Actividad actividad = new Actividad(descripcion, nAlumnos, precioSocio, precioNoSocio, idTemporada, fechaInicio, fechaFin, nombre);
         
          try {
             AccesoBDActividad.insertarActividadBD(accesoBD, actividad);

@@ -18,7 +18,7 @@ public class GestorInstalacion {
             int capacidad, String localizacion) {
 
         boolean exito = true;
-        Instalacion instalacion = Instalacion.crearInstalacion(nombre, capacidad, localizacion);
+        Instalacion instalacion = new Instalacion(nombre, capacidad, localizacion);
 
         try {
             AccesoBDInstalacion.insertarInstalacionBD(accesoBD, instalacion);

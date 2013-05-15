@@ -980,7 +980,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        mostrarButton.setText("Motrar");
+        mostrarButton.setText("Mostrar");
         mostrarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarButtonActionPerformed(evt);
@@ -3926,7 +3926,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         int idActividad = getIDActividad();
         String fechainicio = (String) actividadesTable.getValueAt(nTabla, 1);
         String fechaFin = (String) actividadesTable.getValueAt(nTabla, 2);
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MMM   -dd");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaInicio = null;
         Date fechafin = null;
         try {
