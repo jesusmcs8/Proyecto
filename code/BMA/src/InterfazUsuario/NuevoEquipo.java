@@ -5,6 +5,7 @@
 package InterfazUsuario;
 
 import GestionDeAlumnos.Alumno;
+import GestionDeCategorias.GestorCategorias;
 import GestionDeEquipos.GestorEquipos;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +38,8 @@ public class NuevoEquipo extends javax.swing.JFrame {
         listaAlumnos = new ArrayList<String>();
         List<String> aux = new ArrayList<String>();
         
-        aux = creador.getListaCategorias();        
+        //aux = creador.getListaCategorias();        
+        aux = GestorCategorias.getTipoCategorias(creador.accesoBD);
         actualizaComboCat(aux);
         
         aux = creador.getListaTemps();        

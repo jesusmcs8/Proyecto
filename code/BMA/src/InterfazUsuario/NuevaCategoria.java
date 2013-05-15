@@ -129,6 +129,11 @@ public class NuevaCategoria extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(NuevaCategoria.class.getName()).log(Level.SEVERE, null, ex);
             }
+            try {
+                creador.actualizaTablaCategorias();
+            } catch (SQLException ex) {
+                Logger.getLogger(NuevaCategoria.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.setVisible(false);
         }
             

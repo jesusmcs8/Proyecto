@@ -200,7 +200,11 @@ public class ModificarCategoria extends javax.swing.JFrame {
                 this.setVisible(false);
             }
         }
-        
+        try {
+            creador.actualizaTablaCategorias();
+        } catch (SQLException ex) {
+            Logger.getLogger(ModificarCategoria.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonAceptarActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed

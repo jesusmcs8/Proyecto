@@ -3167,6 +3167,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         List<String> ents = new ArrayList<String>();
         ents = getListaEntrenadores("");
         comboEntGrup.removeAllItems();
+        comboEntGrup.addItem("-Ninguno-");
         actualizaComboEntGrup(ents);
 
         /* Rellenar tabla de grupos */
@@ -3468,53 +3469,25 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         cat = (String) tablaGrupos.getValueAt(filaSelec, 2);
         ent = (String) tablaGrupos.getValueAt(filaSelec, 3);
         inst = (String) tablaGrupos.getValueAt(filaSelec, 4);
-
-        /**
-         * *********************************************************************
-         */
-        /**
-         * ******PROVISIONAL HASTA TENER
-         * CATEGORIAS*****************************
-         */
-        String query = "SELECT idCategoria FROM Categoria WHERE tipo='" + cat + "'";
-        ResultSet res1 = accesoBD.ejecutaConsulta(query);
+        
+        
         try {
-            if (res1.next()) {
-                idCat = res1.getInt(1);
-            }
-
+            idCat = GestorCategorias.getIdCategoria(accesoBD, cat);
         } catch (SQLException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /**
-         * *********************************************************************
-         */
+        
         try {
             idEnt = GestorUsuarios.getIdEnt(accesoBD, ent);
         } catch (SQLException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        /**
-         * *********************************************************************
-         */
-        /**
-         * **********PROVISIONAL HASTA TENER
-         * INSTALACIONES**********************
-         */
-        query = "SELECT idInstalacion FROM Instalacion WHERE "
-                + "nombre='" + inst + "'";
-        ResultSet res2 = accesoBD.ejecutaConsulta(query);
         try {
-            if (res2.next()) {
-                idInst = res2.getInt(1);
-            }
-
+            idInst = GestorInstalacion.getIdInstalacion(accesoBD, inst);
         } catch (SQLException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
+        
         try {
             idTemp = GestorGrupos.getIdTemporada(accesoBD, idGrup);
         } catch (SQLException ex) {
@@ -3622,7 +3595,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
-        // TODO add your handling code here:
+        
         String error = "";
 
         int indiceTabla = tablaInstalacion.getSelectedRow();
@@ -3919,10 +3892,20 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         if (continuar == JOptionPane.YES_OPTION) {
             GestorCategorias.EliminarCategorias(accesoBD, c);
         }
+        try {
+            actualizaTablaCategorias();
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonElimCatActionPerformed
 
     private void menuCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCategoriasMouseClicked
         ocultarPaneles();
+        try {
+            actualizaTablaCategorias();
+        } catch (SQLException ex) {
+            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
         panelCategorias.setVisible(true);
         try {
             actualizaTablaCategorias();
@@ -4240,6 +4223,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
 
     private void actualizaComboTempEnt() throws SQLException {
         comboTempEntr.removeAllItems();
+        comboTempEntr.addItem("-Ninguno-");
         String query = "SELECT curso FROM Temporada";
         ResultSet res = accesoBD.ejecutaConsulta(query);
         while (res.next()) {
@@ -4256,16 +4240,17 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
     }
 
-    /*
-     * Metodo provisional hasta que se implemente "CATEGORIA"
-     */
+    
     private void actualizaComboCatGrup() throws SQLException {
         comboCatGrup.removeAllItems();
-        String query = "SELECT tipo FROM Categoria";
-        ResultSet res = accesoBD.ejecutaConsulta(query);
-        while (res.next()) {
-            comboCatGrup.addItem(res.getString(1));
-        }
+        comboCatGrup.addItem("-Ninguno-");
+        List<String> listaCats = new ArrayList<String>();
+        
+        listaCats = GestorCategorias.getTipoCategorias(accesoBD);
+        
+        for(String s : listaCats)
+            comboCatGrup.addItem(s);
+        
     }
 
     private void actualizaComboCatEquipo() throws SQLException {
@@ -4285,6 +4270,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     }
 
     private void actualizaComboTempEnt(List<String> temps) {
+        comboTempEntr.addItem("-Ninguno-");
         for (String s : temps) {
             comboTempEntr.addItem(s);
         }
@@ -4305,7 +4291,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     /*
      * Metodo provisional hasta que se implemente "CATEGORIA"
      */
-    List<String> getListaCategorias() throws SQLException {
+    /*List<String> getListaCategorias() throws SQLException {
         List<String> cats = new ArrayList<String>();
         String query = "SELECT tipo FROM Categoria";
         ResultSet res = accesoBD.ejecutaConsulta(query);
@@ -4314,7 +4300,7 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         }
 
         return cats;
-    }
+    }*/
 
     public List<String> getListaEntrenadores(String sEnt) {
         List<String> ents = new ArrayList<String>();
@@ -4334,20 +4320,11 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         return als;
     }
 
-    /**
-     * METODO PROVISIONAL HASTA TENER GESTOR DE INSTALACIONES
-     *
-     */
+    
     List<String> getListaInstalaciones(String s) throws SQLException {
         List<String> inst = new ArrayList<String>();
-        //inst = GestorInstalaciones.getListaInstalaciones(accesoBD, s);
-        String query = "SELECT nombre, localizacion FROM Instalacion";
-        ResultSet res = accesoBD.ejecutaConsulta(query);
-
-        while (res.next()) {
-            inst.add(res.getString(1) + "," + res.getString(2));
-        }
-
+        inst = GestorInstalacion.getListaInstalaciones(accesoBD);
+        
 
         return inst;
     }
@@ -4508,18 +4485,10 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         tablaPagos.setModel(dtm);
     }
 
-    /**
-     * METODO PROVISIONAL HASTA TENER GESTOR DE CATEGORIA
-     *
-     */
+    
     private String getCategoria(String s) throws SQLException {
-        String query = "SELECT tipo FROM Categoria WHERE idCategoria='" + s + "'";
-        ResultSet res = accesoBD.ejecutaConsulta(query);
-        String cat = "";
-
-        if (res.next()) {
-            cat = res.getString(1);
-        }
+        
+        String cat = GestorCategorias.getCategoria(accesoBD, Integer.parseInt(s));
 
         return cat;
     }
@@ -4529,12 +4498,8 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         return GestorUsuarios.getEntrenador(accesoBD, s);
     }
 
-    /**
-     * METODO PROVISIONAL HASTA TENER GESTOR DE INSTALACION
-     *
-     */
+    
     private String getTemporada(String s) throws SQLException {
-
 
         return GestorTemporadas.getTemporada(accesoBD, s);
     }

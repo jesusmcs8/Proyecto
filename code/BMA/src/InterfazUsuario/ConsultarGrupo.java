@@ -6,6 +6,7 @@ package InterfazUsuario;
 
 import GestionDeAlumnos.Alumno;
 import GestionDeAlumnos.GestorAlumnos;
+import GestionDeCategorias.GestorCategorias;
 import GestionDeGrupos.GestorGrupos;
 import GestionDeGrupos.Grupo;
 import GestionDeGrupos.GruposBD;
@@ -84,7 +85,8 @@ public class ConsultarGrupo extends javax.swing.JFrame {
         aux = creador.getListaTemps();
         actualizaComboTemp(aux);
         
-        aux = creador.getListaCategorias();
+        //aux = creador.getListaCategorias();
+        aux = GestorCategorias.getTipoCategorias(creador.accesoBD);
         actualizaComboCat(aux);
         
         //aux = creador.getListaAlumnos("");

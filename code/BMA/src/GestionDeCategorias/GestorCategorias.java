@@ -6,6 +6,8 @@ import InterfazUsuario.PantallaPrincipal;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +20,7 @@ public class GestorCategorias {
         return CategoriaBD.getCategoria(accesoBD, idCat);
     }
 
-    public static int getIdCategoria(BaseDatos accesoBD, String categoria) throws SQLException {
+    public static int getIdCategoria(BaseDatos accesoBD, String categoria) throws SQLException, SQLException, SQLException, SQLException, SQLException {
         return CategoriaBD.getIdCategoria(accesoBD, categoria);
     }
 
@@ -80,5 +82,11 @@ public class GestorCategorias {
             JOptionPane.showMessageDialog(new PantallaPrincipal(), "Error al eliminar", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    public static List<String> getTipoCategorias(BaseDatos accesoBD) throws SQLException {
+        return CategoriaBD.getTipoCategorias(accesoBD);
+    }
+
+    }
+
     
-}
+
