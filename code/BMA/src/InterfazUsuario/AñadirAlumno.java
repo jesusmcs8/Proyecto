@@ -239,8 +239,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
     private void AñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñadirActionPerformed
         // TODO add your handling code here:
         listaAlumnos.addAll(ListaAlumnos.getSelectedValuesList());
-        System.out.print(listaAlumnos);
-        AlumnosSelecionados.setText(Integer.toString(listaAlumnos.size()));
+        System.out.print(listaAlumnos);        
     }//GEN-LAST:event_AñadirActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
@@ -424,7 +423,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Alumnos insertados",
                     "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-           
+
         } else {
             JOptionPane.showMessageDialog(null, "No has seleccionado alumnos",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -451,13 +450,13 @@ public class AñadirAlumno extends javax.swing.JFrame {
                             "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-             JOptionPane.showMessageDialog(null, "Alumnos eliminados",
+            JOptionPane.showMessageDialog(null, "Alumnos eliminados",
                     "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "No has seleccionado alumnos",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
 
     }//GEN-LAST:event_QuitarActionPerformed
 
