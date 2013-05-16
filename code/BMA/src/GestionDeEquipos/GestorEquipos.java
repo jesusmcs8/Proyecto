@@ -55,17 +55,8 @@ public class GestorEquipos {
     }
     
     public static boolean EliminarEquipo(BaseDatos accesoBD, Equipo e) throws SQLException {
-
-        boolean equipoEliminado;
-
-        equipoEliminado = EquipoBD.EliminarEquipoBD(accesoBD, e);
         
-/*        if(equipoEliminado==true)
-            JOptionPane.showMessageDialog(new NuevoEquipo(), "Equipo eliminado", "Equipo", JOptionPane.INFORMATION_MESSAGE);
-        else
-            JOptionPane.showMessageDialog(new NuevoEquipo(), "No se puede eliminar el equipo", "Error", JOptionPane.ERROR_MESSAGE);
-*/            
-        return equipoEliminado;
+        return EquipoBD.EliminarEquipoBD(accesoBD, e);
     }
     
     public static void InsertarDatosEquipo(BaseDatos accesoBD, String nombre,

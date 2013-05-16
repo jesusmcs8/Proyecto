@@ -203,7 +203,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         eliminarButton = new javax.swing.JButton();
         panelEquipos = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         textNombreEquipo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -1093,8 +1092,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Equipos");
 
-        jLabel9.setText("Buscar Equipos:");
-
         jLabel10.setText("Nombre:");
 
         textNombreEquipo.addActionListener(new java.awt.event.ActionListener() {
@@ -1177,7 +1174,6 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEquiposLayout.createSequentialGroup()
                         .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
                             .addComponent(jLabel8)
                             .addGroup(panelEquiposLayout.createSequentialGroup()
                                 .addGap(12, 12, 12)
@@ -1192,7 +1188,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                                 .addComponent(jLabel13)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(textEntEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(18, 18, 18)
+                                        .addGap(40, 40, 40)
                                         .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(panelEquiposLayout.createSequentialGroup()
                                                 .addComponent(jLabel11)
@@ -1207,7 +1203,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                         .addComponent(botonBuscar)
                                         .addGap(45, 45, 45)
                                         .addComponent(jButton3)))))
-                        .addGap(331, 331, 331))
+                        .addGap(0, 331, Short.MAX_VALUE))
                     .addGroup(panelEquiposLayout.createSequentialGroup()
                         .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelEquiposLayout.createSequentialGroup()
@@ -1223,8 +1219,8 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                 .addComponent(labelEquiposMostrados)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(labelNumeroEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator4)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jSeparator4))
                 .addContainerGap())
         );
         panelEquiposLayout.setVerticalGroup(
@@ -1232,9 +1228,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
             .addGroup(panelEquiposLayout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addComponent(jLabel8)
-                .addGap(27, 27, 27)
-                .addComponent(jLabel9)
-                .addGap(18, 18, 18)
+                .addGap(59, 59, 59)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(textNombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1250,24 +1244,23 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonBuscar)
                     .addComponent(jButton3))
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelEquiposLayout.createSequentialGroup()
-                        .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelEquiposLayout.createSequentialGroup()
-                                .addComponent(botonNuevoEquipo)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonInfoEquipo)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonModificarEquipo)
-                                .addGap(18, 18, 18)
-                                .addComponent(botonEliminarEquipo)))
+                        .addComponent(botonNuevoEquipo)
                         .addGap(18, 18, 18)
-                        .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelEquiposMostrados)
-                            .addComponent(labelNumeroEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(botonInfoEquipo)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonModificarEquipo)
+                        .addGap(18, 18, 18)
+                        .addComponent(botonEliminarEquipo)))
+                .addGap(18, 18, 18)
+                .addGroup(panelEquiposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelEquiposMostrados)
+                    .addComponent(labelNumeroEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(80, 80, 80))
         );
 
@@ -3846,15 +3839,13 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         categoria = tablaEquipos.getValueAt(filaSelec, 1).toString();
         temporada = tablaEquipos.getValueAt(filaSelec, 2).toString();
         entrenador = tablaEquipos.getValueAt(filaSelec, 3).toString();
-        entrenador2 = tablaEquipos.getValueAt(filaSelec, 4).toString();
 
         System.out.println("\nNombre: " + nombre);
         System.out.println("\nCategoria: " + categoria);
         System.out.println("\nTemporada: " + temporada);
         System.out.println("\nPrimer Entrenador: " + entrenador);
-        System.out.println("\nSegundo Entrenador: " + entrenador2);
 
-        equipo = new Equipo(nombre, temporada, categoria, entrenador, entrenador2);
+        equipo = new Equipo(nombre, temporada, categoria, entrenador, "");
 
         boolean equipoEliminado = false;
 
@@ -4120,7 +4111,6 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

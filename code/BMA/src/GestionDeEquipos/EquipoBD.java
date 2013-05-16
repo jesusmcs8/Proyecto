@@ -21,12 +21,13 @@ import java.util.logging.Logger;
  */
 public class EquipoBD {
 
+    //Filtrar entrenador correctamente
     static ResultSet BuscarEquipos(BaseDatos accesoBD, String nombre, String temporada, String categoria, String entrenador) throws SQLException {
 
         int idCategoria = GestorCategorias.getIdCategoria(accesoBD, categoria);
     
         String consulta = "SELECT DISTINCT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre "
-                        + "FROM Equipo, Categoria, Temporada, Rango, Rango r, Usuario ";
+                        + "FROM Equipo, Categoria, Temporada, Rango, Usuario ";
         String condicion = "WHERE ";
 
         if (!"".equals(nombre) || !"".equals(categoria) || !"".equals(temporada) || !"".equals(entrenador)) {
@@ -54,7 +55,8 @@ public class EquipoBD {
  
         return listaEquipos;
     }
-
+    
+    //Correcta
     static int getIdEq(BaseDatos accesoBD, String nombre, String categoria) throws SQLException {
 
         int idEquipo = 0;
@@ -71,6 +73,7 @@ public class EquipoBD {
         return idEquipo;
     }
 
+    //Correcta
     static int getIdUsuario(BaseDatos accesoBD, String nombre, String tipo) throws SQLException {
 
         int id = 0;
@@ -87,6 +90,7 @@ public class EquipoBD {
         return id;
     }
     
+    //Filtrar entrenador
     static List<Equipo> getListaEquipos(BaseDatos accesoBD) throws SQLException{
         
         List<Equipo> equipos = new ArrayList();
@@ -120,6 +124,7 @@ public class EquipoBD {
         return equipos;
     }
 
+    //Probar con cascade
     static boolean EliminarEquipoBD(BaseDatos accesoBD, Equipo e) throws SQLException {
 
         boolean equipoEliminado = true;
@@ -143,6 +148,7 @@ public class EquipoBD {
         return equipoEliminado;
     }
 
+    //Correcta
     static boolean ConsultarEquipo(BaseDatos accesoBD, String nombre, String temporada,
             String categoria) throws SQLException {
 
@@ -150,8 +156,8 @@ public class EquipoBD {
 
         int idCategoria = GestorCategorias.getIdCategoria(accesoBD, categoria);
         
-        String consulta = "SELECT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre, u.nombre "
-                        + "FROM Equipo, Categoria, Temporada, Rango, Usuario, Usuario u "
+        String consulta = "SELECT Equipo.nombre, Categoria.tipo, Temporada.curso "
+                        + "FROM Equipo, Categoria, Temporada "
                         + "WHERE Equipo.nombre='"+nombre+"' "
                         + "AND Categoria.idCategoria='" + idCategoria + "' "
                         + "AND Temporada.idTemporada='" + GestorTemporadas.getIdTemporada(accesoBD, temporada) + "'";
@@ -169,13 +175,13 @@ public class EquipoBD {
         return validar;
     }
 
+    //Correcta
     static void crearEquipoBD(BaseDatos accesoBD, Equipo equipo) throws SQLException {
         
         int idTemporada = GestorTemporadas.getIdTemporada(accesoBD, equipo.getTemporada().getCurso());
         int idCategoria = GestorCategorias.getIdCategoria(accesoBD, equipo.getCategoria().getNombreCategoria());        
         int idEntrenador = getIdUsuario(accesoBD, equipo.getEntrenador().getNombre(), "primero");
         int idEntrenador2 = getIdUsuario(accesoBD, equipo.getEntrenador2().getNombre(), "segundo");
-
         
         //Insertar en Equipo
         String consulta = "INSERT INTO Equipo (nombre, Fundacion_idFundacion, Categoria_idCategoria, Temporada_idTemporada)"
@@ -186,20 +192,23 @@ public class EquipoBD {
         
         int idEquipo = getIdEq(accesoBD, equipo.getNombre(), equipo.getCategoria().getNombreCategoria());
         
+        if(!"".equals(equipo.getEntrenador().getNombre())){
         //Insertar el Primer Entrenador en Rango
-        String consulta2 = "INSERT INTO Rango (Usuario_idUsuario, Equipo_idEquipo, Equipo_Fundacion_idFundacion, Equipo_Categoria_idCategoria, Equipo_Temporada_idTEmporada, tipo)"
+            String consulta2 = "INSERT INTO Rango (Usuario_idUsuario, Equipo_idEquipo, Equipo_Fundacion_idFundacion, Equipo_Categoria_idCategoria, Equipo_Temporada_idTEmporada, tipo)"
                 + "VALUES ('"+idEntrenador+"', '"+ idEquipo +"', 1, '"+idCategoria+"', '"+idTemporada+"', 'primero')";
         
-        int res2;
-        res2 = accesoBD.ejecutaActualizacion(consulta2);
+            int res2;
+            res2 = accesoBD.ejecutaActualizacion(consulta2);
+        }
         
-        //Insertar el Segundo Entrenador en Rango
-        String consulta3 = "INSERT INTO Rango (Usuario_idUsuario, Equipo_idEquipo, Equipo_Fundacion_idFundacion, Equipo_Categoria_idCategoria, Equipo_Temporada_idTEmporada, tipo)"
-                + "VALUES ('"+idEntrenador2+"', '"+ idEquipo +"', 1, '"+idCategoria+"', '"+idTemporada+"', 'segundo')";
-        
-        int res3;
-        res3 = accesoBD.ejecutaActualizacion(consulta3);
-        
+        if(!"".equals(equipo.getEntrenador2().getNombre())){
+            //Insertar el Segundo Entrenador en Rango
+            String consulta3 = "INSERT INTO Rango (Usuario_idUsuario, Equipo_idEquipo, Equipo_Fundacion_idFundacion, Equipo_Categoria_idCategoria, Equipo_Temporada_idTEmporada, tipo)"
+                    + "VALUES ('"+idEntrenador2+"', '"+ idEquipo +"', 1, '"+idCategoria+"', '"+idTemporada+"', 'segundo')";
+
+            int res3;
+            res3 = accesoBD.ejecutaActualizacion(consulta3);
+        }
         
         String consulta4 = "INSERT INTO TemporadaEquipo (Temporada_idTemporada, Equipo_idEquipo, Equipo_Fundacion_idFundacion, Equipo_Categoria_idCategoria, Equipo_Temporada_idTEmporada)"
                          + "VALUES ('"+idTemporada+"', '"+ idEquipo +"', 1, '"+idCategoria+"', '"+idTemporada+"')";
