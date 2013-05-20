@@ -7,7 +7,7 @@ package GestionDeUsuarios;
  * @author Alex Moreno
  * @version 1.0
  */
-class Usuario {
+public class Usuario {
 
     private int idUsuario;
     private String dni;
@@ -34,6 +34,10 @@ class Usuario {
         this.telMovil = telMovil;
         this.telFijo = telFijo;
         this.email = email;
+    }
+
+    public Usuario(String e) {
+        this.nombre = e;
     }
     public void setIdUsuario(int idUsuario){
         this.idUsuario=idUsuario;
@@ -91,5 +95,9 @@ class Usuario {
 
     public boolean getEntrenador() {
         return entrenador;
+    }
+
+    public void setIdEnt(int idEnt) {
+        this.idUsuario = idEnt;
     }
 }

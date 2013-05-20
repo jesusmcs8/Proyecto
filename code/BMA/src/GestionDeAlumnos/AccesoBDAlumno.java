@@ -7,6 +7,8 @@ package GestionDeAlumnos;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,6 +32,98 @@ class AccesoBDAlumno {
 
         System.out.print("\n inser " + inserccion);
         accesoBD.ejecutaActualizacion(inserccion);
+    }
+
+    static List<String> getListaAlumnos(BaseDatos accesoBD, String s) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        String query = "";
+        if(!"".equals(s)){
+            
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno "
+                +"WHERE primerApellido LIKE '%"+s+"%'";
+        }
+        else{
+            
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno";
+        }
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        while(res.next())
+            als.add(res.getString(2)+" "+res.getString(3)+" "+res.getString(1));
+        
+        return als;
+    }
+
+    static List<Integer> getIdAl(BaseDatos accesoBD, List<String> listaAlumnos) throws SQLException {
+        List<Integer> listaIDAl = new ArrayList<Integer>();
+        
+        String aux, apellido1="", apellido2="";
+        
+        for(String s : listaAlumnos){
+            aux = s;
+            
+            apellido1 = aux.substring(0, aux.indexOf(" "));
+            apellido2 = aux.substring(aux.indexOf(" ")+1, aux.indexOf(" ", aux.indexOf(" ")+1));
+            
+            String query = "SELECT idAlumno FROM Alumno WHERE primerApellido='"+apellido1+"'"
+                + "AND segundoApellido='"+apellido2+"'";
+            ResultSet res = accesoBD.ejecutaConsulta(query);
+            
+            if(res.next())
+                listaIDAl.add(res.getInt(1));
+        }
+       
+        return listaIDAl;
+    }
+
+    static int getIdAl(BaseDatos accesoBD, String s) throws SQLException {
+        int idAl = 0;
+        String aux, apellido1="", apellido2="";
+
+        aux = s;
+        
+        apellido1 = aux.substring(0, aux.indexOf(" "));
+        apellido2 = aux.substring(aux.indexOf(" ")+1, aux.indexOf(" ", aux.indexOf(" ")+1));
+            
+        String query = "SELECT idAlumno FROM Alumno WHERE primerApellido='"+apellido1+"'"
+                + " AND segundoApellido='"+apellido2+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+          
+        System.out.println(","+apellido1+","+apellido2+",");
+        
+        if(res.next())
+            idAl = res.getInt(1);
+        //System.out.println();
+        System.out.println(idAl);
+        return idAl;
+    }
+
+    static List<String> getListaAlumnosSinGrupo(BaseDatos accesoBD, String s) throws SQLException {
+        List<String> als = new ArrayList<String>();
+        String query = "";
+        if(!"".equals(s)){     
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno "
+                +"WHERE primerApellido LIKE '%"+s+"%'";
+        }
+        else{
+            query = "SELECT nombre, primerApellido, segundoApellido from Alumno"
+                    + " WHERE idAlumno "
+                    + "NOT IN "
+                    + "(SELECT Alumno_idAlumno from Alumnogrupo) ";
+            //ResultSet res1 = accesoBD.ejecutaConsulta(query1);
+            //List<String> idAls = new ArrayList<String>();
+            //while(res1.next()){
+              //  idAls.add(res1.getString(2)+" "+res1.getString(3)+" "+res1.getString(1));
+            //}
+            
+            //query = "SELECT nombre, primerApellido, segundoApellido FROM Alumno";
+        }
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        while(res.next())
+            als.add(res.getString(2)+" "+res.getString(3)+" "+res.getString(1));
+
+        return als;
     }
 
     public ResultSet consultaAlumnoBD(BaseDatos accesoBD, String consulta) {

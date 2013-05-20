@@ -6,6 +6,8 @@ package GestionDeUsuarios;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -42,6 +44,58 @@ class AccesoBDUsuario {
     
     public static ResultSet consultaUsuarioBD(BaseDatos accesoBD, String consulta) {
         return accesoBD.ejecutaConsulta(consulta);
+    }
+
+    static int getIdEnt(BaseDatos accesoBD, String entrenador) throws SQLException {
+        int id=0;
+        String nombre = "", apellido1 = "", apellido2 = "";
+        String aux = entrenador;       
+        
+        nombre = aux.substring(0, aux.indexOf(" "));
+        apellido1 = aux.substring(aux.indexOf(" ")+1, aux.indexOf(" ", aux.indexOf(" ")+1));
+        apellido2 = aux.substring(aux.indexOf(" ", aux.indexOf(" ")+1)+1, aux.length());
+        
+        String query = "SELECT idUsuario FROM Usuario WHERE nombre='"+nombre+"' AND "
+        + "primerApellido='"+apellido1+"' AND segundoApellido='"+apellido2+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        if(res.next())
+            id = res.getInt(1);
+        
+        return id;
+    }
+
+    static List<String> getListaEntrenadores(BaseDatos accesoBD, String s) throws SQLException {
+        String query = "";
+        if(!"".equals(s)){
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE "
+                +"nombre LIKE '%" + s + "%' AND entrenador='1'";
+        }
+        else{
+            query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE entrenador='1'";
+        }
+        
+        ResultSet resCons = accesoBD.ejecutaConsulta(query);
+        
+        List<String> res = new ArrayList<String>();
+        
+        while(resCons.next()){
+            res.add(resCons.getString(1)+" "+resCons.getString(2)+" "+resCons.getString(3));
+        }
+        
+        return res;
+    }
+
+    static String getEntrenador(BaseDatos accesoBD, String s) throws SQLException {
+        String query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario "
+                + "WHERE idUsuario='"+s+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+ 
+        String ent = "";
+        
+        if(res.next())
+            ent = (res.getString(1)+" "+res.getString(2)+" "+res.getString(3));
+        
+        return ent;
     }
 
     public void actualizaUsuarioBD(BaseDatos accesoBD, String actualizacion) throws SQLException {

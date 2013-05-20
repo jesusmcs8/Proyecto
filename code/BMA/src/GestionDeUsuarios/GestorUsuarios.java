@@ -5,6 +5,8 @@
 package GestionDeUsuarios;
 import ServiciosAlmacenamiento.BaseDatos;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -66,5 +68,34 @@ public class GestorUsuarios {
             clave, entrenador, telMovil, telFijo,
             email, numeroCuenta);
         usuarioBD.eliminaUsuarioBD(accesoBD, usuarioEliminado);
+    }
+    
+    public static List<String> getEntrenadores(BaseDatos accesoBD, String s) throws SQLException{
+        List<String> res = new ArrayList<String>();        
+        res = AccesoBDUsuario.getListaEntrenadores(accesoBD, s);
+
+        return res;
+    }
+
+    public static int getIdEnt(BaseDatos accesoBD, String entrenador) throws SQLException {
+        int res = AccesoBDUsuario.getIdEnt(accesoBD, entrenador);
+
+        return res;
+    }
+
+    public static String getEntrenador(BaseDatos accesoBD, String s) throws SQLException {
+        return AccesoBDUsuario.getEntrenador(accesoBD, s);
+    }
+
+    public static String getEntrenador(BaseDatos accesoBD, int idEnt) throws SQLException {
+        String query = "SELECT nombre, primerApellido, segundoApellido FROM Usuario WHERE "
+                + "idUsuario='"+idEnt+"'";
+        ResultSet res = accesoBD.ejecutaConsulta(query);
+        
+        String ent = "";
+        if(res.next())
+            ent = (res.getString(1)+" "+res.getString(2)+" "+res.getString(3));
+        
+        return ent;
     }
 }

@@ -4,17 +4,69 @@
  */
 package InterfazUsuario;
 
+import ServiciosAlmacenamiento.BaseDatos;
+import GestionActividades.*;
+import java.sql.*;
+import com.toedter.calendar.JTextFieldDateEditor;
+import java.awt.Color;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+
 /**
  *
  * @author jesusmcs
  */
 public class AltaActividad extends javax.swing.JFrame {
 
+    BaseDatos accesoBD;
+    Border bordeError;
+
     /**
      * Creates new form AltaActividad
      */
     public AltaActividad() {
         initComponents();
+        bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        ((JTextFieldDateEditor) fechaInicioDateChooser.getComponents()[1]).setEditable(false);
+        ((JTextFieldDateEditor) fechaFinDateChooser.getComponents()[1]).setEditable(false);
+    }
+
+    public AltaActividad(BaseDatos acceso) {
+        accesoBD = acceso;
+        initComponents();
+        bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+        ((JTextFieldDateEditor) fechaInicioDateChooser.getComponents()[1]).setEditable(false);
+        ((JTextFieldDateEditor) fechaFinDateChooser.getComponents()[1]).setEditable(false);
+         temporadaComboBox.removeAllItems();
+         instalacion.removeAllItems();
+
+        ResultSet retset;
+        String consulta = "SELECT nombre FROM instalacion";
+        retset = accesoBD.ejecutaConsulta(consulta);
+        try {
+            while (retset.next()) {
+                System.out.print("\n" + retset.getString(1));
+                instalacion.addItem(retset.getString(1).toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AltaActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        ResultSet rts;
+        String consultaCurso = "SELECT curso FROM temporada";
+        rts = accesoBD.ejecutaConsulta(consultaCurso);
+        try {
+            while (rts.next()) {
+                temporadaComboBox.addItem(rts.getString(1).toString());
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AltaActividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -38,6 +90,12 @@ public class AltaActividad extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         Guardar = new javax.swing.JButton();
         Cancelar = new javax.swing.JButton();
+        plazasLabel = new javax.swing.JLabel();
+        plazasTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        temporadaComboBox = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        instalacion = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta actividad");
@@ -54,7 +112,11 @@ public class AltaActividad extends javax.swing.JFrame {
 
         fechaInicioLabel.setText("Fecha inicio");
 
+        fechaInicioDateChooser.setDateFormatString("dd-MM-yyyy");
+
         fechaFinLabel.setText("Fecha Fin");
+
+        fechaFinDateChooser.setDateFormatString("dd-MM-yyyy");
 
         descripcionLabel.setText("Descripcion");
 
@@ -63,6 +125,11 @@ public class AltaActividad extends javax.swing.JFrame {
         descripcionScrollPane.setViewportView(jTextArea1);
 
         Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
 
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -71,36 +138,72 @@ public class AltaActividad extends javax.swing.JFrame {
             }
         });
 
+        plazasLabel.setText("Plazas");
+
+        jLabel2.setText("Temporada");
+
+        temporadaComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2011/2012", "2012/2013" }));
+        temporadaComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                temporadaComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Instalacion");
+
+        instalacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instalacionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(descripcionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(fechaInicioLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(36, 36, 36)
-                            .addComponent(fechaFinLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(descripcionLabel)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(nombreLabel)
-                            .addGap(18, 18, 18)
-                            .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(NuevaActividadLabel)))
-                .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Guardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Cancelar)
                 .addGap(10, 10, 10))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nombreLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(descripcionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(descripcionLabel)
+                                .addComponent(NuevaActividadLabel))
+                            .addGap(275, 275, 275)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(plazasLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(66, 66, 66)
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(temporadaComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(instalacion, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(fechaInicioLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(fechaFinLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,17 +213,30 @@ public class AltaActividad extends javax.swing.JFrame {
                     .addComponent(fechaFinLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(NuevaActividadLabel)
-                        .addGap(33, 33, 33)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(nombreLabel)
                             .addComponent(nombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fechaInicioLabel)
                             .addComponent(fechaInicioDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(fechaFinDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addComponent(descripcionLabel)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(plazasLabel)
+                    .addComponent(plazasTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(temporadaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(descripcionLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(instalacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(descripcionScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -141,6 +257,125 @@ public class AltaActividad extends javax.swing.JFrame {
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_CancelarActionPerformed
+
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        String error = "";
+        ResultSet retset, rts = null;
+
+        float precioSocio = 50;
+        float precioNoSocio = 70;
+        int idTemporada = 0;
+
+        if (nombreTextField.getText().isEmpty()) {
+            error = error + "Debes rellenar el campo 'Nombre'\n";
+            nombreTextField.setBorder(bordeError);
+        } else if (nombreTextField.getText().length() > 45) {
+            error = error + "La longitud del campo 'Nombre' no puede superar los 45 caracteres\n";
+            nombreTextField.setBorder(bordeError);
+        }
+        Date dateFromDateChooser = fechaInicioDateChooser.getDate();
+        String dateString = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser);
+        if (dateString.equals("null-null-null")) {
+            error = error + "Debes rellenar el campo 'Fecha de inicio'\n";
+            fechaInicioDateChooser.setBorder(bordeError);
+        }
+        Date dateFromDateChooser1 = fechaFinDateChooser.getDate();
+        String dateString1 = String.format("%1$tY-%1$tm-%1$td", dateFromDateChooser1);
+        if (dateString1.equals("null-null-null")) {
+            error = error + "Debes rellenar el campo 'Fecha de fin'\n";
+            fechaFinDateChooser.setBorder(bordeError);
+        }
+        if (plazasTextField.getText().isEmpty()) {
+            error = error + "Debes rellenar el campo 'Plazas'\n";
+            plazasTextField.setBorder(bordeError);
+        }
+
+        if (jTextArea1.getText().isEmpty()) {
+            error = error + "Debes rellenar el campo 'Plazas'\n";
+            jTextArea1.setBorder(bordeError);
+        }
+
+        if (error.isEmpty()) {
+
+            String consulta = "SELECT idTemporada FROM temporada"
+                    + " WHERE ";
+            consulta = consulta + "curso = " + "'" + temporadaComboBox.getSelectedItem().toString() + "'";
+
+            System.out.print("\n\n" + consulta);
+
+            retset = accesoBD.ejecutaConsulta(consulta);
+
+            //System.out.print("\n\n" + retset);
+            try {
+                if (retset.next()) {
+                    idTemporada = retset.getInt("idTemporada");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(AltaActividad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            System.out.print("\n\n cod temporada " + idTemporada);
+
+            boolean errores = GestorActividad.darAltaActividad(accesoBD, jTextArea1.getText(), Integer.parseInt(plazasTextField.getText()),
+                    precioSocio, precioNoSocio, idTemporada,
+                    dateFromDateChooser, dateFromDateChooser1, nombreTextField.getText());
+
+            retset = accesoBD.ejecutaConsulta("SELECT idInstalacion FROM instalacion WHERE nombre = '"
+                    + instalacion.getSelectedItem() + "'");
+
+            /*int idInstalacion = 0;
+            try {
+                if (rts.next()) {
+                    idInstalacion = rts.getInt(1);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(AltaActividad.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                insertarInstalacion(idInstalacion, idTemporada);
+            } catch (SQLException ex) {
+                Logger.getLogger(AltaActividad.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+            if (!errores) {
+                JOptionPane.showMessageDialog(null, "Ha habido un error en la base de datos",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Actividad creada con exito",
+                        "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                this.setVisible(false);
+                this.setEnabled(false);
+                this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    error.substring(0, error.length() - 1),
+                    "Errores en el formulario", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_GuardarActionPerformed
+
+    private void insertarInstalacion(int idInst, int idtem) throws SQLException {
+        ResultSet retset, rts;
+        String consulta = "SELECT MAX(idActividad) from actividades";
+        retset = accesoBD.ejecutaConsulta(consulta);
+
+        int idActividad = 0;
+        if (retset.next()) {
+            idActividad = retset.getInt(1);
+        }
+        
+        String insert = "INSERT INTO actividadesInstalacion (actividades_idActividades, actividades_Temporada_idTemporada"
+                + ", Instalacion_idInstalacion) VALUES ("+ idActividad + ", " + idtem + ", " + idInst + ")" ;
+        rts = accesoBD.ejecutaConsulta(insert);
+    }
+    private void temporadaComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_temporadaComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_temporadaComboBoxActionPerformed
+
+    private void instalacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instalacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_instalacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,8 +421,14 @@ public class AltaActividad extends javax.swing.JFrame {
     private javax.swing.JLabel fechaFinLabel;
     private com.toedter.calendar.JDateChooser fechaInicioDateChooser;
     private javax.swing.JLabel fechaInicioLabel;
+    private javax.swing.JComboBox instalacion;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel nombreLabel;
     private javax.swing.JTextField nombreTextField;
+    private javax.swing.JLabel plazasLabel;
+    private javax.swing.JTextField plazasTextField;
+    private javax.swing.JComboBox temporadaComboBox;
     // End of variables declaration//GEN-END:variables
 }

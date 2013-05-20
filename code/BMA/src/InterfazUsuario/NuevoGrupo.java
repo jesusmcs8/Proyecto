@@ -1,8 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package InterfazUsuario;
+
+import GestionDeAlumnos.Alumno;
+import GestionDeCategorias.GestorCategorias;
+import GestionDeGrupos.GestorGrupos;
+import bma.DiasSemana;
+import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -10,12 +21,63 @@ package InterfazUsuario;
  */
 public class NuevoGrupo extends javax.swing.JFrame {
 
+    private PantallaPrincipal creador;
+    private List<Alumno> alumnosSel;
+    private List<String> listaAlumnos;
+    
     /**
      * Creates new form NuevoGrupo
      */
     public NuevoGrupo() {
         initComponents();
-        this.setLocation(300, 300);
+        this.setLocation(300, 150);
+    }
+    
+    public NuevoGrupo(PantallaPrincipal v) throws SQLException {
+        initComponents();
+        this.setLocation(300, 150);
+        creador = v;
+        alumnosSel = new ArrayList<Alumno>();
+        listaAlumnos = new ArrayList<String>();
+ 
+        List<String> aux = new ArrayList<String>();
+        
+        aux = creador.getListaTemps();
+        actualizaComboTemp(aux);
+        
+        //aux = creador.getListaCategorias();
+        aux = GestorCategorias.getTipoCategorias(creador.accesoBD);
+        actualizaComboCat(aux);
+        
+        aux = creador.getListaAlumnosSinGrupo("");
+        actualizaModeloLista(aux);
+        
+        aux = creador.getListaEntrenadores("");
+        actualizaComboEntrenadores(aux);
+        
+        aux = creador.getListaInstalaciones("");
+        actualizaComboInstalaciones(aux);
+        
+        labelError.setVisible(false);
+        
+        comboDia1.removeAllItems();
+        comboDia1.addItem(DiasSemana.Lunes);
+        comboDia1.addItem(DiasSemana.Martes);
+        comboDia1.addItem(DiasSemana.Miercoles);
+        comboDia1.addItem(DiasSemana.Jueves);
+        comboDia1.addItem(DiasSemana.Viernes);
+        comboDia1.addItem(DiasSemana.Sabado);
+        comboDia1.addItem(DiasSemana.Domingo);
+        
+        comboDia2.removeAllItems();
+        comboDia2.addItem(DiasSemana.Lunes);
+        comboDia2.addItem(DiasSemana.Martes);
+        comboDia2.addItem(DiasSemana.Miercoles);
+        comboDia2.addItem(DiasSemana.Jueves);
+        comboDia2.addItem(DiasSemana.Viernes);
+        comboDia2.addItem(DiasSemana.Sabado);
+        comboDia2.addItem(DiasSemana.Domingo);
+ 
     }
 
     /**
@@ -28,87 +90,421 @@ public class NuevoGrupo extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        botonCancelar = new javax.swing.JButton();
+        botonAceptar = new javax.swing.JButton();
+        comboTemp = new javax.swing.JComboBox();
+        comboEnt = new javax.swing.JComboBox();
+        comboCat = new javax.swing.JComboBox();
+        textMin = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        textHora = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        tfBuscarEnt = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jlAlumnos = new javax.swing.JList();
+        jLabel5 = new javax.swing.JLabel();
+        tfBuscarAl = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        labelSelecc = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        labelAnadir = new javax.swing.JLabel();
+        botonAnadir = new javax.swing.JButton();
+        botonQuitar = new javax.swing.JButton();
+        labelError = new javax.swing.JLabel();
+        comboDia1 = new javax.swing.JComboBox();
+        comboDia2 = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        comboInst = new javax.swing.JComboBox();
+        jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nuevo Grupo");
         setResizable(false);
 
-        jLabel1.setText("Introducir temporada, categoria y entrenador para el nuevo grupo");
+        jLabel1.setText("Introducir los datos para crear un nuevo Grupo de Entrenamiento");
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCancelarActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptar.setText("Aceptar");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAceptarActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Temporada-", "12/13", "13/14", "14/15" }));
+        comboTemp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Temporada-", "12/13", "13/14", "14/15" }));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Entrenador-", "Raul G. D.", "Paco S. J." }));
+        comboEnt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Entrenador-", "Raul G. D.", "Paco S. J." }));
+        comboEnt.setMinimumSize(new java.awt.Dimension(174, 20));
+        comboEnt.setPreferredSize(new java.awt.Dimension(174, 20));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Categoria-", "Benjamin", "Alevin", "Infantil", "Cadete", "Junior" }));
+        comboCat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-Categoria-", "Benjamin", "Alevin", "Infantil", "Cadete", "Junior" }));
+
+        textMin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textMinKeyTyped(evt);
+            }
+        });
+
+        jLabel2.setText(":");
+
+        textHora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textHoraKeyTyped(evt);
+            }
+        });
+
+        jLabel3.setText("Horario");
+
+        jLabel4.setText("Entrenador");
+
+        tfBuscarEnt.setText("Buscar...");
+        tfBuscarEnt.setMinimumSize(new java.awt.Dimension(70, 20));
+        tfBuscarEnt.setPreferredSize(new java.awt.Dimension(70, 20));
+        tfBuscarEnt.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfBuscarEntMouseClicked(evt);
+            }
+        });
+        tfBuscarEnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBuscarEntKeyTyped(evt);
+            }
+        });
+
+        jlAlumnos.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jlAlumnos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlAlumnosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jlAlumnos);
+
+        jLabel5.setText("Alumnos");
+
+        tfBuscarAl.setText("Buscar...");
+        tfBuscarAl.setMinimumSize(new java.awt.Dimension(70, 20));
+        tfBuscarAl.setPreferredSize(new java.awt.Dimension(70, 20));
+        tfBuscarAl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tfBuscarAlMouseClicked(evt);
+            }
+        });
+        tfBuscarAl.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfBuscarAlKeyTyped(evt);
+            }
+        });
+
+        jLabel6.setText("Seleccionados:");
+
+        labelSelecc.setText("0");
+
+        jLabel8.setText("Añadidos: ");
+
+        labelAnadir.setText("0");
+
+        botonAnadir.setText("Añadir");
+        botonAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAnadirActionPerformed(evt);
+            }
+        });
+
+        botonQuitar.setText("Quitar");
+
+        labelError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        labelError.setForeground(new java.awt.Color(255, 0, 0));
+        labelError.setText("Se ha superado el maximo por grupo");
+
+        comboDia1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        comboDia2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setText("Dia 1");
+
+        jLabel9.setText("Dia 2");
+
+        jLabel10.setText("(hh:mm)");
+
+        jLabel11.setText("Instalacion");
+
+        comboInst.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboInst.setMinimumSize(new java.awt.Dimension(117, 20));
+        comboInst.setPreferredSize(new java.awt.Dimension(117, 20));
+        comboInst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboInstActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setText("Buscar...");
+        jTextField1.setMinimumSize(new java.awt.Dimension(70, 20));
+        jTextField1.setPreferredSize(new java.awt.Dimension(70, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addContainerGap()
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2)))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfBuscarEnt, javax.swing.GroupLayout.DEFAULT_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(tfBuscarAl, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(comboEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelError)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(botonAceptar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(botonCancelar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelAnadir))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelSelecc))
+                                    .addComponent(jLabel11)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(botonAnadir)
+                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(comboInst, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(botonQuitar)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(comboDia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel10))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(comboDia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(textHora, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textMin, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(6, 6, 6)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
+                    .addComponent(comboTemp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboCat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(comboInst, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboDia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboDia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfBuscarEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addComponent(jLabel5)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfBuscarAl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(botonAnadir)
+                                .addComponent(botonQuitar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labelError)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(labelSelecc))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(labelAnadir)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonCancelar)
+                    .addComponent(botonAceptar))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+        boolean salir = false;
+       
+        if(textHora.getText().length() == 2 && textMin.getText().length() == 2){
+            if(textHora.getText() != null && !Character.isLetter(textHora.getText().charAt(0)) &&
+                    !Character.isLetter(textHora.getText().charAt(1)) &&
+                    textMin.getText() != null && !Character.isLetter(textMin.getText().charAt(0)) && 
+                    !Character.isLetter(textMin.getText().charAt(1)) ){
+                try {
+                    GestorGrupos.insertarDatosGrupo(creador.accesoBD, listaAlumnos, 
+                        comboTemp.getSelectedItem().toString(), comboCat.getSelectedItem().toString(), 
+                        comboDia1.getSelectedItem().toString(), 
+                        comboDia2.getSelectedItem().toString(), textHora.getText(), textMin.getText(), 
+                        comboEnt.getSelectedItem().toString(), comboInst.getSelectedItem().toString());
+                
+                } catch (ParseException ex) {
+                    Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
+                /* Actualizar la tabla de grupos */
+                try {
+                    creador.actualizaTablaGrupos();
+                } catch (SQLException ex) {
+                    Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+                salir = true;
+                this.setVisible(false);
+            }
+        }
+        else
+            JOptionPane.showMessageDialog(this, "Error en los campos de la hora", "Error", JOptionPane.ERROR_MESSAGE);
+        
+    }//GEN-LAST:event_botonAceptarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCancelarActionPerformed
+
+    private void tfBuscarEntMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfBuscarEntMouseClicked
+        tfBuscarEnt.setText("");
+        tfBuscarEnt.requestFocus();
+    }//GEN-LAST:event_tfBuscarEntMouseClicked
+
+    private void tfBuscarEntKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarEntKeyTyped
+        List<String> ents = new ArrayList<String>();
+        
+        String sEnt = tfBuscarEnt.getText();
+        ents = creador.getListaEntrenadores(sEnt);
+        
+        actualizaComboEntrenadores(ents);
+        
+    }//GEN-LAST:event_tfBuscarEntKeyTyped
+
+    private void tfBuscarAlMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfBuscarAlMouseClicked
+        if("Buscar...".equals(tfBuscarAl.getText()))
+            tfBuscarAl.setText("");
+        tfBuscarAl.requestFocus();
+    }//GEN-LAST:event_tfBuscarAlMouseClicked
+
+    private void tfBuscarAlKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfBuscarAlKeyTyped
+        List<String> als = new ArrayList<String>();
+        String s = tfBuscarAl.getText();
+        System.out.println(s);
+        try {
+            als = creador.getListaAlumnos(s);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevoGrupo.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        actualizaModeloLista(als);
+    }//GEN-LAST:event_tfBuscarAlKeyTyped
+
+    private void jlAlumnosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAlumnosMouseClicked
+        int[] n = jlAlumnos.getSelectedIndices();
+        String auxN = Integer.toString(n.length);
+        auxN = auxN.concat("/"+(Integer.toString(20-listaAlumnos.size())));
+        
+        if(n.length > (20-listaAlumnos.size())){
+            labelSelecc.setForeground(Color.red);
+            labelError.setVisible(true);
+            botonAnadir.setEnabled(false);
+        }
+        else{
+            labelSelecc.setForeground(Color.BLACK);
+            labelError.setVisible(false);
+            botonAnadir.setEnabled(true);
+        }
+        
+        labelSelecc.setText(auxN);
+    }//GEN-LAST:event_jlAlumnosMouseClicked
+
+    private void botonAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAnadirActionPerformed
+        listaAlumnos.addAll(jlAlumnos.getSelectedValuesList());
+        labelAnadir.setText(Integer.toString(listaAlumnos.size())+"/20");
+        labelSelecc.setText("0/"+(20-listaAlumnos.size()));
+        
+    }//GEN-LAST:event_botonAnadirActionPerformed
+
+    private void textHoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textHoraKeyTyped
+        if(textHora.getText().length() >= 2)
+            evt.consume();
+    }//GEN-LAST:event_textHoraKeyTyped
+
+    private void textMinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textMinKeyTyped
+       if(textMin.getText().length() >= 2)
+            evt.consume();
+    }//GEN-LAST:event_textMinKeyTyped
+
+    private void comboInstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboInstActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboInstActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,11 +548,72 @@ public class NuevoGrupo extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton botonAnadir;
+    private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton botonQuitar;
+    private javax.swing.JComboBox comboCat;
+    private javax.swing.JComboBox comboDia1;
+    private javax.swing.JComboBox comboDia2;
+    private javax.swing.JComboBox comboEnt;
+    private javax.swing.JComboBox comboInst;
+    private javax.swing.JComboBox comboTemp;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JList jlAlumnos;
+    private javax.swing.JLabel labelAnadir;
+    private javax.swing.JLabel labelError;
+    private javax.swing.JLabel labelSelecc;
+    private javax.swing.JTextField textHora;
+    private javax.swing.JTextField textMin;
+    private javax.swing.JTextField tfBuscarAl;
+    private javax.swing.JTextField tfBuscarEnt;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizaComboTemp(List<String> temps) throws SQLException {
+        comboTemp.removeAllItems();
+        for(String s : temps)
+            comboTemp.addItem(s);
+        
+    }
+
+    private void actualizaComboCat(List<String> temps) throws SQLException {
+        comboCat.removeAllItems();
+        for(String s : temps)
+            comboCat.addItem(s);
+    }
+
+    private void actualizaModeloLista(List<String> temps) {
+        DefaultListModel modelo = new DefaultListModel();
+        for(String s : temps)
+            modelo.addElement(s);
+        
+        jlAlumnos.removeAll();
+        jlAlumnos.setModel(modelo);
+    }
+    
+    private void actualizaComboEntrenadores(List<String> ents){
+        comboEnt.removeAllItems();
+        
+        for(String s : ents)
+            comboEnt.addItem(s);
+    }
+
+    private void actualizaComboInstalaciones(List<String> inst) {
+        comboInst.removeAllItems();
+        
+        for(String s : inst)
+            comboInst.addItem(s);
+    }
 }

@@ -4,17 +4,35 @@
  */
 package InterfazUsuario;
 
+import GestionDeAlumnos.Alumno;
+import GestionDeGrupos.Grupo;
+import GestionDeTemporadas.GestorTemporadas;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Diego
  */
 public class NuevaTemporada extends javax.swing.JFrame {
+    
+    private PantallaPrincipal creador;
 
     /**
      * Creates new form NuevaTemporada
      */
     public NuevaTemporada() {
         initComponents();
+        this.setLocation(300, 300);
+    }
+    
+    public NuevaTemporada(PantallaPrincipal v){
+        initComponents();
+        creador = v;
         this.setLocation(300, 300);
     }
 
@@ -28,22 +46,22 @@ public class NuevaTemporada extends javax.swing.JFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonAceptar = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         labelCurso = new javax.swing.JLabel();
-        jYearChooser1 = new com.toedter.calendar.JYearChooser();
+        chooserCurso = new com.toedter.calendar.JYearChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nueva Temporada");
         setResizable(false);
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptar.setText("Aceptar");
+        botonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonAceptarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -51,12 +69,12 @@ public class NuevaTemporada extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(14, 0, 14, 15);
-        getContentPane().add(jButton1, gridBagConstraints);
+        getContentPane().add(botonAceptar, gridBagConstraints);
 
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelar.setText("Cancelar");
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonCancelarActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -64,7 +82,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 44);
-        getContentPane().add(jButton2, gridBagConstraints);
+        getContentPane().add(botonCancelar, gridBagConstraints);
 
         jLabel1.setText("Seleccionar curso:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -80,6 +98,7 @@ public class NuevaTemporada extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(14, 16, 14, 16);
         getContentPane().add(jLabel2, gridBagConstraints);
 
+        labelCurso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labelCurso.setText("2013/2014");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -87,32 +106,58 @@ public class NuevaTemporada extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
         getContentPane().add(labelCurso, gridBagConstraints);
 
-        jYearChooser1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+        chooserCurso.setValue(2012);
+        chooserCurso.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jYearChooser1PropertyChange(evt);
+                chooserCursoPropertyChange(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
-        getContentPane().add(jYearChooser1, gridBagConstraints);
+        getContentPane().add(chooserCurso, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jYearChooser1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jYearChooser1PropertyChange
-        int aux = jYearChooser1.getYear()+1;
-        labelCurso.setText(Integer.toString(jYearChooser1.getYear()).concat("/"+aux));
-    }//GEN-LAST:event_jYearChooser1PropertyChange
+    private void chooserCursoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_chooserCursoPropertyChange
+        int aux1 = chooserCurso.getYear();
+        int aux2 = chooserCurso.getYear()+1;
+        String auxCurso = Integer.toString(aux1)+"/"+Integer.toString(aux2);
+        
+        labelCurso.setText(auxCurso);
+    }//GEN-LAST:event_chooserCursoPropertyChange
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int curso = chooserCurso.getYear();
+        int correcto = 0;
+        try {
+            correcto = GestorTemporadas.InsertarTemporada(curso, creador.accesoBD);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(correcto == 1){
+            JOptionPane.showMessageDialog(this, "Temporada creada", "Exito", JOptionPane.NO_OPTION);
+            this.setVisible(false);
+        }
+        
+        List<String> temps = new ArrayList<String>();
+        
+        try {
+            temps = GestorTemporadas.getListaTemporadas(creador.accesoBD);
+        } catch (SQLException ex) {
+            Logger.getLogger(NuevaTemporada.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        creador.actualizaComboBoxTemporadas(temps);
+    }//GEN-LAST:event_botonAceptarActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,11 +202,11 @@ public class NuevaTemporada extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botonAceptar;
+    private javax.swing.JButton botonCancelar;
+    private com.toedter.calendar.JYearChooser chooserCurso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private com.toedter.calendar.JYearChooser jYearChooser1;
     private javax.swing.JLabel labelCurso;
     // End of variables declaration//GEN-END:variables
 }

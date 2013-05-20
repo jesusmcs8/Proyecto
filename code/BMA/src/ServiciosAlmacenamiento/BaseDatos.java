@@ -117,10 +117,11 @@ public class BaseDatos {
         return retset;
     }
 
-    public void ejecutaActualizacion(String actualizacion) throws SQLException {
+    public int ejecutaActualizacion(String actualizacion) throws SQLException {
         int i = comprobar();
         stmt = conexion.get(i).createStatement();
-        stmt.executeUpdate(actualizacion);
+        int res = stmt.executeUpdate(actualizacion);
+        return res;
     }
 
     public boolean eliminar(String delete) {
@@ -128,7 +129,7 @@ public class BaseDatos {
             int i = comprobar();
             stmt = conexion.get(i).createStatement();
             int del = stmt.executeUpdate(delete);
-            if (del == 1) {
+            if (del >= 1) {
                 return true;
             } else {
                 return false;
@@ -139,4 +140,8 @@ public class BaseDatos {
         }
 
     }
+
+    
+
+    
 }

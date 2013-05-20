@@ -4,19 +4,36 @@
  */
 package InterfazUsuario;
 
+import GestionDeInstalaciones.*;
+import ServiciosAlmacenamiento.BaseDatos;
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
+import javax.swing.border.Border;
+
 /**
  *
  * @author jesusmcs
  */
 public class AltaInstalacion extends javax.swing.JFrame {
 
+    BaseDatos accesoBD;
+    Border bordeError;
+
     /**
      * Creates new form AltaInstalacion
      */
     public AltaInstalacion() {
+       
         initComponents();
+        bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
     }
-
+    
+    public AltaInstalacion(BaseDatos acceso) {
+        accesoBD = acceso;
+        initComponents();
+        bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +72,11 @@ public class AltaInstalacion extends javax.swing.JFrame {
         capacidadLabel.setText("Capacidad");
 
         Guardar.setText("Guardar");
+        Guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GuardarActionPerformed(evt);
+            }
+        });
 
         Cancelar.setText("Cancelar");
         Cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -135,9 +157,62 @@ public class AltaInstalacion extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_CancelarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
+        // TODO add your handling code here:
+        String errores = "";
+
+        if (nombreTextField.getText().isEmpty()) {
+            errores = errores + "Debes rellenar el campo 'Nombre'\n";
+            nombreTextField.setBorder(bordeError);
+        }else if (nombreTextField.getText().length() > 85) {
+            errores = errores + "La longitud del campo 'Nombre' no puede superar los 45 caracteres\n";
+            nombreTextField.setBorder(bordeError);
+        }
+        if (direccionComboBox.getSelectedItem() == "-") {
+            errores = errores + "Debes rellenar el campo 'Tipo de via'\n";
+            nombreTextField.setBorder(bordeError);
+        }
+        if (direccionTextField.getText().isEmpty() && numeroTextField.getText().isEmpty()) {
+            errores = errores + "Debes rellenar el campo 'Nombre'\n";
+            direccionTextField.setBorder(bordeError);
+            numeroTextField.setBorder(bordeError);
+        }else if ((direccionTextField.getText().length() + numeroTextField.getText().length()) > 136) {
+            errores = errores + "La longitud del campo 'Direccion' no puede superar los 140 caracteres\n";
+            direccionTextField.setBorder(bordeError);
+            numeroTextField.setBorder(bordeError);
+        }
+        if (capacidadTextField.getText().isEmpty()) {
+            errores = errores + "Debes rellenar el campo 'Capacidad'\n";
+            capacidadTextField.setBorder(bordeError);
+        }
+        if (errores.isEmpty()) {
+            String direccion = (String) direccionComboBox.getSelectedItem() + " " +
+                    direccionTextField.getText()+ " " + numeroTextField.getText();
+            boolean error = GestorInstalacion.darAltaInstalacion(accesoBD,nombreTextField.getText(),
+                    Integer.parseInt(capacidadTextField.getText()),direccion);
+            if (!error) {
+                JOptionPane.showMessageDialog(null, "Ha habido un error en la base de datos",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null, "Instalacion creado con exito",
+                        "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+                        this.setVisible(false);
+                        //this.setEnabled(false);
+            this.dispose();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    errores.substring(0, errores.length() - 1),
+                    "Errores en el formulario", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_GuardarActionPerformed
+
+        /**
+         * @param args the command line arguments
+         */
+    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
