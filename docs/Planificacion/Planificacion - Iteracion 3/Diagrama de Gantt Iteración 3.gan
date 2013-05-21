@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Diagrama de Gant" company="" webLink="" view-date="2013-05-06" view-index="2" gantt-divider-location="665" resource-divider-location="717" version="2.0" locale="es">
+<?xml version="1.0" encoding="UTF-8"?><project name="Diagrama de Gant" company="" webLink="" view-date="2013-05-06" view-index="0" gantt-divider-location="665" resource-divider-location="717" version="2.0" locale="es">
     <description/>
     <view zooming-state="default:4" id="gantt-chart">
         <field id="tpd3" name="Nombre" width="59" order="0"/>
@@ -64,23 +64,22 @@
                     <depend id="5" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="23" name="Analisis" color="#8cb6ce" meeting="false" start="2013-05-18" duration="2" complete="0" expand="true">
-                <depend id="41" type="2" difference="0" hardness="Strong"/>
-                <task id="31" name="Obtener clases, relaciones y atributos" color="#8cb6ce" meeting="false" start="2013-05-18" duration="2" complete="0" expand="true"/>
-                <task id="33" name="Obtener Diagrama de Clases" color="#8cb6ce" meeting="false" start="2013-05-18" duration="2" complete="0" expand="true"/>
-                <task id="32" name="Contratos de operaciones de DSS" color="#8cb6ce" meeting="false" start="2013-05-18" duration="2" complete="0" expand="true"/>
-                <task id="34" name="Obtener Diagramas de Secuencia de los contratos" color="#8cb6ce" meeting="false" start="2013-05-18" duration="2" complete="0" expand="true"/>
-                <task id="35" name="Documento Fase Analisis" color="#8cb6ce" meeting="false" start="2013-05-18" duration="2" complete="0" expand="true"/>
+            <task id="23" name="Analisis" color="#8cb6ce" meeting="false" start="2013-05-18" duration="5" complete="0" expand="true">
+                <task id="31" name="Obtener clases, relaciones y atributos" color="#8cb6ce" meeting="false" start="2013-05-18" duration="5" complete="0" expand="true"/>
+                <task id="33" name="Obtener Diagrama de Clases" color="#8cb6ce" meeting="false" start="2013-05-18" duration="5" complete="0" expand="true"/>
+                <task id="32" name="Contratos de operaciones de DSS" color="#8cb6ce" meeting="false" start="2013-05-18" duration="5" complete="0" expand="true"/>
+                <task id="34" name="Obtener Diagramas de Secuencia de los contratos" color="#8cb6ce" meeting="false" start="2013-05-18" duration="5" complete="0" expand="true"/>
+                <task id="35" name="Documento Fase Analisis" color="#8cb6ce" meeting="false" start="2013-05-18" duration="5" complete="0" expand="true"/>
             </task>
             <task id="41" name="Diseño" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true">
-                <task id="42" name="Diagrama de Secuencia del Sistema de todos los casos de uso." color="#8cb6ce" meeting="false" start="2013-05-20" duration="2" complete="0" expand="true"/>
-                <task id="43" name="Descomposición del sistema en subsistemas de diseño" color="#8cb6ce" meeting="false" start="2013-05-20" duration="2" complete="0" expand="true"/>
-                <task id="44" name="Obtener Diagrama de Secuencia de Diseño" color="#8cb6ce" meeting="false" start="2013-05-20" duration="2" complete="0" expand="true"/>
-                <task id="45" name="Paso de clases a modelo relacional" color="#8cb6ce" meeting="false" start="2013-05-20" duration="2" complete="0" expand="true"/>
-                <task id="46" name="Modelar Diagrama de Componentes" color="#8cb6ce" meeting="false" start="2013-05-21" duration="2" complete="0" expand="true"/>
-                <task id="47" name="Encajar el Diagrama de Clases en la arquitectura obtenida" color="#8cb6ce" meeting="false" start="2013-05-21" duration="2" complete="0" expand="true"/>
-                <task id="48" name="Obtener Diagrama de Despliegue de Diseño" color="#8cb6ce" meeting="false" start="2013-05-21" duration="2" complete="0" expand="true"/>
-                <task id="49" name="Documento Fase Diseño" color="#8cb6ce" meeting="false" start="2013-05-21" duration="2" complete="0" expand="true"/>
+                <task id="42" name="Diagrama de Secuencia del Sistema de todos los casos de uso." color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
+                <task id="43" name="Descomposición del sistema en subsistemas de diseño" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
+                <task id="44" name="Obtener Diagrama de Secuencia de Diseño" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
+                <task id="45" name="Paso de clases a modelo relacional" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
+                <task id="46" name="Modelar Diagrama de Componentes" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
+                <task id="47" name="Encajar el Diagrama de Clases en la arquitectura obtenida" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
+                <task id="48" name="Obtener Diagrama de Despliegue de Diseño" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
+                <task id="49" name="Documento Fase Diseño" color="#8cb6ce" meeting="false" start="2013-05-20" duration="3" complete="0" expand="true"/>
             </task>
         </task>
         <task id="50" name="Equipo de Implementacion" color="#8cb6ce" meeting="false" start="2013-05-13" duration="20" complete="0" expand="true">
