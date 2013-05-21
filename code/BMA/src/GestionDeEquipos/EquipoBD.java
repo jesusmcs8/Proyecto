@@ -26,19 +26,23 @@ public class EquipoBD {
 
         int idCategoria = GestorCategorias.getIdCategoria(accesoBD, categoria);
     
-        String consulta = "SELECT DISTINCT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre "
-                        + "FROM Equipo, Categoria, Temporada, Rango, Usuario ";
+        String select = "SELECT DISTINCT Equipo.nombre, Categoria.tipo, Temporada.curso";
+        if(!"".equals(entrenador))
+            select += ", Usuario.nombre ";
+        
+        String from = "FROM Equipo, Categoria, Temporada, Rango, Usuario ";
+        
         String condicion = "WHERE ";
 
-        if (!"".equals(nombre) || !"".equals(categoria) || !"".equals(temporada) || !"".equals(entrenador)) {
+        if (!"".equals(nombre) || !"-Categoria-".equals(categoria) || !"-Temporada-".equals(temporada) || !"".equals(entrenador)) {
             
             if (!"".equals(nombre)) {
                 condicion += "Equipo.nombre='" + nombre + "' AND ";
             }       
-            if (!"".equals(categoria)) {
+            if (!"-Categoria-".equals(categoria)) {
                 condicion += "Categoria.idCategoria='" + idCategoria + "' AND ";
             }           
-            if (!"".equals(temporada)) {
+            if (!"-Temporada-".equals(temporada)) {
                 condicion += "Temporada.idTemporada='" + GestorTemporadas.getIdTemporada(accesoBD, temporada) + "' AND ";
             }            
             if (!"".equals(entrenador)) {
@@ -48,10 +52,10 @@ public class EquipoBD {
             
         }
         condicion = condicion.substring(0, condicion.length()-5);
-        consulta += condicion;
+        select = select + from + condicion;
 
-        System.out.println("\nLa consulta es: " + consulta);
-        ResultSet listaEquipos = accesoBD.ejecutaConsulta(consulta);
+        System.out.println("\nLa consulta es: " + select);
+        ResultSet listaEquipos = accesoBD.ejecutaConsulta(select);
  
         return listaEquipos;
     }
@@ -97,8 +101,11 @@ public class EquipoBD {
         
         String consulta = "SELECT Equipo.nombre, Categoria.tipo, Temporada.curso, Usuario.nombre "
                         + "FROM Equipo, Categoria, Temporada, Usuario, Rango "
-                        + "WHERE Equipo.Categoria_idCategoria=Categoria.idCategoria AND "
-                        + "Usuario.idUsuario = Rango.Usuario_idUsuario AND Rango.Equipo_idEquipo=Equipo.idEquipo AND Rango.tipo='primero'";
+                        + "WHERE Equipo.Categoria_idCategoria = Categoria.idCategoria AND "
+                        + "Equipo.Temporada_idTemporada = Temporada.idTemporada AND "
+                        + "Usuario.idUsuario = Rango.Usuario_idUsuario AND "
+                        + "Rango.Equipo_idEquipo = Equipo.idEquipo AND "
+                        + "Rango.tipo = 'primero'";
         
         ResultSet res = accesoBD.ejecutaConsulta(consulta);
         
@@ -184,8 +191,8 @@ public class EquipoBD {
         int idEntrenador2 = getIdUsuario(accesoBD, equipo.getEntrenador2().getNombre(), "segundo");
         
         //Insertar en Equipo
-        String consulta = "INSERT INTO Equipo (nombre, Fundacion_idFundacion, Categoria_idCategoria, Temporada_idTemporada)"
-                        + "VALUES ('"+equipo.getNombre()+"', 1, '"+idCategoria+"', '"+idTemporada+"')";
+        String consulta = "INSERT INTO Equipo (Fundacion_idFundacion, Categoria_idCategoria, Temporada_idTemporada, nombre)"
+                        + "VALUES (1, '"+idCategoria+"', '"+idTemporada+"', '"+equipo.getNombre()+"')";
 
         int res1;
         res1 = accesoBD.ejecutaActualizacion(consulta);
