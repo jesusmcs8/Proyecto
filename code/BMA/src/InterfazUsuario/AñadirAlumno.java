@@ -88,6 +88,12 @@ public class AñadirAlumno extends javax.swing.JFrame {
 
         Nombre.setText("Nombre");
 
+        NombreTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NombreTextFieldKeyTyped(evt);
+            }
+        });
+
         PrimerApellido.setText("Primer Apellido");
 
         SegundoApellido.setText("Segudno Apellido");
@@ -353,7 +359,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
                 }
                 String insertAlumno = new String("INSERT INTO pagoactividades (Alumno_idAlumno, Actividades_idActividades, Actividades_Temporada_idTemporada, Cuota_idCuota)"
                         + "VALUES (" + listaIDAlumnos.get(i) + ", " + idActividad + ", " + idTemporada + ", " + idCuota + ")");
-                System.out.print(insertAlumno);
+                System.out.print("\ninsertarAlumno"+insertAlumno);
                 try {
                     accesoBD.ejecutaActualizacion(insertAlumno);
                 } catch (SQLException ex) {
@@ -400,6 +406,26 @@ public class AñadirAlumno extends javax.swing.JFrame {
         MostrarAlumnos();
 
     }//GEN-LAST:event_QuitarActionPerformed
+
+    private void NombreTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NombreTextFieldKeyTyped
+        // TODO add your handling code here:
+        String nombre = NombreTextField.getText();
+        DefaultListModel modelo = new DefaultListModel();
+        String consulta = "SELECT primerApellido, segundoApellido, nombre FROM "
+                + "alumno WHERE nombre LIKE '%" + nombre + "%'";
+        ResultSet retset = accesoBD.ejecutaConsulta(consulta);
+        
+        List<String> nuevosAlumnos = new ArrayList<String>();
+        try {
+            while(retset.next()){
+                modelo.addElement(retset.getString(1)+" "+retset.getString(2)+" "+retset.getString(3));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AñadirAlumno.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.print("\nModelo \n"+modelo);
+        ListaAlumnos.setModel(modelo);
+    }//GEN-LAST:event_NombreTextFieldKeyTyped
 
     /**
      * @param args the command line arguments

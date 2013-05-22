@@ -3897,17 +3897,17 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         int temporada = 0;
         int plazas = 0;
         int idActividad = getIDActividad();
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-        Date fechaInicio = null;
-        Date fechafin = null;
+        
+        SimpleDateFormat formato = new java.text.SimpleDateFormat("yyyy-MM-dd");
+        java.sql.Date fechaInicio = null;
+        java.sql.Date fechafin = null;
         try {
-            fechaInicio = (Date) formato.parse(actividadesTable.getValueAt(nTabla, 1).toString());
+            fechaInicio = new java.sql.Date(formato.parse(actividadesTable.getValueAt(nTabla, 1).toString()).getTime());
             System.out.print(fechaInicio);
         } catch (ParseException ex) {
-            Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+}
         try {
-            fechafin = (Date) formato.parse(actividadesTable.getValueAt(nTabla, 2).toString());
+            fechafin = new java.sql.Date(formato.parse(actividadesTable.getValueAt(nTabla, 2).toString()).getTime());
         } catch (ParseException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -3921,6 +3921,8 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
                 + "' AND fechaFin = '" + actividadesTable.getValueAt(nTabla, 2) + "'"*/
         
         System.out.print("\n\n" + consulta);
+        System.out.print("\n\n" + actividadesTable.getValueAt(nTabla, 1));
+        System.out.print("\n\n" + actividadesTable.getValueAt(nTabla, 2));
         retset = accesoBD.ejecutaConsulta(consulta);
         int selection = JOptionPane.showConfirmDialog(this, "Desea eliminar la Instalacion?", "Instalacion usuario", JOptionPane.YES_NO_OPTION);
         if (selection == JOptionPane.YES_OPTION) {
