@@ -1526,7 +1526,7 @@ public class PantallaPrincipal extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(Modificar))
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(772, Short.MAX_VALUE))
+                .addContainerGap(936, Short.MAX_VALUE))
         );
         panelActividadesLayout.setVerticalGroup(
             panelActividadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3897,19 +3897,17 @@ private void botonEliminarUsuarioActionPerformed(java.awt.event.ActionEvent evt)
         int temporada = 0;
         int plazas = 0;
         int idActividad = getIDActividad();
-        String fechainicio = (String) actividadesTable.getValueAt(nTabla, 1);
-        String fechaFin = (String) actividadesTable.getValueAt(nTabla, 2);
         SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
         Date fechaInicio = null;
         Date fechafin = null;
         try {
-            fechaInicio = (Date) formato.parse(fechainicio);
+            fechaInicio = (Date) formato.parse(actividadesTable.getValueAt(nTabla, 1).toString());
             System.out.print(fechaInicio);
         } catch (ParseException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
         try {
-            fechafin = (Date) formato.parse(fechaFin);
+            fechafin = (Date) formato.parse(actividadesTable.getValueAt(nTabla, 2).toString());
         } catch (ParseException ex) {
             Logger.getLogger(PantallaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
