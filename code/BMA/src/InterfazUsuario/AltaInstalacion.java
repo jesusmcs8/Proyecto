@@ -19,6 +19,7 @@ public class AltaInstalacion extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
     Border bordeError;
+    PantallaPrincipal principal;
 
     /**
      * Creates new form AltaInstalacion
@@ -29,9 +30,10 @@ public class AltaInstalacion extends javax.swing.JFrame {
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
     }
     
-    public AltaInstalacion(BaseDatos acceso) {
+    public AltaInstalacion(BaseDatos acceso, PantallaPrincipal p) {
         accesoBD = acceso;
         initComponents();
+        principal = p;
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
     }
     /**
@@ -205,7 +207,7 @@ public class AltaInstalacion extends javax.swing.JFrame {
                     errores.substring(0, errores.length() - 1),
                     "Errores en el formulario", JOptionPane.ERROR_MESSAGE);
         }
-        
+        principal.ActualizarTabla();
     }//GEN-LAST:event_GuardarActionPerformed
 
         /**

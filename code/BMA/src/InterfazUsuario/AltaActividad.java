@@ -24,6 +24,7 @@ public class AltaActividad extends javax.swing.JFrame {
 
     BaseDatos accesoBD;
     Border bordeError;
+    PantallaPrincipal pantallaPrincipal;
 
     /**
      * Creates new form AltaActividad
@@ -35,9 +36,10 @@ public class AltaActividad extends javax.swing.JFrame {
         ((JTextFieldDateEditor) fechaFinDateChooser.getComponents()[1]).setEditable(false);
     }
 
-    public AltaActividad(BaseDatos acceso) {
+    public AltaActividad(BaseDatos acceso, PantallaPrincipal principal) {
         accesoBD = acceso;
         initComponents();
+        pantallaPrincipal = principal;
         bordeError = BorderFactory.createMatteBorder(1, 1, 1, 1, Color.red);
         ((JTextFieldDateEditor) fechaInicioDateChooser.getComponents()[1]).setEditable(false);
         ((JTextFieldDateEditor) fechaFinDateChooser.getComponents()[1]).setEditable(false);
@@ -353,6 +355,7 @@ public class AltaActividad extends javax.swing.JFrame {
                     "Errores en el formulario", JOptionPane.ERROR_MESSAGE);
         }
 
+        pantallaPrincipal.mostrarActividades();
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void insertarInstalacion(int idInst, int idtem) throws SQLException {

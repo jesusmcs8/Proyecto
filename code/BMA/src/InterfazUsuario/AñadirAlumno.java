@@ -47,6 +47,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
         initComponents();
         idTemporada = idTemp;
         idActividad = idAct;
+        MostrarAlumnos();
     }
 
     /**
@@ -69,7 +70,6 @@ public class AñadirAlumno extends javax.swing.JFrame {
         Añadir = new javax.swing.JButton();
         Guardar = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
-        Mostrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         AlumnosSelecionados = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -113,13 +113,6 @@ public class AñadirAlumno extends javax.swing.JFrame {
             }
         });
 
-        Mostrar.setText("Mostrar");
-        Mostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MostrarActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Alumnos Seleccionados");
 
         AlumnosSelecionados.setText("0");
@@ -151,8 +144,6 @@ public class AñadirAlumno extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(Mostrar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(Quitar)
                                 .addGap(4, 4, 4)
                                 .addComponent(Añadir)
@@ -177,7 +168,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(NombreTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,7 +219,6 @@ public class AñadirAlumno extends javax.swing.JFrame {
                     .addComponent(Salir)
                     .addComponent(Guardar)
                     .addComponent(Añadir)
-                    .addComponent(Mostrar)
                     .addComponent(Quitar))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -247,7 +237,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_SalirActionPerformed
 
-    private String leerConsulta() {
+    private  String leerConsulta() {
         String consulta = new String("SELECT nombre, primerApellido, segundoApellido from alumno ");
         String condicion = new String("WHERE ");
 
@@ -302,65 +292,15 @@ public class AñadirAlumno extends javax.swing.JFrame {
 
     }
 
-    private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
+    private  void MostrarAlumnos(){
+        
+        ListaAlumnos.removeAll();
+        AlumnosMostrados.removeAll();
         try {
             // TODO add your handling code here:
             String mostrar_alumnos = leerConsulta();
             ResultSet retset;
             retset = accesoBD.ejecutaConsulta(mostrar_alumnos);
-            /*
-             AlumnosTable.setModel(new javax.swing.table.DefaultTableModel(
-             new Object[][]{
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null},
-             {null, null, null}
-             },
-             new String[]{
-             "Nombre", "Primer Apellido", "Segundo Apellido"
-             }));
-             javax.swing.table.TableModel modelo_tabla = new javax.swing.table.DefaultTableModel();
-             modelo_tabla = AlumnosTable.getModel();
-             int i = 0;
-             while (retset.next()) {
-
-             if (i < 25) {
-             AlumnosTable.setValueAt(retset.getString("nombre"), i, 0);
-             AlumnosTable.setValueAt(retset.getString("primerApellido"), i, 1);
-             AlumnosTable.setValueAt(retset.getString("segundoApellido"), i, 2);
-             } else {
-             javax.swing.table.DefaultTableModel temp = (javax.swing.table.DefaultTableModel) AlumnosTable.getModel();
-             Object nuevo[] = {"", "", ""};
-             temp.addRow(nuevo);
-             AlumnosTable.setValueAt(retset.getString("nombre"), i, 0);
-             AlumnosTable.setValueAt(retset.getString("primerApellido"), i, 1);
-             AlumnosTable.setValueAt(retset.getString("segundoApellido"), i, 2);
-             }
-             i++;
-             }
-             */
-
             DefaultListModel modelo = new DefaultListModel();
             while (retset.next()) {
                 modelo.addElement(retset.getString("primerApellido")
@@ -372,9 +312,8 @@ public class AñadirAlumno extends javax.swing.JFrame {
         }
 
         alumnosSelecionados();
-
-    }//GEN-LAST:event_MostrarActionPerformed
-
+    }
+    
     public int getIDCuota() throws SQLException {
         String Consulta = "SELECT MAX(idCuota) FROM Cuota";
         int id = 0;
@@ -428,6 +367,8 @@ public class AñadirAlumno extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No has seleccionado alumnos",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        MostrarAlumnos();
 
     }//GEN-LAST:event_GuardarActionPerformed
 
@@ -456,7 +397,7 @@ public class AñadirAlumno extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "No has seleccionado alumnos",
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        MostrarAlumnos();
 
     }//GEN-LAST:event_QuitarActionPerformed
 
@@ -507,7 +448,6 @@ public class AñadirAlumno extends javax.swing.JFrame {
     private javax.swing.JLabel Buscar;
     private javax.swing.JButton Guardar;
     private javax.swing.JList ListaAlumnos;
-    private javax.swing.JButton Mostrar;
     private javax.swing.JLabel Nombre;
     private javax.swing.JTextField NombreTextField;
     private javax.swing.JLabel PrimerApellido;
