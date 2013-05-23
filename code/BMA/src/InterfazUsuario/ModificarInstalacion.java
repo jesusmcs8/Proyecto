@@ -212,7 +212,8 @@ public class ModificarInstalacion extends javax.swing.JFrame {
 
 
             boolean exito = GestorInstalacion.modificaInstalacion(accesoBD, id,
-                    nombreTextField.getText(), capacidadTextField.getText(), direccionTextField.getText());
+                    nombreTextField.getText(), capacidadTextField.getText(),tipoDeVia.getSelectedItem().toString()+
+                    " " + direccionTextField.getText());
 
             if (!exito) {
                 JOptionPane.showMessageDialog(null, "Ha habido un error en la base de datos",
